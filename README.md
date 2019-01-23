@@ -10,6 +10,9 @@
 npm install --save react-insta-stories
 ```
 
+## Demo
+https://mohitk05.github.io/react-insta-stories/
+
 ## Usage
 
 ```jsx
