@@ -19,5 +19,8 @@
 
     // allow specifying true explicitly for boolean props
     "react/jsx-boolean-value": 0
+  },
+  "globals": {
+    "Image": true
   }
 }

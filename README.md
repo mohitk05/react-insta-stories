@@ -38,6 +38,15 @@ const stories = [
 ]
 ```
 
+## Props
+
+Property | Type | Default
+--- | --- | ---
+`stories` | String/Object | `required`
+`defaultInterval` | Number | 1200
+`width` | Number | 360
+`height` | Number | 640
+
 ## License
 
 MIT © [mohitk05](https://github.com/mohitk05)
