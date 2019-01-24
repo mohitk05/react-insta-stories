@@ -14,6 +14,10 @@ export default class App extends Component {
           <br/>
           <p>Made with ♥ by <a href="https://github.com/mohitk05/react-insta-stories" target="_blank">@mohitk05</a></p>
           <br/>
+          <div style={{background: '#eee', padding: 5, paddingLeft: 10, paddingRight: 10, borderRadius: 5, width: 'auto'}}><p>◀ Tap left for previous story</p>
+          <p>▶︎ Tap right for next story</p>
+          <p>◉ Press and hold to pause</p></div>
+          <br/>
           <p>Know more about me here: <a href="https://mohitkarekar.com" target="_blank">mohitkarekar.com</a></p>
         </div>
         <div className="stories"><Stories stories={stories} defaultDuration={1200} /></div>
