@@ -11,7 +11,8 @@ npm install --save react-insta-stories
 ```
 
 ## Demo
-https://mohitk05.github.io/react-insta-stories/
+The component responds to actions like tap on right side for next story, on left for previous and tap and hold for pause. Custom time duration for each story can be provided.
+See it in action here: https://mohitk05.github.io/react-insta-stories/
 
 ## Usage
 
@@ -43,12 +44,13 @@ const stories = [
 
 ## Props
 
-Property | Type | Default
---- | --- | ---
-`stories` | String/Object | `required`
-`defaultInterval` | Number | 1200
-`width` | Number | 360
-`height` | Number | 640
+Property | Type | Default | Description
+--- | --- | --- | ---
+`stories` | [String/Object] | `required` | An array of image urls `['https://i.imgur.com/YA4fraZ.png', 
+  'https://i.imgur.com/Ik635gD.jpg']` or array of story objects `[{ url: 'https://i.imgur.com/mDuSAmB.png', duration: 1500 }, { url: 'https://i.imgur.com/YA4fraZ.png', duration: 1000 }]`
+`defaultInterval` | Number | 1200 | Milliseconds duration for which a story persists
+`width` | Number | 360 | Width of the component in pixels
+`height` | Number | 640 | Height of the component in pixels
 
 ## License
 
