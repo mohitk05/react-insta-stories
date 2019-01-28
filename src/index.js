@@ -19,6 +19,7 @@ export default class ReactInstaStories extends Component {
           defaultInterval={this.props.defaultInterval}
           width={this.props.width}
           height={this.props.height}
+          loader={this.props.loader}
         />
       </div>
     )
@@ -29,5 +30,6 @@ ReactInstaStories.propTypes = {
   stories: PropTypes.array,
   defaultInterval: PropTypes.number,
   width: PropTypes.number,
-  height: PropTypes.number
+  height: PropTypes.number,
+  loader: PropTypes.Component
 }

@@ -20,7 +20,7 @@ export default class App extends Component {
           <br/>
           <p>Know more about me here: <a href="https://mohitkarekar.com" target="_blank">mohitkarekar.com</a></p>
         </div>
-        <div className="stories"><Stories stories={stories} defaultDuration={1200} /></div>
+        <div className="stories"><Stories stories={stories} defaultDuration={1200} loader={<div>Please wait..</div>} /></div>
       </div>
     )
   }
