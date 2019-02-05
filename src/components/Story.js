@@ -1,5 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import Header from './Header'
 
 export default class Story extends React.Component {
   constructor(props) {
@@ -24,6 +25,7 @@ export default class Story extends React.Component {
   }
   render() {
     let source = typeof this.props.story === 'object' ? this.props.story.url : this.props.story
+    let isHeader = typeof this.props.story === 'object' && this.props.story.header
     return (
       <div style={{...styles.story, width: this.props.width, height: this.props.height}}>
         <img
@@ -31,6 +33,9 @@ export default class Story extends React.Component {
           src={source}
           onLoad={this.imageLoaded}
         />
+        {isHeader && <div style={{position: 'absolute', left: 15, top: 20}}>
+          <Header heading={this.props.story.header.heading} subheading={this.props.story.header.subheading} />
+        </div>}
         {!this.state.loaded && <div style={{width: this.props.width, height: this.props.height, position: 'absolute', left: 0, top: 0, background: 'rgba(0, 0, 0, 0.9)', zIndex: 9, display: 'flex', justifyContent: 'center', alignItems: 'center', color: '#ccc'}}>{this.props.loader || `Loading..`}</div>}
       </div>
     )
@@ -42,10 +47,10 @@ const styles = {
     display: 'flex'
   },
   storyContent: {
-    width: 'inherit',
+    width: 'auto',
     maxWidth: '100%',
     maxHeight: '100%',
-    alignSelf: 'center'
+    margin: 'auto'
   }
 }
 
