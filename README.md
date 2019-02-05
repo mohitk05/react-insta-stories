@@ -1,4 +1,4 @@
-# react-insta-stories
+# react-insta-stories 🎲
 
 > A React component for Instagram like stories
 
@@ -45,11 +45,14 @@ const stories = [
 
 ## Props
 
+##### _Update: Header added!_ 🤩
+
 Property | Type | Default | Description
 --- | --- | --- | ---
-`stories` | [String/Object] | `required` | An array of image urls `['https://i.imgur.com/YA4fraZ.png', 'https://i.imgur.com/Ik635gD.jpg']` or array of story objects `[{ url: 'https://i.imgur.com/mDuSAmB.png', duration: 1500 }, { url: 'https://i.imgur.com/YA4fraZ.png', duration: 1000 }]`
+`stories` | [String/Object] | `required` | An array of image urls `['https://i.imgur.com/YA4fraZ.png', 'https://i.imgur.com/Ik635gD.jpg']` or array of story objects `[{ url: 'https://i.imgur.com/mDuSAmB.png', duration: 1500 }, { url: 'https://i.imgur.com/YA4fraZ.png', header: { heading: '@mohitk05', subheading: 'Posted 5h ago', profileImage: 'https://avatars0.githubusercontent.com/u/24852829?s=400&v=4' } }]`
 `defaultInterval` | Number | 1200 | Milliseconds duration for which a story persists
 `loader` | Component | 'Loading..' | A loader component as a fallback until image loads from url
+`header` | Component | Default header as in demo | A header component which sits at the top of each story. It receives the `header` object from the `story` object. Data for header to be sent with each story object.
 `width` | Number | 360 | Width of the component in pixels
 `height` | Number | 640 | Height of the component in pixels
 
