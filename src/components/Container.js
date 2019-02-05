@@ -94,19 +94,19 @@ export default class Container extends React.Component {
   }
 
   render() {
-    return (
-      <div style={{...styles.container, ...{width: this.width, height: this.height}}}>
-        <ProgressArray
-          length={this.props.stories.map((s, i) => i)}
-          progress={{id: this.state.currentId, completed: this.state.count / ((this.props.stories[this.state.currentId] && this.props.stories[this.state.currentId].duration) || this.defaultInterval)}}
-        />
-        <Story action={this.pause} height={this.height} width={this.width} story={this.props.stories[this.state.currentId]} loader={this.props.loader} />
-        <div style={styles.overlay}>
-          <div style={{width: this.width / 2, zIndex: 999}} onTouchStart={this.debouncePause} onTouchEnd={e => this.mouseUp(e, 'previous')} onMouseDown={this.debouncePause} onMouseUp={(e) => this.mouseUp(e, 'previous')} />
-          <div style={{width: this.width / 2, zIndex: 999}} onTouchStart={this.debouncePause} onTouchEnd={e => this.mouseUp(e, 'next')} onMouseDown={this.debouncePause} onMouseUp={(e) => this.mouseUp(e, 'next')} />
+      return (
+        <div style={{...styles.container, ...{width: this.width, height: this.height}}}>
+          <ProgressArray
+            length={this.props.stories.map((s, i) => i)}
+            progress={{id: this.state.currentId, completed: this.state.count / ((this.props.stories[this.state.currentId] && this.props.stories[this.state.currentId].duration) || this.defaultInterval)}}
+          />
+          <Story action={this.pause} height={this.height} width={this.width} story={this.props.stories[this.state.currentId]} loader={this.props.loader} />
+          <div style={styles.overlay}>
+            <div style={{width: '50%', zIndex: 999}} onTouchStart={this.debouncePause} onTouchEnd={e => this.mouseUp(e, 'previous')} onMouseDown={this.debouncePause} onMouseUp={(e) => this.mouseUp(e, 'previous')} />
+            <div style={{width: '50%', zIndex: 999}} onTouchStart={this.debouncePause} onTouchEnd={e => this.mouseUp(e, 'next')} onMouseDown={this.debouncePause} onMouseUp={(e) => this.mouseUp(e, 'next')} />
+          </div>
         </div>
-      </div>
-    )
+      )
   }
 }
 

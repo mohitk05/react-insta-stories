@@ -51,8 +51,8 @@ const styles = {
 
 Story.propTypes = {
   story: PropTypes.object || PropTypes.string,
-  height: PropTypes.number,
-  width: PropTypes.number,
+  height: PropTypes.number || PropTypes.string,
+  width: PropTypes.number || PropTypes.string,
   action: PropTypes.func,
   loader: PropTypes.Component
 }
