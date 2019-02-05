@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 
 const header = props => {
   return <div style={styles.main}>
-    <div><img style={styles.img} src='https://picsum.photos/1080/1920' /></div>
+    {props.profileImage && <div><img style={styles.img} src={props.profileImage} /></div>}
     <div style={styles.text}>
       <p style={styles.heading}>{props.heading}</p>
       <p style={styles.subheading}>{props.subheading}</p>
@@ -26,11 +26,11 @@ const styles = {
   text: {
     display: 'flex',
     flexDirection: 'column',
-    filter: 'drop-shadow(0 0px 3px rgba(0, 0, 0, 0.5))'
+    filter: 'drop-shadow(0 0px 3px rgba(0, 0, 0, 0.9))'
   },
   heading: {
     fontSize: 15,
-    color: 'rgba(255, 255, 255, 0.8)'
+    color: 'rgba(255, 255, 255, 0.9)'
   },
   subheading: {
     fontSize: 10,
@@ -40,7 +40,8 @@ const styles = {
 
 header.propTypes = {
   heading: PropTypes.string,
-  subheading: PropTypes.subheading
+  subheading: PropTypes.subheading,
+  profileImage: PropTypes.string
 }
 
 export default header

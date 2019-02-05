@@ -100,7 +100,7 @@ export default class Container extends React.Component {
           length={this.props.stories.map((s, i) => i)}
           progress={{id: this.state.currentId, completed: this.state.count / ((this.props.stories[this.state.currentId] && this.props.stories[this.state.currentId].duration) || this.defaultInterval)}}
         />
-        <Story action={this.pause} height={this.height} width={this.width} story={this.props.stories[this.state.currentId]} loader={this.props.loader} />
+        <Story action={this.pause} height={this.height} width={this.width} story={this.props.stories[this.state.currentId]} loader={this.props.loader} header={this.props.header} />
         <div style={styles.overlay}>
           <div style={{width: this.width / 2, zIndex: 999}} onTouchStart={this.debouncePause} onTouchEnd={e => this.mouseUp(e, 'previous')} onMouseDown={this.debouncePause} onMouseUp={(e) => this.mouseUp(e, 'previous')} />
           <div style={{width: this.width / 2, zIndex: 999}} onTouchStart={this.debouncePause} onTouchEnd={e => this.mouseUp(e, 'next')} onMouseDown={this.debouncePause} onMouseUp={(e) => this.mouseUp(e, 'next')} />
@@ -134,5 +134,6 @@ Container.propTypes = {
   defaultInterval: PropTypes.number,
   width: PropTypes.number,
   height: PropTypes.number,
-  loader: PropTypes.Component
+  loader: PropTypes.element,
+  header: PropTypes.element
 }

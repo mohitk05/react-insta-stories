@@ -33,8 +33,8 @@ export default class Story extends React.Component {
           src={source}
           onLoad={this.imageLoaded}
         />
-        {isHeader && <div style={{position: 'absolute', left: 15, top: 20}}>
-          <Header heading={this.props.story.header.heading} subheading={this.props.story.header.subheading} />
+        {isHeader && <div style={{position: 'absolute', left: 12, top: 20}}>
+          {this.props.header ? () => this.props.header(this.props.story.header) : <Header heading={this.props.story.header.heading} subheading={this.props.story.header.subheading} profileImage={this.props.story.header.profileImage} />}
         </div>}
         {!this.state.loaded && <div style={{width: this.props.width, height: this.props.height, position: 'absolute', left: 0, top: 0, background: 'rgba(0, 0, 0, 0.9)', zIndex: 9, display: 'flex', justifyContent: 'center', alignItems: 'center', color: '#ccc'}}>{this.props.loader || `Loading..`}</div>}
       </div>
@@ -59,5 +59,6 @@ Story.propTypes = {
   height: PropTypes.number,
   width: PropTypes.number,
   action: PropTypes.func,
-  loader: PropTypes.Component
+  loader: PropTypes.element,
+  header: PropTypes.element
 }
