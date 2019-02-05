@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import Container from './components/Container'
 import PropTypes from 'prop-types'
-require('babel-polyfill')
 
 export default class ReactInstaStories extends Component {
   componentDidMount() {
