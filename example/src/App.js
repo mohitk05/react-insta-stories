@@ -7,18 +7,18 @@ export default class App extends Component {
     return (
       <div className="App">
         <div className="left">
-          <h2><code><a href="https://www.npmjs.com/package/react-insta-stories" target="_blank">react-insta-stories</a></code></h2>
+          <h2><code><a rel="noopener noreferrer" href="https://www.npmjs.com/package/react-insta-stories" target="_blank">react-insta-stories</a></code></h2>
           <p>Create Instagram like stories on the web using React</p>
           <br/>
           <code ><span style={{background: '#eee', padding: 5, paddingLeft: 10, paddingRight: 10, borderRadius: 5, width: 'auto'}}>npm i react-insta-stories</span></code>
           <br/>
-          <p>Made with ♥ by <a href="https://github.com/mohitk05/react-insta-stories" target="_blank">@mohitk05</a></p>
+          <p>Made with ♥ by <a rel="noopener noreferrer" href="https://github.com/mohitk05/react-insta-stories" target="_blank">@mohitk05</a></p>
           <br/>
           <div style={{background: '#eee', padding: 5, paddingLeft: 10, paddingRight: 10, borderRadius: 5, width: 'auto'}}><p>◀ Tap left for previous story</p>
           <p>▶︎ Tap right for next story</p>
           <p>◉ Press and hold to pause</p></div>
           <br/>
-          <p>Know more about me here: <a href="https://mohitkarekar.com" target="_blank">mohitkarekar.com</a></p>
+          <p>Know more about me here: <a rel="noopener noreferrer" href="https://mohitkarekar.com" target="_blank">mohitkarekar.com</a></p>
         </div>
         <div className="stories"><Stories stories={stories} defaultDuration={1200} loader={<div>Loading..</div>} /></div>
       </div>
