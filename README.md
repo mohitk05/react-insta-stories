@@ -4,7 +4,7 @@
 
 [![NPM](https://img.shields.io/npm/v/react-insta-stories.svg)](https://www.npmjs.com/package/react-insta-stories) [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
 
-![Demo shows image and video stories](https://i.imgur.com/wJQZGSr.gif)
+<img src="https://i.imgur.com/wJQZGSr.gif" width="300px" alt="Demo">
 
 ## Install
 
