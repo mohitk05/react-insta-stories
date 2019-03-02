@@ -1,4 +1,4 @@
-# react-insta-stories 🎲
+# react-insta-stories 💁‍♀️
 
 > A React component for Instagram like stories
 
@@ -11,6 +11,8 @@ npm install --save react-insta-stories
 ```
 
 ## Demo
+⚡️ Video support added! Watch the demo below!
+
 The component responds to actions like tap on right side for next story, on left for previous and tap and hold for pause. Custom time duration for each story can be provided.
 See it in action here: https://mohitk05.github.io/react-insta-stories/
 
@@ -38,14 +40,16 @@ class App extends Component {
 const stories = [
   'https://i.imgur.com/YA4fraZ.png', 
   'https://i.imgur.com/Ik635gD.jpg', 
-  { url: 'https://i.imgur.com/mDuSAmB.png', duration: 1500 }, 'https://www.jlstms.com/data/wallpapers/54/im58571310.jpg',
+  { url: 'https://i.imgur.com/mDuSAmB.png', duration: 1500 }, 
+  { url: 'https://storage.googleapis.com/coverr-main/mp4/Footboys.mp4', type: 'video', duration: 1000 },
+  'https://www.jlstms.com/data/wallpapers/54/im58571310.jpg',
   'https://i.imgur.com/YA4fraZ.png'
 ]
 ```
 
 ## Props
 
-##### _Update: Header added!_ 🤩
+#### _Update: Header added!_ 🤩
 
 Property | Type | Default | Description
 --- | --- | --- | ---
@@ -55,6 +59,15 @@ Property | Type | Default | Description
 `header` | Component | Default header as in demo | A header component which sits at the top of each story. It receives the `header` object from the `story` object. Data for header to be sent with each story object.
 `width` | Number | 360 | Width of the component in pixels
 `height` | Number | 640 | Height of the component in pixels
+
+### Story object
+Instead of simple string url, a comprehensive 'story object' can also be passed in the `stories` array.
+Property | Description
+--- | ---
+`url` | The url of the resource, be it image or video.
+`duration` | Optional. Duration for which a story should persist.
+`header` | Optional. Adds a header on the top. Object with `heading`, `subheading` and `profileImage` properties.
+`type` | Optional. To distinguish a video story. `type: 'video'` is necessary for a video story. 
 
 ## License
 

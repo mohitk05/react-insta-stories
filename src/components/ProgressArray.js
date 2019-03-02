@@ -6,7 +6,17 @@ export default class ProgressArray extends React.Component {
   render() {
     return (
       <div style={styles.progressArr}>
-        {this.props.length.map(i => <Progress width={1 / this.props.length.length} completed={i === this.props.progress.id ? this.props.progress.completed : (i < this.props.progress.id ? 1 : 0)} />)}
+        {this.props.length.map((i, index) =>
+          <Progress
+            key={index}
+            width={1 / this.props.length.length}
+            next={this.props.next}
+            defaultInterval={this.props.defaultInterval}
+            videoDuration={this.props.videoDuration}
+            currentStory={this.props.currentStory}
+            active={i === this.props.progress.id ? 1 : (i < this.props.progress.id ? 2 : 0)}
+            pause={this.props.pause}
+          />)}
       </div>
     )
   }
@@ -29,5 +39,13 @@ const styles = {
 
 ProgressArray.propTypes = {
   length: PropTypes.array,
-  progress: PropTypes.object
+  progress: PropTypes.object,
+  pause: PropTypes.bool,
+  next: PropTypes.func,
+  currentStory: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.object
+  ]),
+  defaultInterval: PropTypes.number,
+  videoDuration: PropTypes.number
 }
