@@ -4,6 +4,8 @@
 
 [![NPM](https://img.shields.io/npm/v/react-insta-stories.svg)](https://www.npmjs.com/package/react-insta-stories) [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
 
+[Demo shows image and video stories](https://i.imgur.com/wJQZGSr.gifv)
+
 ## Install
 
 ```bash
@@ -62,6 +64,7 @@ Property | Type | Default | Description
 
 ### Story object
 Instead of simple string url, a comprehensive 'story object' can also be passed in the `stories` array.
+
 Property | Description
 --- | ---
 `url` | The url of the resource, be it image or video.
