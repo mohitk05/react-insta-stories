@@ -40,7 +40,7 @@ const styles = {
 
 header.propTypes = {
   heading: PropTypes.string,
-  subheading: PropTypes.subheading,
+  subheading: PropTypes.string,
   profileImage: PropTypes.string
 }
 
