@@ -43,7 +43,7 @@ const stories = [
   'https://i.imgur.com/YA4fraZ.png', 
   'https://i.imgur.com/Ik635gD.jpg', 
   { url: 'https://i.imgur.com/mDuSAmB.png', duration: 1500 }, 
-  { url: 'https://storage.googleapis.com/coverr-main/mp4/Footboys.mp4', type: 'video', duration: 1000 },
+  { url: 'https://storage.googleapis.com/coverr-main/mp4/Footboys.mp4', type: 'video' },
   'https://www.jlstms.com/data/wallpapers/54/im58571310.jpg',
   'https://i.imgur.com/YA4fraZ.png'
 ]
