@@ -63,10 +63,6 @@ const styles = {
     maxWidth: '100%',
     background: '#555',
     margin: 2
-  },
-  overlay: {
-    height: '100%',
-    background: 'white'
   }
 }
 

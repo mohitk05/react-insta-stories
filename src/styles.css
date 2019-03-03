@@ -1,9 +1,33 @@
 .inner {
   background: #fff;
   height: 100%;
+  max-width: 100%;
+  transform-origin: center left;
+
+  -webkit-backface-visibility: hidden;
+  -moz-backface-visibility: hidden;
+  -ms-backface-visibility: hidden;
+  backface-visibility: hidden;
+
+  -webkit-perspective: 1000;
+  -moz-perspective: 1000;
+  -ms-perspective: 1000;
+  perspective: 1000;
 }
 
 @keyframes slidein {
-  from { width: 0 }
-  to { width: 100%; }
+  from { 
+    -webkit-transform: scale3d(0, 1, 1);
+    -moz-transform: scale3d(0, 1, 1);
+    -ms-transform: scale3d(0, 1, 1);
+    -o-transform: scale3d(0, 1, 1);
+    transform: scale3d(0, 1, 1); 
+  }
+  to { 
+    -webkit-transform: scale3d(1, 1, 1);
+    -moz-transform: scale3d(1, 1, 1);
+    -ms-transform: scale3d(1, 1, 1);
+    -o-transform: scale3d(1, 1, 1);
+    transform: scale3d(1, 1, 1); 
+  }
 }
