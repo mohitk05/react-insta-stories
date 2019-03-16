@@ -6,7 +6,6 @@
 
 ⚡️ 'See more' and video playback added! Watch the demo below!
 
-https://mohitk05.github.io/react-insta-stories/
 ![Demo screenshot](https://i.imgur.com/Twvjxp5.png)
 
 ## Install
