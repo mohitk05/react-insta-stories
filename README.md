@@ -4,6 +4,9 @@
 
 [![NPM](https://img.shields.io/npm/v/react-insta-stories.svg)](https://www.npmjs.com/package/react-insta-stories) [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
 
+⚡️ 'See more' and video playback added! Watch the demo below!
+
+https://mohitk05.github.io/react-insta-stories/
 ![Demo screenshot](https://i.imgur.com/Twvjxp5.png)
 
 ## Install
@@ -13,8 +16,6 @@ npm install --save react-insta-stories
 ```
 
 ## Demo
-⚡️ Video support added! Watch the demo below!
-
 The component responds to actions like tap on right side for next story, on left for previous and tap and hold for pause. Custom time duration for each story can be provided.
 See it in action here: https://mohitk05.github.io/react-insta-stories/
 
