@@ -8,8 +8,9 @@
     "prop-types": "^15.6.2",
     "react": "^16.4.1",
     "react-dom": "^16.4.1",
+    "react-insta-stories": "file:..",
     "react-scripts": "^1.1.4",
-    "react-insta-stories": "file:.."
+    "react-transition-group": "^2.6.1"
   },
   "scripts": {
     "start": "react-scripts start",

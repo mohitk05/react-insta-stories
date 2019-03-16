@@ -5,8 +5,10 @@ import PropTypes from 'prop-types'
 export default class ReactInstaStories extends Component {
   componentDidMount() {
     this.props.stories.map(s => {
-      const i = new Image()
-      i.src = typeof s === 'object' ? s.url : s
+      let i = new Image()
+      if (!(typeof s === 'object' && s.type === 'video')) {
+        i.src = typeof s === 'object' ? s.url : s
+      }
     })
   }
 

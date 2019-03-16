@@ -16,6 +16,7 @@ export default class ProgressArray extends React.Component {
             currentStory={this.props.currentStory}
             active={i === this.props.progress.id ? 1 : (i < this.props.progress.id ? 2 : 0)}
             pause={this.props.pause}
+            bufferAction={this.props.bufferAction}
           />)}
       </div>
     )
@@ -31,6 +32,7 @@ const styles = {
     position: 'absolute',
     width: '98%',
     padding: 5,
+    paddingTop: 7,
     alignSelf: 'center',
     zIndex: 99,
     filter: 'drop-shadow(0 1px 8px #000)'
@@ -47,5 +49,6 @@ ProgressArray.propTypes = {
     PropTypes.object
   ]),
   defaultInterval: PropTypes.number,
-  videoDuration: PropTypes.number
+  videoDuration: PropTypes.number,
+  bufferAction: PropTypes.bool
 }

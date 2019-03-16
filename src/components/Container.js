@@ -49,8 +49,8 @@ export default class Container extends React.Component {
     })
   }
 
-  pause = (action) => {
-    this.setState({ pause: action === 'pause' })
+  pause = (action, bufferAction) => {
+    this.setState({ pause: action === 'pause', bufferAction })
   }
 
   previous = () => {
@@ -98,13 +98,24 @@ export default class Container extends React.Component {
         <ProgressArray
           next={this.next}
           pause={this.state.pause}
+          bufferAction={this.state.bufferAction}
           videoDuration={this.state.videoDuration}
           length={this.props.stories.map((s, i) => i)}
           defaultInterval={this.defaultInterval}
           currentStory={this.props.stories[this.state.currentId]}
           progress={{id: this.state.currentId, completed: this.state.count / ((this.props.stories[this.state.currentId] && this.props.stories[this.state.currentId].duration) || this.defaultInterval)}}
         />
-        <Story action={this.pause} height={this.height} playState={this.state.pause} width={this.width} story={this.props.stories[this.state.currentId]} loader={this.props.loader} header={this.props.header} getVideoDuration={this.getVideoDuration} />
+        <Story
+          action={this.pause}
+          bufferAction={this.state.bufferAction}
+          height={this.height}
+          playState={this.state.pause}
+          width={this.width}
+          story={this.props.stories[this.state.currentId]}
+          loader={this.props.loader}
+          header={this.props.header}
+          getVideoDuration={this.getVideoDuration}
+        />
         <div style={styles.overlay}>
           <div style={{width: this.width / 2, zIndex: 999}} onTouchStart={this.debouncePause} onTouchEnd={e => this.mouseUp(e, 'previous')} onMouseDown={this.debouncePause} onMouseUp={(e) => this.mouseUp(e, 'previous')} />
           <div style={{width: this.width / 2, zIndex: 999}} onTouchStart={this.debouncePause} onTouchEnd={e => this.mouseUp(e, 'next')} onMouseDown={this.debouncePause} onMouseUp={(e) => this.mouseUp(e, 'next')} />

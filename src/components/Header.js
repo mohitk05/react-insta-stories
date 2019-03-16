@@ -4,22 +4,23 @@ import PropTypes from 'prop-types'
 const header = props => {
   return <div style={styles.main}>
     {props.profileImage && <div><img style={styles.img} src={props.profileImage} /></div>}
-    <div style={styles.text}>
+    <span style={styles.text}>
       <p style={styles.heading}>{props.heading}</p>
       <p style={styles.subheading}>{props.subheading}</p>
-    </div>
+    </span>
   </div>
 }
 
 const styles = {
   main: {
-    display: 'flex'
+    display: 'flex',
+    alignItems: 'center'
   },
   img: {
-    width: 30,
-    height: 30,
-    borderRadius: '50%',
-    marginRight: 5,
+    width: 40,
+    height: 40,
+    borderRadius: 40,
+    marginRight: 10,
     filter: 'drop-shadow(0 0px 2px rgba(0, 0, 0, 0.5))',
     border: '2px solid rgba(255, 255, 255, 0.8)'
   },
@@ -29,11 +30,11 @@ const styles = {
     filter: 'drop-shadow(0 0px 3px rgba(0, 0, 0, 0.9))'
   },
   heading: {
-    fontSize: 15,
+    fontSize: '1rem',
     color: 'rgba(255, 255, 255, 0.9)'
   },
   subheading: {
-    fontSize: 10,
+    fontSize: '0.6rem',
     color: 'rgba(255, 255, 255, 0.8)'
   }
 }

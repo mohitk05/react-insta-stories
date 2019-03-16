@@ -23,10 +23,10 @@ export default class Progress extends React.PureComponent {
     if (typeof current === 'object') {
       if (current.type && props.videoDuration) return { duration: props.videoDuration * 1000 }
       if (current.duration) return { duration: current.duration }
+      return { duration: props.defaultInterval }
     } else {
       return { duration: props.defaultInterval }
     }
-    return state
   }
 
   next = () => {
@@ -50,7 +50,7 @@ export default class Progress extends React.PureComponent {
         break
     }
     return (
-      <div style={{...styles.progress, ...{width: `${this.props.width * 100}%`}}}>
+      <div className={style.autoHide} style={{...styles.progress, ...{width: `${this.props.width * 100}%`, opacity: this.props.pause && !this.props.bufferAction ? 0 : 1}}}>
         <div ref={r => { this.inner = r }} className={style.inner} style={innerStyle} /* style={{...styles.overlay, width: `${this.props.completed * 100}%`}} */ />
       </div>
     )
@@ -76,5 +76,6 @@ Progress.propTypes = {
     PropTypes.string,
     PropTypes.object
   ]),
-  videoDuration: PropTypes.number
+  videoDuration: PropTypes.number,
+  bufferAction: PropTypes.bool
 }
