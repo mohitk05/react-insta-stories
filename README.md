@@ -51,6 +51,8 @@ Property | Type | Default | Description
 `header` | Component | Default header as in demo | A header component which sits at the top of each story. It receives the `header` object from the `story` object. Data for header to be sent with each story object.
 `width` | Number | 360 | Width of the component in pixels
 `height` | Number | 640 | Height of the component in pixels
+`storyStyles` | Object | none | Override the default story styles mentioned below.
+
 
 ### Story object
 Instead of simple string url, a comprehensive 'story object' can also be passed in the `stories` array.
@@ -62,7 +64,7 @@ Property | Description
 `header` | Optional. Adds a header on the top. Object with `heading`, `subheading` and `profileImage` properties.
 `seeMore` | Optional. Adds a see more icon at the bottom of the story. On clicking, opens up this component.
 `type` | Optional. To distinguish a video story. `type: 'video'` is necessary for a video story. 
-`storyStyles` | Optional. Override the default story styles mentioned below.
+`styles` | Optional. Override the default story styles mentioned below.
 
 ### Default story styles
 Following are the default story content styles. Override them by providing your own style object with each story or a global override by using the `storyStyles` prop.
