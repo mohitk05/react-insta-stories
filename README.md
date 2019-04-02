@@ -1,4 +1,4 @@
-![Main image](https://i.imgur.com/JQw5hwo.jpg)
+![Main image](https://i.imgur.com/JQw5hwo.jpg?2)
 <h1 align="center">react-insta-stories</h1>
 <p align="center">A React component for Instagram like stories</p>
 
@@ -62,6 +62,7 @@ Property | Description
 `header` | Optional. Adds a header on the top. Object with `heading`, `subheading` and `profileImage` properties.
 `seeMore` | Optional. Adds a see more icon at the bottom of the story. On clicking, opens up this component.
 `type` | Optional. To distinguish a video story. `type: 'video'` is necessary for a video story. 
+`storyStyles` | Optional. Override the default story styles mentioned below.
 
 ### Default story styles
 Following are the default story content styles. Override them by providing your own style object with each story or a global override by using the `storyStyles` prop.
