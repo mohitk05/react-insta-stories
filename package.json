@@ -5,6 +5,7 @@
   "author": "mohitk05",
   "license": "MIT",
   "repository": "mohitk05/react-insta-stories",
+  "homepage": "https://mohitk05.github.io/react-insta-stories/",
   "main": "dist/index.js",
   "module": "dist/index.es.js",
   "jsnext:main": "dist/index.es.js",
@@ -23,8 +24,8 @@
     "build": "rollup -c",
     "start": "rollup -c -w",
     "prepare": "npm run build",
-    "predeploy": "cd example && npm install && npm run build",
-    "deploy": "gh-pages -d example/build"
+    "predeploy": "cd ghpage && npm install && npm run build",
+    "deploy": "gh-pages -d ghpage/build"
   },
   "peerDependencies": {
     "prop-types": "^15.5.4",

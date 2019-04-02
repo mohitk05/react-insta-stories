@@ -62,13 +62,14 @@ export default class Story extends React.Component {
     let source = typeof this.props.story === 'object' ? this.props.story.url : this.props.story
     let isHeader = typeof this.props.story === 'object' && this.props.story.header
     let type = this.props.story.type === 'video' ? 'video' : 'image'
+    let storyContentStyles = this.props.story.styles || this.props.storyContentStyles || styles.storyContent
     return (
       <div style={{...styles.story, width: this.props.width, height: this.props.height}}>
         {type === 'image' ? <img
-          style={styles.storyContent}
+          style={storyContentStyles}
           src={source}
           onLoad={this.imageLoaded}
-        /> : (type === 'video' ? <video ref={r => { this.vid = r }} style={styles.storyContent} src={source} controls={false} onLoadedData={this.videoLoaded} autoPlay /> : null)}
+        /> : (type === 'video' ? <video ref={r => { this.vid = r }} style={storyContentStyles} src={source} controls={false} onLoadedData={this.videoLoaded} autoPlay /> : null)}
         {isHeader && <div style={{position: 'absolute', left: 12, top: 20, zIndex: 19}}>
           {this.props.header ? () => this.props.header(this.props.story.header) : <Header heading={this.props.story.header.heading} subheading={this.props.story.header.subheading} profileImage={this.props.story.header.profileImage} />}
         </div>}
@@ -85,7 +86,8 @@ export default class Story extends React.Component {
 const styles = {
   story: {
     display: 'flex',
-    position: 'relative'
+    position: 'relative',
+    overflow: 'hidden'
   },
   storyContent: {
     width: 'auto',
@@ -107,5 +109,6 @@ Story.propTypes = {
   header: PropTypes.element,
   playState: PropTypes.bool,
   getVideoDuration: PropTypes.func,
-  bufferAction: PropTypes.bool
+  bufferAction: PropTypes.bool,
+  storyContentStyles: PropTypes.object
 }

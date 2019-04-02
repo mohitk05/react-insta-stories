@@ -22,6 +22,7 @@ export default class ReactInstaStories extends Component {
           height={this.props.height}
           loader={this.props.loader}
           header={this.props.header}
+          storyContentStyles={this.props.storyStyles}
         />
       </div>
     )
@@ -34,5 +35,6 @@ ReactInstaStories.propTypes = {
   width: PropTypes.number,
   height: PropTypes.number,
   loader: PropTypes.element,
-  header: PropTypes.element
+  header: PropTypes.element,
+  storyStyles: PropTypes.object
 }

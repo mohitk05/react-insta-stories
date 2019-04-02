@@ -1,6 +1,6 @@
-# react-insta-stories 💁‍♀️
-
-> A React component for Instagram like stories
+![Main image](https://i.imgur.com/JQw5hwo.jpg)
+<h1 align="center">react-insta-stories</h1>
+<p align="center">A React component for Instagram like stories</p>
 
 [![NPM](https://img.shields.io/npm/v/react-insta-stories.svg)](https://www.npmjs.com/package/react-insta-stories) [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
 
@@ -62,6 +62,17 @@ Property | Description
 `header` | Optional. Adds a header on the top. Object with `heading`, `subheading` and `profileImage` properties.
 `seeMore` | Optional. Adds a see more icon at the bottom of the story. On clicking, opens up this component.
 `type` | Optional. To distinguish a video story. `type: 'video'` is necessary for a video story. 
+
+### Default story styles
+Following are the default story content styles. Override them by providing your own style object with each story or a global override by using the `storyStyles` prop.
+```js
+storyContent: {
+    width: 'auto',
+    maxWidth: '100%',
+    maxHeight: '100%',
+    margin: 'auto'
+}
+```
 
 ## License
 
