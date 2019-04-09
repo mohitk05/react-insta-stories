@@ -112,10 +112,7 @@ export default class Container extends React.Component {
           playState={this.state.pause}
           width={this.width}
           story={this.props.stories[this.state.currentId]}
-          loader={this.props.loader}
-          header={this.props.header}
           getVideoDuration={this.getVideoDuration}
-          storyContentStyles={this.props.storyContentStyles}
         />
         <div style={styles.overlay}>
           <div style={{width: this.width / 2, zIndex: 999}} onTouchStart={this.debouncePause} onTouchEnd={e => this.mouseUp(e, 'previous')} onMouseDown={this.debouncePause} onMouseUp={(e) => this.mouseUp(e, 'previous')} />

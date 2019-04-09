@@ -2,7 +2,10 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import Header from './Header'
 import SeeMore from './SeeMore'
-import globalStyle from './../styles.css'
+import Loader from './Loader'
+import MainPropsContext from './../contexts/mainPropsContext'
+
+const MainPropsConsumer = MainPropsContext.Consumer
 
 export default class Story extends React.Component {
   constructor(props) {
@@ -62,23 +65,24 @@ export default class Story extends React.Component {
     let source = typeof this.props.story === 'object' ? this.props.story.url : this.props.story
     let isHeader = typeof this.props.story === 'object' && this.props.story.header
     let type = this.props.story.type === 'video' ? 'video' : 'image'
-    let storyContentStyles = this.props.story.styles || this.props.storyContentStyles || styles.storyContent
     return (
-      <div style={{...styles.story, width: this.props.width, height: this.props.height}}>
-        {type === 'image' ? <img
-          style={storyContentStyles}
-          src={source}
-          onLoad={this.imageLoaded}
-        /> : (type === 'video' ? <video ref={r => { this.vid = r }} style={storyContentStyles} src={source} controls={false} onLoadedData={this.videoLoaded} autoPlay /> : null)}
-        {isHeader && <div style={{position: 'absolute', left: 12, top: 20, zIndex: 19}}>
-          {this.props.header ? () => this.props.header(this.props.story.header) : <Header heading={this.props.story.header.heading} subheading={this.props.story.header.subheading} profileImage={this.props.story.header.profileImage} />}
+      <MainPropsConsumer>
+        {mainProps => <div style={{...styles.story, width: this.props.width, height: this.props.height}}>
+          {type === 'image' ? <img
+            style={this.props.story.styles || mainProps.storyContentStyles || styles.storyContent}
+            src={source}
+            onLoad={this.imageLoaded}
+          /> : (type === 'video' ? <video ref={r => { this.vid = r }} style={this.props.story.styles || mainProps.storyContentStyles || styles.storyContent} src={source} controls={false} onLoadedData={this.videoLoaded} autoPlay /> : null)}
+          {isHeader && <div style={{position: 'absolute', left: 12, top: 20, zIndex: 19}}>
+            {mainProps.header ? () => mainProps.header(this.props.story.header) : <Header heading={this.props.story.header.heading} subheading={this.props.story.header.subheading} profileImage={this.props.story.header.profileImage} />}
+          </div>}
+          {!this.state.loaded && <div style={{width: this.props.width, height: this.props.height, position: 'absolute', left: 0, top: 0, background: 'rgba(0, 0, 0, 0.9)', zIndex: 9, display: 'flex', justifyContent: 'center', alignItems: 'center', color: '#ccc'}}>{mainProps.loader || <Loader />}</div>}
+          {this.props.story.seeMore &&
+          <div style={{position: 'absolute', margin: 'auto', bottom: 0, zIndex: 9999, width: '100%'}}>
+            <SeeMore action={this.props.action} toggleMore={this.toggleMore} showContent={this.state.showMore} seeMoreContent={this.props.story.seeMore} />
+          </div>}
         </div>}
-        {!this.state.loaded && <div style={{width: this.props.width, height: this.props.height, position: 'absolute', left: 0, top: 0, background: 'rgba(0, 0, 0, 0.9)', zIndex: 9, display: 'flex', justifyContent: 'center', alignItems: 'center', color: '#ccc'}}>{this.props.loader || <div className={globalStyle.spinner} />}</div>}
-        {this.props.story.seeMore &&
-        <div style={{position: 'absolute', margin: 'auto', bottom: 0, zIndex: 9999, width: '100%'}}>
-          <SeeMore action={this.props.action} toggleMore={this.toggleMore} showContent={this.state.showMore} seeMoreContent={this.props.story.seeMore} />
-        </div>}
-      </div>
+      </MainPropsConsumer>
     )
   }
 }
@@ -105,10 +109,7 @@ Story.propTypes = {
   height: PropTypes.number,
   width: PropTypes.number,
   action: PropTypes.func,
-  loader: PropTypes.element,
-  header: PropTypes.element,
   playState: PropTypes.bool,
   getVideoDuration: PropTypes.func,
-  bufferAction: PropTypes.bool,
-  storyContentStyles: PropTypes.object
+  bufferAction: PropTypes.bool
 }

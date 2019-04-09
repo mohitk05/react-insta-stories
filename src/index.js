@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import Container from './components/Container'
 import PropTypes from 'prop-types'
+import MainPropsContext from './contexts/mainPropsContext'
 
 export default class ReactInstaStories extends Component {
   componentDidMount() {
@@ -14,7 +15,7 @@ export default class ReactInstaStories extends Component {
 
   render() {
     return (
-      <div>
+      <MainPropsContext.Provider value={this.props}>
         <Container
           stories={this.props.stories}
           defaultInterval={this.props.defaultInterval}
@@ -24,7 +25,7 @@ export default class ReactInstaStories extends Component {
           header={this.props.header}
           storyContentStyles={this.props.storyStyles}
         />
-      </div>
+      </MainPropsContext.Provider>
     )
   }
 }
