@@ -4,7 +4,9 @@
 
 [![Backers on Open Collective](https://opencollective.com/react-insta-stories/backers/badge.svg)](#backers) [![Sponsors on Open Collective](https://opencollective.com/react-insta-stories/sponsors/badge.svg)](#sponsors) [![NPM](https://img.shields.io/npm/v/react-insta-stories.svg)](https://www.npmjs.com/package/react-insta-stories) [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
 
-⚡️ 'See more' and video playback added! Watch the demo below!
+#### Recent updates 🚀
+⚡️ APIs added
+⚡️ See More option added
 
 ![Demo screenshot](https://i.imgur.com/Twvjxp5.png)
 
@@ -47,7 +49,7 @@ Property | Type | Default | Description
 --- | --- | --- | ---
 `stories` | [String/Object] | `required` | An array of image urls or array of story objects (options described below)
 `defaultInterval` | Number | 1200 | Milliseconds duration for which a story persists
-`loader` | Component | 'Loading..' | A loader component as a fallback until image loads from url
+`loader` | Component | Ripple loader | A loader component as a fallback until image loads from url
 `header` | Component | Default header as in demo | A header component which sits at the top of each story. It receives the `header` object from the `story` object. Data for header to be sent with each story object.
 `width` | Number | 360 | Width of the component in pixels
 `height` | Number | 640 | Height of the component in pixels
