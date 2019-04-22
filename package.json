@@ -25,7 +25,8 @@
     "start": "rollup -c -w",
     "prepare": "npm run build",
     "predeploy": "cd ghpage && npm install && npm run build",
-    "deploy": "gh-pages -d ghpage/build"
+    "deploy": "gh-pages -d ghpage/build",
+    "postinstall": "opencollective-postinstall"
   },
   "peerDependencies": {
     "prop-types": "^15.5.4",
@@ -65,5 +66,12 @@
   "files": [
     "dist"
   ],
-  "dependencies": {}
+  "dependencies": {
+    "opencollective-postinstall": "^2.0.2",
+    "opencollective": "^1.0.3"
+  },
+  "collective": {
+    "type": "opencollective",
+    "url": "https://opencollective.com/react-insta-stories"
+  }
 }
