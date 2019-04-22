@@ -5,7 +5,7 @@
 [![Backers on Open Collective](https://opencollective.com/react-insta-stories/backers/badge.svg)](#backers) [![Sponsors on Open Collective](https://opencollective.com/react-insta-stories/sponsors/badge.svg)](#sponsors) [![NPM](https://img.shields.io/npm/v/react-insta-stories.svg)](https://www.npmjs.com/package/react-insta-stories) [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
 
 #### Recent updates 🚀
-⚡️ APIs added
+⚡️ APIs added to trigger changes manually
 ⚡️ See More option added
 
 ![Demo screenshot](https://i.imgur.com/Twvjxp5.png)
