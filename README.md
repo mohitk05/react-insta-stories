@@ -77,6 +77,24 @@ storyContent: {
 }
 ```
 
+## API
+Following functions can be accessed using the `ref` of default export, e.g. `this.stories.pause()`
+
+##### `pause(overrideHideProgress: Boolean)`
+Pause the currently playing story. Pass `true` to override the default hiding of progress bars.
+
+##### `play()`
+Play a paused story.
+
+##### `previous()`
+Jump to the previous story. Similar to when tapped on left side of the screen.
+
+##### `next()`
+Jump to the next story. Similar to when tapped on right side of the screen.
+
+##### `toggleSeeMore(show: Boolean)`
+Show or hide the `Show More` component. Pass `true` to show and otherwise.
+
 ## Contributors
 
 This project exists thanks to all the people who contribute. 
@@ -85,14 +103,14 @@ This project exists thanks to all the people who contribute.
 
 ## Backers
 
-Thank you to all our backers! 🙏 [[Become a backer](https://opencollective.com/react-insta-stories#backer)]
+Thank you to all our backers! 🙏 [Become a backer](https://opencollective.com/react-insta-stories#backer)
 
 <a href="https://opencollective.com/react-insta-stories#backers" target="_blank"><img src="https://opencollective.com/react-insta-stories/backers.svg?width=890"></a>
 
 
 ## Sponsors
 
-Support this project by becoming a sponsor. Your logo will show up here with a link to your website. [[Become a sponsor](https://opencollective.com/react-insta-stories#sponsor)]
+Support this project by becoming a sponsor. [Become a sponsor](https://opencollective.com/react-insta-stories#sponsor)
 
 <a href="https://opencollective.com/react-insta-stories/sponsor/0/website" target="_blank"><img src="https://opencollective.com/react-insta-stories/sponsor/0/avatar.svg"></a>
 <a href="https://opencollective.com/react-insta-stories/sponsor/1/website" target="_blank"><img src="https://opencollective.com/react-insta-stories/sponsor/1/avatar.svg"></a>
@@ -104,8 +122,6 @@ Support this project by becoming a sponsor. Your logo will show up here with a l
 <a href="https://opencollective.com/react-insta-stories/sponsor/7/website" target="_blank"><img src="https://opencollective.com/react-insta-stories/sponsor/7/avatar.svg"></a>
 <a href="https://opencollective.com/react-insta-stories/sponsor/8/website" target="_blank"><img src="https://opencollective.com/react-insta-stories/sponsor/8/avatar.svg"></a>
 <a href="https://opencollective.com/react-insta-stories/sponsor/9/website" target="_blank"><img src="https://opencollective.com/react-insta-stories/sponsor/9/avatar.svg"></a>
-
-
 
 ## License
 

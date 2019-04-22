@@ -3,6 +3,13 @@ import Container from './components/Container'
 import PropTypes from 'prop-types'
 
 export default class ReactInstaStories extends Component {
+  constructor(props) {
+    super(props)
+    this.pause = this.pause.bind(this)
+    this.play = this.play.bind(this)
+    this.previous = this.previous.bind(this)
+    this.next = this.next.bind(this)
+  }
   componentDidMount() {
     this.props.stories.map(s => {
       let i = new Image()
@@ -12,10 +19,45 @@ export default class ReactInstaStories extends Component {
     })
   }
 
+  pause() {
+    if(this.c) {
+      this.c.pause('pause')
+      return true
+    } else return false
+  }
+
+  play() {
+    if(this.c) {
+      this.c.pause('play')
+      return true
+    } else return false
+  }
+
+  previous() {
+    if(this.c) {
+      this.c.previous()
+      return true
+    } else return false
+  }
+
+  next() {
+    if(this.c) {
+      this.c.next()
+      return true
+    } else return false
+  }
+
+  toggleSeeMore(show) {
+    if(this.c) {
+      return this.c.toggleMore(show)
+    } else return false
+  }
+
   render() {
     return (
       <div>
         <Container
+          ref={c => this.c = c}
           stories={this.props.stories}
           defaultInterval={this.props.defaultInterval}
           width={this.props.width}

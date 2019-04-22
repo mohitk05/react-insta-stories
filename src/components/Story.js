@@ -10,6 +10,7 @@ export default class Story extends React.Component {
     this.state = {
       loaded: false
     }
+    this.getStoryContent = this.getStoryContent.bind(this)
   }
   componentDidUpdate(prevProps) {
     if (this.props.story !== prevProps.story) {
@@ -58,18 +59,23 @@ export default class Story extends React.Component {
       console.log(e)
     }
   }
-  render() {
+  getStoryContent() {
     let source = typeof this.props.story === 'object' ? this.props.story.url : this.props.story
-    let isHeader = typeof this.props.story === 'object' && this.props.story.header
-    let type = this.props.story.type === 'video' ? 'video' : 'image'
     let storyContentStyles = this.props.story.styles || this.props.storyContentStyles || styles.storyContent
+    let type = this.props.story.type === 'video' ? 'video' : 'image'    
     return (
-      <div style={{...styles.story, width: this.props.width, height: this.props.height}}>
-        {type === 'image' ? <img
+      type === 'image' ? <img
           style={storyContentStyles}
           src={source}
           onLoad={this.imageLoaded}
-        /> : (type === 'video' ? <video ref={r => { this.vid = r }} style={storyContentStyles} src={source} controls={false} onLoadedData={this.videoLoaded} autoPlay /> : null)}
+        /> : (type === 'video' ? <video ref={r => { this.vid = r }} style={storyContentStyles} src={source} controls={false} onLoadedData={this.videoLoaded} autoPlay /> : null)
+    )
+  }
+  render() {
+    let isHeader = typeof this.props.story === 'object' && this.props.story.header
+    return (
+      <div style={{...styles.story, width: this.props.width, height: this.props.height}}>
+        {this.getStoryContent()}
         {isHeader && <div style={{position: 'absolute', left: 12, top: 20, zIndex: 19}}>
           {this.props.header ? () => this.props.header(this.props.story.header) : <Header heading={this.props.story.header.heading} subheading={this.props.story.header.subheading} profileImage={this.props.story.header.profileImage} />}
         </div>}
