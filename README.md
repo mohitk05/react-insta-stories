@@ -77,6 +77,25 @@ storyContent: {
 }
 ```
 
+## API
+Following functions can be accessed using the `ref` of default export, e.g. `this.stories.pause()`
+
+##### `pause(overrideHideProgress: Boolean)`
+Pause the currently playing story. Pass `true` to override the default hiding of progress bars.
+
+##### `play()`
+Play a paused story.
+
+##### `previous()`
+Jump to the previous story. Similar to when tapped on left side of the screen.
+
+##### `next()`
+Jump to the next story. Similar to when tapped on right side of the screen.
+
+##### `toggleSeeMore(show: Boolean)`
+Show or hide the `Show More` component. Pass `true` to show and otherwise.
+
+
 ## License
 
 MIT © [mohitk05](https://github.com/mohitk05)

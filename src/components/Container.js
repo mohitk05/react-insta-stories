@@ -19,34 +19,6 @@ export default class Container extends React.Component {
 
   componentDidMount() {
     this.props.defaultInterval && (this.defaultInterval = this.props.defaultInterval)
-    // this.start()
-  }
-
-  // start = async () => {
-  //   while (this.state.currentId < this.props.stories.length - 1) {
-  //     let curr = this.state.currentId + 1
-  //     this.setState({ currentId: curr })
-  //     let interval = this.props.stories[curr].duration
-  //     await this.wait(interval || this.defaultInterval).then(() => {
-  //       this.state.currentId < this.props.stories.length - 1 && this.setState({count: 0})
-  //     })
-  //   }
-  // }
-
-  wait = (time) => {
-    return new Promise(resolve => {
-      this.setState({count: 0})
-      let id = setInterval(() => {
-        if (this.state.count < time) {
-          if (!this.state.pause) {
-            this.setState({ count: this.state.count + 1 })
-          }
-        } else {
-          clearInterval(id)
-          resolve()
-        }
-      }, 1)
-    })
   }
 
   pause = (action, bufferAction) => {
@@ -92,6 +64,13 @@ export default class Container extends React.Component {
     this.setState({ videoDuration: duration })
   }
 
+  toggleMore = show => {
+    if(this.story) {
+      this.story.toggleMore(show)
+      return true
+    } else return false
+  }
+
   render() {
     return (
       <div style={{...styles.container, ...{width: this.width, height: this.height}}}>
@@ -106,6 +85,7 @@ export default class Container extends React.Component {
           progress={{id: this.state.currentId, completed: this.state.count / ((this.props.stories[this.state.currentId] && this.props.stories[this.state.currentId].duration) || this.defaultInterval)}}
         />
         <Story
+          ref={s => this.story = s}
           action={this.pause}
           bufferAction={this.state.bufferAction}
           height={this.height}
