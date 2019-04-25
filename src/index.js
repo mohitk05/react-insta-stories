@@ -9,6 +9,7 @@ export default class ReactInstaStories extends Component {
     this.play = this.play.bind(this)
     this.previous = this.previous.bind(this)
     this.next = this.next.bind(this)
+    this.loop = this.props.loop || false
   }
   componentDidMount() {
     this.props.stories.map(s => {
@@ -20,35 +21,35 @@ export default class ReactInstaStories extends Component {
   }
 
   pause() {
-    if(this.c) {
+    if (this.c) {
       this.c.pause('pause')
       return true
     } else return false
   }
 
   play() {
-    if(this.c) {
+    if (this.c) {
       this.c.pause('play')
       return true
     } else return false
   }
 
   previous() {
-    if(this.c) {
+    if (this.c) {
       this.c.previous()
       return true
     } else return false
   }
 
   next() {
-    if(this.c) {
+    if (this.c) {
       this.c.next()
       return true
     } else return false
   }
 
   toggleSeeMore(show) {
-    if(this.c) {
+    if (this.c) {
       return this.c.toggleMore(show)
     } else return false
   }
@@ -65,6 +66,7 @@ export default class ReactInstaStories extends Component {
           loader={this.props.loader}
           header={this.props.header}
           storyContentStyles={this.props.storyStyles}
+          loop={this.loop}
         />
       </div>
     )
@@ -78,5 +80,6 @@ ReactInstaStories.propTypes = {
   height: PropTypes.number,
   loader: PropTypes.element,
   header: PropTypes.element,
-  storyStyles: PropTypes.object
+  storyStyles: PropTypes.object,
+  loop: PropTypes.bool
 }
