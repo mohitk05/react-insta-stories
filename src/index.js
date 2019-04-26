@@ -9,8 +9,8 @@ export default class ReactInstaStories extends Component {
     this.play = this.play.bind(this)
     this.previous = this.previous.bind(this)
     this.next = this.next.bind(this)
-    this.loop = this.props.loop || false
   }
+
   componentDidMount() {
     this.props.stories.map(s => {
       let i = new Image()
@@ -66,11 +66,15 @@ export default class ReactInstaStories extends Component {
           loader={this.props.loader}
           header={this.props.header}
           storyContentStyles={this.props.storyStyles}
-          loop={this.loop}
+          loop={this.props.loop}
         />
       </div>
     )
   }
+}
+
+ReactInstaStories.defaultProps = {
+  loop: false
 }
 
 ReactInstaStories.propTypes = {
