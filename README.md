@@ -30,7 +30,7 @@ import Stories from 'react-insta-stories'
 class App extends Component {
   render () {
     return (
-      <Stories 
+      <Stories
         stories={stories}
         defaultInterval={1500}
         width={432}
@@ -54,6 +54,7 @@ Property | Type | Default | Description
 `width` | Number | 360 | Width of the component in pixels
 `height` | Number | 640 | Height of the component in pixels
 `storyStyles` | Object | none | Override the default story styles mentioned below.
+`loop` | Boolean | false | The last story loop to the first one and restart the stories.
 
 
 ### Story object
@@ -65,7 +66,7 @@ Property | Description
 `duration` | Optional. Duration for which a story should persist.
 `header` | Optional. Adds a header on the top. Object with `heading`, `subheading` and `profileImage` properties.
 `seeMore` | Optional. Adds a see more icon at the bottom of the story. On clicking, opens up this component.
-`type` | Optional. To distinguish a video story. `type: 'video'` is necessary for a video story. 
+`type` | Optional. To distinguish a video story. `type: 'video'` is necessary for a video story.
 `styles` | Optional. Override the default story styles mentioned below.
 
 ### Default story styles
@@ -99,7 +100,7 @@ Show or hide the `Show More` component. Pass `true` to show and otherwise.
 
 ## Contributors
 
-This project exists thanks to all the people who contribute. 
+This project exists thanks to all the people who contribute.
 <a href="https://github.com/mohitk05/react-insta-stories/graphs/contributors"><img src="https://opencollective.com/react-insta-stories/contributors.svg?width=890&button=false" /></a>
 
 

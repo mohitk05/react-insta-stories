@@ -12,13 +12,9 @@ export default class Container extends React.Component {
       count: 0,
       storiesDone: 0
     }
-    this.defaultInterval = 4000
+    this.defaultInterval = this.props.defaultInterval || 4000
     this.width = props.width || 360
     this.height = props.height || 640
-  }
-
-  componentDidMount() {
-    this.props.defaultInterval && (this.defaultInterval = this.props.defaultInterval)
   }
 
   pause = (action, bufferAction) => {
@@ -35,6 +31,21 @@ export default class Container extends React.Component {
   }
 
   next = () => {
+    if (this.props.loop) {
+      this.updateNextStoryIdForLoop()
+    } else {
+      this.updateNextStoryId()
+    }
+  };
+
+  updateNextStoryIdForLoop = () => {
+    this.setState({
+      currentId: (this.state.currentId + 1) % this.props.stories.length,
+      count: 0
+    })
+  }
+
+  updateNextStoryId = () => {
     if (this.state.currentId < this.props.stories.length - 1) {
       this.setState({
         currentId: this.state.currentId + 1,
@@ -65,7 +76,7 @@ export default class Container extends React.Component {
   }
 
   toggleMore = show => {
-    if(this.story) {
+    if (this.story) {
       this.story.toggleMore(show)
       return true
     } else return false
@@ -73,16 +84,16 @@ export default class Container extends React.Component {
 
   render() {
     return (
-      <div style={{...styles.container, ...{width: this.width, height: this.height}}}>
+      <div style={{ ...styles.container, ...{ width: this.width, height: this.height } }}>
         <ProgressArray
           next={this.next}
           pause={this.state.pause}
           bufferAction={this.state.bufferAction}
           videoDuration={this.state.videoDuration}
-          length={this.props.stories.map((s, i) => i)}
+          length={this.props.stories.map((_, i) => i)}
           defaultInterval={this.defaultInterval}
           currentStory={this.props.stories[this.state.currentId]}
-          progress={{id: this.state.currentId, completed: this.state.count / ((this.props.stories[this.state.currentId] && this.props.stories[this.state.currentId].duration) || this.defaultInterval)}}
+          progress={{ id: this.state.currentId, completed: this.state.count / ((this.props.stories[this.state.currentId] && this.props.stories[this.state.currentId].duration) || this.defaultInterval) }}
         />
         <Story
           ref={s => this.story = s}
@@ -98,8 +109,8 @@ export default class Container extends React.Component {
           storyContentStyles={this.props.storyContentStyles}
         />
         <div style={styles.overlay}>
-          <div style={{width: this.width / 2, zIndex: 999}} onTouchStart={this.debouncePause} onTouchEnd={e => this.mouseUp(e, 'previous')} onMouseDown={this.debouncePause} onMouseUp={(e) => this.mouseUp(e, 'previous')} />
-          <div style={{width: this.width / 2, zIndex: 999}} onTouchStart={this.debouncePause} onTouchEnd={e => this.mouseUp(e, 'next')} onMouseDown={this.debouncePause} onMouseUp={(e) => this.mouseUp(e, 'next')} />
+          <div style={{ width: this.width / 2, zIndex: 999 }} onTouchStart={this.debouncePause} onTouchEnd={e => this.mouseUp(e, 'previous')} onMouseDown={this.debouncePause} onMouseUp={(e) => this.mouseUp(e, 'previous')} />
+          <div style={{ width: this.width / 2, zIndex: 999 }} onTouchStart={this.debouncePause} onTouchEnd={e => this.mouseUp(e, 'next')} onMouseDown={this.debouncePause} onMouseUp={(e) => this.mouseUp(e, 'next')} />
         </div>
       </div>
     )
@@ -132,5 +143,6 @@ Container.propTypes = {
   height: PropTypes.number,
   loader: PropTypes.element,
   header: PropTypes.element,
-  storyContentStyles: PropTypes.object
+  storyContentStyles: PropTypes.object,
+  loop: PropTypes.bool
 }
