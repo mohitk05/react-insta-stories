@@ -50,8 +50,8 @@ export default class Progress extends React.PureComponent {
         break
     }
     return (
-      <div className={style.autoHide} style={{...styles.progress, ...{width: `${this.props.width * 100}%`, opacity: this.props.pause && !this.props.bufferAction ? 0 : 1}}}>
-        <div ref={r => { this.inner = r }} className={style.inner} style={innerStyle} /* style={{...styles.overlay, width: `${this.props.completed * 100}%`}} */ />
+      <div className={style.autoHide} style={{ ...styles.progress, ...{ width: `${this.props.width * 100}%`, opacity: this.props.pause && !this.props.bufferAction ? 0 : 1 } }}>
+        <div ref={r => { this.inner = r }} className={style.inner} style={innerStyle} />
       </div>
     )
   }
