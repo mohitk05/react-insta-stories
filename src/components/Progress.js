@@ -61,10 +61,5 @@ Progress.propTypes = {
   pause: PropTypes.bool,
   next: PropTypes.func,
   active: PropTypes.number,
-  currentStory: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.object
-  ]),
-  videoDuration: PropTypes.number,
   bufferAction: PropTypes.bool
 }
