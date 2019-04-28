@@ -3,13 +3,6 @@ import PropTypes from 'prop-types'
 import style from './../styles.css'
 
 export default class Progress extends React.PureComponent {
-  constructor(props) {
-    super(props)
-    this.state = {
-      duration: this.props.defaultInterval
-    }
-  }
-
   componentDidMount() {
     if (this.inner) {
       this.inner.addEventListener('webkitAnimationEnd', this.next, false)
@@ -23,26 +16,37 @@ export default class Progress extends React.PureComponent {
   }
 
   render() {
-    let innerStyle
-    switch (this.props.active) {
-      case 2:
-        innerStyle = { width: '100%' }
-        break
-      case 1:
-        innerStyle = { animation: `${this.state.duration}ms linear 0ms ${style.slidein}`, animationPlayState: this.props.pause ? 'paused' : 'running' }
-        break
-      case 0:
-        innerStyle = { width: 0 }
-        break
-      default:
-        innerStyle = { width: 0 }
-        break
-    }
     return (
-      <div className={style.autoHide} style={{ ...styles.progress, ...{ width: `${this.props.width * 100}%`, opacity: this.props.pause && !this.props.bufferAction ? 0 : 1 } }}>
-        <div ref={r => { this.inner = r }} className={style.inner} style={innerStyle} />
-      </div>
+      <ProgressWrapper width={this.props.width} pause={this.props.pause} bufferAction={this.props.bufferAction}>
+        <div ref={r => { this.inner = r }} className={style.inner} style={getProgressStyle(this.props)} />
+      </ProgressWrapper>
     )
+  }
+}
+
+const ProgressWrapper = (props) => (
+  <div className={style.autoHide} style={{ ...styles.progress, ...getProgressWrapperStyle(props) }}>
+    {props.children}
+  </div>
+)
+
+const getProgressWrapperStyle = ({ width, pause, bufferAction }) => ({
+  width: `${width * 100}%`,
+  opacity: pause && !bufferAction ? 0 : 1
+})
+
+const animationPlayState = (pause) => pause ? 'paused' : 'running'
+
+const getProgressStyle = ({ active, defaultInterval, pause }) => {
+  switch (active) {
+    case 2:
+      return { width: '100%' }
+    case 1:
+      return { animation: `${defaultInterval}ms linear 0ms ${style.slidein}`, animationPlayState: animationPlayState(pause) }
+    case 0:
+      return { width: 0 }
+    default:
+      return { width: 0 }
   }
 }
 
