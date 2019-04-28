@@ -17,14 +17,16 @@ export default class Progress extends React.PureComponent {
   }
 
   render() {
+    const { width, pause, bufferAction, active, defaultInterval } = this.props
     return (
-      <ProgressWrapper width={this.props.width} pause={this.props.pause} bufferAction={this.props.bufferAction}>
-        <div ref={r => { this.inner = r }} className={style.inner} style={getProgressStyle(this.props)} />
+      <ProgressWrapper width={width} pause={pause} bufferAction={bufferAction}>
+        <div ref={r => { this.inner = r }} className={style.inner} style={getProgressStyle({ active, defaultInterval, pause })} />
       </ProgressWrapper>
     )
   }
 }
 
+const animation = (defaultInterval) => `${defaultInterval}ms linear 0ms ${style.slidein}`
 const animationPlayState = (pause) => pause ? 'paused' : 'running'
 
 const getProgressStyle = ({ active, defaultInterval, pause }) => {
@@ -32,7 +34,7 @@ const getProgressStyle = ({ active, defaultInterval, pause }) => {
     case 2:
       return { width: '100%' }
     case 1:
-      return { animation: `${defaultInterval}ms linear 0ms ${style.slidein}`, animationPlayState: animationPlayState(pause) }
+      return { animation: animation(defaultInterval), animationPlayState: animationPlayState(pause) }
     case 0:
       return { width: 0 }
     default:
