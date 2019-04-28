@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 
 const Header = props =>
   <div style={styles.main}>
-    {props.profileImage && <div><img style={styles.img} src={props.profileImage} /></div>}
+    {props.profileImage && <img style={styles.img} src={props.profileImage} />}
     <span style={styles.text}>
       <p style={styles.heading}>{props.heading}</p>
       <p style={styles.subheading}>{props.subheading}</p>
