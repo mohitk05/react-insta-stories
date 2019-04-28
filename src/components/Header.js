@@ -1,12 +1,12 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-const Header = props =>
+const Header = ({ profileImage, heading, subheading }) =>
   <div style={styles.main}>
-    {props.profileImage && <img style={styles.img} src={props.profileImage} />}
+    {profileImage && <img style={styles.img} src={profileImage} />}
     <span style={styles.text}>
-      <p style={styles.heading}>{props.heading}</p>
-      <p style={styles.subheading}>{props.subheading}</p>
+      <p style={styles.heading}>{heading}</p>
+      <p style={styles.subheading}>{subheading}</p>
     </span>
   </div>
 
