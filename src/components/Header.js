@@ -1,15 +1,14 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-const header = props => {
-  return <div style={styles.main}>
-    {props.profileImage && <div><img style={styles.img} src={props.profileImage} /></div>}
+const Header = ({ profileImage, heading, subheading }) =>
+  <div style={styles.main}>
+    {profileImage && <img style={styles.img} src={profileImage} />}
     <span style={styles.text}>
-      <p style={styles.heading}>{props.heading}</p>
-      <p style={styles.subheading}>{props.subheading}</p>
+      <p style={styles.heading}>{heading}</p>
+      <p style={styles.subheading}>{subheading}</p>
     </span>
   </div>
-}
 
 const styles = {
   main: {
@@ -39,10 +38,10 @@ const styles = {
   }
 }
 
-header.propTypes = {
+Header.propTypes = {
   heading: PropTypes.string,
   subheading: PropTypes.string,
   profileImage: PropTypes.string
 }
 
-export default header
+export default Header
