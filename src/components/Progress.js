@@ -12,6 +12,17 @@ export default class Progress extends React.PureComponent {
     }
   }
 
+  static getDerivedStateFromProps(props, state) {
+    let current = props.currentStory
+    if (typeof current === 'object') {
+      if (current.type && props.videoDuration) return { duration: props.videoDuration * 1000 }
+      if (current.duration) return { duration: current.duration }
+      return { duration: props.defaultInterval }
+    } else {
+      return { duration: props.defaultInterval }
+    }
+  }
+
   next = () => {
     this.props.next()
   }
@@ -48,5 +59,10 @@ Progress.propTypes = {
   pause: PropTypes.bool,
   next: PropTypes.func,
   active: PropTypes.number,
-  bufferAction: PropTypes.bool
+  bufferAction: PropTypes.bool,
+  videoDuration: PropTypes.number,
+  currentStory: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.object
+  ]),
 }
