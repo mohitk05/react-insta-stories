@@ -68,7 +68,7 @@ export default class Story extends React.Component {
           style={storyContentStyles}
           src={source}
           onLoad={this.imageLoaded}
-        /> : (type === 'video' ? <video ref={r => { this.vid = r }} style={storyContentStyles} src={source} controls={false} onLoadedData={this.videoLoaded} autoPlay playsinline /> : null)
+        /> : (type === 'video' ? <video ref={r => { this.vid = r }} style={storyContentStyles} src={source} controls={false} onLoadedData={this.videoLoaded} autoPlay playsInline /> : null)
     )
   }
   render() {
