@@ -1,15 +1,9 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import style from './../styles.css'
+import ProgressWrapper from './ProgressWrapper'
 
 export default class Progress extends React.PureComponent {
-  constructor(props) {
-    super(props)
-    this.state = {
-      duration: this.props.defaultInterval
-    }
-  }
-
   componentDidMount() {
     if (this.inner) {
       this.inner.addEventListener('webkitAnimationEnd', this.next, false)
@@ -34,35 +28,31 @@ export default class Progress extends React.PureComponent {
   }
 
   render() {
-    let innerStyle
-    switch (this.props.active) {
-      case 2:
-        innerStyle = { width: '100%' }
-        break
-      case 1:
-        innerStyle = { animation: `${this.state.duration}ms linear 0ms ${style.slidein}`, animationPlayState: this.props.pause ? 'paused' : 'running' }
-        break
-      case 0:
-        innerStyle = { width: 0 }
-        break
-      default:
-        innerStyle = { width: 0 }
-        break
-    }
+    const { width, pause, bufferAction, active } = this.props
     return (
-      <div className={style.autoHide} style={{...styles.progress, ...{width: `${this.props.width * 100}%`, opacity: this.props.pause && !this.props.bufferAction ? 0 : 1}}}>
-        <div ref={r => { this.inner = r }} className={style.inner} style={innerStyle} /* style={{...styles.overlay, width: `${this.props.completed * 100}%`}} */ />
-      </div>
+      <ProgressWrapper width={width} pause={pause} bufferAction={bufferAction}>
+        <div
+          ref={r => { this.inner = r }}
+          className={style.inner}
+          style={getProgressStyle({ active, pause, duration: this.state.duration })} />
+      </ProgressWrapper>
     )
   }
 }
 
-const styles = {
-  progress: {
-    height: 2,
-    maxWidth: '100%',
-    background: '#555',
-    margin: 2
+const animation = (duration) => `${duration}ms linear 0ms ${style.slidein}`
+const animationPlayState = (pause) => pause ? 'paused' : 'running'
+
+const getProgressStyle = ({ active, duration, pause }) => {
+  switch (active) {
+    case 2:
+      return { width: '100%' }
+    case 1:
+      return { animation: animation(duration), animationPlayState: animationPlayState(pause) }
+    case 0:
+      return { width: 0 }
+    default:
+      return { width: 0 }
   }
 }
 
@@ -72,10 +62,10 @@ Progress.propTypes = {
   pause: PropTypes.bool,
   next: PropTypes.func,
   active: PropTypes.number,
+  bufferAction: PropTypes.bool,
+  videoDuration: PropTypes.number,
   currentStory: PropTypes.oneOfType([
     PropTypes.string,
     PropTypes.object
   ]),
-  videoDuration: PropTypes.number,
-  bufferAction: PropTypes.bool
 }
