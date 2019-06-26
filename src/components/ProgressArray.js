@@ -2,10 +2,10 @@ import React from 'react'
 import Progress from './Progress'
 import PropTypes from 'prop-types'
 
-export default class ProgressArray extends React.Component {
+class ProgressArray extends React.PureComponent {
   render() {
     return (
-      <div style={styles.progressArr}>
+      <div style={styles.progressArr(this.props.progressAtBottom)}>
         {this.props.length.map((i, index) =>
           <Progress
             key={index}
@@ -23,20 +23,30 @@ export default class ProgressArray extends React.Component {
   }
 }
 
+const defaultProgressStyle = {
+  display: 'flex',
+  justifyContent: 'center',
+  maxWidth: '100%',
+  flexWrap: 'row',
+  position: 'absolute',
+  width: '98%',
+  padding: 5,
+  paddingTop: 7,
+  alignSelf: 'center',
+  zIndex: 99,
+  filter: 'drop-shadow(0 1px 8px #000)'
+}
+
+const progressBottomStyle = {
+  ...defaultProgressStyle,
+  bottom: 0
+}
+
+const getProgressStyle = progressAtBottom =>
+  progressAtBottom ? progressBottomStyle : defaultProgressStyle
+
 const styles = {
-  progressArr: {
-    display: 'flex',
-    justifyContent: 'center',
-    maxWidth: '100%',
-    flexWrap: 'row',
-    position: 'absolute',
-    width: '98%',
-    padding: 5,
-    paddingTop: 7,
-    alignSelf: 'center',
-    zIndex: 99,
-    filter: 'drop-shadow(0 1px 8px #000)'
-  }
+  progressArr: getProgressStyle
 }
 
 ProgressArray.propTypes = {
@@ -50,5 +60,12 @@ ProgressArray.propTypes = {
   ]),
   defaultInterval: PropTypes.number,
   videoDuration: PropTypes.number,
-  bufferAction: PropTypes.bool
+  bufferAction: PropTypes.bool,
+  progressAtBottom: PropTypes.bool
 }
+
+ProgressArray.defaultProps = {
+  progressAtBottom: false
+}
+
+export default ProgressArray
