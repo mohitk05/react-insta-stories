@@ -3,7 +3,7 @@ import Story from './Story'
 import ProgressArray from './ProgressArray'
 import PropTypes from 'prop-types'
 
-export default class Container extends React.Component {
+class Container extends React.PureComponent {
   constructor(props) {
     super(props)
     this.state = {
@@ -12,9 +12,9 @@ export default class Container extends React.Component {
       count: 0,
       storiesDone: 0
     }
-    this.defaultInterval = this.props.defaultInterval || 4000
-    this.width = props.width || 360
-    this.height = props.height || 640
+    this.defaultInterval = props.defaultInterval
+    this.width = props.width
+    this.height = props.height
   }
 
   pause = (action, bufferAction) => {
@@ -109,8 +109,8 @@ export default class Container extends React.Component {
           storyContentStyles={this.props.storyContentStyles}
         />
         <div style={styles.overlay}>
-          <div style={{ width: this.width / 2, zIndex: 999 }} onTouchStart={this.debouncePause} onTouchEnd={e => this.mouseUp(e, 'previous')} onMouseDown={this.debouncePause} onMouseUp={(e) => this.mouseUp(e, 'previous')} />
-          <div style={{ width: this.width / 2, zIndex: 999 }} onTouchStart={this.debouncePause} onTouchEnd={e => this.mouseUp(e, 'next')} onMouseDown={this.debouncePause} onMouseUp={(e) => this.mouseUp(e, 'next')} />
+          <div style={{ width: '50%', zIndex: 999 }} onTouchStart={this.debouncePause} onTouchEnd={e => this.mouseUp(e, 'previous')} onMouseDown={this.debouncePause} onMouseUp={(e) => this.mouseUp(e, 'previous')} />
+          <div style={{ width: '50%', zIndex: 999 }} onTouchStart={this.debouncePause} onTouchEnd={e => this.mouseUp(e, 'next')} onMouseDown={this.debouncePause} onMouseUp={(e) => this.mouseUp(e, 'next')} />
         </div>
       </div>
     )
@@ -146,3 +146,11 @@ Container.propTypes = {
   storyContentStyles: PropTypes.object,
   loop: PropTypes.bool
 }
+
+Container.defaultProps = {
+  defaultInterval: 4000,
+  width: 360,
+  height: 640
+}
+
+export default Container
