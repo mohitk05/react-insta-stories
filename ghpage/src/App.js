@@ -41,7 +41,7 @@ export default class App extends Component {
           <br/>
           <p>Know more about me here: <a rel="noopener noreferrer" href="https://mohitkarekar.com" target="_blank">mohitkarekar.com</a></p>
         </div>
-        <div className="stories"><Stories ref={s => this.stories = s} stories={stories} defaultInterval={2500} /></div>
+        <div className="stories"><Stories ref={s => this.stories = s} stories={stories} defaultInterval={5000} /></div>
       </div>
     )
   }

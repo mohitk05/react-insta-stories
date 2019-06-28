@@ -4,7 +4,7 @@ import Header from './Header'
 import SeeMore from './SeeMore'
 import globalStyle from './../styles.css'
 
-export default class Story extends React.Component {
+class Story extends React.PureComponent {
   constructor(props) {
     super(props)
     this.state = {
@@ -12,6 +12,7 @@ export default class Story extends React.Component {
     }
     this.getStoryContent = this.getStoryContent.bind(this)
   }
+
   componentDidUpdate(prevProps) {
     if (this.props.story !== prevProps.story) {
       this.pauseId && clearTimeout(this.pauseId)
@@ -26,6 +27,7 @@ export default class Story extends React.Component {
         this.props.action('play', true)
       })
     }
+
     if (this.vid && (this.props.playState !== prevProps.playState) && !this.props.bufferAction) {
       if (this.props.playState) {
         this.vid.pause()
@@ -34,9 +36,11 @@ export default class Story extends React.Component {
       }
     }
   }
+
   toggleMore = show => {
     this.setState({ showMore: show })
   }
+
   imageLoaded = () => {
     try {
       if (this.pauseId) clearTimeout(this.pauseId)
@@ -46,6 +50,7 @@ export default class Story extends React.Component {
       console.log(e)
     }
   }
+
   videoLoaded = () => {
     try {
       this.props.getVideoDuration(this.vid.duration)
@@ -59,19 +64,25 @@ export default class Story extends React.Component {
       console.log(e)
     }
   }
+
   getStoryContent() {
     let source = typeof this.props.story === 'object' ? this.props.story.url : this.props.story
-    let storyContentStyles = this.props.story.styles || this.props.storyContentStyles || styles.storyContent
-    let type = this.props.story.type === 'video' ? 'video' : 'image'    
+    let storyContentStyles = '' || this.props.story.styles || this.props.storyContentStyles || styles.storyContent
+    let type = this.props.story.type === 'video' ? 'video' : 'image'
+
     return (
       type === 'image' ? <img
-          style={storyContentStyles}
-          src={source}
-          onLoad={this.imageLoaded}
-        /> : (type === 'video' ? <video ref={r => { this.vid = r }} style={storyContentStyles} src={source} controls={false} onLoadedData={this.videoLoaded} autoPlay playsInline /> : null)
+        className={this.state.loaded ? globalStyle.storyImg : ''}
+        style={storyContentStyles}
+        src={source}
+        onLoad={this.imageLoaded}
+      /> : (type === 'video' ? <video ref={r => { this.vid = r }} style={storyContentStyles} src={source} controls={false} onLoadedData={this.videoLoaded} autoPlay playsInline /> : null)
     )
   }
+
   render() {
+    if (!this.props.active) return null
+
     let isHeader = typeof this.props.story === 'object' && this.props.story.header
     return (
       <div style={{...styles.story, width: this.props.width, height: this.props.height}}>
@@ -118,3 +129,5 @@ Story.propTypes = {
   bufferAction: PropTypes.bool,
   storyContentStyles: PropTypes.object
 }
+
+export default Story

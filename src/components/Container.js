@@ -95,19 +95,23 @@ class Container extends React.PureComponent {
           currentStory={this.props.stories[this.state.currentId]}
           progress={{ id: this.state.currentId, completed: this.state.count / ((this.props.stories[this.state.currentId] && this.props.stories[this.state.currentId].duration) || this.defaultInterval) }}
         />
-        <Story
-          ref={s => this.story = s}
-          action={this.pause}
-          bufferAction={this.state.bufferAction}
-          height={this.height}
-          playState={this.state.pause}
-          width={this.width}
-          story={this.props.stories[this.state.currentId]}
-          loader={this.props.loader}
-          header={this.props.header}
-          getVideoDuration={this.getVideoDuration}
-          storyContentStyles={this.props.storyContentStyles}
-        />
+
+        {this.props.stories.map((story, storyIndex) => (
+          <Story
+            ref={s => this.story = s}
+            action={this.pause}
+            bufferAction={this.state.bufferAction}
+            height={this.height}
+            playState={this.state.pause}
+            width={this.width}
+            story={story}
+            loader={this.props.loader}
+            header={this.props.header}
+            getVideoDuration={this.getVideoDuration}
+            storyContentStyles={this.props.storyContentStyles}
+            active={this.state.currentId === storyIndex}
+          />
+        ))}
         <div style={styles.overlay}>
           <div style={{ width: '50%', zIndex: 999 }} onTouchStart={this.debouncePause} onTouchEnd={e => this.mouseUp(e, 'previous')} onMouseDown={this.debouncePause} onMouseUp={(e) => this.mouseUp(e, 'previous')} />
           <div style={{ width: '50%', zIndex: 999 }} onTouchStart={this.debouncePause} onTouchEnd={e => this.mouseUp(e, 'next')} onMouseDown={this.debouncePause} onMouseUp={(e) => this.mouseUp(e, 'next')} />
