@@ -55,7 +55,7 @@ Property | Type | Default | Description
 `height` | Number | 640 | Height of the component in pixels
 `storyStyles` | Object | none | Override the default story styles mentioned below.
 `loop` | Boolean | false | The last story loop to the first one and restart the stories.
-
+`horizontalAnimation` | Boolean | false | Add a horizontal animation for all story images to move from right to left.
 
 ### Story object
 Instead of simple string url, a comprehensive 'story object' can also be passed in the `stories` array.
