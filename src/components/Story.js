@@ -66,24 +66,43 @@ class Story extends React.PureComponent {
   }
 
   getStoryContent() {
-    let source = typeof this.props.story === 'object' ? this.props.story.url : this.props.story
-    let storyContentStyles = '' || this.props.story.styles || this.props.storyContentStyles || styles.storyContent
-    let type = this.props.story.type === 'video' ? 'video' : 'image'
+    const { story, storyContentStyles, horizontalAnimation } = this.props
+    const source = typeof story === 'object' ? story.url : story
+    const style = story.styles || storyContentStyles || styles.storyContent
+    const type = story.type === 'video' ? 'video' : 'image'
+    const className = (horizontalAnimation && this.state.loaded) ? globalStyle.storyImg : ''
 
-    return (
-      type === 'image' ? <img
-        className={this.state.loaded ? globalStyle.storyImg : ''}
-        style={storyContentStyles}
-        src={source}
-        onLoad={this.imageLoaded}
-      /> : (type === 'video' ? <video ref={r => { this.vid = r }} style={storyContentStyles} src={source} controls={false} onLoadedData={this.videoLoaded} autoPlay playsInline /> : null)
-    )
+    if (type === 'image') {
+      return (
+        <img
+          className={className}
+          style={style}
+          src={source}
+          onLoad={this.imageLoaded}
+        />
+      )
+    }
+
+    if (type === 'video') {
+      return (
+        <video
+          ref={r => { this.vid = r }}
+          style={style}
+          src={source}
+          controls={false}
+          onLoadedData={this.videoLoaded}
+          autoPlay
+          playsInline
+        />
+      )
+    }
   }
 
   render() {
     if (!this.props.active) return null
 
     let isHeader = typeof this.props.story === 'object' && this.props.story.header
+
     return (
       <div style={{...styles.story, width: this.props.width, height: this.props.height}}>
         {this.getStoryContent()}
@@ -127,7 +146,14 @@ Story.propTypes = {
   playState: PropTypes.bool,
   getVideoDuration: PropTypes.func,
   bufferAction: PropTypes.bool,
-  storyContentStyles: PropTypes.object
+  storyContentStyles: PropTypes.object,
+  active: PropTypes.bool,
+  horizontalAnimation: PropTypes.bool
+}
+
+Story.defaultProps = {
+  active: false,
+  horizontalAnimation: false
 }
 
 export default Story

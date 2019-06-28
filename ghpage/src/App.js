@@ -41,16 +41,18 @@ export default class App extends Component {
           <br/>
           <p>Know more about me here: <a rel="noopener noreferrer" href="https://mohitkarekar.com" target="_blank">mohitkarekar.com</a></p>
         </div>
-        <div className="stories"><Stories ref={s => this.stories = s} stories={stories} defaultInterval={5000} /></div>
+        <div className="stories"><Stories ref={s => this.stories = s} stories={stories} defaultInterval={5000} loop /></div>
       </div>
     )
   }
 }
 
 const stories = [
-  'https://source.unsplash.com/random',
+  'https://images.unsplash.com/photo-1561343431-adbd8c7be1ef?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=1080&fit=max&ixid=eyJhcHBfaWQiOjF9',
   'https://images.unsplash.com/photo-1508186225823-0963cf9ab0de?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=634&q=80',
-  'https://source.unsplash.com/random'
+  'https://images.unsplash.com/photo-1559638849-71cafc038a2e?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=1080&fit=max&ixid=eyJhcHBfaWQiOjF9',
+  'https://images.unsplash.com/photo-1561241312-2bade8fbadf0?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=1080&fit=max&ixid=eyJhcHBfaWQiOjF9',
+  'https://images.unsplash.com/photo-1560620979-322d97c9de30?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=1080&fit=max&ixid=eyJhcHBfaWQiOjF9'
 ].map((s, i) => ({
   url: s,
   styles: {
