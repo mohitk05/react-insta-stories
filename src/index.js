@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import Container from './components/Container'
 import PropTypes from 'prop-types'
 
-export default class ReactInstaStories extends Component {
+class ReactInstaStories extends Component {
   constructor(props) {
     super(props)
     this.pause = this.pause.bind(this)
@@ -68,6 +68,7 @@ export default class ReactInstaStories extends Component {
           storyContentStyles={this.props.storyStyles}
           loop={this.props.loop}
           progressAtBottom={this.props.progressAtBottom}
+          horizontalAnimation={this.props.horizontalAnimation}
         />
       </div>
     )
@@ -76,7 +77,8 @@ export default class ReactInstaStories extends Component {
 
 ReactInstaStories.defaultProps = {
   loop: false,
-  progressAtBottom: false
+  progressAtBottom: false,
+  horizontalAnimation: false
 }
 
 ReactInstaStories.propTypes = {
@@ -88,5 +90,8 @@ ReactInstaStories.propTypes = {
   header: PropTypes.element,
   storyStyles: PropTypes.object,
   loop: PropTypes.bool,
-  progressAtBottom: PropTypes.bool
+  progressAtBottom: PropTypes.bool,
+  horizontalAnimation: PropTypes.bool
 }
+
+export default ReactInstaStories

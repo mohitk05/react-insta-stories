@@ -82,6 +82,49 @@ class Container extends React.PureComponent {
     } else return false
   }
 
+  renderStories() {
+    return this.props.stories.map((story, storyIndex) => {
+      const active = this.state.currentId === storyIndex
+
+      return (
+        <Story
+          ref={s => this.story = s}
+          action={this.pause}
+          bufferAction={this.state.bufferAction}
+          height={this.height}
+          playState={this.state.pause}
+          width={this.width}
+          story={story}
+          loader={this.props.loader}
+          header={this.props.header}
+          getVideoDuration={this.getVideoDuration}
+          storyContentStyles={this.props.storyContentStyles}
+          horizontalAnimation
+          active={active}
+        />
+      )
+    })
+  }
+
+  renderStory() {
+    return (
+      <Story
+        ref={s => this.story = s}
+        action={this.pause}
+        bufferAction={this.state.bufferAction}
+        height={this.height}
+        playState={this.state.pause}
+        width={this.width}
+        story={this.props.stories[this.state.currentId]}
+        loader={this.props.loader}
+        header={this.props.header}
+        getVideoDuration={this.getVideoDuration}
+        storyContentStyles={this.props.storyContentStyles}
+        active
+      />
+    )
+  }
+
   render() {
     return (
       <div style={{ ...styles.container, ...{ width: this.width, height: this.height } }}>
@@ -96,19 +139,11 @@ class Container extends React.PureComponent {
           progress={{ id: this.state.currentId, completed: this.state.count / ((this.props.stories[this.state.currentId] && this.props.stories[this.state.currentId].duration) || this.defaultInterval) }}
           progressAtBottom={this.props.progressAtBottom}
         />
-        <Story
-          ref={s => this.story = s}
-          action={this.pause}
-          bufferAction={this.state.bufferAction}
-          height={this.height}
-          playState={this.state.pause}
-          width={this.width}
-          story={this.props.stories[this.state.currentId]}
-          loader={this.props.loader}
-          header={this.props.header}
-          getVideoDuration={this.getVideoDuration}
-          storyContentStyles={this.props.storyContentStyles}
-        />
+
+        {this.props.horizontalAnimation
+          ? this.renderStories()
+          : this.renderStory()}
+
         <div style={styles.overlay}>
           <div style={{ width: '50%', zIndex: 999 }} onTouchStart={this.debouncePause} onTouchEnd={e => this.mouseUp(e, 'previous')} onMouseDown={this.debouncePause} onMouseUp={(e) => this.mouseUp(e, 'previous')} />
           <div style={{ width: '50%', zIndex: 999 }} onTouchStart={this.debouncePause} onTouchEnd={e => this.mouseUp(e, 'next')} onMouseDown={this.debouncePause} onMouseUp={(e) => this.mouseUp(e, 'next')} />
@@ -142,14 +177,16 @@ Container.propTypes = {
   header: PropTypes.element,
   storyContentStyles: PropTypes.object,
   loop: PropTypes.bool,
-  progressAtBottom: PropTypes.bool
+  progressAtBottom: PropTypes.bool,
+  horizontalAnimation: PropTypes.bool
 }
 
 Container.defaultProps = {
   defaultInterval: 4000,
   width: 360,
   height: 640,
-  progressAtBottom: false
+  progressAtBottom: false,
+  horizontalAnimation: false
 }
 
 export default Container
