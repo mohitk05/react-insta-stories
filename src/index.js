@@ -68,6 +68,7 @@ class ReactInstaStories extends Component {
           storyContentStyles={this.props.storyStyles}
           loop={this.props.loop}
           progressAtBottom={this.props.progressAtBottom}
+          horizontalAnimation={this.props.horizontalAnimation}
         />
       </div>
     )
@@ -76,7 +77,8 @@ class ReactInstaStories extends Component {
 
 ReactInstaStories.defaultProps = {
   loop: false,
-  progressAtBottom: false
+  progressAtBottom: false,
+  horizontalAnimation: false
 }
 
 ReactInstaStories.propTypes = {
@@ -88,7 +90,8 @@ ReactInstaStories.propTypes = {
   header: PropTypes.element,
   storyStyles: PropTypes.object,
   loop: PropTypes.bool,
-  progressAtBottom: PropTypes.bool
+  progressAtBottom: PropTypes.bool,
+  horizontalAnimation: PropTypes.bool
 }
 
 export default ReactInstaStories

@@ -56,6 +56,7 @@ Property | Type | Default | Description
 `storyStyles` | Object | none | Override the default story styles mentioned below.
 `loop` | Boolean | false | The last story loop to the first one and restart the stories.
 `progressAtBottom` | Boolean | false | Add the progress bar in the story bottom.
+`horizontalAnimation` | Boolean | false | Add a horizontal animation for all story images to move from right to left.
 
 
 ### Story object
