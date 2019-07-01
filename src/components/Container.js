@@ -82,7 +82,20 @@ class Container extends React.PureComponent {
     } else return false
   }
 
+  storeStoryReference = s => {
+    this.story = s
+  }
+
   render() {
+    const {
+      stories,
+      progressAtBottom,
+      loader,
+      header,
+      storyContentStyles,
+      horizontalAnimation
+    } = this.props
+
     return (
       <div style={{ ...styles.container, ...{ width: this.width, height: this.height } }}>
         <ProgressArray
@@ -90,30 +103,30 @@ class Container extends React.PureComponent {
           pause={this.state.pause}
           bufferAction={this.state.bufferAction}
           videoDuration={this.state.videoDuration}
-          length={this.props.stories.map((_, i) => i)}
+          length={stories.map((_, i) => i)}
           defaultInterval={this.defaultInterval}
-          currentStory={this.props.stories[this.state.currentId]}
-          progress={{ id: this.state.currentId, completed: this.state.count / ((this.props.stories[this.state.currentId] && this.props.stories[this.state.currentId].duration) || this.defaultInterval) }}
-          progressAtBottom={this.props.progressAtBottom}
+          currentStory={stories[this.state.currentId]}
+          progress={{ id: this.state.currentId, completed: this.state.count / ((stories[this.state.currentId] && stories[this.state.currentId].duration) || this.defaultInterval) }}
+          progressAtBottom={progressAtBottom}
         />
 
-        {this.props.stories.map((story, storyIndex) => {
+        {stories.map((story, storyIndex) => {
           const active = this.state.currentId === storyIndex
 
           return (
             <Story
-              ref={s => this.story = s}
+              ref={this.storeStoryReference()}
               action={this.pause}
               bufferAction={this.state.bufferAction}
               height={this.height}
               playState={this.state.pause}
               width={this.width}
               story={story}
-              loader={this.props.loader}
-              header={this.props.header}
+              loader={loader}
+              header={header}
               getVideoDuration={this.getVideoDuration}
-              storyContentStyles={this.props.storyContentStyles}
-              horizontalAnimation={this.props.horizontalAnimation}
+              storyContentStyles={storyContentStyles}
+              horizontalAnimation={horizontalAnimation}
               active={active}
             />
           )

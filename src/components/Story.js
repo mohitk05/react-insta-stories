@@ -2,6 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import Header from './Header'
 import SeeMore from './SeeMore'
+import { VIDEO } from './constants'
 import globalStyle from './../styles.css'
 
 class Story extends React.PureComponent {
@@ -19,10 +20,13 @@ class Story extends React.PureComponent {
       this.pauseId = setTimeout(() => {
         this.setState({ loaded: false })
       }, 300)
+
       this.props.action('pause', true)
+
       this.vid && this.vid.addEventListener('waiting', () => {
         this.props.action('pause', true)
       })
+
       this.vid && this.vid.addEventListener('playing', () => {
         this.props.action('play', true)
       })
@@ -65,28 +69,21 @@ class Story extends React.PureComponent {
     }
   }
 
+  storeVideoReference = r => {
+    this.vid = r
+  }
+
   getStoryContent() {
     const { story, storyContentStyles, horizontalAnimation } = this.props
     const source = typeof story === 'object' ? story.url : story
     const style = story.styles || storyContentStyles || styles.storyContent
-    const type = story.type === 'video' ? 'video' : 'image'
+    const isVideoType = story.type === VIDEO
     const className = (horizontalAnimation && this.state.loaded) ? globalStyle.storyImg : ''
 
-    if (type === 'image') {
-      return (
-        <img
-          className={className}
-          style={style}
-          src={source}
-          onLoad={this.imageLoaded}
-        />
-      )
-    }
-
-    if (type === 'video') {
+    if (isVideoType) {
       return (
         <video
-          ref={r => { this.vid = r }}
+          ref={this.storeVideoReference}
           style={style}
           src={source}
           controls={false}
@@ -96,6 +93,15 @@ class Story extends React.PureComponent {
         />
       )
     }
+
+    return (
+      <img
+        className={className}
+        style={style}
+        src={source}
+        onLoad={this.imageLoaded}
+      />
+    )
   }
 
   render() {
