@@ -82,7 +82,20 @@ class Container extends React.PureComponent {
     } else return false
   }
 
+  storeStoryReference = s => {
+    this.story = s
+  }
+
   render() {
+    const {
+      stories,
+      progressAtBottom,
+      loader,
+      header,
+      storyContentStyles,
+      horizontalAnimation
+    } = this.props
+
     return (
       <div style={{ ...styles.container, ...{ width: this.width, height: this.height } }}>
         <ProgressArray
@@ -90,25 +103,35 @@ class Container extends React.PureComponent {
           pause={this.state.pause}
           bufferAction={this.state.bufferAction}
           videoDuration={this.state.videoDuration}
-          length={this.props.stories.map((_, i) => i)}
+          length={stories.map((_, i) => i)}
           defaultInterval={this.defaultInterval}
-          currentStory={this.props.stories[this.state.currentId]}
-          progress={{ id: this.state.currentId, completed: this.state.count / ((this.props.stories[this.state.currentId] && this.props.stories[this.state.currentId].duration) || this.defaultInterval) }}
-          progressAtBottom={this.props.progressAtBottom}
+          currentStory={stories[this.state.currentId]}
+          progress={{ id: this.state.currentId, completed: this.state.count / ((stories[this.state.currentId] && stories[this.state.currentId].duration) || this.defaultInterval) }}
+          progressAtBottom={progressAtBottom}
         />
-        <Story
-          ref={s => this.story = s}
-          action={this.pause}
-          bufferAction={this.state.bufferAction}
-          height={this.height}
-          playState={this.state.pause}
-          width={this.width}
-          story={this.props.stories[this.state.currentId]}
-          loader={this.props.loader}
-          header={this.props.header}
-          getVideoDuration={this.getVideoDuration}
-          storyContentStyles={this.props.storyContentStyles}
-        />
+
+        {stories.map((story, storyIndex) => {
+          const active = this.state.currentId === storyIndex
+
+          return (
+            <Story
+              ref={this.storeStoryReference()}
+              action={this.pause}
+              bufferAction={this.state.bufferAction}
+              height={this.height}
+              playState={this.state.pause}
+              width={this.width}
+              story={story}
+              loader={loader}
+              header={header}
+              getVideoDuration={this.getVideoDuration}
+              storyContentStyles={storyContentStyles}
+              horizontalAnimation={horizontalAnimation}
+              active={active}
+            />
+          )
+        })}
+
         <div style={styles.overlay}>
           <div style={{ width: '50%', zIndex: 999 }} onTouchStart={this.debouncePause} onTouchEnd={e => this.mouseUp(e, 'previous')} onMouseDown={this.debouncePause} onMouseUp={(e) => this.mouseUp(e, 'previous')} />
           <div style={{ width: '50%', zIndex: 999 }} onTouchStart={this.debouncePause} onTouchEnd={e => this.mouseUp(e, 'next')} onMouseDown={this.debouncePause} onMouseUp={(e) => this.mouseUp(e, 'next')} />
@@ -130,10 +153,6 @@ const styles = {
     height: 'inherit',
     width: 'inherit',
     display: 'flex'
-  },
-  left: {
-  },
-  right: {
   }
 }
 
@@ -146,14 +165,16 @@ Container.propTypes = {
   header: PropTypes.element,
   storyContentStyles: PropTypes.object,
   loop: PropTypes.bool,
-  progressAtBottom: PropTypes.bool
+  progressAtBottom: PropTypes.bool,
+  horizontalAnimation: PropTypes.bool
 }
 
 Container.defaultProps = {
   defaultInterval: 4000,
   width: 360,
   height: 640,
-  progressAtBottom: false
+  progressAtBottom: false,
+  horizontalAnimation: false
 }
 
 export default Container

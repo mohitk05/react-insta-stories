@@ -40,6 +40,22 @@ p{
   }
 }
 
+@keyframes horizontal-scroll {
+  0% { object-position: 0% 50%; }
+  100% { object-position: 100% 50%; }
+}
+
+.storyImg {
+  object-fit: cover;
+  margin: unset;
+  animation-name: horizontal-scroll;
+  animation-duration: 5s;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+  position: absolute;
+  height: 100%;
+}
+
 .spinner {
   width: 40px;
   height: 40px;
