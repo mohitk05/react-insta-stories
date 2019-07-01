@@ -94,6 +94,7 @@ class Container extends React.PureComponent {
           defaultInterval={this.defaultInterval}
           currentStory={this.props.stories[this.state.currentId]}
           progress={{ id: this.state.currentId, completed: this.state.count / ((this.props.stories[this.state.currentId] && this.props.stories[this.state.currentId].duration) || this.defaultInterval) }}
+          progressAtBottom={this.props.progressAtBottom}
         />
         <Story
           ref={s => this.story = s}
@@ -144,13 +145,15 @@ Container.propTypes = {
   loader: PropTypes.element,
   header: PropTypes.element,
   storyContentStyles: PropTypes.object,
-  loop: PropTypes.bool
+  loop: PropTypes.bool,
+  progressAtBottom: PropTypes.bool
 }
 
 Container.defaultProps = {
   defaultInterval: 4000,
   width: 360,
-  height: 640
+  height: 640,
+  progressAtBottom: false
 }
 
 export default Container

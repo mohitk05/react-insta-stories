@@ -55,6 +55,7 @@ Property | Type | Default | Description
 `height` | Number | 640 | Height of the component in pixels
 `storyStyles` | Object | none | Override the default story styles mentioned below.
 `loop` | Boolean | false | The last story loop to the first one and restart the stories.
+`progressAtBottom` | Boolean | false | Add the progress bar in the story bottom.
 
 
 ### Story object
