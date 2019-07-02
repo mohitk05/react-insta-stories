@@ -2,6 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import style from './../styles.css'
 import ProgressWrapper from './ProgressWrapper'
+import { COMING, ACTIVE, PASSED } from './constants'
 
 export default class Progress extends React.PureComponent {
   componentDidMount() {
@@ -45,11 +46,11 @@ const animationPlayState = (pause) => pause ? 'paused' : 'running'
 
 const getProgressStyle = ({ active, duration, pause }) => {
   switch (active) {
-    case 2:
+    case PASSED:
       return { width: '100%' }
-    case 1:
+    case ACTIVE:
       return { animation: animation(duration), animationPlayState: animationPlayState(pause) }
-    case 0:
+    case COMING:
       return { width: 0 }
     default:
       return { width: 0 }
