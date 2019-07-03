@@ -66,12 +66,5 @@
   "files": [
     "dist"
   ],
-  "dependencies": {
-    "opencollective-postinstall": "^2.0.2",
-    "opencollective": "^1.0.3"
-  },
-  "collective": {
-    "type": "opencollective",
-    "url": "https://opencollective.com/react-insta-stories"
-  }
+  "dependencies": {}
 }
