@@ -30,7 +30,7 @@ const defaultProgressStyle = {
   flexWrap: 'row',
   position: 'absolute',
   width: '98%',
-  padding: '7px 5px 5px 5px',
+  padding: '10px 5px',
   alignSelf: 'center',
   zIndex: 99,
   filter: 'drop-shadow(0 1px 8px #000)'
