@@ -68,5 +68,5 @@ Progress.propTypes = {
   currentStory: PropTypes.oneOfType([
     PropTypes.string,
     PropTypes.object
-  ]),
+  ])
 }
