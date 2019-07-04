@@ -1,5 +1,5 @@
 {
-  "name": "react-insta-stories",
+  "name": "@quintoandar/react-insta-stories",
   "version": "1.5.2",
   "description": "A React component for Instagram like stories",
   "author": "mohitk05",
@@ -25,8 +25,7 @@
     "start": "rollup -c -w",
     "prepare": "npm run build",
     "predeploy": "cd ghpage && npm install && npm run build",
-    "deploy": "gh-pages -d ghpage/build",
-    "postinstall": "opencollective-postinstall"
+    "deploy": "gh-pages -d ghpage/build"
   },
   "peerDependencies": {
     "prop-types": "^15.5.4",
