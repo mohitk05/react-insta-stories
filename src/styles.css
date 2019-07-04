@@ -41,8 +41,8 @@ p{
 }
 
 @keyframes horizontal-scroll {
-  0% { object-position: 0% 50%; }
-  100% { object-position: 100% 50%; }
+  0% { object-position: 30% 50%; }
+  100% { object-position: 70% 50%; }
 }
 
 .storyImg {
