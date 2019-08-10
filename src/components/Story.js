@@ -112,7 +112,7 @@ Story.propTypes = {
   width: PropTypes.number,
   action: PropTypes.func,
   loader: PropTypes.element,
-  header: PropTypes.element,
+  header: PropTypes.func,
   playState: PropTypes.bool,
   getVideoDuration: PropTypes.func,
   bufferAction: PropTypes.bool,
