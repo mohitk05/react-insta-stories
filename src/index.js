@@ -83,7 +83,7 @@ ReactInstaStories.propTypes = {
   width: PropTypes.number,
   height: PropTypes.number,
   loader: PropTypes.element,
-  header: PropTypes.element,
+  header: PropTypes.func,
   storyStyles: PropTypes.object,
   loop: PropTypes.bool
 }
