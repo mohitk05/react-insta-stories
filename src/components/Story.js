@@ -77,7 +77,7 @@ export default class Story extends React.Component {
       <div style={{...styles.story, width: this.props.width, height: this.props.height}}>
         {this.getStoryContent()}
         {isHeader && <div style={{position: 'absolute', left: 12, top: 20, zIndex: 19}}>
-          {this.props.header ? () => this.props.header(this.props.story.header) : <Header heading={this.props.story.header.heading} subheading={this.props.story.header.subheading} profileImage={this.props.story.header.profileImage} />}
+          {this.props.header ? this.props.header(this.props.story.header) : <Header heading={this.props.story.header.heading} subheading={this.props.story.header.subheading} profileImage={this.props.story.header.profileImage} />}
         </div>}
         {!this.state.loaded && <div style={{width: this.props.width, height: this.props.height, position: 'absolute', left: 0, top: 0, background: 'rgba(0, 0, 0, 0.9)', zIndex: 9, display: 'flex', justifyContent: 'center', alignItems: 'center', color: '#ccc'}}>{this.props.loader || <div className={globalStyle.spinner} />}</div>}
         {this.props.story.seeMore &&
@@ -112,7 +112,7 @@ Story.propTypes = {
   width: PropTypes.number,
   action: PropTypes.func,
   loader: PropTypes.element,
-  header: PropTypes.element,
+  header: PropTypes.func,
   playState: PropTypes.bool,
   getVideoDuration: PropTypes.func,
   bufferAction: PropTypes.bool,
