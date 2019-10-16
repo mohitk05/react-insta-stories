@@ -1,5 +1,6 @@
-import React, { useContext, useState, useRef } from 'react'
+import React, { useContext, useState, useRef, useEffect } from 'react'
 import GlobalContext from './../context/Global'
+import ProgressContext from './../context/Progress'
 import Story from './Story'
 import ProgressArray from './ProgressArray'
 import { GlobalCtx } from './../interfaces'
@@ -12,12 +13,45 @@ export default function () {
     const [videoDuration, setVideoDuration] = useState<number>(0)
 
     let mousedownId = useRef<NodeJS.Timeout>()
+    let animationFrameId = useRef<number>()
 
     const { width, height, defaultInterval, stories, loop } = useContext<GlobalCtx>(GlobalContext)
 
+    useEffect(() => {
+        if (!pause) {
+            animationFrameId.current = requestAnimationFrame(incrementCount)
+        }
+        return () => {
+            cancelAnimationFrame(animationFrameId.current)
+        }
+    }, [currentId, pause])
+
+    useEffect(() => {
+        setCount(0)
+    }, [currentId, stories])
+
+    const incrementCount = () => {
+        setCount((count: number) => {
+            const interval = getCurrentInterval()
+            if (stories[currentId].type === 'video') console.log(interval)
+            if (count < 100) {
+                animationFrameId.current = requestAnimationFrame(incrementCount)
+            } else {
+                next()
+            }
+            return count + (100 / ((interval / 1000) * 60))
+        })
+    }
+
+    const getCurrentInterval = () => {
+        if (stories[currentId].type === 'video') return videoDuration
+        if (typeof stories[currentId].duration === 'number') return stories[currentId].duration
+        return defaultInterval
+    }
+
     const toggleState = (action: string, bufferAction?: boolean) => {
         setPause(action === 'pause')
-        setBufferAction(bufferAction)
+        setBufferAction(!!bufferAction)
     }
 
     const previous = () => {
@@ -65,20 +99,22 @@ export default function () {
     }
 
     const getVideoDuration = (duration: number) => {
-        setVideoDuration(duration)
+        setVideoDuration(duration * 1000)
     }
 
     return (
         <div style={{ ...styles.container, ...{ width, height } }}>
-            <ProgressArray
-                next={next}
-                pause={pause}
-                bufferAction={bufferAction}
-                videoDuration={videoDuration}
-                numArray={stories.map((_, i) => i)}
-                currentStory={stories[currentId]}
-                progress={{ id: currentId }}
-            />
+            <ProgressContext.Provider value={{
+                bufferAction: bufferAction,
+                videoDuration: videoDuration,
+                numArray: stories.map((_, i) => i),
+                currentStory: stories[currentId],
+                currentId,
+                count,
+                pause
+            }}>
+                <ProgressArray />
+            </ProgressContext.Provider>
             <Story
                 action={toggleState}
                 bufferAction={bufferAction}
@@ -90,6 +126,7 @@ export default function () {
                 <div style={{ width: '50%', zIndex: 999 }} onTouchStart={debouncePause} onTouchEnd={e => mouseUp(e, 'previous')} onMouseDown={debouncePause} onMouseUp={(e) => mouseUp(e, 'previous')} />
                 <div style={{ width: '50%', zIndex: 999 }} onTouchStart={debouncePause} onTouchEnd={e => mouseUp(e, 'next')} onMouseDown={debouncePause} onMouseUp={(e) => mouseUp(e, 'next')} />
             </div>
+            <p style={{ position: 'absolute', top: 640 }}>{count}</p>
         </div>
     )
 }

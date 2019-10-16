@@ -33,9 +33,7 @@ export interface StoryState {
     showMore: boolean
 }
 
-export type Story = string | StoryObject
-
-export interface StoryObject {
+export interface Story {
     url: string,
     seeMore?: JSX.Element,
     header?: Header,
@@ -65,12 +63,7 @@ export interface HeaderProps {
 
 export interface ProgressProps {
     width: number,
-    pause: boolean,
-    next: Function,
     active: number,
-    bufferAction: boolean,
-    videoDuration: number,
-    currentStory: Story
 }
 
 export interface ProgressWrapperProps {
@@ -81,13 +74,15 @@ export interface ProgressWrapperProps {
 }
 
 export interface ProgressArrayProps {
+
+}
+
+export interface ProgressContext {
     numArray: number[],
-    progress: {
-        id: number
-    },
-    pause: boolean,
-    next: Function,
+    currentId: number,
+    count: number,
     currentStory: Story,
     videoDuration: number,
-    bufferAction: boolean
+    bufferAction: boolean,
+    pause: boolean
 }

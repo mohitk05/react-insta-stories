@@ -41,7 +41,7 @@ module.exports = {
         path: path.resolve(__dirname, 'dist'),
         library: 'Stories',
         libraryTarget: 'umd',
-        publicPath: '/dist/main.js',
+        publicPath: '/dist/index.js',
         umdNamedDefine: true
     },
     externals: {

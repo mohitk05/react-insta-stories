@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect, useContext, useRef } from "react";
 import { StoryProps, GlobalCtx } from "./../interfaces";
 import Header from "./Header";
 import SeeMore from "./SeeMore";
@@ -14,30 +14,30 @@ const Story = (props: StoryProps) => {
 	);
 
 	useEffect(() => {
-		pauseId && clearTimeout(pauseId);
-		pauseId = setTimeout(() => {
+		pauseId.current && clearTimeout(pauseId.current);
+		pauseId.current = setTimeout(() => {
 			setLoaded(false);
 		}, 300);
 		props.action("pause", true);
-		vid &&
-			vid.addEventListener("waiting", () => {
+		vid.current &&
+			vid.current.addEventListener("waiting", () => {
 				props.action("pause", true);
 			});
-		vid &&
-			vid.addEventListener("playing", () => {
+		vid.current &&
+			vid.current.addEventListener("playing", () => {
 				props.action("play", true);
 			});
 	}, [props.story]);
 
-	let pauseId: NodeJS.Timeout;
-	let vid: HTMLVideoElement;
+	let pauseId = useRef<NodeJS.Timeout>();
+	let vid = useRef<HTMLVideoElement>(null);
 
 	useEffect(() => {
-		if (vid && !props.bufferAction) {
+		if (vid.current) {
 			if (props.playState) {
-				vid.pause();
+				vid.current.pause();
 			} else {
-				vid.play().catch(e => console.log(e));
+				vid.current.play().catch(e => console.log(e));
 			}
 		}
 	}, [props.playState]);
@@ -48,7 +48,7 @@ const Story = (props: StoryProps) => {
 
 	const imageLoaded = () => {
 		try {
-			if (pauseId) clearTimeout(pauseId);
+			if (pauseId.current) clearTimeout(pauseId.current);
 			setLoaded(true);
 			props.action("play", true);
 		} catch (e) {
@@ -58,9 +58,9 @@ const Story = (props: StoryProps) => {
 
 	const videoLoaded = () => {
 		try {
-			props.getVideoDuration(vid.duration);
-			vid &&
-				vid
+			props.getVideoDuration(vid.current.duration);
+			vid.current &&
+				vid.current
 					.play()
 					.then(() => {
 						imageLoaded();
@@ -89,9 +89,7 @@ const Story = (props: StoryProps) => {
 			<img style={storyContentStyles} src={source} onLoad={imageLoaded} />
 		) : type === "video" ? (
 			<video
-				ref={r => {
-					vid = r;
-				}}
+				ref={vid}
 				style={storyContentStyles}
 				src={source}
 				controls={false}

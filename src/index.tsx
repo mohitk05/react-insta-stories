@@ -5,7 +5,10 @@ import GlobalContext from './context/Global'
 
 const ReactInstaStories = function (props: ReactInstaStoriesProps) {
     let context: GlobalCtx = {
-        stories: props.stories,
+        stories: props.stories.map(s => {
+            if (typeof s === 'string') return { url: s }
+            else return s
+        }),
         width: props.width,
         height: props.height,
         loader: props.loader,

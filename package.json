@@ -6,6 +6,7 @@
 	"scripts": {
 		"build": "rm -rf ./dist && webpack --mode production",
 		"build:dev": "rm -rf ./dist && webpack --mode development",
+		"prestart": "rm -rf ./dist && webpack --mode development",
 		"start": "webpack-dev-server --open",
 		"test": "echo \"Error: no test specified\" && exit 1"
 	},
@@ -43,5 +44,6 @@
 	},
 	"peerDependencies": {
 		"react": "^16.8.2"
-	}
+	},
+	"dependencies": {}
 }

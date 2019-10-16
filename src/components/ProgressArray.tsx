@@ -1,25 +1,20 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import Progress from './Progress'
-import { ProgressArrayProps } from './../interfaces'
+import { ProgressContext } from './../interfaces'
+import ProgressCtx from './../context/Progress'
 
-export default class ProgressArray extends React.Component<ProgressArrayProps> {
-    render() {
-        return (
-            <div style={styles.progressArr}>
-                {this.props.numArray.map((i, index) =>
-                    <Progress
-                        key={index}
-                        width={1 / this.props.numArray.length}
-                        next={this.props.next}
-                        videoDuration={this.props.videoDuration}
-                        currentStory={this.props.currentStory}
-                        active={i === this.props.progress.id ? 1 : (i < this.props.progress.id ? 2 : 0)}
-                        pause={this.props.pause}
-                        bufferAction={this.props.bufferAction}
-                    />)}
-            </div>
-        )
-    }
+export default () => {
+    const { numArray, currentId } = useContext<ProgressContext>(ProgressCtx)
+    return (
+        <div style={styles.progressArr}>
+            {numArray.map(i =>
+                <Progress
+                    key={i}
+                    width={1 / numArray.length}
+                    active={i === currentId ? 1 : (i < currentId ? 2 : 0)}
+                />)}
+        </div>
+    )
 }
 
 const styles = {
