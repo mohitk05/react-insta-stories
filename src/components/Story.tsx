@@ -14,19 +14,21 @@ const Story = (props: StoryProps) => {
 	);
 
 	useEffect(() => {
-		pauseId.current && clearTimeout(pauseId.current);
-		pauseId.current = setTimeout(() => {
-			setLoaded(false);
-		}, 300);
-		props.action("pause", true);
-		vid.current &&
-			vid.current.addEventListener("waiting", () => {
-				props.action("pause", true);
-			});
-		vid.current &&
-			vid.current.addEventListener("playing", () => {
-				props.action("play", true);
-			});
+		if (typeof props.story === 'object' && props.story.content) {
+			setLoaded(true)
+			props.action('play', true)
+		} else {
+			setLoaded(false)
+			props.action("pause", true);
+			vid.current &&
+				vid.current.addEventListener("waiting", () => {
+					props.action("pause", true);
+				});
+			vid.current &&
+				vid.current.addEventListener("playing", () => {
+					props.action("play", true);
+				});
+		}
 	}, [props.story]);
 
 	let pauseId = useRef<NodeJS.Timeout>();
@@ -48,7 +50,6 @@ const Story = (props: StoryProps) => {
 
 	const imageLoaded = () => {
 		try {
-			if (pauseId.current) clearTimeout(pauseId.current);
 			setLoaded(true);
 			props.action("play", true);
 		} catch (e) {
@@ -75,29 +76,34 @@ const Story = (props: StoryProps) => {
 	};
 
 	const getStoryContent = () => {
-		let source =
-			typeof props.story === "object" ? props.story.url : props.story;
-		let storyContentStyles =
-			(typeof props.story === "object" && props.story.styles) ||
-			storyStyles ||
-			styles.storyContent;
-		let type =
-			typeof props.story === "object" && props.story.type === "video"
-				? "video"
-				: "image";
-		return type === "image" ? (
-			<img style={storyContentStyles} src={source} onLoad={imageLoaded} />
-		) : type === "video" ? (
-			<video
-				ref={vid}
-				style={storyContentStyles}
-				src={source}
-				controls={false}
-				onLoadedData={videoLoaded}
-				autoPlay
-				playsInline
-			/>
-		) : null;
+		let innerContent = typeof props.story === "object" && props.story.content
+		if (innerContent) {
+			return innerContent(props.action)
+		} else {
+			let source =
+				typeof props.story === "object" ? props.story.url : props.story;
+			let storyContentStyles =
+				(typeof props.story === "object" && props.story.styles) ||
+				storyStyles ||
+				styles.storyContent;
+			let type =
+				typeof props.story === "object" && props.story.type === "video"
+					? "video"
+					: "image";
+			return type === "image" ? (
+				<img style={storyContentStyles} src={source} onLoad={imageLoaded} />
+			) : type === "video" ? (
+				<video
+					ref={vid}
+					style={storyContentStyles}
+					src={source}
+					controls={false}
+					onLoadedData={videoLoaded}
+					autoPlay
+					playsInline
+				/>
+			) : null;
+		}
 	};
 
 	let isHeader = typeof props.story === "object" && props.story.header;
