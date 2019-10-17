@@ -17,7 +17,7 @@ class App extends React.Component {
   render() {
     return (
       <div className="App">
-        <Stories stories={this.state.stories || stories} loop />
+        <Stories stories={stories} loop />
       </div>
     );
   }

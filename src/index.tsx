@@ -1,9 +1,20 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { ReactInstaStoriesProps, GlobalCtx } from './interfaces'
 import Container from './components/Container'
 import GlobalContext from './context/Global'
 
 const ReactInstaStories = function (props: ReactInstaStoriesProps) {
+    useEffect(() => {
+        props.stories.forEach((s, i) => {
+            let images = []
+            const url = typeof s === 'object' && s.url && (s.type === 'image' || !s.type) ? s.url : (typeof s === 'string' ? s : null)
+            if (url) {
+                images[i] = new Image()
+                images[i].src = url
+            }
+        })
+    }, [props.stories])
+
     let context: GlobalCtx = {
         stories: props.stories.map(s => {
             if (typeof s === 'string') return { url: s }
