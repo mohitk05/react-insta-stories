@@ -34,12 +34,13 @@ export interface StoryState {
 }
 
 export interface Story {
-    url: string,
+    url?: string,
     seeMore?: JSX.Element,
     header?: Header,
     type?: string,
     duration?: number,
-    styles?: object
+    styles?: object,
+    content?: Function
 }
 
 export interface Header {
