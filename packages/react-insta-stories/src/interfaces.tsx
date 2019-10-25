@@ -6,7 +6,12 @@ export interface ReactInstaStoriesProps {
     header?: Function,
     storyStyles?: Object,
     loop?: boolean,
-    defaultInterval?: number
+    defaultInterval?: number,
+    isPaused?: boolean,
+    currentIndex?: number,
+    onAllStoriesEnd?: Function,
+    onStoryStart?: Function,
+    onStoryEnd?: Function
 }
 
 export interface GlobalCtx extends ReactInstaStoriesProps { }

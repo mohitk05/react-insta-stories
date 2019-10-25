@@ -15,7 +15,7 @@ export default function () {
     let mousedownId = useRef<NodeJS.Timeout>()
     let animationFrameId = useRef<number>()
 
-    const { width, height, defaultInterval, stories, loop } = useContext<GlobalCtx>(GlobalContext)
+    const { width, height, defaultInterval, stories, loop, currentIndex, isPaused, onStoryStart, onStoryEnd, onAllStoriesEnd } = useContext<GlobalCtx>(GlobalContext)
 
     useEffect(() => {
         if (!pause) {
@@ -30,17 +30,45 @@ export default function () {
         setCount(0)
     }, [currentId, stories])
 
+    useEffect(() => {
+        if (typeof currentIndex === 'number') {
+            if (currentIndex >= 0 && currentIndex < stories.length) {
+                setCurrentId(currentIndex)
+            } else {
+                console.error('Index out of bounds. Current index was set to value more than the length of stories array.', currentIndex)
+            }
+        }
+    }, [currentIndex])
+
+    useEffect(() => {
+        setPause(isPaused)
+    }, [isPaused])
+
     const incrementCount = () => {
         setCount((count: number) => {
+            if (count === 0) storyStartCallback()
             const interval = getCurrentInterval()
             if (stories[currentId].type === 'video') console.log(interval)
             if (count < 100) {
                 animationFrameId.current = requestAnimationFrame(incrementCount)
             } else {
+                storyEndCallback()
                 next()
             }
             return count + (100 / ((interval / 1000) * 60))
         })
+    }
+
+    const storyStartCallback = () => {
+        onStoryStart && onStoryStart(currentId, stories[currentId])
+    }
+
+    const storyEndCallback = () => {
+        onStoryEnd && onStoryEnd(currentId, stories[currentId])
+    }
+
+    const allStoriesEndCallback = () => {
+        onAllStoriesEnd && onAllStoriesEnd()
     }
 
     const getCurrentInterval = () => {
@@ -66,6 +94,9 @@ export default function () {
             updateNextStoryIdForLoop()
         } else {
             updateNextStoryId()
+        }
+        if (currentId === stories.length - 1 || ((currentId + 1) % stories.length === stories.length - 1)) {
+            allStoriesEndCallback()
         }
     };
 

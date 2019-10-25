@@ -108,6 +108,12 @@ const stories = [
 | `height`          | Number          | 640                       | Height of the component in pixels                                                                                                                                   |
 | `storyStyles`     | Object          | none                      | Override the default story styles mentioned below.                                                                                                                  |
 | `loop`            | Boolean         | false                     | The last story loop to the first one and restart the stories.                                                                                                       |
+| **New props**     | ⭐️             | ⭐️                       | ⭐️                                                                                                                                                                 |
+| `isPaused`        | Boolean         | false                     | Toggle story playing state                                                                                                                                          |
+| `currentIndex`    | Number          | undefined                 | Set the current story index                                                                                                                                         |
+| `onStoryStart`    | Function        | -                         | Callback when a story starts                                                                                                                                        |
+| `onStoryEnd`      | Function        | -                         | Callback when a story ends                                                                                                                                          |
+| `onAllStoriesEnd` | Function        | -                         | Callback when all stories in the array have ended                                                                                                                   |
 
 ### Story object
 
