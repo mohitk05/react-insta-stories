@@ -17,6 +17,7 @@ class App extends React.Component {
   render() {
     return (
       <div className="App">
+        <a href="https://github.com/mohitk05/react-insta-stories/pull/32">react-insta-stories</a>
         <Stories defaultInterval={10000} stories={stories2} />
       </div>
     );

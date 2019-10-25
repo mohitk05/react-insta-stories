@@ -1,7 +1,12 @@
 .App {
 	display: flex;
-	justify-content: center;
 	align-items: center;
 	height: 100vh;
+	flex-direction: column;
 	filter: drop-shadow(0 2px 15px #eee);
+	margin-top: 20px;
+}
+
+.App a {
+	margin-bottom: 20px;
 }
