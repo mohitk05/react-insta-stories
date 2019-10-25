@@ -76,9 +76,9 @@ const Story = (props: StoryProps) => {
 	};
 
 	const getStoryContent = () => {
-		let innerContent = typeof props.story === "object" && props.story.content
-		if (innerContent) {
-			return innerContent(props.action)
+		let InnerContent = typeof props.story === "object" && props.story.content
+		if (InnerContent) {
+			return <InnerContent action={props.action} isPaused={props.playState} />
 		} else {
 			let source =
 				typeof props.story === "object" ? props.story.url : props.story;

@@ -1,6 +1,4 @@
-import { ReactChildren } from "react";
-
-export interface ReactInstaStoriesProps {
+export interface ReactNativeStoriesProps {
     stories: Story[],
     width?: number,
     height?: number,
@@ -11,7 +9,7 @@ export interface ReactInstaStoriesProps {
     defaultInterval?: number
 }
 
-export interface GlobalCtx extends ReactInstaStoriesProps { }
+export interface GlobalCtx extends ReactNativeStoriesProps { }
 
 export interface ContainerState {
     currentId: number,
