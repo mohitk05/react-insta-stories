@@ -53,6 +53,9 @@ export default function () {
                 animationFrameId.current = requestAnimationFrame(incrementCount)
             } else {
                 storyEndCallback()
+                if (currentId === stories.length - 1) {
+                    allStoriesEndCallback()
+                }
                 next()
             }
             return count + (100 / ((interval / 1000) * 60))
@@ -94,9 +97,6 @@ export default function () {
             updateNextStoryIdForLoop()
         } else {
             updateNextStoryId()
-        }
-        if (currentId === stories.length - 1 || ((currentId + 1) % stories.length === stories.length - 1)) {
-            allStoriesEndCallback()
         }
     };
 

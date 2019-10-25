@@ -18,7 +18,7 @@ class App extends React.Component {
     return (
       <div className="App">
         <a href="https://github.com/mohitk05/react-insta-stories/pull/32">react-insta-stories</a>
-        <Stories defaultInterval={10000} stories={stories2} />
+        <Stories defaultInterval={10000} stories={stories2} onStoryEnd={(s, st) => console.log('story ended', s, st)} onAllStoriesEnd={(s, st) => console.log('all stories ended', s, st)} onStoryStart={(s, st) => console.log('story started', s, st)} />
       </div>
     );
   }
