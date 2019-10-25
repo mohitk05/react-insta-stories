@@ -26,7 +26,12 @@ const ReactInstaStories = function (props: ReactInstaStoriesProps) {
         header: props.header,
         storyStyles: props.storyStyles,
         loop: props.loop,
-        defaultInterval: props.defaultInterval
+        defaultInterval: props.defaultInterval,
+        isPaused: props.isPaused,
+        currentIndex: props.currentIndex,
+        onStoryStart: props.onStoryStart,
+        onStoryEnd: props.onStoryEnd,
+        onAllStoriesEnd: props.onAllStoriesEnd
     }
     return <GlobalContext.Provider value={context}>
         <Container />
