@@ -3,7 +3,7 @@
 	align-items: center;
 	height: 100vh;
 	flex-direction: column;
-	filter: drop-shadow(0 2px 15px #eee);
+	filter: drop-shadow(0 2px 15px #ccc);
 	margin-top: 20px;
 }
 

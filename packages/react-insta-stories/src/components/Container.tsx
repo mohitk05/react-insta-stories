@@ -41,7 +41,9 @@ export default function () {
     }, [currentIndex])
 
     useEffect(() => {
-        setPause(isPaused)
+        if (typeof isPaused === 'boolean') {
+            setPause(isPaused)
+        }
     }, [isPaused])
 
     const incrementCount = () => {

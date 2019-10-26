@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext, useRef } from "react";
 import { StoryProps, GlobalCtx } from "./../interfaces";
 import Header from "./Header";
 import SeeMore from "./SeeMore";
-// import globalStyle from './../styles.css'
+import globalStyle from './../styles.css'
 import GlobalContext from "./../context/Global";
 
 const Story = (props: StoryProps) => {
@@ -31,7 +31,6 @@ const Story = (props: StoryProps) => {
 		}
 	}, [props.story]);
 
-	let pauseId = useRef<NodeJS.Timeout>();
 	let vid = useRef<HTMLVideoElement>(null);
 
 	useEffect(() => {
@@ -105,7 +104,7 @@ const Story = (props: StoryProps) => {
 			) : null;
 		}
 	};
-
+	console.log('playstate', props.playState)
 	let isHeader = typeof props.story === "object" && props.story.header;
 	return (
 		<div style={{ ...styles.story, width: width, height: height }}>
@@ -141,7 +140,7 @@ const Story = (props: StoryProps) => {
 						color: "#ccc"
 					}}
 				>
-					{loader || <p>Loading...</p>/*<div className={globalStyle.spinner} />*/}
+					{loader || <div className={globalStyle.spinner} />}
 				</div>
 			)}
 			{typeof props.story === "object" && props.story.seeMore && (
