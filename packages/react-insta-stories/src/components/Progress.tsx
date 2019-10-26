@@ -33,6 +33,7 @@ const styles: any = {
         background: '#fff',
         height: '100%',
         maxWidth: '100%',
+        borderRadius: 2,
         transformOrigin: 'center left',
 
         WebkitBackfaceVisibility: 'hidden',

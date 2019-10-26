@@ -30,6 +30,7 @@
 		"@babel/core": "^7.5.5",
 		"@babel/preset-env": "^7.5.5",
 		"@babel/preset-react": "^7.0.0",
+		"@teamsupercell/typings-for-css-modules-loader": "^2.0.0",
 		"@types/react": "^16.9.2",
 		"@types/react-dom": "^16.8.5",
 		"babel-loader": "^8.0.6",

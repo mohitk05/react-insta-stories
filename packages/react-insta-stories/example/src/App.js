@@ -6,7 +6,6 @@ class App extends React.Component {
   constructor() {
     super()
     this.state = {
-
     }
   }
   componentDidMount() {
@@ -44,7 +43,7 @@ const Story2 = ({ action, isPaused }) => {
   </div>
 }
 
-const stories2 = [{
+const stories2 = ['https://picsum.photos/1080/1920', {
   content: (action) => {
     return <div style={contentStyle}>
       <h1>The new version is here.</h1>
@@ -62,12 +61,12 @@ const stories2 = [{
     </div>
   }
 }, {
-  content: Story2
-}]
+    content: Story2
+  }]
 
 const image = {
   display: 'block',
-  maxHeight: 200,
+  maxWidth: '100%',
   borderRadius: 4,
 }
 
