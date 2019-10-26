@@ -17,7 +17,7 @@ class App extends React.Component {
     return (
       <div className="App">
         <a href="https://github.com/mohitk05/react-insta-stories/pull/32">react-insta-stories</a>
-        <Stories defaultInterval={10000} stories={stories2} onStoryEnd={(s, st) => console.log('story ended', s, st)} onAllStoriesEnd={(s, st) => console.log('all stories ended', s, st)} onStoryStart={(s, st) => console.log('story started', s, st)} />
+        <Stories defaultInterval={8000} stories={stories2} onStoryEnd={(s, st) => console.log('story ended', s, st)} onAllStoriesEnd={(s, st) => console.log('all stories ended', s, st)} onStoryStart={(s, st) => console.log('story started', s, st)} />
       </div>
     );
   }
@@ -43,7 +43,7 @@ const Story2 = ({ action, isPaused }) => {
   </div>
 }
 
-const stories2 = ['https://picsum.photos/1080/1920', {
+const stories2 = ['https://picsum.photos/1080/1920', { url: 'https://storage.googleapis.com/coverr-main/mp4/Footboys.mp4', type: 'video' }, {
   content: (action) => {
     return <div style={contentStyle}>
       <h1>The new version is here.</h1>

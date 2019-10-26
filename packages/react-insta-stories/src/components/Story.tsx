@@ -104,7 +104,7 @@ const Story = (props: StoryProps) => {
 			) : null;
 		}
 	};
-	console.log('playstate', props.playState)
+
 	let isHeader = typeof props.story === "object" && props.story.header;
 	return (
 		<div style={{ ...styles.story, width: width, height: height }}>
