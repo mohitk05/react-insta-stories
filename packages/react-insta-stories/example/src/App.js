@@ -43,8 +43,8 @@ const Story2 = ({ action, isPaused }) => {
   </div>
 }
 
-const stories2 = ['https://picsum.photos/1080/1920', { url: 'https://storage.googleapis.com/coverr-main/mp4/Footboys.mp4', type: 'video' }, {
-  content: (action) => {
+const stories2 = [{
+  content: () => {
     return <div style={contentStyle}>
       <h1>The new version is here.</h1>
       <p>This is the new story.</p>
@@ -61,8 +61,16 @@ const stories2 = ['https://picsum.photos/1080/1920', { url: 'https://storage.goo
     </div>
   }
 }, {
-    content: Story2
-  }]
+  content: props => {
+    return <div style={{ background: 'pink', padding: 20 }}>
+      <h1 style={{ marginTop: '100%', marginBottom: 0 }}>🌝</h1>
+      <h1 style={{ marginTop: 5 }}>We have our good old image and video stories, just the same.</h1>
+    </div>
+  },
+  duration: 5000
+}, 'https://picsum.photos/1080/1920', { url: 'https://storage.googleapis.com/coverr-main/mp4/Footboys.mp4', type: 'video' }, {
+  content: Story2
+}]
 
 const image = {
   display: 'block',

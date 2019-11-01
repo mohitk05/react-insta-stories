@@ -50,7 +50,6 @@ export default function () {
         setCount((count: number) => {
             if (count === 0) storyStartCallback()
             const interval = getCurrentInterval()
-            if (stories[currentId].type === 'video') console.log(interval)
             if (count < 100) {
                 animationFrameId.current = requestAnimationFrame(incrementCount)
             } else {
