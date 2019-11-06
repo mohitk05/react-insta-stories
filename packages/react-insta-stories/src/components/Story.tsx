@@ -14,6 +14,7 @@ const Story = (props: StoryProps) => {
 	);
 
 	useEffect(() => {
+		setShowMore(false)
 		if (typeof props.story === 'object' && props.story.content) {
 			setLoaded(true)
 			props.action('play', true)
@@ -44,7 +45,8 @@ const Story = (props: StoryProps) => {
 	}, [props.playState]);
 
 	const toggleMore = (show: boolean) => {
-		setShowMore(show);
+		setShowMore(show)
+		props.action(show ? 'pause' : 'play')
 	};
 
 	const imageLoaded = () => {
@@ -148,9 +150,10 @@ const Story = (props: StoryProps) => {
 					style={{
 						position: "absolute",
 						margin: "auto",
-						bottom: 0,
+						bottom: showMore ? 'unset' : 0,
 						zIndex: 9999,
-						width: "100%"
+						width: "100%",
+						height: showMore ? '100%' : 'auto'
 					}}
 				>
 					<SeeMore

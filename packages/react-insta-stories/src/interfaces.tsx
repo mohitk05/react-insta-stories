@@ -38,7 +38,7 @@ export interface StoryState {
 
 export interface Story {
     url?: string,
-    seeMore?: JSX.Element,
+    seeMore?: Function,
     header?: Header,
     type?: string,
     duration?: number,
@@ -53,7 +53,7 @@ export interface Header {
 }
 
 export interface SeeMoreProps {
-    seeMoreContent: JSX.Element,
+    seeMoreContent: Function,
     showContent: boolean,
     action: Function,
     toggleMore: Function
