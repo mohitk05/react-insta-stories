@@ -50,7 +50,9 @@ class App extends Component {
 const stories = [
 	{
 		url: 'https://picsum.photos/1080/1920',
-		seeMore: <SeeMore />,
+		seeMore: ({ close }) => (
+			<div style={{ width: '100%', height: '100%' }}>Hello</div>
+		),
 		header: {
 			heading: 'Mohit Karekar',
 			subheading: 'Posted 5h ago',
@@ -85,7 +87,9 @@ const stories = [
 		url:
 			'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4',
 		type: 'video',
-		seeMore: <SeeMore />
+		seeMore: ({ close }) => (
+			<div style={{ width: '100%', height: '100%' }}>Hello</div>
+		)
 	},
 	{
 		url:
@@ -119,14 +123,14 @@ const stories = [
 
 Instead of simple string url, a comprehensive 'story object' can also be passed in the `stories` array.
 
-| Property   | Description                                                                                            |
-| ---------- | ------------------------------------------------------------------------------------------------------ |
-| `url`      | The url of the resource, be it image or video.                                                         |
-| `duration` | Optional. Duration for which a story should persist.                                                   |
-| `header`   | Optional. Adds a header on the top. Object with `heading`, `subheading` and `profileImage` properties. |
-| `seeMore`  | Optional. Adds a see more icon at the bottom of the story. On clicking, opens up this component.       |
-| `type`     | Optional. To distinguish a video story. `type: 'video'` is necessary for a video story.                |
-| `styles`   | Optional. Override the default story styles mentioned below.                                           |
+| Property   | Description                                                                                                                                   |
+| ---------- | --------------------------------------------------------------------------------------------------------------------------------------------- |
+| `url`      | The url of the resource, be it image or video.                                                                                                |
+| `duration` | Optional. Duration for which a story should persist.                                                                                          |
+| `header`   | Optional. Adds a header on the top. Object with `heading`, `subheading` and `profileImage` properties.                                        |
+| `seeMore`  | Optional. Adds a see more icon at the bottom of the story. On clicking, opens up this component. (v2: updated to Function instead of element) |
+| `type`     | Optional. To distinguish a video story. `type: 'video'` is necessary for a video story.                                                       |
+| `styles`   | Optional. Override the default story styles mentioned below.                                                                                  |
 
 ### Default story styles
 
@@ -143,7 +147,7 @@ storyContent: {
 
 ## API
 
-_**APIs will be deprecated from v2, and will be replaced by props based control.**_
+_**APIs will be deprecated from v2, and will be replaced by props based control. Check out '⭐️ new props' in the props table above.**_
 
 Following functions can be accessed using the `ref` of default export, e.g. `this.stories.pause()`
 

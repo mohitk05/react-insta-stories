@@ -3,21 +3,17 @@ import { SeeMoreProps } from './../interfaces'
 // import up from './../up.png'
 
 export default function seeMore(props: SeeMoreProps) {
+    const SeeMoreContent = props.seeMoreContent
     return (
         props.showContent
-            ? <div className={styles.seeMoreExpanded}>
-                {props.seeMoreContent}
-                <div onClick={() => {
-                    props.toggleMore(false)
-                    props.action('play')
-                }} className={styles.seeMoreClose}><span>✕</span></div>
+            ? <div style={styles.seeMoreExpanded}>
+                <SeeMoreContent close={() => props.toggleMore(false)} />
             </div>
             : <div onClick={() => {
                 props.toggleMore(true)
-                props.action('pause')
-            }} className={styles.seeMore}>
-                <span className={styles.seeMoreIcon}>⌃</span>
-                <span className={styles.seeMoreText}>Read more</span>
+            }} style={styles.seeMore}>
+                <span style={styles.seeMoreIcon}>⌃</span>
+                <span style={styles.seeMoreText}>See more</span>
             </div>
     )
 }
@@ -25,15 +21,16 @@ export default function seeMore(props: SeeMoreProps) {
 const styles: any = {
     seeMore: {
         height: "10vh",
-        background: "linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 1))",
+        background: "linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.2))",
         display: "flex",
         flexDirection: "column",
         width: "100%",
         alignItems: "center",
-        justifyContent: "flex-end"
+        justifyContent: "flex-end",
+        bottom: 0
     },
     seeMoreExpanded: {
-        position: 'fixed',
+        position: 'absolute',
         top: 0,
         left: 0,
         width: '100%',
@@ -44,19 +41,20 @@ const styles: any = {
     seeMoreText: {
         color: "white",
         textAlign: "center",
-        letterSpacing: "0.2em",
+        letterSpacing: "0.1em",
         marginBottom: "2.2vh",
         textTransform: "capitalize",
-        opacity: "0.6",
-        fontSize: "0.7em",
+        opacity: "1",
+        fontSize: "0.8em",
         transition: "opacity 300ms ease-in-out"
     },
     seeMoreIcon: {
         color: "white",
         textAlign: "center",
         letterSpacing: "0.2em",
-        marginBottom: "0.5vh",
-        opacity: "0.6",
+        marginBottom: "0.4vh",
+        opacity: "1",
+        filter: "drop-shadow(0 0 5px black)",
         textTransform: "capitalize",
         transition: "opacity 300ms ease-in-out"
     },
