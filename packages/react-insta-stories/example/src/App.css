@@ -1,0 +1,13 @@
+.App {
+	display: flex;
+	align-items: center;
+	height: 100vh;
+	flex-direction: column;
+	filter: drop-shadow(0 2px 15px #ccc);
+	margin-top: 20px;
+	font-family: 'Karla', sans-serif;
+}
+
+.App a {
+	margin-bottom: 20px;
+}

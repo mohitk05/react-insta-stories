@@ -1,0 +1,51 @@
+{
+	"name": "react-insta-stories",
+	"version": "2.0.1",
+	"description": "A React component for Instagram like stories",
+	"main": "dist/index.js",
+	"types": "dist/index.d.ts",
+	"scripts": {
+		"build": "rm -rf ./dist && webpack --mode production",
+		"build:dev": "rm -rf ./dist && webpack --mode development",
+		"prestart": "rm -rf ./dist && webpack --mode development",
+		"start": "webpack-dev-server --open",
+		"test": "echo \"Error: no test specified\" && exit 1"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/mohitk05/react-insta-stories.git"
+	},
+	"keywords": [
+		"stories",
+		"react",
+		"instagram"
+	],
+	"author": "mohitk05",
+	"license": "MIT",
+	"bugs": {
+		"url": "https://github.com/mohitk05/react-insta-stories/issues"
+	},
+	"homepage": "https://github.com/mohitk05/react-insta-stories#readme",
+	"devDependencies": {
+		"@babel/core": "^7.5.5",
+		"@babel/preset-env": "^7.5.5",
+		"@babel/preset-react": "^7.0.0",
+		"@teamsupercell/typings-for-css-modules-loader": "^2.0.0",
+		"@types/react": "^16.9.2",
+		"@types/react-dom": "^16.8.5",
+		"babel-loader": "^8.0.6",
+		"css-loader": "^3.2.0",
+		"react": "^16.10.2",
+		"source-map-loader": "^0.2.4",
+		"style-loader": "^1.0.0",
+		"ts-loader": "^6.0.4",
+		"typescript": "^3.5.3",
+		"webpack": "^4.41.0",
+		"webpack-cli": "^3.3.9",
+		"webpack-dev-server": "^3.8.1"
+	},
+	"peerDependencies": {
+		"react": "^16.8.2"
+	},
+	"dependencies": {}
+}
