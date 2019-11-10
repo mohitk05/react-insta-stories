@@ -1,20 +1,27 @@
-![Main image](https://i.imgur.com/JQw5hwo.jpg?2)
+![Main image](https://i.imgur.com/OAL12S5.jpg)
 
-<h1 align="center">react-insta-stories</h1>
+<h1 style="margin: 0" align="center">react-insta-stories</h1>
 <p align="center">A React component for Instagram like stories</p>
 
-[![Backers on Open Collective](https://opencollective.com/react-insta-stories/backers/badge.svg)](#backers) [![Sponsors on Open Collective](https://opencollective.com/react-insta-stories/sponsors/badge.svg)](#sponsors) [![NPM](https://img.shields.io/npm/v/react-insta-stories.svg)](https://www.npmjs.com/package/react-insta-stories) [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
+<p align="center"><a href="https://mohitk05.github.io/react-insta-stories/">Homepage</a> • <a href="https://mohitk05.github.io/react-insta-stories/">Demo</a></p>
 
-[Get a sneak peek of what's cooking in v2 🍲](http://react-insta-stories-v2.surge.sh/)
+<div align="center"><a href="https://www.npmjs.com/package/react-insta-stories"><img alt="NPM" src="https://img.shields.io/npm/v/react-insta-stories.svg"></a>&nbsp;<a href="https://standardjs.com"><img alt="JavaScript Style Guide" src="https://img.shields.io/badge/code_style-standard-brightgreen.svg"></a>&nbsp;<a href="#backers"><img alt="Backers on Open Collective" src="https://opencollective.com/react-insta-stories/backers/badge.svg"></a>&nbsp;<a href="#sponsors"><img alt="Sponsors on Open Collective" src="https://opencollective.com/react-insta-stories/sponsors/badge.svg"></a></div>
 
-    Version 2 - Recent updates 🚀
+## What's new in v2? 🚀
 
-    - TypeScript 🎉
-    - Updated for easier feature additions
-    - Create multiple instances to recreate stories by multiple users
-    - Render JSX into your stories
+-   Render your own components/JSX in stories
+-   Create multiple instances to recreate stories by multiple users easily, jump to stories using props
+-   Prop based control, event callbacks
+-   Custom JSX gives control to pause/play story
+-   **(for devs)** TypeScript 🎉
+-   **(for devs)** Updated for easier feature additions, hooks
 
-![Demo screenshot](https://i.imgur.com/Twvjxp5.png)
+## What's breaking in v2? 🚨
+
+-   Ref based APIs are no more supported, replace them with [new prop based controls](#props).
+-   `seeMore` property should now be a React component or a function.
+
+<img src="https://i.imgur.com/Y1s8FKb.png" alt="Demo screenshot"/>
 
 ## Install
 
@@ -145,9 +152,9 @@ storyContent: {
 }
 ```
 
-## API
+## API (only for v1)
 
-_**APIs will be deprecated from v2, and will be replaced by props based control. Check out '⭐️ new props' in the props table above.**_
+🚨 _**APIs will be deprecated from v2, and will be replaced by props based control. Check out '⭐️ new props' in the props table above.**_
 
 Following functions can be accessed using the `ref` of default export, e.g. `this.stories.pause()`
 

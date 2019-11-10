@@ -16,9 +16,55 @@ class App extends React.Component {
   render() {
     return (
       <div className="App">
-        <a href="https://github.com/mohitk05/react-insta-stories/pull/32">react-insta-stories</a>
-        <Stories defaultInterval={8000} stories={stories2} onStoryEnd={(s, st) => console.log('story ended', s, st)} onAllStoriesEnd={(s, st) => console.log('all stories ended', s, st)} onStoryStart={(s, st) => console.log('story started', s, st)} />
+        <div className="left">
+          <h2><code><a rel="noopener noreferrer" href="https://www.npmjs.com/package/react-insta-stories" target="_blank">react-insta-stories [v2]</a></code></h2>
+          <p>Create Instagram like stories on the web using React</p>
+          <br />
+          <code ><span style={{ background: '#eee', padding: 5, paddingLeft: 10, paddingRight: 10, borderRadius: 5, width: 'auto' }}>npm i react-insta-stories</span></code>
+          <br />
+          <p>Made with ♥ by <a rel="noopener noreferrer" href="https://github.com/mohitk05/react-insta-stories" target="_blank">@mohitk05</a></p>
+          <br />
+          <div style={{ background: '#eee', padding: 5, paddingLeft: 10, paddingRight: 10, borderRadius: 5, width: 'auto' }}><p>◀ Tap left for previous story</p>
+            <p>▶︎ Tap right for next story</p>
+            <p>◉ Press and hold to pause</p></div>
+          <br />
+          <div className="updates">
+            <p><mark><b>Updates [V2.0.0]</b></mark></p>
+            <p>1. Render your own components/JSX in stories</p>
+            <p>2. Create multiple instances to recreate stories by multiple users easily, jump to stories using props</p>
+            <p>3. Prop based control, event callbacks</p>
+            <p>4. Custom JSX gives control to pause/play story</p>
+            <p>5. (for devs) TypeScript 🎉</p>
+            <p>6. (for devs) Updated for easier feature additions, hooks</p>
+            <br></br>
+            <p><mark><b>Updates [V1.4.1]</b></mark></p>
+            <p>1. Stories stretch to fill screen by default</p>
+            <p>2. Style story content using 'storyStyles' prop 💅</p>
+            <p>3. Add individual styling to each story</p>
+            <br />
+            <p><mark><b>Updates [V1.4.0]</b></mark></p>
+            <p>1. 'See more' feature added 🤳</p>
+            <p>2. Video playback fixes</p>
+            <br />
+            <p><mark><b>Updates [V1.3.0]</b></mark></p>
+            <p>1. Video support added 🎉</p>
+            <p>2. babel-polyfill error fix 👾</p>
+            <p>3. Changed progress animation to plain CSS</p>
+            <br />
+            <p><mark><b>Updates [V1.2.0]</b></mark></p>
+            <p>1. Now you can add a header to the story</p>
+            <p>2. Image aspect ratio retained if story size changed (fix)</p>
+          </div>
+          <br />
+          <p>Know more about me here: <a rel="noopener noreferrer" href="https://mohitkarekar.com" target="_blank">mohitkarekar.com</a></p>
+        </div>
+        <div className="stories">
+          <Stories defaultInterval={8000} stories={stories2} onStoryEnd={(s, st) => console.log('story ended', s, st)} onAllStoriesEnd={(s, st) => console.log('all stories ended', s, st)} onStoryStart={(s, st) => console.log('story started', s, st)} />
+        </div>
       </div>
+      // <div className="App">
+      //   <a href="https://github.com/mohitk05/react-insta-stories/pull/32">react-insta-stories</a>
+      // </div>
     );
   }
 }
