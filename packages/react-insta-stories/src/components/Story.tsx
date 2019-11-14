@@ -95,6 +95,7 @@ const Story = (props: StoryProps) => {
 				<img style={storyContentStyles} src={source} onLoad={imageLoaded} />
 			) : type === "video" ? (
 				<video
+					preload="auto"
 					ref={vid}
 					style={storyContentStyles}
 					src={source}
