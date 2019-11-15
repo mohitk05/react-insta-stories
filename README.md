@@ -58,12 +58,15 @@ class App extends Component {
 
 const stories = [
  	//🆕! Rendering Components instead of video or images can now be done by passing 
-	//a content property into the story.
+	//a content property into the story. There is also an 2 props, 'action' (fn) and 'isPaused'(bool). 
+	//action can be used to play and pause.
   	{
-                content: props => {
+                content: ({action, isPaused}) => {
+		  const handleClick=(e)=>{e.preventDefault(); action(isPaused ? 'play': 'pause') };
                   return (
-                    <div>
+                    <div onClick={handleClick}>
                   	<h2>Hi</h2>
+			<span>{isPaused ? 'Paused' : 'Playing'}</span>
                     </div>
                   );
                 }
