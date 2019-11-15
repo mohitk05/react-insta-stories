@@ -36,6 +36,8 @@ See it in action here: https://mohitk05.github.io/react-insta-stories/
 
 ## Usage
 
+
+
 ```jsx
 import React, { Component } from 'react';
 
@@ -55,6 +57,17 @@ class App extends Component {
 }
 
 const stories = [
+ 	//🆕! Rendering Components instead of video or images can now be done by passing 
+	//a content property into the story.
+  	{
+                content: props => {
+                  return (
+                    <div>
+                  	<h2>Hi</h2>
+                    </div>
+                  );
+                }
+        },
 	{
 		url: 'https://picsum.photos/1080/1920',
 		seeMore: ({ close }) => (
