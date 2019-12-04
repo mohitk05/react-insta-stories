@@ -37,6 +37,8 @@ See it in action here: https://mohitk05.github.io/react-insta-stories/
 
 ## Usage
 
+
+
 ```jsx
 import React, { Component } from 'react';
 
@@ -56,6 +58,19 @@ class App extends Component {
 }
 
 const stories = [
+ 	//🆕! Rendering Components instead of video or images can now be done by passing a 'content' property into the story. 
+	//The props contain properties 'action'(fn) and 'isPaused'(bool)
+  	{
+                content: ({action, isPaused}) => {
+		  const handleClick=(e)=>{e.preventDefault(); action(isPaused ? 'play': 'pause') };
+                  return (
+                    <div onClick={handleClick}>
+                  	<h2>Hi</h2>
+			<span>{isPaused ? 'Paused' : 'Playing'}</span>
+                    </div>
+                  );
+                }
+        },
 	{
 		url: 'https://picsum.photos/1080/1920',
 		seeMore: ({ close }) => (
