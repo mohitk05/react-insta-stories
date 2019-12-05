@@ -3,10 +3,9 @@
 	"version": "0.1.0",
 	"private": true,
 	"dependencies": {
-		"react": "^16.10.2",
 		"react-dom": "^16.10.2",
-		"react-scripts": "3.2.0",
-		"react-insta-stories": "file:.."
+		"react-insta-stories": "file:..",
+		"react-scripts": "3.2.0"
 	},
 	"scripts": {
 		"start": "react-scripts start",

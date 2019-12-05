@@ -8,7 +8,8 @@
 		"build": "rm -rf ./dist && webpack --mode production",
 		"build:dev": "rm -rf ./dist && webpack --mode development",
 		"prestart": "rm -rf ./dist && webpack --mode development",
-		"start": "webpack-dev-server --open",
+		"start": "webpack-dev-server",
+		"example": "cd example && npm install && npm start",
 		"test": "echo \"Error: no test specified\" && exit 1"
 	},
 	"repository": {

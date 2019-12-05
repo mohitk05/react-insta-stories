@@ -12,7 +12,7 @@ export default function () {
     const [bufferAction, setBufferAction] = useState<boolean>(true)
     const [videoDuration, setVideoDuration] = useState<number>(0)
 
-    let mousedownId = useRef<NodeJS.Timeout>()
+    let mousedownId = useRef<number>()
     let animationFrameId = useRef<number>()
 
     const { width, height, defaultInterval, stories, loop, currentIndex, isPaused, onStoryStart, onStoryEnd, onAllStoriesEnd } = useContext<GlobalCtx>(GlobalContext)
