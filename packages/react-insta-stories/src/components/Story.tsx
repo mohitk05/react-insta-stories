@@ -98,10 +98,11 @@ const Story = (props: StoryProps) => {
 					ref={vid}
 					style={storyContentStyles}
 					src={source}
-					controls={false}
+					controls={true}
 					onLoadedData={videoLoaded}
 					autoPlay
 					playsInline
+					muted
 				/>
 			) : null;
 		}
