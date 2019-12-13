@@ -103,6 +103,7 @@ const Story = (props: StoryProps) => {
 					ref={vid}
 					style={storyContentStyles}
 					src={source}
+					controls={false}
 					onLoadedData={videoLoaded}
 					autoPlay
 					playsInline

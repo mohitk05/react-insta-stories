@@ -9,6 +9,8 @@ export interface ReactInstaStoriesProps {
     defaultInterval?: number,
     isPaused?: boolean,
     currentIndex?: number,
+    mutedComponent?: JSX.Element,
+    unmutedComponent?: JSX.Element,
     onAllStoriesEnd?: Function,
     onStoryStart?: Function,
     onStoryEnd?: Function
@@ -27,6 +29,7 @@ export interface StoryProps {
     story: Story,
     action: Function,
     playState: boolean,
+    mutedState: boolean,
     getVideoDuration: Function,
     bufferAction: boolean
 }
@@ -41,6 +44,7 @@ export interface Story {
     seeMore?: Function,
     header?: Header,
     type?: string,
+    muted?: boolean,
     duration?: number,
     styles?: object,
     content?: Function

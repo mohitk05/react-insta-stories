@@ -6,16 +6,17 @@ import ProgressArray from './ProgressArray'
 import { GlobalCtx } from './../interfaces'
 
 export default function () {
+    const { width, height, defaultInterval, stories, loop, currentIndex, isPaused, onStoryStart, onStoryEnd, onAllStoriesEnd, mutedComponent, unmutedComponent } = useContext<GlobalCtx>(GlobalContext)
+    
     const [currentId, setCurrentId] = useState<number>(0)
     const [pause, setPause] = useState<boolean>(true)
     const [count, setCount] = useState<number>(0)
+    const [mute, setMute] = useState<boolean>(stories[currentId].muted)
     const [bufferAction, setBufferAction] = useState<boolean>(true)
     const [videoDuration, setVideoDuration] = useState<number>(0)
-
+    
     let mousedownId = useRef<NodeJS.Timeout>()
     let animationFrameId = useRef<number>()
-
-    const { width, height, defaultInterval, stories, loop, currentIndex, isPaused, onStoryStart, onStoryEnd, onAllStoriesEnd } = useContext<GlobalCtx>(GlobalContext)
 
     useEffect(() => {
         if (!pause) {
@@ -28,6 +29,7 @@ export default function () {
 
     useEffect(() => {
         setCount(0)
+        setMute(stories[currentId].muted);
     }, [currentId, stories])
 
     useEffect(() => {
@@ -130,6 +132,15 @@ export default function () {
         }
     }
 
+    const toggleMute = (e: React.MouseEvent | React.TouchEvent) => {
+        e.preventDefault()
+        if (mute) {
+            setMute(false)
+        } else {
+            setMute(true)
+        }
+    }
+
     const getVideoDuration = (duration: number) => {
         setVideoDuration(duration * 1000)
     }
@@ -151,28 +162,39 @@ export default function () {
                 action={toggleState}
                 bufferAction={bufferAction}
                 playState={pause}
+                mutedState={mute}
                 story={stories[currentId]}
                 getVideoDuration={getVideoDuration}
             />
             <div style={styles.overlay}>
                 <div style={{ width: '50%', zIndex: 999 }} onTouchStart={debouncePause} onTouchEnd={e => mouseUp(e, 'previous')} onMouseDown={debouncePause} onMouseUp={(e) => mouseUp(e, 'previous')} />
                 <div style={{ width: '50%', zIndex: 999 }} onTouchStart={debouncePause} onTouchEnd={e => mouseUp(e, 'next')} onMouseDown={debouncePause} onMouseUp={(e) => mouseUp(e, 'next')} />
+                { stories[currentId].type === "video" && 
+                    <div style={styles.volume} onClick={toggleMute}>{mute ? mutedComponent : unmutedComponent}</div>
+                }
             </div>
         </div>
     )
 }
 
 const styles = {
-    container: {
-        display: 'flex',
-        flexDirection: 'column',
-        background: '#111',
-        position: 'relative'
-    },
-    overlay: {
-        position: 'absolute',
-        height: 'inherit',
-        width: 'inherit',
-        display: 'flex'
-    }
-}
+  container: {
+    display: "flex",
+    flexDirection: "column",
+    background: "#111",
+    position: "relative"
+  },
+  overlay: {
+    position: "absolute",
+    height: "inherit",
+    width: "inherit",
+    display: "flex"
+  },
+  volume: {
+    zIndex: 999,
+    display: "block",
+    position: "absolute",
+    bottom: 50,
+    right: 50,
+  }
+};
