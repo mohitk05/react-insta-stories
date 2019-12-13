@@ -92,14 +92,14 @@ const Story = (props: StoryProps) => {
 					? "video"
 					: "image";
 			return type === "image" ? (
-				<img style={storyContentStyles} src={source} onLoad={imageLoaded} />
+				<img onLoad={imageLoaded} style={storyContentStyles} src={source} />
 			) : type === "video" ? (
 				<video
 					ref={vid}
+					onLoadedData={videoLoaded}
 					style={storyContentStyles}
 					src={source}
 					controls={false}
-					onLoadedData={videoLoaded}
 					autoPlay
 					playsInline
 				/>
