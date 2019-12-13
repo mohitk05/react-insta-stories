@@ -41,8 +41,13 @@ const Story = (props: StoryProps) => {
 			} else {
 				vid.current.play().catch(e => console.log(e));
 			}
+			if (props.mutedState) {
+				vid.current.muted = true;
+			} else {
+				vid.current.muted = false;
+			}
 		}
-	}, [props.playState]);
+	}, [props.playState, props.mutedState]);
 
 	const toggleMore = (show: boolean) => {
 		setShowMore(show)
@@ -98,7 +103,6 @@ const Story = (props: StoryProps) => {
 					ref={vid}
 					style={storyContentStyles}
 					src={source}
-					controls={false}
 					onLoadedData={videoLoaded}
 					autoPlay
 					playsInline

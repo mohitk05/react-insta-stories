@@ -21,6 +21,7 @@ export interface StoryProps {
     story: Story;
     action: Function;
     playState: boolean;
+    mutedState: boolean;
     getVideoDuration: Function;
     bufferAction: boolean;
 }
@@ -33,6 +34,7 @@ export interface Story {
     seeMore?: JSX.Element;
     header?: Header;
     type?: string;
+    muted?: boolean;
     duration?: number;
     styles?: object;
     content?: Function;
