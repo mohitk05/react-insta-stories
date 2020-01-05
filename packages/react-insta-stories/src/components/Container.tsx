@@ -53,7 +53,6 @@ export default function () {
             if (count < 100) {
                 animationFrameId.current = requestAnimationFrame(incrementCount)
             } else {
-                storyEndCallback()
                 if (currentId === stories.length - 1) {
                     allStoriesEndCallback()
                 }
@@ -68,7 +67,7 @@ export default function () {
     }
 
     const storyEndCallback = () => {
-        onStoryEnd && onStoryEnd(currentId, stories[currentId])
+        return onStoryEnd ? onStoryEnd(currentId, stories[currentId]) :true;
     }
 
     const allStoriesEndCallback = () => {
@@ -94,9 +93,10 @@ export default function () {
     }
 
     const next = () => {
+        let callbackOverride = storyEndCallback()
         if (loop) {
             updateNextStoryIdForLoop()
-        } else {
+        } else if(callbackOverride) {
             updateNextStoryId()
         }
     };
