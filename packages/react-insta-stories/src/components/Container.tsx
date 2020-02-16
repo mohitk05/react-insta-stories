@@ -37,9 +37,7 @@ export default function () {
     }
 
     const previous = () => {
-        if (currentId > 0) {
-            setCurrentId(currentId - 1)
-        }
+        setCurrentId(prev => prev > 0 ? prev - 1 : prev)
     }
 
     const next = () => {
@@ -51,13 +49,14 @@ export default function () {
     };
 
     const updateNextStoryIdForLoop = () => {
-        setCurrentId((currentId + 1) % stories.length)
+        setCurrentId(prev => (prev + 1) % stories.length)
     }
 
     const updateNextStoryId = () => {
-        if (currentId < stories.length - 1) {
-            setCurrentId(currentId + 1)
-        }
+        setCurrentId(prev => {
+            if (prev < stories.length - 1) return prev + 1
+            return prev
+        })
     }
 
     const debouncePause = (e: React.MouseEvent | React.TouchEvent) => {
@@ -80,6 +79,7 @@ export default function () {
     const getVideoDuration = (duration: number) => {
         setVideoDuration(duration * 1000)
     }
+
     return (
         <div style={{ ...styles.container, ...{ width, height } }}>
             <ProgressContext.Provider value={{

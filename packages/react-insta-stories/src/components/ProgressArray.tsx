@@ -53,7 +53,7 @@ export default () => {
     }
 
     const allStoriesEndCallback = () => {
-        onAllStoriesEnd && onAllStoriesEnd()
+        onAllStoriesEnd && onAllStoriesEnd(currentId, stories)
     }
 
     const getCurrentInterval = () => {

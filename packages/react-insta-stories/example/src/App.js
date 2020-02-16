@@ -80,9 +80,8 @@ const Story2 = ({ action, isPaused }) => {
     <p>Render your custom JSX by passing just a <code style={{ fontStyle: 'italic' }}>content</code> property inside your story object.</p>
     <p>You get a <code style={{ fontStyle: 'italic' }}>action</code> prop as an input to your content function, that can be used to play or pause the story.</p>
     <h1>{isPaused ? 'Paused' : 'Playing'}</h1>
-    <h4>Excited to launch v2!! Expect it around October endish. Cheers! 🎉</h4>
-    <p>react-insta-stories v2 coming soon.</p>
-    <p>And so is the React Native version 💫</p>
+    <h4>v2 is out 🎉</h4>
+    <p>React Native version coming soon.</p>
   </div>
 }
 
