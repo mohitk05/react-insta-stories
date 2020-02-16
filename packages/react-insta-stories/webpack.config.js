@@ -48,7 +48,6 @@ module.exports = {
         path: path.resolve(__dirname, 'dist'),
         library: 'Stories',
         libraryTarget: 'umd',
-        publicPath: '/dist/index.js',
         umdNamedDefine: true,
         globalObject: 'this'
     },

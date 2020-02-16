@@ -5,9 +5,9 @@
 	"main": "dist/index.js",
 	"types": "dist/index.d.ts",
 	"scripts": {
-		"build": "rm -rf ./dist && webpack --mode production",
-		"build:dev": "rm -rf ./dist && webpack --mode development",
-		"prestart": "rm -rf ./dist && webpack --mode development",
+		"build": "webpack --mode production",
+		"build:dev": "webpack --mode development",
+		"prestart": "webpack --mode development",
 		"start": "webpack-dev-server",
 		"example": "cd example && rm package-lock.json && npm install && npm start",
 		"test": "echo \"Error: no test specified\" && exit 1"

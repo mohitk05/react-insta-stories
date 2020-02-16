@@ -59,12 +59,9 @@ class App extends React.Component {
           <p>Know more about me here: <a rel="noopener noreferrer" href="https://mohitkarekar.com" target="_blank">mohitkarekar.com</a></p>
         </div>
         <div className="stories">
-          <Stories loop defaultInterval={8000} stories={stories2} onStoryEnd={(s, st) => console.log('story ended', s, st)} onAllStoriesEnd={(s, st) => console.log('all stories ended', s, st)} onStoryStart={(s, st) => console.log('story started', s, st)} />
+          <Stories loop defaultInterval={8000} stories={stories} onStoryEnd={(s, st) => console.log('story ended', s, st)} onAllStoriesEnd={(s, st) => console.log('all stories ended', s, st)} onStoryStart={(s, st) => console.log('story started', s, st)} />
         </div>
       </div>
-      // <div className="App">
-      //   <a href="https://github.com/mohitk05/react-insta-stories/pull/32">react-insta-stories</a>
-      // </div>
     );
   }
 }
@@ -89,8 +86,13 @@ const Story2 = ({ action, isPaused }) => {
   </div>
 }
 
+const stories3 = [
+  'https://picsum.photos/1080/1920',
+
+]
+
 const stories2 = [{
-  content: () => {
+  content: ({ action, isPaused }) => {
     return <div style={contentStyle}>
       <h1>The new version is here.</h1>
       <p>This is the new story.</p>
@@ -102,6 +104,7 @@ const stories2 = [{
         </code>
       </pre>
       <p>Or here, an image!</p>
+      <br />
       <img style={image} src="https://images.unsplash.com/photo-1565506737357-af89222625ad?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1650&q=80"></img>
       <h3>Pefect. But there's more! →</h3>
     </div>
