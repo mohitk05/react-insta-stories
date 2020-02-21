@@ -18,13 +18,13 @@ export default function () {
     const { width, height, defaultInterval, stories, loop, currentIndex, isPaused, onStoryStart, onStoryEnd, onAllStoriesEnd } = useContext<GlobalCtx>(GlobalContext)
 
     useEffect(() => {
-        if (!pause) {
+        if (!pause && !isPaused) {
             animationFrameId.current = requestAnimationFrame(incrementCount)
         }
         return () => {
             cancelAnimationFrame(animationFrameId.current)
         }
-    }, [currentId, pause])
+    }, [currentId, pause,isPaused])
 
     useEffect(() => {
         setCount(0)
