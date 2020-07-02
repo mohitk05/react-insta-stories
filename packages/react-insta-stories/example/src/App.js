@@ -59,12 +59,9 @@ class App extends React.Component {
           <p>Know more about me here: <a rel="noopener noreferrer" href="https://mohitkarekar.com" target="_blank">mohitkarekar.com</a></p>
         </div>
         <div className="stories">
-          <Stories defaultInterval={8000} stories={stories2} onStoryEnd={(s, st) => console.log('story ended', s, st)} onAllStoriesEnd={(s, st) => console.log('all stories ended', s, st)} onStoryStart={(s, st) => console.log('story started', s, st)} />
+          <Stories loop defaultInterval={8000} stories={stories2} onStoryEnd={(s, st) => console.log('story ended', s, st)} onAllStoriesEnd={(s, st) => console.log('all stories ended', s, st)} onStoryStart={(s, st) => console.log('story started', s, st)} />
         </div>
       </div>
-      // <div className="App">
-      //   <a href="https://github.com/mohitk05/react-insta-stories/pull/32">react-insta-stories</a>
-      // </div>
     );
   }
 }
@@ -83,14 +80,18 @@ const Story2 = ({ action, isPaused }) => {
     <p>Render your custom JSX by passing just a <code style={{ fontStyle: 'italic' }}>content</code> property inside your story object.</p>
     <p>You get a <code style={{ fontStyle: 'italic' }}>action</code> prop as an input to your content function, that can be used to play or pause the story.</p>
     <h1>{isPaused ? 'Paused' : 'Playing'}</h1>
-    <h4>Excited to launch v2!! Expect it around October endish. Cheers! 🎉</h4>
-    <p>react-insta-stories v2 coming soon.</p>
-    <p>And so is the React Native version 💫</p>
+    <h4>v2 is out 🎉</h4>
+    <p>React Native version coming soon.</p>
   </div>
 }
 
+const stories3 = [
+  'https://picsum.photos/1080/1920',
+
+]
+
 const stories2 = [{
-  content: () => {
+  content: ({ action, isPaused }) => {
     return <div style={contentStyle}>
       <h1>The new version is here.</h1>
       <p>This is the new story.</p>
@@ -102,6 +103,7 @@ const stories2 = [{
         </code>
       </pre>
       <p>Or here, an image!</p>
+      <br />
       <img style={image} src="https://images.unsplash.com/photo-1565506737357-af89222625ad?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1650&q=80"></img>
       <h3>Pefect. But there's more! →</h3>
     </div>

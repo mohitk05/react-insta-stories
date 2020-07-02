@@ -68,6 +68,7 @@ export interface HeaderProps {
 export interface ProgressProps {
     width: number,
     active: number,
+    count: number
 }
 
 export interface ProgressWrapperProps {
@@ -82,11 +83,9 @@ export interface ProgressArrayProps {
 }
 
 export interface ProgressContext {
-    numArray: number[],
     currentId: number,
-    count: number,
-    currentStory: Story,
     videoDuration: number,
     bufferAction: boolean,
-    pause: boolean
+    pause: boolean,
+    next: Function
 }

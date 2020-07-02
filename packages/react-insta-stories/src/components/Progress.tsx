@@ -4,14 +4,14 @@ import ProgressWrapper from './ProgressWrapper'
 import ProgressCtx from './../context/Progress'
 
 export default (props: ProgressProps) => {
-    const { bufferAction, count, pause } = useContext<ProgressContext>(ProgressCtx)
+    const { bufferAction, pause } = useContext<ProgressContext>(ProgressCtx)
 
     const getProgressStyle = ({ active }) => {
         switch (active) {
             case 2:
                 return { width: '100%' }
             case 1:
-                return { transform: `scaleX(${count / 100})` }
+                return { transform: `scaleX(${props.count / 100})` }
             case 0:
                 return { width: 0 }
             default:
