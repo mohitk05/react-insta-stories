@@ -22,7 +22,7 @@ Slides for React Bangalore meetup (view on desktop): https://inspiring-hawking-4
 -   Ref based APIs are no more supported, replace them with [new prop based controls](#props).
 -   `seeMore` property should now be a React component or a function.
 
-<img src="https://i.imgur.com/Y1s8FKb.png" alt="Demo screenshot"/>
+<img height="600" src="https://i.imgur.com/Y1s8FKb.png" alt="Demo screenshot"/>
 
 ## Install
 
@@ -193,6 +193,10 @@ Jump to the next story. Similar to when tapped on right side of the screen.
 ##### `toggleSeeMore(show: Boolean)`
 
 Show or hide the `Show More` component. Pass `true` to show and otherwise.
+
+## Websites using `react-insta-stories`
+- [Corsza](http://corsza.com/)
+- [TLDR Stories](https://www.producthunt.com/posts/tldr-stories-a0c16732-ba1e-4a40-b420-8582b9128bac)
 
 ## Contributors
 
