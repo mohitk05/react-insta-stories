@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import './App.css';
 import Stories from 'react-insta-stories'
 
@@ -17,7 +17,7 @@ class App extends React.Component {
     return (
       <div className="App">
         <div className="left">
-          <h2><code><a rel="noopener noreferrer" href="https://www.npmjs.com/package/react-insta-stories" target="_blank">react-insta-stories [v2]</a></code></h2>
+          <h2><code><a rel="noopener noreferrer" href="https://www.npmjs.com/package/react-insta-stories" target="_blank">react-insta-stories [v2.0.3]</a></code></h2>
           <p>Create Instagram like stories on the web using React</p>
           <br />
           <code ><span style={{ background: '#eee', padding: 5, paddingLeft: 10, paddingRight: 10, borderRadius: 5, width: 'auto' }}>npm i react-insta-stories</span></code>
@@ -67,14 +67,14 @@ class App extends React.Component {
 }
 
 const Story2 = ({ action, isPaused }) => {
-  useEffect(() => {
-    setTimeout(() => {
-      action('pause')
-      setTimeout(() => {
-        action('play')
-      }, 2000)
-    }, 2000)
-  }, [])
+  // useEffect(() => {
+  //   setTimeout(() => {
+  //     action('pause')
+  //     setTimeout(() => {
+  //       action('play')
+  //     }, 2000)
+  //   }, 2000)
+  // }, [])
   return <div style={{ ...contentStyle, background: 'Aquamarine', color: '#16161d' }}>
     <h1>You get the control of the story.</h1>
     <p>Render your custom JSX by passing just a <code style={{ fontStyle: 'italic' }}>content</code> property inside your story object.</p>
@@ -105,7 +105,7 @@ const stories2 = [{
       <p>Or here, an image!</p>
       <br />
       <img style={image} src="https://images.unsplash.com/photo-1565506737357-af89222625ad?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1650&q=80"></img>
-      <h3>Pefect. But there's more! →</h3>
+      <h3>Perfect. But there's more! →</h3>
     </div>
   }
 }, {

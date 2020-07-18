@@ -7,7 +7,6 @@
 
 <div align="center"><a href="https://www.npmjs.com/package/react-insta-stories"><img alt="NPM" src="https://img.shields.io/npm/v/react-insta-stories.svg"></a>&nbsp;<a href="https://standardjs.com"><img alt="JavaScript Style Guide" src="https://img.shields.io/badge/code_style-standard-brightgreen.svg"></a>&nbsp;<a href="#backers"><img alt="Backers on Open Collective" src="https://opencollective.com/react-insta-stories/backers/badge.svg"></a>&nbsp;<a href="#sponsors"><img alt="Sponsors on Open Collective" src="https://opencollective.com/react-insta-stories/sponsors/badge.svg"></a></div>
 
-Slides for React Bangalore meetup (view on desktop): https://inspiring-hawking-401dfc.netlify.com/
 ## What's new in v2? 🚀
 
 -   Render your own components/JSX in stories
@@ -17,10 +16,7 @@ Slides for React Bangalore meetup (view on desktop): https://inspiring-hawking-4
 -   **(for devs)** TypeScript 🎉
 -   **(for devs)** Updated for easier feature additions, hooks
 
-## What's breaking in v2? 🚨
-
--   Ref based APIs are no more supported, replace them with [new prop based controls](#props).
--   `seeMore` property should now be a React component or a function.
+<br>
 
 <img height="600" src="https://i.imgur.com/Y1s8FKb.png" alt="Demo screenshot"/>
 
@@ -37,91 +33,24 @@ See it in action here: https://mohitk05.github.io/react-insta-stories/
 
 ## Usage
 
-
-
 ```jsx
 import React, { Component } from 'react';
 
 import Stories from 'react-insta-stories';
 
-class App extends Component {
-	render() {
-		return (
-			<Stories
-				stories={stories}
-				defaultInterval={1500}
-				width={432}
-				height={768}
-			/>
-		);
-	}
-}
-
-const stories = [
- 	//🆕! Rendering Components instead of video or images can now be done by passing a 'content' property into the story. 
-	//The props contain properties 'action'(fn) and 'isPaused'(bool)
-  	{
-                content: ({action, isPaused}) => {
-		  const handleClick=(e)=>{e.preventDefault(); action(isPaused ? 'play': 'pause') };
-                  return (
-                    <div onClick={handleClick}>
-                  	<h2>Hi</h2>
-			<span>{isPaused ? 'Paused' : 'Playing'}</span>
-                    </div>
-                  );
-                }
-        },
-	{
-		url: 'https://picsum.photos/1080/1920',
-		seeMore: ({ close }) => (
-			<div style={{ width: '100%', height: '100%' }}>Hello</div>
-		),
-		header: {
-			heading: 'Mohit Karekar',
-			subheading: 'Posted 5h ago',
-			profileImage: 'https://picsum.photos/1000/1000'
-		}
-	},
-	{
-		url:
-			'https://fsa.zobj.net/crop.php?r=dyJ08vhfPsUL3UkJ2aFaLo1LK5lhjA_5o6qEmWe7CW6P4bdk5Se2tYqxc8M3tcgYCwKp0IAyf0cmw9yCmOviFYb5JteeZgYClrug_bvSGgQxKGEUjH9H3s7PS9fQa3rpK3DN3nx-qA-mf6XN',
-		header: {
-			heading: 'Mohit Karekar',
-			subheading: 'Posted 32m ago',
-			profileImage: 'https://picsum.photos/1080/1920'
-		}
-	},
-	{
-		url:
-			'https://media.idownloadblog.com/wp-content/uploads/2016/04/iPhone-wallpaper-abstract-portrait-stars-macinmac.jpg',
-		header: {
-			heading: 'mohitk05/react-insta-stories',
-			subheading: 'Posted 32m ago',
-			profileImage:
-				'https://avatars0.githubusercontent.com/u/24852829?s=400&v=4'
-		}
-	},
-	{
-		url: 'https://storage.googleapis.com/coverr-main/mp4/Footboys.mp4',
-		type: 'video',
-		duration: 1000
-	},
-	{
-		url:
-			'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4',
-		type: 'video',
-		seeMore: ({ close }) => (
-			<div style={{ width: '100%', height: '100%' }}>Hello</div>
-		)
-	},
-	{
-		url:
-			'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4',
-		type: 'video'
-	},
-	'https://images.unsplash.com/photo-1534856966153-c86d43d53fe0?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=564&q=80'
-];
+const App = () => {
+	return (
+		<Stories
+			stories={stories}
+			defaultInterval={1500}
+			width={432}
+			height={768}
+		/>
+	);
+};
 ```
+
+Here `stories` is an array of story objects, which can be of various types as described [below](#story-object).
 
 ## Props
 
@@ -168,35 +97,174 @@ storyContent: {
 }
 ```
 
-## API
+## Common Usage
 
-_**APIs will be deprecated from v2, and will be replaced by props based control. Check out '⭐️ new props' in the props table above.**_
+#### 1. Basic implementation with string URLs
 
-Following functions can be accessed using the `ref` of default export, e.g. `this.stories.pause()`
+If you wish to have a bare minimum setup and only need to show image stories, you can simply pass the image urls inside the `stories` array.
+This will show all your images as stories.
 
-##### `pause(overrideHideProgress: Boolean)`
+```js
+import Stories from 'react-insta-stories';
 
-Pause the currently playing story. Pass `true` to override the default hiding of progress bars.
+const stories = [
+	'https://example.com/pic.jpg',
+	'data:image/jpg;base64,R0lGODl....',
+	'https://mohitkarekar.com/icon.png',
+];
 
-##### `play()`
+return () => <Stories stories={stories} />;
+```
 
-Play a paused story.
+#### 2. Customising stories
 
-##### `previous()`
+If plain images does not suffice your usecase, you can pass an object instead of a string. This object supports all the properties mentioned above in the section [story object](#story-object). While using the object type, use `url` to denote the source url in case of media.
 
-Jump to the previous story. Similar to when tapped on left side of the screen.
+These properties can be mixed in different ways to obtain desired output.
 
-##### `next()`
+##### Duration
 
-Jump to the next story. Similar to when tapped on right side of the screen.
+Each story can be set to have a different duration.
 
-##### `toggleSeeMore(show: Boolean)`
+```jsx
+const stories = [
+	'https://example.com/pic.jpg',
+	{
+		url: 'https://example.com/pic2.jpg',
+		duration: 5000,
+	},
+];
+```
 
-Show or hide the `Show More` component. Pass `true` to show and otherwise.
+##### Header
+
+Adds a header to the story.
+
+```jsx
+const stories = [
+	'https://example.com/pic.jpg',
+	{
+		url: 'https://example.com/pic2.jpg',
+		duration: 5000,
+		header: {
+			heading: 'Mohit Karekar',
+			subheading: 'Posted 30m ago',
+			profileImage: 'https://picsum.photos/100/100',
+		},
+	},
+];
+```
+
+##### See More
+
+Adds a click to see more option at the bottom of the story. When present, shows the arrow at the bottom and when clicked, shows the provided component.
+
+```jsx
+const stories = [
+	'https://example.com/pic.jpg',
+	{
+		url: 'https://example.com/pic2.jpg',
+		duration: 5000,
+		seeMore: SeeMore, // some component
+	},
+	{
+		url: 'https://example.com/pic3.jpg',
+		duration: 2000,
+		seeMore: ({ close }) => {
+			return <div onClick={close}>Hello, click to close this.</div>;
+		},
+	},
+];
+```
+
+##### Type
+
+If provided `type: video`, then the component loads a video player. All expected features come in automatically. Duration is ignored, if provided and actual video duration is considered.
+
+```jsx
+const stories = [
+	'https://example.com/pic.jpg',
+	{
+		url: 'https://example.com/vid.mp4',
+		duration: 5000, // ignored
+		type: 'video',
+	},
+];
+```
+
+##### Styles
+
+Override default story element styles. Regular style object can be provided.
+
+#### 3. Custom JSX as a story
+
+You can render custom JSX inside a story by sending a `content` property inside the story object. If a `content` property is present, all other media related properties are ignored. `duration` holds true here.
+
+```jsx
+const stories = [
+	'https://example.com/pic.jpg',
+	{
+		content: (props) => (
+			<div style={{ background: 'pink', padding: 20 }}>
+				<h1 style={{ marginTop: '100%', marginBottom: 0 }}>🌝</h1>
+				<h1 style={{ marginTop: 5 }}>A custom title can go here.</h1>
+			</div>
+		),
+	},
+];
+```
+
+The content property can hold any React component. For further control, it receives two important props:
+
+-   `action` It allows you to fire play/pause actions.
+-   `isPaused` Holds true is the story is currently paused, false otherwise.
+
+```jsx
+const stories = [
+	'https://example.com/pic.jpg',
+	{
+		content: ({ action, isPaused }) => {
+			useEffect(() => {
+				setTimeout(() => {
+					action('pause');
+					setTimeout(() => {
+						action('play');
+					}, 2000);
+				}, 2000);
+			}, []);
+			return (
+				<div style={{ background: 'pink', padding: 20 }}>
+					<h1 style={{ marginTop: '100%', marginBottom: 0 }}>🌝</h1>
+					<h1>{isPaused ? 'Paused' : 'Playing'}</h1>
+				</div>
+			);
+		},
+	},
+];
+```
+
+In the code above, on render a timeout will be set which would fire a 'pause' action after 2 seconds. Again after 2 seconds, a 'play' action would be fired.
+In the JSX, `isPaused` is used to display the current play state.
+
+## Development
+
+To develop this package locally, you can follo these steps:
+
+1. Clone the repo to your local.
+2. Run `npm install`.
+3. Then `cd example && npm install`
+4. Come back to the root directory `cd ..`
+5. Run `npm start`
+6. In a new command window/tab, run `npm run example`.
+
+This will start a hot-reloading setup with a live example.
 
 ## Websites using `react-insta-stories`
-- [Corsza](http://corsza.com/)
-- [TLDR Stories](https://www.producthunt.com/posts/tldr-stories-a0c16732-ba1e-4a40-b420-8582b9128bac)
+
+-   [Corsza](http://corsza.com/)
+-   [TLDR Stories](https://www.producthunt.com/posts/tldr-stories-a0c16732-ba1e-4a40-b420-8582b9128bac)
+
+Do you use `react-insta-stories` too? Raise a PR to include your site in this list!
 
 ## Contributors
 
