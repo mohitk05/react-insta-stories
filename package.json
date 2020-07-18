@@ -1,6 +1,6 @@
 {
 	"name": "react-insta-stories",
-	"version": "2.0.2",
+	"version": "2.0.3",
 	"description": "A React component for Instagram like stories",
 	"main": "dist/index.js",
 	"types": "dist/index.d.ts",
@@ -8,9 +8,11 @@
 		"build": "webpack --mode production",
 		"build:dev": "webpack --mode development",
 		"prestart": "webpack --mode development",
-		"start": "webpack-dev-server",
-		"example": "cd example && rm package-lock.json && npm install && npm start",
-		"test": "echo \"Error: no test specified\" && exit 1"
+		"start": "webpack-dev-server --watch",
+		"example": "cd example && npm start",
+		"test": "echo \"Error: no test specified\" && exit 1",
+		"prepublish": "npm run build",
+		"publish": "npm publish"
 	},
 	"repository": {
 		"type": "git",

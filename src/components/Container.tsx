@@ -11,10 +11,9 @@ export default function () {
     const [bufferAction, setBufferAction] = useState<boolean>(true)
     const [videoDuration, setVideoDuration] = useState<number>(0)
 
-    let mousedownId = useRef<NodeJS.Timeout>()
+    let mousedownId = useRef<any>();
 
     const { width, height, stories, loop, currentIndex, isPaused } = useContext<GlobalCtx>(GlobalContext)
-
     useEffect(() => {
         if (typeof currentIndex === 'number') {
             if (currentIndex >= 0 && currentIndex < stories.length) {
