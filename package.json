@@ -11,7 +11,8 @@
 		"start": "webpack-dev-server --watch",
 		"example": "cd example && npm start",
 		"test": "echo \"Error: no test specified\" && exit 1",
-		"publish": "npm publish"
+		"publish": "npm publish",
+		"deploy": "gh-pages -d example/dist"
 	},
 	"repository": {
 		"type": "git",
@@ -37,6 +38,7 @@
 		"@types/react-dom": "^16.8.5",
 		"babel-loader": "^8.0.6",
 		"css-loader": "^3.2.0",
+		"gh-pages": "^3.1.0",
 		"react": "^16.10.2",
 		"source-map-loader": "^0.2.4",
 		"style-loader": "^1.0.0",
