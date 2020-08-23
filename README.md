@@ -3,12 +3,12 @@
 <h1 style="margin: 0" align="center">react-insta-stories</h1>
 <p align="center">A React component for Instagram like stories</p>
 
-<p align="center"><a href="https://mohitk05.github.io/react-insta-stories/">Homepage</a> • <a href="http://react-insta-stories-v2.surge.sh">Demo</a></p>
+<p align="center"><a href="https://mohitk05.github.io/react-insta-stories/">Homepage</a> • <a href="http://react-insta-stories-v2.surge.sh">Demo</a> • <a href="https://discord.gg/CBUC5c3">Discord</a></p>
 
 <div align="center"><a href="https://www.npmjs.com/package/react-insta-stories"><img alt="NPM" src="https://img.shields.io/npm/v/react-insta-stories.svg"></a>&nbsp;<a href="https://standardjs.com"><img alt="JavaScript Style Guide" src="https://img.shields.io/badge/code_style-standard-brightgreen.svg"></a>&nbsp;<a href="#backers"><img alt="Backers on Open Collective" src="https://opencollective.com/react-insta-stories/backers/badge.svg"></a>&nbsp;<a href="#sponsors"><img alt="Sponsors on Open Collective" src="https://opencollective.com/react-insta-stories/sponsors/badge.svg"></a></div>
-<br>
-<p style="text-align: center">This package is being sponsored by the following tool; please help to support us by taking a look and signing up to a free trial.</p>
-<a style="width: 100%" href="https://tracking.gitads.io/?repo=react-insta-stories"><img style="display: block; margin: auto" src="https://images.gitads.io/react-insta-stories" alt="GitAds"/></a>
+<!-- <br> -->
+<!-- <p style="text-align: center">This package is being sponsored by the following tool; please help to support us by taking a look and signing up to a free trial.</p>
+<a style="width: 100%" href="https://tracking.gitads.io/?repo=react-insta-stories"><img style="display: block; margin: auto" src="https://images.gitads.io/react-insta-stories" alt="GitAds"/></a> -->
 
 ## What's new in v2? 🚀
 
