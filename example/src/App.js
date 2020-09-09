@@ -1,17 +1,12 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import './App.css';
-import Stories from 'react-insta-stories'
+import Stories, { WithSeeMore } from 'react-insta-stories'
 
 class App extends React.Component {
   constructor() {
     super()
     this.state = {
     }
-  }
-  componentDidMount() {
-    setTimeout(() => {
-      // this.setState({ stories: stories2 })
-    }, 3000);
   }
   render() {
     return (
@@ -67,14 +62,9 @@ class App extends React.Component {
 }
 
 const Story2 = ({ action, isPaused }) => {
-  // useEffect(() => {
-  //   setTimeout(() => {
-  //     action('pause')
-  //     setTimeout(() => {
-  //       action('play')
-  //     }, 2000)
-  //   }, 2000)
-  // }, [])
+  useEffect(() => {
+    action('play')
+  }, [])
   return <div style={{ ...contentStyle, background: 'Aquamarine', color: '#16161d' }}>
     <h1>You get the control of the story.</h1>
     <p>Render your custom JSX by passing just a <code style={{ fontStyle: 'italic' }}>content</code> property inside your story object.</p>
@@ -92,6 +82,9 @@ const stories3 = [
 
 const stories2 = [{
   content: ({ action, isPaused }) => {
+    useEffect(() => {
+      action('play');
+    }, [action])
     return <div style={contentStyle}>
       <h1>The new version is here.</h1>
       <p>This is the new story.</p>
@@ -109,15 +102,18 @@ const stories2 = [{
     </div>
   }
 }, {
-  content: props => {
-    return <div style={{ background: 'pink', padding: 20 }}>
+  content: ({ action, story }) => {
+    useEffect(() => {
+      action('play');
+    }, [action])
+    return <WithSeeMore story={story} action={action}><div style={{ background: 'pink', padding: 20 }}>
       <h1 style={{ marginTop: '100%', marginBottom: 0 }}>🌝</h1>
       <h1 style={{ marginTop: 5 }}>We have our good old image and video stories, just the same.</h1>
-    </div>
+    </div></WithSeeMore>
   },
   seeMore: ({ close }) => <div style={{ maxWidth: '100%', height: '100%', padding: 40, background: 'white' }}><h2>Just checking the see more feature.</h2><p style={{ textDecoration: 'underline' }} onClick={close}>Go on, close this popup.</p></div>,
   duration: 5000
-}, 'https://picsum.photos/1080/1920', { url: 'https://storage.googleapis.com/coverr-main/mp4/Footboys.mp4', type: 'video' }, {
+}, { url: 'https://picsum.photos/1080/1920', seeMore: ({ close }) => <div style={{ maxWidth: '100%', height: '100%', padding: 40, background: 'white' }}><h2>Just checking the see more feature.</h2><p style={{ textDecoration: 'underline' }} onClick={close}>Go on, close this popup.</p></div> }, { url: 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4', type: 'video' }, {
   content: Story2
 }]
 

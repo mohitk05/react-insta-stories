@@ -1,3 +1,5 @@
+import * as React from 'react';
+
 export interface ReactInstaStoriesProps {
     stories: Story[],
     width?: number,
@@ -9,6 +11,10 @@ export interface ReactInstaStoriesProps {
     defaultInterval?: number,
     isPaused?: boolean,
     currentIndex?: number,
+    renderers?: {
+        renderer: Renderer,
+        tester: Tester
+    }[],
     onAllStoriesEnd?: Function,
     onStoryStart?: Function,
     onStoryEnd?: Function
@@ -23,12 +29,28 @@ export interface ContainerState {
     storiesDone: number
 }
 
-export interface StoryProps {
+export interface Renderer extends React.FC<{
+    action: (action: string, bufferAction?: boolean) => void;
+    isPaused: boolean;
     story: Story,
-    action: Function,
-    playState: boolean,
-    getVideoDuration: Function,
-    bufferAction: boolean
+    config: {
+        width?: number,
+        height?: number,
+        loader?: JSX.Element,
+        header?: Function,
+        storyStyles?: Object,
+    },
+    messageHandler: (type: string, data: any) => ({ ack: 'OK' | 'ERROR' })
+}> { }
+
+export type Tester = (story: Story) => boolean;
+
+export interface StoryProps {
+    story: Story;
+    action: (action: string, bufferAction?: boolean) => void;
+    playState: boolean;
+    getVideoDuration: Function;
+    bufferAction: boolean;
 }
 
 export interface StoryState {
@@ -43,7 +65,7 @@ export interface Story {
     type?: string,
     duration?: number,
     styles?: object,
-    content?: Function
+    content?: Renderer
 }
 
 export interface Header {

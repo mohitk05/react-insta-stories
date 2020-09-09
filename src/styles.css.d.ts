@@ -1,13 +1,13 @@
-declare namespace StylesCssModule {
+declare namespace StylesCssNamespace {
   export interface IStylesCss {
     "sk-scaleout": string;
     spinner: string;
   }
 }
 
-declare const StylesCssModule: StylesCssModule.IStylesCss & {
+declare const StylesCssModule: StylesCssNamespace.IStylesCss & {
   /** WARNING: Only available when `css-loader` is used without `style-loader` or `mini-css-extract-plugin` */
-  locals: StylesCssModule.IStylesCss;
+  locals: StylesCssNamespace.IStylesCss;
 };
 
 export = StylesCssModule;

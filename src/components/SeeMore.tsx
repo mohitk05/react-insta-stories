@@ -1,6 +1,5 @@
 import React from 'react'
 import { SeeMoreProps } from './../interfaces'
-// import up from './../up.png'
 
 export default function seeMore(props: SeeMoreProps) {
     const SeeMoreContent = props.seeMoreContent
