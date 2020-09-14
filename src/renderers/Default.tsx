@@ -62,9 +62,9 @@ const styles = {
 
 export const tester: Tester = (story) => {
     return {
-        condition: !story.type || story.type === 'image',
-        priority: 2
-    }
+        condition: true,
+        priority: 1
+    };
 }
 
 export default {

@@ -6,6 +6,7 @@ import WithSeeMore from './wrappers/withSeeMore';
 
 export const renderer: Renderer = ({ story, action, isPaused, config, messageHandler }) => {
     const [loaded, setLoaded] = React.useState(false);
+    const [muted, setMuted] = React.useState(false);
     const { width, height, loader, storyStyles } = config;
 
     let computedStyles = {
@@ -36,7 +37,14 @@ export const renderer: Renderer = ({ story, action, isPaused, config, messageHan
     const videoLoaded = () => {
         messageHandler('UPDATE_VIDEO_DURATION', { duration: vid.current.duration });
         setLoaded(true);
-        action('play');
+        vid.current.play().then(() => {
+            action('play');
+        }).catch(() => {
+            setMuted(true);
+            vid.current.play().finally(() => {
+                action('play');
+            })
+        });
     }
 
     return <WithHeader story={story} globalHeader={config.header}>
@@ -48,10 +56,10 @@ export const renderer: Renderer = ({ story, action, isPaused, config, messageHan
                     src={story.url}
                     controls={false}
                     onLoadedData={videoLoaded}
-                    autoPlay
                     playsInline
                     onWaiting={onWaiting}
                     onPlaying={onPlaying}
+                    muted={muted}
                 />
                 {!loaded && (
                     <div
@@ -92,7 +100,10 @@ const styles = {
 };
 
 export const tester: Tester = (story) => {
-    return story.type === 'video';
+    return {
+        condition: story.type === 'video',
+        priority: 2
+    }
 }
 
 export default {

@@ -43,7 +43,10 @@ export interface Renderer extends React.FC<{
     messageHandler: (type: string, data: any) => ({ ack: 'OK' | 'ERROR' })
 }> { }
 
-export type Tester = (story: Story) => boolean;
+export type Tester = (story: Story) => {
+    condition: boolean;
+    priority: number;
+};
 
 export interface StoryProps {
     story: Story;
