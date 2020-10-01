@@ -8,7 +8,7 @@ import withHeader from './renderers/wrappers/withHeader'
 import withSeeMore from './renderers/wrappers/withSeeMore'
 
 const ReactInstaStories = function (props: ReactInstaStoriesProps) {
-    let renderers = props.renderers ? defaultRenderers.concat(props.renderers) : defaultRenderers;
+    let renderers = props.renderers ? props.renderers.concat(defaultRenderers) : defaultRenderers;
     let context: GlobalCtx = {
         stories: props.stories.map(s => {
             let story: Story = {};
@@ -20,10 +20,9 @@ const ReactInstaStories = function (props: ReactInstaStoriesProps) {
                 story = Object.assign(story, s);
             }
 
-            if (!story.content) {
-                let renderer = getRenderer(story, renderers);
-                story.content = renderer;
-            }
+            let renderer = getRenderer(story, renderers);
+            story.originalContent = story.content;
+            story.content = renderer;
             return story
         }),
         width: props.width,
@@ -53,4 +52,4 @@ ReactInstaStories.defaultProps = {
 export const WithHeader = withHeader;
 export const WithSeeMore = withSeeMore;
 
-export default ReactInstaStories
+export default React.memo(ReactInstaStories);

@@ -1,11 +1,11 @@
-import React, { useState } from 'react';
-import { Story } from '../../interfaces';
+import React, { ComponentType, useState } from 'react';
+import { Action, SeeMoreProps, Story } from '../../interfaces';
 import SeeMore from "./../../components/SeeMore";
 
 const withSeeMore: React.FC<{
     story: Story,
-    action: (action: string, bufferAction?: boolean) => void,
-    customCollapsed?: React.FC
+    action: Action,
+    customCollapsed?: SeeMoreProps["customCollapsed"]
 }> = ({ story, action, customCollapsed, children }) => {
     const [showMore, setShowMore] = useState(false);
     const toggleMore = (show) => {
@@ -31,6 +31,7 @@ const withSeeMore: React.FC<{
                     toggleMore={toggleMore}
                     showContent={showMore}
                     seeMoreContent={story.seeMore}
+                    customCollapsed={customCollapsed || story.seeMoreCollapsed}
                 />
             </div>
         )}

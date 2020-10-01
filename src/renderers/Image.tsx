@@ -7,7 +7,6 @@ import WithSeeMore from './wrappers/withSeeMore';
 export const renderer: Renderer = ({ story, action, isPaused, config }) => {
     const [loaded, setLoaded] = React.useState(false);
     const { width, height, loader, storyStyles } = config;
-
     let computedStyles = {
         ...styles.storyContent,
         ...(storyStyles || {})
@@ -62,7 +61,7 @@ const styles = {
 
 export const tester: Tester = (story) => {
     return {
-        condition: !story.type || story.type === 'image',
+        condition: !story.content && (!story.type || story.type === 'image'),
         priority: 2
     }
 }

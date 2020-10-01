@@ -6,13 +6,14 @@ class App extends React.Component {
   constructor() {
     super()
     this.state = {
+      pause: false
     }
   }
   render() {
     return (
       <div className="App">
         <div className="left">
-          <h2><code><a rel="noopener noreferrer" href="https://www.npmjs.com/package/react-insta-stories" target="_blank">react-insta-stories [v2.0.3]</a></code></h2>
+          <h2><code><a rel="noopener noreferrer" href="https://www.npmjs.com/package/react-insta-stories" target="_blank">react-insta-stories [v2.1.0]</a></code></h2>
           <p>Create Instagram like stories on the web using React</p>
           <br />
           <code ><span style={{ background: '#eee', padding: 5, paddingLeft: 10, paddingRight: 10, borderRadius: 5, width: 'auto' }}>npm i react-insta-stories</span></code>
@@ -24,6 +25,13 @@ class App extends React.Component {
             <p>◉ Press and hold to pause</p></div>
           <br />
           <div className="updates">
+            <p><mark><b>Updates [V2.1.0]</b></mark></p>
+            <p>1. Pass in renderers to switch story UI according to certain conditions</p>
+            <p>2. Internal code structure changed keeping in mind long-term maintainability</p>
+            <p>3. Community based pluggable renderers possible now</p>
+            <p>4. Bug fixes</p>
+            <p><a href="https://github.com/mohitk05/react-insta-stories/pull/80">Read more here →</a></p>
+            <br></br>
             <p><mark><b>Updates [V2.0.0]</b></mark></p>
             <p>1. Render your own components/JSX in stories</p>
             <p>2. Create multiple instances to recreate stories by multiple users easily, jump to stories using props</p>
@@ -53,8 +61,9 @@ class App extends React.Component {
           <br />
           <p>Know more about me here: <a rel="noopener noreferrer" href="https://mohitkarekar.com" target="_blank">mohitkarekar.com</a></p>
         </div>
+        <button onClick={() => this.setState({ pause: !this.state.pause })}>Pause</button>
         <div className="stories">
-          <Stories loop defaultInterval={8000} stories={stories2} onStoryEnd={(s, st) => console.log('story ended', s, st)} onAllStoriesEnd={(s, st) => console.log('all stories ended', s, st)} onStoryStart={(s, st) => console.log('story started', s, st)} />
+          <Stories isPaused={this.state.pause} loop defaultInterval={8000} stories={stories2} onStoryEnd={(s, st) => console.log('story ended', s, st)} onAllStoriesEnd={(s, st) => console.log('all stories ended', s, st)} onStoryStart={(s, st) => console.log('story started', s, st)} />
         </div>
       </div>
     );
@@ -62,9 +71,6 @@ class App extends React.Component {
 }
 
 const Story2 = ({ action, isPaused }) => {
-  useEffect(() => {
-    action('play')
-  }, [])
   return <div style={{ ...contentStyle, background: 'Aquamarine', color: '#16161d' }}>
     <h1>You get the control of the story.</h1>
     <p>Render your custom JSX by passing just a <code style={{ fontStyle: 'italic' }}>content</code> property inside your story object.</p>
@@ -82,9 +88,6 @@ const stories3 = [
 
 const stories2 = [{
   content: ({ action, isPaused }) => {
-    useEffect(() => {
-      action('play');
-    }, [action])
     return <div style={contentStyle}>
       <h1>The new version is here.</h1>
       <p>This is the new story.</p>
@@ -103,14 +106,12 @@ const stories2 = [{
   }
 }, {
   content: ({ action, story }) => {
-    useEffect(() => {
-      action('play');
-    }, [action])
-    return <WithSeeMore story={story} action={action}><div style={{ background: 'pink', padding: 20 }}>
+    return <WithSeeMore story={story} action={action} customCollapsed={({ toggleMore, action }) => <h2 onClick={() => action('pause')}>Hellooo</h2>}><div style={{ background: 'pink', padding: 20 }}>
       <h1 style={{ marginTop: '100%', marginBottom: 0 }}>🌝</h1>
       <h1 style={{ marginTop: 5 }}>We have our good old image and video stories, just the same.</h1>
     </div></WithSeeMore>
   },
+  seeMoreCollapsed: ({ toggleMore, action }) => <h2 onClick={() => action('pause')}>Hellooo</h2>,
   seeMore: ({ close }) => <div style={{ maxWidth: '100%', height: '100%', padding: 40, background: 'white' }}><h2>Just checking the see more feature.</h2><p style={{ textDecoration: 'underline' }} onClick={close}>Go on, close this popup.</p></div>,
   duration: 5000
 }, { url: 'https://picsum.photos/1080/1920', seeMore: ({ close }) => <div style={{ maxWidth: '100%', height: '100%', padding: 40, background: 'white' }}><h2>Just checking the see more feature.</h2><p style={{ textDecoration: 'underline' }} onClick={close}>Go on, close this popup.</p></div> }, { url: 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4', type: 'video' }, {

@@ -1,19 +1,24 @@
 import React from 'react'
 import { SeeMoreProps } from './../interfaces'
 
-export default function seeMore(props: SeeMoreProps) {
-    const SeeMoreContent = props.seeMoreContent
+export default (props: SeeMoreProps) => {
+    const SeeMoreContent = props.seeMoreContent;
+    const CustomCollapsed = props.customCollapsed;
     return (
         props.showContent
             ? <div style={styles.seeMoreExpanded}>
                 <SeeMoreContent close={() => props.toggleMore(false)} />
             </div>
-            : <div onClick={() => {
+            :
+            (CustomCollapsed ? <CustomCollapsed action={props.action} toggleMore={props.toggleMore} /> : <div style={styles.seeMore} onClick={(e) => {
+                e.preventDefault();
+                e.stopPropagation();
                 props.toggleMore(true)
-            }} style={styles.seeMore}>
+            }} >
                 <span style={styles.seeMoreIcon}>⌃</span>
                 <span style={styles.seeMoreText}>See more</span>
             </div>
+            )
     )
 }
 

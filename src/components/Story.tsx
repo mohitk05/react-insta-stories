@@ -20,7 +20,13 @@ const Story = (props: StoryProps) => {
 	const getStoryContent = () => {
 		let InnerContent = props.story.content;
 		let config = { width, height, loader, header, storyStyles };
-		return <InnerContent action={props.action} isPaused={props.playState} story={props.story} config={config} messageHandler={rendererMessageHandler} />
+		return <InnerContent
+			action={props.action}
+			isPaused={props.playState}
+			story={props.story}
+			config={config}
+			messageHandler={rendererMessageHandler}
+		/>
 	};
 
 	return (
