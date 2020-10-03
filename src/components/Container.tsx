@@ -30,6 +30,22 @@ export default function () {
         }
     }, [isPaused])
 
+    useEffect(() => {
+        document.addEventListener("keydown", handleKeyDown);
+        return () => {
+            document.removeEventListener("keydown", handleKeyDown);
+        }
+    }, [])
+
+    const handleKeyDown = (e: KeyboardEvent) => {
+        if (e.key === 'ArrowLeft') {
+            previous()
+        }
+        else if (e.key === 'ArrowRight') {
+            next()
+        }
+    }
+
     const toggleState = (action: string, bufferAction?: boolean) => {
         setPause(action === 'pause')
         setBufferAction(!!bufferAction)

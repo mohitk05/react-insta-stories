@@ -1,9 +1,28 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { SeeMoreProps } from './../interfaces'
 // import up from './../up.png'
 
 export default function seeMore(props: SeeMoreProps) {
-    const SeeMoreContent = props.seeMoreContent
+    useEffect(() => {
+        document.addEventListener("keydown", handleKeyDown);
+        return () => {
+            document.removeEventListener("keydown", handleKeyDown);
+        }
+    }, [])
+
+    const handleKeyDown = (e: KeyboardEvent) => {
+        if (e.key === 'ArrowUp') {
+            e.preventDefault()
+            props.toggleMore(true)
+        }
+        else if (e.key === 'ArrowDown') {
+            e.preventDefault()
+            props.toggleMore(false)
+        }
+    }
+
+    const SeeMoreContent = props.seeMoreContent;
+
     return (
         props.showContent
             ? <div style={styles.seeMoreExpanded}>
