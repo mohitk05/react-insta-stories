@@ -13,7 +13,7 @@
 		"test": "echo \"Error: no test specified\" && exit 1",
 		"publish": "npm publish",
 		"deploy": "gh-pages -d example/dist",
-		"buildall": "webpack --mode production && cd example && npm run build"
+		"buildall": "npm install && webpack --mode production && cd example && npm install && npm run build"
 	},
 	"repository": {
 		"type": "git",
