@@ -1,25 +1,16 @@
-import React, { useEffect } from 'react'
-import { ReactInstaStoriesProps, GlobalCtx } from './interfaces'
+import React, { useEffect, useState } from 'react'
+import { ReactInstaStoriesProps, GlobalCtx, Story, Tester, Renderer } from './interfaces'
 import Container from './components/Container'
 import GlobalContext from './context/Global'
+import StoriesContext from './context/Stories';
+import { getRenderer } from './util/renderers'
+import { renderers as defaultRenderers } from './renderers/index';
+import withHeader from './renderers/wrappers/withHeader'
+import withSeeMore from './renderers/wrappers/withSeeMore'
 
 const ReactInstaStories = function (props: ReactInstaStoriesProps) {
-    useEffect(() => {
-        props.stories.forEach((s, i) => {
-            let images = []
-            const url = typeof s === 'object' && s.url && (s.type === 'image' || !s.type) ? s.url : (typeof s === 'string' ? s : null)
-            if (url) {
-                images[i] = new Image()
-                images[i].src = url
-            }
-        })
-    }, [props.stories])
-
+    let renderers = props.renderers ? props.renderers.concat(defaultRenderers) : defaultRenderers;
     let context: GlobalCtx = {
-        stories: props.stories.map(s => {
-            if (typeof s === 'string') return { url: s }
-            else return s
-        }),
         width: props.width,
         height: props.height,
         loader: props.loader,
@@ -33,15 +24,43 @@ const ReactInstaStories = function (props: ReactInstaStoriesProps) {
         onStoryEnd: props.onStoryEnd,
         onAllStoriesEnd: props.onAllStoriesEnd
     }
+    const [stories, setStories] = useState<{ stories: Story[] }>({ stories: generateStories(props.stories, renderers) });
+    useEffect(() => {
+        setStories({ stories: generateStories(props.stories, renderers) });
+    }, [props.stories, props.renderers]);
+
     return <GlobalContext.Provider value={context}>
-        <Container />
+        <StoriesContext.Provider value={stories}>
+            <Container />
+        </StoriesContext.Provider>
     </GlobalContext.Provider>
 }
+
+const generateStories = (stories: Story[], renderers: { renderer: Renderer, tester: Tester }[]) => {
+    return stories.map(s => {
+        let story: Story = {};
+
+        if (typeof s === 'string') {
+            story.url = s;
+            story.type = 'image';
+        } else if (typeof s === 'object') {
+            story = Object.assign(story, s);
+        }
+
+        let renderer = getRenderer(story, renderers);
+        story.originalContent = story.content;
+        story.content = renderer;
+        return story
+    })
+};
 
 ReactInstaStories.defaultProps = {
     width: 360,
     height: 640,
     defaultInterval: 4000
 }
+
+export const WithHeader = withHeader;
+export const WithSeeMore = withSeeMore;
 
 export default ReactInstaStories

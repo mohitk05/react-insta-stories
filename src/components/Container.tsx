@@ -1,9 +1,10 @@
 import React, { useContext, useState, useRef, useEffect } from 'react'
 import GlobalContext from './../context/Global'
+import StoriesContext from './../context/Stories'
 import ProgressContext from './../context/Progress'
 import Story from './Story'
 import ProgressArray from './ProgressArray'
-import { GlobalCtx } from './../interfaces'
+import { GlobalCtx, StoriesContext as StoriesContextInterface } from './../interfaces'
 
 export default function () {
     const [currentId, setCurrentId] = useState<number>(0)
@@ -13,11 +14,13 @@ export default function () {
 
     let mousedownId = useRef<any>();
 
-    const { width, height, stories, loop, currentIndex, isPaused } = useContext<GlobalCtx>(GlobalContext)
+    const { width, height, loop, currentIndex, isPaused } = useContext<GlobalCtx>(GlobalContext);
+    const { stories } = useContext<StoriesContextInterface>(StoriesContext);
+
     useEffect(() => {
         if (typeof currentIndex === 'number') {
             if (currentIndex >= 0 && currentIndex < stories.length) {
-                setCurrentId(currentIndex)
+                setCurrentIdWrapper(() => currentIndex)
             } else {
                 console.error('Index out of bounds. Current index was set to value more than the length of stories array.', currentIndex)
             }
@@ -51,8 +54,13 @@ export default function () {
         setBufferAction(!!bufferAction)
     }
 
+    const setCurrentIdWrapper = (callback) => {
+        setCurrentId(callback);
+        toggleState('pause', true);
+    }
+
     const previous = () => {
-        setCurrentId(prev => prev > 0 ? prev - 1 : prev)
+        setCurrentIdWrapper(prev => prev > 0 ? prev - 1 : prev)
     }
 
     const next = () => {
@@ -64,11 +72,11 @@ export default function () {
     };
 
     const updateNextStoryIdForLoop = () => {
-        setCurrentId(prev => (prev + 1) % stories.length)
+        setCurrentIdWrapper(prev => (prev + 1) % stories.length)
     }
 
     const updateNextStoryId = () => {
-        setCurrentId(prev => {
+        setCurrentIdWrapper(prev => {
             if (prev < stories.length - 1) return prev + 1
             return prev
         })

@@ -1,13 +1,15 @@
 import React, { useContext, useState, useEffect, useRef } from 'react'
 import Progress from './Progress'
-import { ProgressContext, GlobalCtx } from './../interfaces'
+import { ProgressContext, GlobalCtx, StoriesContext as StoriesContextInterface } from './../interfaces'
 import ProgressCtx from './../context/Progress'
 import GlobalContext from './../context/Global'
+import StoriesContext from './../context/Stories'
 
 export default () => {
     const [count, setCount] = useState<number>(0)
     const { currentId, next, videoDuration, pause } = useContext<ProgressContext>(ProgressCtx)
-    const { stories, defaultInterval, onStoryEnd, onStoryStart, onAllStoriesEnd } = useContext<GlobalCtx>(GlobalContext)
+    const { defaultInterval, onStoryEnd, onStoryStart, onAllStoriesEnd } = useContext<GlobalCtx>(GlobalContext);
+    const { stories } = useContext<StoriesContextInterface>(StoriesContext);
 
     useEffect(() => {
         setCount(0)
