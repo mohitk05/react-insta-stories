@@ -27,7 +27,7 @@ const ReactInstaStories = function (props: ReactInstaStoriesProps) {
     const [stories, setStories] = useState<{ stories: Story[] }>({ stories: generateStories(props.stories, renderers) });
     useEffect(() => {
         setStories({ stories: generateStories(props.stories, renderers) });
-    }, [props.stories]);
+    }, [props.stories, props.renderers]);
 
     return <GlobalContext.Provider value={context}>
         <StoriesContext.Provider value={stories}>
