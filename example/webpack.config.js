@@ -1,4 +1,6 @@
 const webpack = require('webpack');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 module.exports = {
     entry: './src/index.js',
@@ -12,10 +14,9 @@ module.exports = {
             {
                 test: /\.css$/i,
                 use: [
-                    'style-loader',
+                    MiniCssExtractPlugin.loader,
                     {
-                        loader: 'css-loader',
-                        options: { modules: true },
+                        loader: 'css-loader'
                     }
                 ],
             }
@@ -30,6 +31,10 @@ module.exports = {
         filename: 'bundle.js'
     },
     plugins: [
+        new HtmlWebpackPlugin({
+            template: __dirname + '/src/index.ejs'
+        }),
+        new MiniCssExtractPlugin(),
         new webpack.HotModuleReplacementPlugin()
     ],
     devServer: {

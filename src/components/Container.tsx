@@ -1,9 +1,10 @@
 import React, { useContext, useState, useRef, useEffect } from 'react'
 import GlobalContext from './../context/Global'
+import StoriesContext from './../context/Stories'
 import ProgressContext from './../context/Progress'
 import Story from './Story'
 import ProgressArray from './ProgressArray'
-import { GlobalCtx } from './../interfaces'
+import { GlobalCtx, StoriesContext as StoriesContextInterface } from './../interfaces'
 
 export default function () {
     const [currentId, setCurrentId] = useState<number>(0)
@@ -13,7 +14,9 @@ export default function () {
 
     let mousedownId = useRef<any>();
 
-    const { width, height, stories, loop, currentIndex, isPaused } = useContext<GlobalCtx>(GlobalContext)
+    const { width, height, loop, currentIndex, isPaused } = useContext<GlobalCtx>(GlobalContext);
+    const { stories } = useContext<StoriesContextInterface>(StoriesContext);
+
     useEffect(() => {
         if (typeof currentIndex === 'number') {
             if (currentIndex >= 0 && currentIndex < stories.length) {

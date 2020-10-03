@@ -20,7 +20,28 @@ export interface ReactInstaStoriesProps {
     onStoryEnd?: Function
 }
 
-export interface GlobalCtx extends ReactInstaStoriesProps { }
+export interface GlobalCtx {
+    width?: number;
+    height?: number;
+    loader?: JSX.Element;
+    header?: Function;
+    storyStyles?: Object;
+    loop?: boolean;
+    defaultInterval?: number;
+    isPaused?: boolean;
+    currentIndex?: number;
+    renderers?: {
+        renderer: Renderer;
+        tester: Tester
+    }[];
+    onAllStoriesEnd?: Function;
+    onStoryStart?: Function;
+    onStoryEnd?: Function;
+}
+
+export interface StoriesContext {
+    stories: Story[];
+}
 
 export interface ContainerState {
     currentId: number;
