@@ -6,18 +6,6 @@
 <p align="center"><a href="https://mohitk05.github.io/react-insta-stories/">Homepage</a> • <a href="https://discord.gg/CBUC5c3">Discord</a></p>
 
 <div align="center"><a href="https://www.npmjs.com/package/react-insta-stories"><img alt="NPM" src="https://img.shields.io/npm/v/react-insta-stories.svg"></a>&nbsp;<a href="https://standardjs.com"><img alt="JavaScript Style Guide" src="https://img.shields.io/badge/code_style-standard-brightgreen.svg"></a>&nbsp;<a href="#backers"><img alt="Backers on Open Collective" src="https://opencollective.com/react-insta-stories/backers/badge.svg"></a>&nbsp;<a href="#sponsors"><img alt="Sponsors on Open Collective" src="https://opencollective.com/react-insta-stories/sponsors/badge.svg"></a></div>
-<!-- <br> -->
-<!-- <p style="text-align: center">This package is being sponsored by the following tool; please help to support us by taking a look and signing up to a free trial.</p>
-<a style="width: 100%" href="https://tracking.gitads.io/?repo=react-insta-stories"><img style="display: block; margin: auto" src="https://images.gitads.io/react-insta-stories" alt="GitAds"/></a> -->
-
-## What's new in v2? 🚀
-
--   Render your own components/JSX in stories
--   Create multiple instances to recreate stories by multiple users easily, jump to stories using props
--   Prop based control, event callbacks
--   Custom JSX gives control to pause/play story
--   **(for devs)** TypeScript 🎉
--   **(for devs)** Updated for easier feature additions, hooks
 
 <br>
 
@@ -60,6 +48,7 @@ Here `stories` is an array of story objects, which can be of various types as de
 | Property          | Type            | Default                   | Description                                                                                                                                                         |
 | ----------------- | --------------- | ------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `stories`         | [String/Object] | `required`                | An array of image urls or array of story objects (options described below)                                                                                          |
+| `renderers` ⚡️   | [Object]        | `[]`                      | An array of renderer objects (options described below)                                                                                                              |
 | `defaultInterval` | Number          | 1200                      | Milliseconds duration for which a story persists                                                                                                                    |
 | `loader`          | Component       | Ripple loader             | A loader component as a fallback until image loads from url                                                                                                         |
 | `header`          | Component       | Default header as in demo | A header component which sits at the top of each story. It receives the `header` object from the `story` object. Data for header to be sent with each story object. |
@@ -78,14 +67,15 @@ Here `stories` is an array of story objects, which can be of various types as de
 
 Instead of simple string url, a comprehensive 'story object' can also be passed in the `stories` array.
 
-| Property   | Description                                                                                                                                   |
-| ---------- | --------------------------------------------------------------------------------------------------------------------------------------------- |
-| `url`      | The url of the resource, be it image or video.                                                                                                |
-| `duration` | Optional. Duration for which a story should persist.                                                                                          |
-| `header`   | Optional. Adds a header on the top. Object with `heading`, `subheading` and `profileImage` properties.                                        |
-| `seeMore`  | Optional. Adds a see more icon at the bottom of the story. On clicking, opens up this component. (v2: updated to Function instead of element) |
-| `type`     | Optional. To distinguish a video story. `type: 'video'` is necessary for a video story.                                                       |
-| `styles`   | Optional. Override the default story styles mentioned below.                                                                                  |
+| Property           | Description                                                                                                                                   |
+| ------------------ | --------------------------------------------------------------------------------------------------------------------------------------------- |
+| `url`              | The url of the resource, be it image or video.                                                                                                |
+| `type`             | Optional. Type of the story. `type: 'video'                                                                                                   | 'image'`. Type `video` is necessary for a video story. |
+| `duration`         | Optional. Duration for which a story should persist.                                                                                          |
+| `header`           | Optional. Adds a header on the top. Object with `heading`, `subheading` and `profileImage` properties.                                        |
+| `seeMore`          | Optional. Adds a see more icon at the bottom of the story. On clicking, opens up this component. (v2: updated to Function instead of element) |
+| `seeMoreCollapsed` | Optional. Send custom component to be rendered instead of the default 'See More' text.                                                        |  |
+| `styles`           | Optional. Override the default story styles mentioned below.                                                                                  |
 
 ### Default story styles
 
@@ -99,6 +89,125 @@ storyContent: {
     margin: 'auto'
 }
 ```
+
+### Renderers
+
+To allow reusable components to display story UI, you can pass in pre-built or custom-built components in a special manner to leverage this behavior. Each renderer object has two properties:
+
+-   `renderer` - This is the UI component that will be rendered whenever the object matches certain conditions.
+-   `tester` - This is a function that tests whether the renderer is suitable for the current story. It receives the current story object to render and returns an object with two properties:
+    -   `condition` - This states if the renderer matches the current story's criteria (a boolean).
+    -   `priority` - A number denoting the priority of the current renderer. E.g. priority of 2 is less than a 5, and if two renderers have condition = `true`, their priorities will be compared and the one with higher priority will be selected.
+
+So essentially a simple renderer would look like this:
+(you may also refer the inbuilt [Image renderer](src/renderers/Image.tsx))
+
+```jsx
+// Renderer.js
+
+export const renderer = ({ story, action, isPaused, config }) => {
+	return <div>Hello!</div>;
+};
+
+export const tester = (story) => {
+	return {
+		// Use this renderer only when the story type is video
+		condition: story.type === 'video',
+		priority: 3,
+	};
+};
+```
+
+Every `renderer` component gets 4 props as shown above. Out of these the `story`, `action` and `isPaused` are as their names suggest. The `config` object contains certain global properties which were passed while initialising the component. It looks like this:
+
+```js
+const { width, height, loader, storyStyles } = config;
+```
+
+> These props can be used to customize the entire UI as required, and then can be packaged as a Node module and shared. If someone else wishes to use your package as a renderer, they can simply pass it inside an array as the `renderers` prop to the main component.
+> _If you publish any such renderer, please raise a PR to add it to this list. A few suggestions would be a Markdown renderer, highlighted code renderer, etc._
+
+List of public renderers:
+
+-   Add one here
+
+### Higher Order Components
+
+#### `WithSeeMore`
+
+This is a wrapper component which includes the UI and logic for displaying a 'See More' link at the bottom of the story. This is available as a named export from the package and can be used to easily add the functionality to a custom content story.
+It takes in two props - `story` and `action`.
+
+```jsx
+const { WithSeeMore } from 'react-insta-stories';
+
+const CustomStoryContent = ({ story, action }) => {
+	return <WithSeeMore story={story} action={action}>
+		<div>
+			<h1>Hello!</h1>
+			<p>This story would have a 'See More' link at the bottom ✨</p>
+		</div>
+	</WithSeeMore>
+}
+```
+
+You can also send custom 'See More' component for the collapsed state. While using `WithSeeMore`, pass in a `customCollapsed` prop with a value of your custom component. It will receive a `toggleMore` and `action` prop to handle clicks on the See More link.
+
+```jsx
+const { WithSeeMore } from 'react-insta-stories';
+
+const customCollapsedComponent = ({ toggleMore, action }) =>
+	<h2 onClick={() => {
+		action('pause');
+		window.open('https://mywebsite.url', '_blank');
+	}}>
+		Go to Website
+	</h2>
+
+const CustomStoryContent = ({ story, action }) => {
+	return <WithSeeMore
+		story={story}
+		action={action}
+		customCollapsed={customCollapsedComponent}
+	>
+		<div>
+			<h1>Hello!</h1>
+			<p>This story would have a 'See More' link at the bottom and will open a URL in a new tab.</p>
+		</div>
+	</WithSeeMore>
+}
+```
+
+If not implementing a custom UI, you can send the `customCollapsedComponent` component inside the story object as `seeMoreCollapsed`.
+
+```jsx
+const stories = [
+	{
+		url: 'some.url',
+		seeMore: SeeMoreComponent, // when expanded
+		seeMoreCollapsed: customCollapsedComponent, // when collapsed
+	},
+];
+```
+
+#### `WithHeader`
+
+This named export can be used to include the header UI on any custom story. Simply wrap the component with this HOC and pass in some props.
+
+```jsx
+const { WithHeader } from 'react-insta-stories';
+
+const CustomStoryContent = ({ story, config }) => {
+	return <WithHeader story={story} globalHeader={config.header}>
+		<div>
+			<h1>Hello!</h1>
+			<p>This story would have the configured header!</p>
+		</div>
+	</WithHeader>
+}
+```
+
+You may also use both these HOCs together, as in the [Image renderer](src/renderers/Image.tsx).
 
 ## Common Usage
 
