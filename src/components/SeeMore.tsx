@@ -14,7 +14,7 @@ export default function seeMore(props: SeeMoreProps) {
             e.preventDefault()
             props.toggleMore(true)
         }
-        else if (e.key === 'ArrowDown') {
+        else if (e.key === 'ArrowDown' || e.key === 'Escape') {
             e.preventDefault()
             props.toggleMore(false)
         }
