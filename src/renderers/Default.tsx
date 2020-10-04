@@ -15,11 +15,6 @@ export const renderer: Renderer = ({ story, action }) => {
 }
 
 const styles = {
-    story: {
-        display: "flex",
-        position: "relative",
-        overflow: "hidden"
-    },
     storyContent: {
         width: "100%",
         maxHeight: "100%",
@@ -33,7 +28,7 @@ const styles = {
     }
 };
 
-export const tester: Tester = (story) => {
+export const tester: Tester = () => {
     return {
         condition: true,
         priority: 1
