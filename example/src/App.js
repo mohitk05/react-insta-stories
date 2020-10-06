@@ -7,7 +7,7 @@ class App extends React.Component {
 		return (
 			<div className="App">
 				<div className="left">
-					<h2><code><a rel="noopener noreferrer" href="https://www.npmjs.com/package/react-insta-stories" target="_blank">react-insta-stories [v2.1.0]</a></code></h2>
+					<h2><code><a rel="noopener noreferrer" href="https://www.npmjs.com/package/react-insta-stories" target="_blank">react-insta-stories [v2.1.2]</a></code></h2>
 					<p>Create Instagram like stories on the web using React</p>
 					<br />
 					<code ><span style={{ background: '#eee', padding: 5, paddingLeft: 10, paddingRight: 10, borderRadius: 5, width: 'auto' }}>npm i react-insta-stories</span></code>
@@ -21,11 +21,12 @@ class App extends React.Component {
 						<p>◉ Press and hold to pause</p></div>
 					<br />
 					<div className="updates">
-						<p><mark><b>Updates [V2.1.0]</b></mark></p>
+						<p><mark><b>Updates [V2.1.2]</b></mark></p>
 						<p>1. Pass in renderers to switch story UI according to certain conditions</p>
 						<p>2. Internal code structure changed keeping in mind long-term maintainability</p>
 						<p>3. Community based pluggable renderers possible now</p>
-						<p>4. Bug fixes</p>
+						<p>4. Optional keyboard navigation</p>
+						<p>5. Bug fixes</p>
 						<p><a href="https://github.com/mohitk05/react-insta-stories/pull/80">Read more here →</a></p>
 						<br></br>
 						<p><mark><b>Updates [V2.0.0]</b></mark></p>
@@ -58,7 +59,7 @@ class App extends React.Component {
 					<p>Know more about me here: <a rel="noopener noreferrer" href="https://mohitkarekar.com" target="_blank">mohitkarekar.com</a></p>
 				</div>
 				<div className="stories">
-					<Stories loop defaultInterval={8000} stories={stories2} onStoryEnd={(s, st) => console.log('story ended', s, st)} onAllStoriesEnd={(s, st) => console.log('all stories ended', s, st)} onStoryStart={(s, st) => console.log('story started', s, st)} />
+					<Stories loop keyboardNavigation defaultInterval={8000} stories={stories2} onStoryEnd={(s, st) => console.log('story ended', s, st)} onAllStoriesEnd={(s, st) => console.log('all stories ended', s, st)} onStoryStart={(s, st) => console.log('story started', s, st)} />
 				</div>
 			</div>
 		);
