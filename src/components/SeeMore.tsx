@@ -1,9 +1,35 @@
-import React from 'react'
+import React, { useEffect, useContext } from 'react'
+import GlobalContext from './../context/Global'
+import { GlobalCtx } from './../interfaces'
 import { SeeMoreProps } from './../interfaces'
 
-export default (props: SeeMoreProps) => {
+export default function seeMore(props: SeeMoreProps) {
     const SeeMoreContent = props.seeMoreContent;
     const CustomCollapsed = props.customCollapsed;
+
+    const { keyboardNavigation } = useContext<GlobalCtx>(GlobalContext);
+
+    useEffect(() => {
+        const isClient = (typeof window !== 'undefined' && window.document);
+        if (isClient && (typeof keyboardNavigation === 'boolean' && keyboardNavigation)) {
+            document.addEventListener("keydown", handleKeyDown);
+            return () => {
+                document.removeEventListener("keydown", handleKeyDown);
+            }
+        }
+    }, [keyboardNavigation])
+
+    const handleKeyDown = (e: KeyboardEvent) => {
+        if (e.key === 'ArrowUp') {
+            e.preventDefault()
+            props.toggleMore(true)
+        }
+        else if (e.key === 'ArrowDown' || e.key === 'Escape') {
+            e.preventDefault()
+            props.toggleMore(false)
+        }
+    }
+
     return (
         props.showContent
             ? <div style={styles.seeMoreExpanded}>
