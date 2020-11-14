@@ -58,9 +58,7 @@ const styles = {
         margin: "auto"
     },
     imageContainer: {
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'center'
+      margin: 'auto'
   }
 };
 

@@ -119,6 +119,9 @@ const stories2 = [
   {
     url: 'https://images.unsplash.com/photo-1500964757637-c85e8a162699?ixlib=rb-1.2.1&w=1000&q=80'
   },
+  {
+    url: 'https://winaero.com/blog/wp-content/uploads/2019/11/Photos-new-icon.png'
+  },
 	{
 		content: Story2
 	}
