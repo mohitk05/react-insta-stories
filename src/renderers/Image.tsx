@@ -19,7 +19,7 @@ export const renderer: Renderer = ({ story, action, isPaused, config }) => {
 
     return <WithHeader story={story} globalHeader={config.header}>
         <WithSeeMore story={story} action={action}>
-            <div>
+            <div style={styles.imageContainer}>
                 <img style={computedStyles} src={story.url} onLoad={imageLoaded} />
                 {!loaded && (
                     <div
@@ -56,7 +56,12 @@ const styles = {
         maxWidth: "100%",
         maxHeight: "100%",
         margin: "auto"
-    }
+    },
+    imageContainer: {
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center'
+  }
 };
 
 export const tester: Tester = (story) => {
