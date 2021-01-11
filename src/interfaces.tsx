@@ -18,6 +18,8 @@ export interface ReactInstaStoriesProps {
     onAllStoriesEnd?: Function;
     onStoryStart?: Function;
     onStoryEnd?: Function;
+    onClickNextStory?: (currentStoryIndex: number) => void;
+    onClickPrevStory?: (currentStoryIndex: number) => void;
     keyboardNavigation?: boolean;
 }
 
@@ -38,6 +40,8 @@ export interface GlobalCtx {
     onAllStoriesEnd?: Function;
     onStoryStart?: Function;
     onStoryEnd?: Function;
+    onClickNextStory?: (currentStoryIndex: number) => void;
+    onClickPrevStory?: (currentStoryIndex: number) => void;
     keyboardNavigation?: boolean;
 }
 

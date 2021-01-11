@@ -23,6 +23,8 @@ const ReactInstaStories = function (props: ReactInstaStoriesProps) {
         onStoryStart: props.onStoryStart,
         onStoryEnd: props.onStoryEnd,
         onAllStoriesEnd: props.onAllStoriesEnd,
+        onClickNextStory: props.onClickNextStory,
+        onClickPrevStory: props.onClickPrevStory,
         keyboardNavigation: props.keyboardNavigation
     }
     const [stories, setStories] = useState<{ stories: Story[] }>({ stories: generateStories(props.stories, renderers) });
