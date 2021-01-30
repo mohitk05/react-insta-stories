@@ -40,7 +40,8 @@ const styles = {
 	story: {
 		display: "flex",
 		position: "relative",
-		overflow: "hidden"
+		overflow: "hidden",
+		alignItems: "center"
 	},
 	storyContent: {
 		width: "auto",
