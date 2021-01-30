@@ -1,6 +1,6 @@
 {
-	"name": "rabans-stories",
-	"version": "1.0.4",
+	"name": "react-insta-stories",
+	"version": "2.1.2",
 	"description": "A React component for Instagram like stories",
 	"main": "dist/index.js",
 	"types": "dist/index.d.ts",
