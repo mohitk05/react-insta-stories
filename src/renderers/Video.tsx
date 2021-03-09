@@ -60,6 +60,8 @@ export const renderer: Renderer = ({ story, action, isPaused, config, messageHan
                     onWaiting={onWaiting}
                     onPlaying={onPlaying}
                     muted={muted}
+                    autoPlay
+                    webkit-playsinline
                 />
                 {!loaded && (
                     <div
