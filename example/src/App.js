@@ -7,7 +7,7 @@ class App extends React.Component {
 		return (
 			<div className="App">
 				<div className="left">
-					<h2><code><a rel="noopener noreferrer" href="https://www.npmjs.com/package/react-insta-stories" target="_blank">react-insta-stories [v2.1.2]</a></code></h2>
+					<h2><code><a rel="noopener noreferrer" href="https://www.npmjs.com/package/react-insta-stories" target="_blank">react-insta-stories [v2.1.3]</a></code></h2>
 					<p>Create Instagram like stories on the web using React</p>
 					<br />
 					<code ><span style={{ background: '#eee', padding: 5, paddingLeft: 10, paddingRight: 10, borderRadius: 5, width: 'auto' }}>npm i react-insta-stories</span></code>
