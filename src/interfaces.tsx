@@ -2,8 +2,8 @@ import * as React from 'react';
 
 export interface ReactInstaStoriesProps {
     stories: Story[];
-    width?: number;
-    height?: number;
+    width?: NumberOrString;
+    height?: NumberOrString;
     loader?: JSX.Element;
     header?: Function;
     storyStyles?: Object;
@@ -22,8 +22,8 @@ export interface ReactInstaStoriesProps {
 }
 
 export interface GlobalCtx {
-    width?: number;
-    height?: number;
+    width?: NumberOrString;
+    height?: NumberOrString;
     loader?: JSX.Element;
     header?: Function;
     storyStyles?: Object;
@@ -40,6 +40,8 @@ export interface GlobalCtx {
     onStoryEnd?: Function;
     keyboardNavigation?: boolean;
 }
+
+type NumberOrString = number | string;
 
 export interface StoriesContext {
     stories: Story[];
@@ -58,8 +60,8 @@ export interface Renderer extends React.FC<{
     isPaused: boolean;
     story: Story;
     config: {
-        width?: number;
-        height?: number;
+        width?: NumberOrString;
+        height?: NumberOrString;
         loader?: JSX.Element;
         header?: Function;
         storyStyles?: Object;
