@@ -30,7 +30,9 @@ const Story = (props: StoryProps) => {
 	};
 
 	return (
-		<div style={{ ...styles.story, width: width, height: height }}>
+		<div
+			style={{ ...styles.story, width: width, height: height }}
+		>
 			{getStoryContent()}
 		</div>
 	);

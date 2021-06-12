@@ -6,6 +6,7 @@ export interface ReactInstaStoriesProps {
     height?: NumberOrString;
     loader?: JSX.Element;
     header?: Function;
+    storyContainerStyles?: Record<string, any>;
     storyStyles?: Object;
     loop?: boolean;
     defaultInterval?: number;
@@ -26,6 +27,7 @@ export interface GlobalCtx {
     height?: NumberOrString;
     loader?: JSX.Element;
     header?: Function;
+    storyContainerStyles?: Record<string, any>;
     storyStyles?: Object;
     loop?: boolean;
     defaultInterval?: number;
