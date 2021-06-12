@@ -59,7 +59,15 @@ class App extends React.Component {
 					<p>Know more about me here: <a rel="noopener noreferrer" href="https://mohitkarekar.com" target="_blank">mohitkarekar.com</a></p>
 				</div>
 				<div className="stories">
-					<Stories loop keyboardNavigation defaultInterval={8000} stories={stories2} onStoryEnd={(s, st) => console.log('story ended', s, st)} onAllStoriesEnd={(s, st) => console.log('all stories ended', s, st)} onStoryStart={(s, st) => console.log('story started', s, st)} />
+					<Stories
+						loop
+						keyboardNavigation
+						defaultInterval={8000}
+						stories={stories2}
+						onStoryEnd={(s, st) => console.log('story ended', s, st)}
+						onAllStoriesEnd={(s, st) => console.log('all stories ended', s, st)}
+						onStoryStart={(s, st) => console.log('story started', s, st)}
+					/>
 				</div>
 			</div>
 		);
@@ -99,7 +107,7 @@ const stories2 = [
 	},
 	{
 		content: ({ action, story }) => {
-			return <WithSeeMore story={story} action={action}><div style={{ background: 'pink', padding: 20 }}>
+			return <WithSeeMore story={story} action={action}><div style={{ background: 'pink', padding: 20, height: '100%' }}>
 				<h1 style={{ marginTop: '100%', marginBottom: 0 }}>🌝</h1>
 				<h1 style={{ marginTop: 5 }}>We have our good old image and video stories, just the same.</h1>
 			</div></WithSeeMore>
@@ -138,7 +146,8 @@ const contentStyle = {
 	background: 'salmon',
 	width: '100%',
 	padding: 20,
-	color: 'white'
+	color: 'white',
+	height: '100%'
 }
 
 const customSeeMore = {

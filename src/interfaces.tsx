@@ -22,8 +22,8 @@ export interface ReactInstaStoriesProps {
 }
 
 export interface GlobalCtx {
-    width?: number;
-    height?: number;
+    width?: number | string;
+    height?: number | string;
     loader?: JSX.Element;
     header?: Function;
     storyStyles?: Object;
