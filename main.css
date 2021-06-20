@@ -19,7 +19,7 @@ body {
 }
 
 p {
-	margin: 0;
+	margin: 5px 0;
 }
 
 .App {
@@ -27,12 +27,12 @@ p {
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	font-family: 'Karla', sans-serif;
+	font-family: 'Inter', sans-serif;
 	height: 87vh;
 }
 
 .stories {
-	filter: drop-shadow(0 10px 20px #aaa);
+	filter: drop-shadow(0 20px 30px #aaa);
 }
 
 .left {
