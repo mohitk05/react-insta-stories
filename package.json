@@ -1,6 +1,6 @@
 {
 	"name": "react-insta-stories",
-	"version": "2.2.1",
+	"version": "2.2.2",
 	"description": "A React component for Instagram like stories",
 	"main": "dist/index.js",
 	"types": "dist/index.d.ts",
@@ -41,6 +41,7 @@
 		"css-loader": "^3.2.0",
 		"gh-pages": "^3.1.0",
 		"react": "^16.10.2",
+		"react-svg-loader": "^3.0.3",
 		"source-map-loader": "^0.2.4",
 		"style-loader": "^1.0.0",
 		"ts-loader": "^6.0.4",
