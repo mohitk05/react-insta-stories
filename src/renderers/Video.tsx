@@ -1,6 +1,6 @@
 import * as React from 'react';
+import Spinner from '../components/Spinner';
 import { Renderer, Tester } from './../interfaces';
-import globalStyle from './../styles.css'
 import WithHeader from './wrappers/withHeader';
 import WithSeeMore from './wrappers/withSeeMore';
 
@@ -61,7 +61,7 @@ export const renderer: Renderer = ({ story, action, isPaused, config, messageHan
                     onPlaying={onPlaying}
                     muted={muted}
                     autoPlay
-                    webkit-playsinline
+                    webkit-playsinline="true"
                 />
                 {!loaded && (
                     <div
@@ -79,7 +79,7 @@ export const renderer: Renderer = ({ story, action, isPaused, config, messageHan
                             color: "#ccc"
                         }}
                     >
-                        {loader || <div className={globalStyle.spinner} />}
+                        {loader || <Spinner />}
                     </div>
                 )}
             </div>

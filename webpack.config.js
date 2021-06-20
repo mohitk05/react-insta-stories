@@ -21,19 +21,22 @@ module.exports = {
                 exclude: /node_modules/
             },
             {
-                test: /\.css$/i,
+                test: /\.svg$/,
                 use: [
-                    'style-loader',
-                    '@teamsupercell/typings-for-css-modules-loader',
                     {
-                        loader: 'css-loader',
-                        options: { modules: true },
+                        loader: "babel-loader"
                     },
-                ],
+                    {
+                        loader: "react-svg-loader",
+                        options: {
+                            jsx: true
+                        }
+                    }
+                ]
             },
             {
                 test: /\.m?js$/,
-                exclude: /(node_modules|bower_components)/,
+                exclude: /node_modules/,
                 use: {
                     loader: 'babel-loader'
                 }
@@ -50,6 +53,11 @@ module.exports = {
         libraryTarget: 'umd',
         umdNamedDefine: true,
         globalObject: 'this'
+    },
+    optimization: {
+        splitChunks: {
+            chunks: 'all',
+        },
     },
     externals: {
         // Don't bundle react or react-dom

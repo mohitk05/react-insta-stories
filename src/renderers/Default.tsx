@@ -1,8 +1,5 @@
 import * as React from 'react';
 import { Renderer, Tester } from './../interfaces';
-import globalStyle from './../styles.css'
-import WithHeader from './wrappers/withHeader';
-import WithSeeMore from './wrappers/withSeeMore';
 
 export const renderer: Renderer = ({ story, action }) => {
     React.useEffect(() => {
