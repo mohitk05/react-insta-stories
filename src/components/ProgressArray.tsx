@@ -37,12 +37,12 @@ export default () => {
         if (countCopy < 100) {
             animationFrameId.current = requestAnimationFrame(incrementCount)
         } else {
-            storyEndCallback()
+            storyEndCallback();
             if (currentId === stories.length - 1) {
-                allStoriesEndCallback()
+                allStoriesEndCallback();
             }
-            cancelAnimationFrame(animationFrameId.current)
-            next()
+            cancelAnimationFrame(animationFrameId.current);
+            next();
         }
     }
 

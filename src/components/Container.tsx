@@ -13,6 +13,7 @@ export default function () {
     const [videoDuration, setVideoDuration] = useState<number>(0)
 
     let mousedownId = useRef<any>();
+    let isMounted = useRef<boolean>(true);
 
     const { width, height, loop, currentIndex, isPaused, keyboardNavigation, storyContainerStyles = {} } = useContext<GlobalCtx>(GlobalContext);
     const { stories } = useContext<StoriesContextInterface>(StoriesContext);
@@ -41,7 +42,14 @@ export default function () {
                 document.removeEventListener("keydown", handleKeyDown);
             }
         }
-    }, [keyboardNavigation])
+    }, [keyboardNavigation]);
+
+    // Cleanup mounted state - for issue #130 (https://github.com/mohitk05/react-insta-stories/issues/130)
+    useEffect(() => {
+        return () => {
+            isMounted.current = false;
+        }
+    }, []);
 
     const handleKeyDown = (e: KeyboardEvent) => {
         if (e.key === 'ArrowLeft') {
@@ -67,10 +75,12 @@ export default function () {
     }
 
     const next = () => {
-        if (loop) {
-            updateNextStoryIdForLoop()
-        } else {
-            updateNextStoryId()
+        if (isMounted.current) {
+            if (loop) {
+                updateNextStoryIdForLoop()
+            } else {
+                updateNextStoryId()
+            }
         }
     };
 
