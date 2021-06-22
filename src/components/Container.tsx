@@ -102,7 +102,7 @@ export default function () {
         }, 200)
     }
 
-    const mouseUp = (e: React.MouseEvent | React.TouchEvent, type: string) => {
+    const mouseUp = (type: string) => (e: React.MouseEvent | React.TouchEvent) => {
         e.preventDefault()
         mousedownId.current && clearTimeout(mousedownId.current)
         if (pause) {
@@ -135,8 +135,8 @@ export default function () {
                 getVideoDuration={getVideoDuration}
             />
             <div style={styles.overlay}>
-                <div style={{ width: '50%', zIndex: 999 }} onTouchStart={debouncePause} onTouchEnd={e => mouseUp(e, 'previous')} onMouseDown={debouncePause} onMouseUp={(e) => mouseUp(e, 'previous')} />
-                <div style={{ width: '50%', zIndex: 999 }} onTouchStart={debouncePause} onTouchEnd={e => mouseUp(e, 'next')} onMouseDown={debouncePause} onMouseUp={(e) => mouseUp(e, 'next')} />
+                <div style={{ width: '50%', zIndex: 999 }} onTouchStart={debouncePause} onTouchEnd={mouseUp('previous')} onMouseDown={debouncePause} onMouseUp={mouseUp('previous')} />
+                <div style={{ width: '50%', zIndex: 999 }} onTouchStart={debouncePause} onTouchEnd={mouseUp('next')} onMouseDown={debouncePause} onMouseUp={mouseUp('next')} />
             </div>
         </div>
     )
