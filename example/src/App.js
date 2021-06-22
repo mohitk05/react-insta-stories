@@ -6,7 +6,7 @@ function App() {
 	return (
 		<div className="App">
 			<div className="left">
-				<h2><code><a rel="noopener noreferrer" href="https://www.npmjs.com/package/react-insta-stories" target="_blank">react-insta-stories [v2.2.2]</a></code></h2>
+				<h2><code><a rel="noopener noreferrer" href="https://www.npmjs.com/package/react-insta-stories" target="_blank">react-insta-stories</a><br /><a href="https://www.npmjs.com/package/react-insta-stories"><img alt="NPM" src="https://img.shields.io/npm/v/react-insta-stories.svg" /></a></code></h2>
 				<p>Create Instagram like stories on the web using React</p>
 				<br />
 				<code style={{ marginTop: 10, marginBottom: 10 }}><span style={{ background: '#eee', padding: 5, paddingLeft: 10, paddingRight: 10, borderRadius: 5, width: 'auto' }}>npm i react-insta-stories</span></code>
