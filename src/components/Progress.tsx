@@ -30,7 +30,7 @@ export default (props: ProgressProps) => {
 
 const styles: any = {
     inner: {
-        background: '#fff',
+        backgroundImage: 'linear-gradient(to right, #5544e7 , #69b9fb)',
         height: '100%',
         maxWidth: '100%',
         borderRadius: 2,
