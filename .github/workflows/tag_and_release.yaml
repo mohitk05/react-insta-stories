@@ -1,0 +1,30 @@
+name: Authorizer Release Package
+
+on:
+  workflow_dispatch:
+    inputs:
+      GITHUB_TOKEN:
+        description: 'The github token is used for releasing in the github registry.'
+        required: true
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Expose Input credentials
+      uses: ./.github/actions/expose-input-credentials
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v1
+      with:
+        node-version: 14.17.3
+    - name: Install modules
+      run: npm ci
+    - name: Build artifacts
+      run: npm run build
+    - name: Release
+      run: npx semantic-release  
+      env:
+        CI: true
+        HUSKY: 0
+        GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        NPM_TOKEN: ${{ secrets.GITHUB_TOKEN }}

@@ -1,5 +1,5 @@
 {
-	"name": "react-insta-stories",
+	"name": "@intive/react-insta-stories",
 	"version": "2.2.3",
 	"description": "A React component for Instagram like stories",
 	"main": "dist/index.js",
@@ -17,19 +17,22 @@
 	},
 	"repository": {
 		"type": "git",
-		"url": "git+https://github.com/mohitk05/react-insta-stories.git"
+		"url": "https://github.com/intive/react-insta-stories.git"
 	},
 	"keywords": [
 		"stories",
 		"react",
 		"instagram"
 	],
-	"author": "mohitk05",
+	"publishConfig": {
+    "registry": "https://npm.pkg.github.com/intive"
+  },
+	"author": "intive",
 	"license": "MIT",
 	"bugs": {
-		"url": "https://github.com/mohitk05/react-insta-stories/issues"
+		"url": "https://https://github.com/intive/react-insta-stories/issues"
 	},
-	"homepage": "https://github.com/mohitk05/react-insta-stories#readme",
+	"homepage": "https://https://github.com/intive/react-insta-stories#readme",
 	"devDependencies": {
 		"@babel/core": "^7.5.5",
 		"@babel/preset-env": "^7.5.5",

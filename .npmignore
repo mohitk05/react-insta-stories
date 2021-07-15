@@ -4,3 +4,4 @@ src
 .eslintrc
 webpack.config.js
 tsconfig.json
+.github

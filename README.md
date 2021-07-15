@@ -1,20 +1,12 @@
-![Main image](https://i.imgur.com/OAL12S5.jpg)
-
 <h1 style="margin: 0" align="center">react-insta-stories</h1>
 <p align="center">A React component for Instagram like stories</p>
-
-<p align="center"><a href="https://mohitk05.github.io/react-insta-stories/">Homepage</a> • <a href="https://discord.gg/CBUC5c3">Discord</a></p>
-
-<div align="center"><a href="https://www.npmjs.com/package/react-insta-stories"><img alt="NPM" src="https://img.shields.io/npm/v/react-insta-stories.svg"></a>&nbsp;<a href="https://standardjs.com"><img alt="JavaScript Style Guide" src="https://img.shields.io/badge/code_style-standard-brightgreen.svg"></a>&nbsp;<a href="#backers"><img alt="Backers on Open Collective" src="https://opencollective.com/react-insta-stories/backers/badge.svg"></a>&nbsp;<a href="#sponsors"><img alt="Sponsors on Open Collective" src="https://opencollective.com/react-insta-stories/sponsors/badge.svg"></a></div>
-
-<br>
 
 <img height="600" src="https://i.imgur.com/Y1s8FKb.png" alt="Demo screenshot"/>
 
 ## Install
 
 ```bash
-npm install --save react-insta-stories
+npm install @intive/react-insta-stories --registry=https://npm.pkg.github.com
 ```
 
 ## Demo
