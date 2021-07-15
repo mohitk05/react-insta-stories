@@ -1,26 +1,19 @@
-![Main image](https://i.imgur.com/OAL12S5.jpg)
-
 <h1 style="margin: 0" align="center">react-insta-stories</h1>
 <p align="center">A React component for Instagram like stories</p>
 
-<p align="center"><a href="https://mohitk05.github.io/react-insta-stories/">Homepage</a> • <a href="https://discord.gg/CBUC5c3">Discord</a></p>
-
-<div align="center"><a href="https://www.npmjs.com/package/react-insta-stories"><img alt="NPM" src="https://img.shields.io/npm/v/react-insta-stories.svg"></a>&nbsp;<a href="https://standardjs.com"><img alt="JavaScript Style Guide" src="https://img.shields.io/badge/code_style-standard-brightgreen.svg"></a>&nbsp;<a href="#backers"><img alt="Backers on Open Collective" src="https://opencollective.com/react-insta-stories/backers/badge.svg"></a>&nbsp;<a href="#sponsors"><img alt="Sponsors on Open Collective" src="https://opencollective.com/react-insta-stories/sponsors/badge.svg"></a></div>
-
-<br>
+It's a fork from [https://github.com/mohitk05/react-insta-stories](https://github.com/mohitk05/react-insta-stories)
 
 <img height="600" src="https://i.imgur.com/Y1s8FKb.png" alt="Demo screenshot"/>
 
 ## Install
 
 ```bash
-npm install --save react-insta-stories
+npm install @intive/react-insta-stories --registry=https://npm.pkg.github.com
 ```
 
 ## Demo
 
-The component responds to actions like tap on right side for next story, on left for previous and tap and hold for pause. Custom time duration for each story can be provided.
-See it in action here: https://mohitk05.github.io/react-insta-stories/
+__TBD__
 
 ## Usage
 
@@ -362,7 +355,7 @@ In the JSX, `isPaused` is used to display the current play state.
 
 ## Development
 
-To develop this package locally, you can follo these steps:
+To develop this package locally, you can follow these steps:
 
 1. Clone the repo to your local.
 2. Run `npm install`.
@@ -373,43 +366,6 @@ To develop this package locally, you can follo these steps:
 
 This will start a hot-reloading setup with a live example.
 
-## Thanks To
-
--   [@SamHambert](https://github.com/SamHerbert/SVG-Loaders) for the default spinner SVG
-
-## Websites using `react-insta-stories`
-
--   [Corsza](http://corsza.com/)
--   [TLDR Stories](https://www.producthunt.com/posts/tldr-stories-a0c16732-ba1e-4a40-b420-8582b9128bac)
-
-Do you use `react-insta-stories` too? Raise a PR to include your site in this list!
-
-## Contributors
-
-This project exists thanks to all the people who contribute.
-<a href="https://github.com/mohitk05/react-insta-stories/graphs/contributors"><img src="https://opencollective.com/react-insta-stories/contributors.svg?width=890&button=false" /></a>
-
-## Backers
-
-Thank you to all our backers! 🙏 [Become a backer](https://opencollective.com/react-insta-stories#backer)
-
-<a href="https://opencollective.com/react-insta-stories#backers" target="_blank"><img src="https://opencollective.com/react-insta-stories/backers.svg?width=890"></a>
-
-## Sponsors
-
-Support this project by becoming a sponsor. [Become a sponsor](https://opencollective.com/react-insta-stories#sponsor)
-
-<a href="https://opencollective.com/react-insta-stories/sponsor/0/website" target="_blank"><img src="https://opencollective.com/react-insta-stories/sponsor/0/avatar.svg"></a>
-<a href="https://opencollective.com/react-insta-stories/sponsor/1/website" target="_blank"><img src="https://opencollective.com/react-insta-stories/sponsor/1/avatar.svg"></a>
-<a href="https://opencollective.com/react-insta-stories/sponsor/2/website" target="_blank"><img src="https://opencollective.com/react-insta-stories/sponsor/2/avatar.svg"></a>
-<a href="https://opencollective.com/react-insta-stories/sponsor/3/website" target="_blank"><img src="https://opencollective.com/react-insta-stories/sponsor/3/avatar.svg"></a>
-<a href="https://opencollective.com/react-insta-stories/sponsor/4/website" target="_blank"><img src="https://opencollective.com/react-insta-stories/sponsor/4/avatar.svg"></a>
-<a href="https://opencollective.com/react-insta-stories/sponsor/5/website" target="_blank"><img src="https://opencollective.com/react-insta-stories/sponsor/5/avatar.svg"></a>
-<a href="https://opencollective.com/react-insta-stories/sponsor/6/website" target="_blank"><img src="https://opencollective.com/react-insta-stories/sponsor/6/avatar.svg"></a>
-<a href="https://opencollective.com/react-insta-stories/sponsor/7/website" target="_blank"><img src="https://opencollective.com/react-insta-stories/sponsor/7/avatar.svg"></a>
-<a href="https://opencollective.com/react-insta-stories/sponsor/8/website" target="_blank"><img src="https://opencollective.com/react-insta-stories/sponsor/8/avatar.svg"></a>
-<a href="https://opencollective.com/react-insta-stories/sponsor/9/website" target="_blank"><img src="https://opencollective.com/react-insta-stories/sponsor/9/avatar.svg"></a>
 
 ## License
-
-MIT © [mohitk05](https://github.com/mohitk05)
+MIT

@@ -1,0 +1,32 @@
+name: Run CI for Pull Request into master branch
+
+on:
+  pull_request:
+    branches:
+    - master
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Use Node.js 14.17.3
+      uses: actions/setup-node@v1
+      with:
+        node-version: 14.17.3
+    - name: Cache Node.js modules
+      uses: actions/cache@v2
+      with:
+        # npm cache files are stored in `~/.npm` on Linux/macOS
+        path: |
+          **/node_modules
+        key: ${{ runner.OS }}-node-${{ hashFiles('**/package-lock.json') }}
+        restore-keys: |
+          ${{ runner.OS }}-node-
+          ${{ runner.OS }}-
+    - name: Install and test
+      run: |
+        npm ci
+        npm run test
+      env:
+        CI: true
