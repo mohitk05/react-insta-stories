@@ -5,10 +5,7 @@ runs:
   using: "composite"
   steps:
     - run: |
-            GITHUB_TOKEN=$(cat $GITHUB_EVENT_PATH | jq '.inputs.GITHUB_TOKEN' | sed 's/"//g' )
             NPM_TOKEN=$(cat $GITHUB_EVENT_PATH | jq '.inputs.NPM_TOKEN' | sed 's/"//g' )
-            echo "::add-mask::$GITHUB_TOKEN"
             echo "::add-mask::$NPM_TOKEN"
-            echo "GITHUB_TOKEN=$GITHUB_TOKEN" >> $GITHUB_ENV
             echo "NPM_TOKEN=$NPM_TOKEN" >> $GITHUB_ENV
       shell: bash

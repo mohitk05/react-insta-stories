@@ -3,7 +3,7 @@ name: Release Package
 on:
   workflow_dispatch:
     inputs:
-      GITHUB_TOKEN:
+      NPM_TOKEN:
         description: 'The github token is used for releasing in the github registry.'
         required: true
 jobs:
@@ -26,5 +26,5 @@ jobs:
       env:
         CI: true
         HUSKY: 0
-        GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        NPM_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        GH_TOKEN: ${{ GITHUB_TOKEN }}
+        NPM_TOKEN: ${{ NPM_TOKEN }}
