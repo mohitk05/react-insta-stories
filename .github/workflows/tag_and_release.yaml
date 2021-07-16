@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
     inputs:
       NPM_TOKEN:
-        description: 'The github token is used for releasing in the github registry.'
+        description: 'The NPM token is used for releasing in the npm registry.'
         required: true
 jobs:
   release:
@@ -26,5 +26,5 @@ jobs:
       env:
         CI: true
         HUSKY: 0
-        GH_TOKEN: ${{ GITHUB_TOKEN }}
-        NPM_TOKEN: ${{ NPM_TOKEN }}
+        GH_TOKEN: ${{ env.GITHUB_TOKEN }}
+        NPM_TOKEN: ${{ env.NPM_TOKEN }}
