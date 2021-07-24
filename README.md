@@ -360,6 +360,42 @@ const stories = [
 In the code above, on render a timeout will be set which would fire a 'pause' action after 2 seconds. Again after 2 seconds, a 'play' action would be fired.
 In the JSX, `isPaused` is used to display the current play state.
 
+## Exposing story navigation
+
+Exposing story navigation (e.g. toggle previous and next story via buttons) can be accomplished by tracking the index of the visible story, which is passed into the `onStoryStart` callback by assigning it to a `ref`, then adding or subtracting an index in your `onNext`/`onPrevious` handlers, which can then be set to state. Your index state can then be passed into the `Stories` component as `currentIndex`.
+
+Here's a naive example:
+
+```jsx
+const StoryReel = ({stories}) => {
+    const visibleIndex = React.useRef(0);
+  
+    const [selectedIndex, setSelectedIndex] = React.useState(0);
+  
+    const onStoryStart = (index: number) => {
+      visibleIndex.current = index;
+    };
+  
+    const onNext = () => setSelectedIndex(visibleIndex.current + 1);
+  
+    const onPrevious = () => setSelectedIndex(visibleIndex.current - 1);
+
+    return (
+        <div>
+            <button type="button" onClick={onPrevious}>Previous</button>
+            <div>
+                <Stories
+                    onStoryStart={onStoryStart}
+                    stories={stories}
+                    currentIndex={selectedIndex}
+                />
+            </div>
+            <button type="button" onClick={onNext}>Next</button>
+      </div>
+    )
+}
+```
+
 ## Development
 
 To develop this package locally, you can follo these steps:
