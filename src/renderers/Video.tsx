@@ -19,6 +19,7 @@ export const renderer: Renderer = ({ story, action, isPaused, config, messageHan
     React.useEffect(() => {
         if (vid.current) {
             if (isPaused) {
+                action("pause", true);
                 vid.current.pause();
             } else {
                 vid.current.play().catch(() => { });
@@ -55,6 +56,7 @@ export const renderer: Renderer = ({ story, action, isPaused, config, messageHan
                     style={computedStyles}
                     src={story.url}
                     controls={false}
+                    onLoadStart={onWaiting}
                     onLoadedData={videoLoaded}
                     playsInline
                     onWaiting={onWaiting}
