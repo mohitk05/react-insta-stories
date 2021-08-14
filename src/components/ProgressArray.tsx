@@ -13,6 +13,9 @@ export default () => {
 
     useEffect(() => {
         setCount(0)
+        startTimestamp.current = undefined
+        previousTimeStamp.current = undefined
+        cancelAnimationFrame(animationFrameId.current)
     }, [currentId, stories])
 
     useEffect(() => {
@@ -25,16 +28,31 @@ export default () => {
     }, [currentId, pause])
 
     let animationFrameId = useRef<number>()
+    let startTimestamp = useRef<number>() 
+    let previousTimeStamp = useRef<number>()   
 
-    let countCopy = count;
-    const incrementCount = () => {
+    let countCopy = count;    
+    const incrementCount = (timestamp) => {
+        if (startTimestamp.current === undefined) startTimestamp.current = timestamp;
         if (countCopy === 0) storyStartCallback()
-        setCount((count: number) => {
-            const interval = getCurrentInterval()
-            countCopy = count + (100 / ((interval / 1000) * 60))
-            return count + (100 / ((interval / 1000) * 60))
-        })
+        setCount(() => {
+            if (startTimestamp.current === undefined || previousTimeStamp === undefined) {
+                countCopy = 0
+                return 0
+            }
+
+            if (previousTimeStamp.current !== timestamp) {
+                const elapsed = timestamp - startTimestamp.current
+                const interval =  getCurrentInterval()
+                countCopy = Math.min(100 * elapsed / interval, 100)
+                return  Math.min(100 * elapsed / interval, 100)                 
+            }
+            countCopy = 0
+            return 0
+        });
+
         if (countCopy < 100) {
+            previousTimeStamp.current = timestamp
             animationFrameId.current = requestAnimationFrame(incrementCount)
         } else {
             storyEndCallback();
