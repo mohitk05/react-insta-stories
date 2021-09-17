@@ -53,5 +53,7 @@
 	"peerDependencies": {
 		"react": "^16.8.2"
 	},
-	"dependencies": {}
+	"dependencies": {
+		"react-player": "^2.9.0"
+	}
 }

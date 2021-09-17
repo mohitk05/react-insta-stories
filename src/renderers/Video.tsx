@@ -3,8 +3,11 @@ import Spinner from '../components/Spinner';
 import { Renderer, Tester } from './../interfaces';
 import WithHeader from './wrappers/withHeader';
 import WithSeeMore from './wrappers/withSeeMore';
+import ReactPlayer from 'react-player';
 
 export const renderer: Renderer = ({ story, action, isPaused, config, messageHandler }) => {
+    const [playing, setPlaying] = React.useState(false);
+
     const [loaded, setLoaded] = React.useState(false);
     const [muted, setMuted] = React.useState(false);
     const { width, height, loader, storyStyles } = config;
@@ -14,44 +17,44 @@ export const renderer: Renderer = ({ story, action, isPaused, config, messageHan
         ...(storyStyles || {})
     }
 
-    let vid = React.useRef<HTMLVideoElement>(null);
+    let vid = React.useRef(null);
 
     React.useEffect(() => {
         if (vid.current) {
-            if (isPaused) {
-                action("pause", true);
-                vid.current.pause();
+            if (vid.current.getCurrentTime() === 0) {
+
             } else {
-                vid.current.play().catch(() => { });
+                if (isPaused) {
+                    action("pause", true);
+                    setPlaying(false);
+                } else {
+                    setPlaying(true);
+                }
             }
         }
     }, [isPaused]);
 
     const onWaiting = () => {
         action("pause", true);
+        setPlaying(false);
     }
 
     const onPlaying = () => {
         action("play", true);
+        setPlaying(true);
     }
 
     const videoLoaded = () => {
-        messageHandler('UPDATE_VIDEO_DURATION', { duration: vid.current.duration });
+        messageHandler('UPDATE_VIDEO_DURATION', { duration: vid.current.getDuration() });
+        action('play');
         setLoaded(true);
-        vid.current.play().then(() => {
-            action('play');
-        }).catch(() => {
-            setMuted(true);
-            vid.current.play().finally(() => {
-                action('play');
-            })
-        });
+        setPlaying(true);
     }
 
     return <WithHeader story={story} globalHeader={config.header}>
         <WithSeeMore story={story} action={action}>
             <div style={styles.videoContainer}>
-                <video
+                {/* <video
                     ref={vid}
                     style={computedStyles}
                     src={story.url}
@@ -64,6 +67,22 @@ export const renderer: Renderer = ({ story, action, isPaused, config, messageHan
                     muted={muted}
                     autoPlay
                     webkit-playsinline="true"
+                /> */}
+
+                <ReactPlayer
+                    ref={vid}
+                    style={computedStyles}
+                    url={story.url}
+                    controls={false}
+                    playsinline
+                    onReady={videoLoaded}
+                    onBuffer={onWaiting}
+                    onBufferEnd={onPlaying}
+                    muted={muted}
+                    className='react-player-video'
+                    width='100%'
+                    height='auto'
+                    playing={playing}
                 />
                 {!loaded && (
                     <div
@@ -86,7 +105,7 @@ export const renderer: Renderer = ({ story, action, isPaused, config, messageHan
                 )}
             </div>
         </WithSeeMore>
-    </WithHeader>
+    </WithHeader >
 }
 
 const styles = {

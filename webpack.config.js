@@ -67,6 +67,12 @@ module.exports = {
             amd: 'React',
             root: 'React'
         },
+        'react-player': {
+            commonjs: 'react-player',
+            commonjs2: 'react-player',
+            amd: 'ReactPlayer',
+            root: 'ReactPlayer'
+        },
         'react-dom': {
             commonjs: 'react-dom',
             commonjs2: 'react-dom',
