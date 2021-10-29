@@ -1,6 +1,6 @@
 {
-	"name": "react-insta-stories",
-	"version": "2.2.5",
+	"name": "react-insta-stories-v2",
+	"version": "1.0.0",
 	"description": "A React component for Instagram like stories",
 	"main": "dist/index.js",
 	"types": "dist/index.d.ts",
@@ -17,19 +17,19 @@
 	},
 	"repository": {
 		"type": "git",
-		"url": "git+https://github.com/mohitk05/react-insta-stories.git"
+		"url": "git+https://github.com/shruthi48/react-insta-stories.git"
 	},
 	"keywords": [
 		"stories",
 		"react",
 		"instagram"
 	],
-	"author": "mohitk05",
+	"author": "shruthi48",
 	"license": "MIT",
 	"bugs": {
-		"url": "https://github.com/mohitk05/react-insta-stories/issues"
+		"url": "https://github.com/shruthi48/react-insta-stories/issues"
 	},
-	"homepage": "https://github.com/mohitk05/react-insta-stories#readme",
+	"homepage": "https://github.com/shruthi48/react-insta-stories#readme",
 	"devDependencies": {
 		"@babel/core": "^7.5.5",
 		"@babel/preset-env": "^7.5.5",
