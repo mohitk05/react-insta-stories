@@ -64,6 +64,7 @@ Here `stories` is an array of story objects, which can be of various types as de
 | `onStoryEnd`           | Function        | -                         | Callback when a story ends                                                                                                                                          |
 | `onAllStoriesEnd`      | Function        | -                         | Callback when all stories in the array have ended                                                                                                                   |
 | `keyboardNavigation`   | Boolean         | false                     | Attaches arrow key listeners to navigate between stories if true. Also adds up arrow key listener for opening See More and Escape/down arrow for closing it         |
+| `preventDefault`       | Boolean         | false                     | Disable the default behavior when user click the component                                                                                                          |
 
 ### Story object
 
