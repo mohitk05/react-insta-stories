@@ -1,0 +1,27 @@
+{
+  "version": "1.0.0",
+  "name": "react-native-stories",
+  "packageManager": "yarn@3.1.1",
+  "scripts": {
+    "build": "webpack --mode production",
+    "build:dev": "webpack --mode development",
+    "prestart": "webpack --mode development",
+    "start": "webpack --watch --mode development"
+  },
+  "peerDependencies": {
+    "react": "^17.0.2",
+    "react-native": "^0.66.4"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.8.6",
+    "@types/react": "^17.0.38",
+    "@types/react-native": "^0.66.10",
+    "@types/react-native-video": "^5.0.11",
+    "babel-preset-expo": "~8.1.0",
+    "metro-react-native-babel-preset": "^0.59.0"
+  },
+  "dependencies": {
+    "react-native-video": "^5.2.0",
+    "react-stories-common": "1.0.0"
+  }
+}

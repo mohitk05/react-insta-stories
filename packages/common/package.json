@@ -1,0 +1,18 @@
+{
+  "version": "1.0.0",
+  "name": "react-stories-common",
+  "packageManager": "yarn@3.1.1",
+  "private": true,
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "webpack --mode production",
+    "build:dev": "webpack --mode development",
+    "prestart": "webpack --mode development",
+    "start": "webpack --watch --mode development"
+  },
+  "devDependencies": {
+    "@types/react": "^17.0.38",
+    "react": "^17.0.2"
+  }
+}
