@@ -1,0 +1,16 @@
+{
+  "version": "1.0.0",
+  "name": "react-stories-common",
+  "packageManager": "yarn@3.1.1",
+  "private": true,
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc"
+  },
+  "devDependencies": {
+    "@types/react": "^17.0.38",
+    "react": "^17.0.2",
+    "typescript": "^4.5.4"
+  }
+}
