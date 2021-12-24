@@ -6,11 +6,13 @@
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
-    "build": "tsc"
+    "build": "webpack --mode production",
+    "build:dev": "webpack --mode development",
+    "prestart": "webpack --mode development",
+    "start": "webpack --watch --mode development"
   },
   "devDependencies": {
     "@types/react": "^17.0.38",
-    "react": "^17.0.2",
-    "typescript": "^4.5.4"
+    "react": "^17.0.2"
   }
 }

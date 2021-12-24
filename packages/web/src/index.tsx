@@ -9,7 +9,7 @@ export const WithHeader = withHeader;
 export const WithSeeMore = withSeeMore;
 
 export default (props: BaseProps) => {
-    return <ReactInstaStoriesRoot {...props} defaultRenderers={renderers}>
-        <Container />
-    </ReactInstaStoriesRoot>
+  return <ReactInstaStoriesRoot {...props} defaultRenderers={renderers}>
+    <Container />
+  </ReactInstaStoriesRoot>
 }

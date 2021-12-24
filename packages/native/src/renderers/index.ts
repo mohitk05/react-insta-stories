@@ -1,6 +1,6 @@
-import image from './Image';
-import video from './Video';
-import defaultRenderer from './Default';
-import autoplayContent from './AutoPlayContent';
+import image from "./Image";
+import video from "./Video";
+import defaultRenderer from "./Default";
+import autoplayContent from "./AutoPlayContent";
 
-export const renderers = [image, video, autoplayContent, defaultRenderer];
+export const renderers = [image, autoplayContent, defaultRenderer];

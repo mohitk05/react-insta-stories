@@ -3,112 +3,109 @@ import Spinner from '../components/Spinner';
 import { Renderer, Tester } from 'react-stories-common/dist/types';
 import WithHeader from './wrappers/withHeader';
 import WithSeeMore from './wrappers/withSeeMore';
+import { StyleProp, View, ViewStyle } from 'react-native';
+import Video from 'react-native-video';
 
 export const renderer: Renderer = ({ story, action, isPaused, config, messageHandler }) => {
-    const [loaded, setLoaded] = React.useState(false);
-    const [muted, setMuted] = React.useState(false);
-    const { width, height, loader, storyStyles } = config;
+  const [loaded, setLoaded] = React.useState(false);
+  const [muted, setMuted] = React.useState(false);
+  const { width, height, loader, storyStyles } = config;
 
-    let computedStyles = {
-        ...styles.storyContent,
-        ...(storyStyles || {})
+  let computedStyles = {
+    ...styles.storyContent,
+    ...(storyStyles || {})
+  }
+
+  let vid = React.useRef(null);
+
+  React.useEffect(() => {
+    if (vid.current) {
+      if (isPaused) {
+        vid.current.pause();
+      } else {
+        vid.current.play().catch(() => { });
+      }
     }
+  }, [isPaused]);
 
-    let vid = React.useRef<HTMLVideoElement>(null);
+  const onWaiting = () => {
+    action("pause", true);
+  }
 
-    React.useEffect(() => {
-        if (vid.current) {
-            if (isPaused) {
-                vid.current.pause();
-            } else {
-                vid.current.play().catch(() => { });
-            }
-        }
-    }, [isPaused]);
+  const onPlaying = () => {
+    action("play", true);
+  }
 
-    const onWaiting = () => {
-        action("pause", true);
-    }
+  const videoLoaded = () => {
+    messageHandler('UPDATE_VIDEO_DURATION', { duration: vid.current.duration });
+    setLoaded(true);
+    vid.current.play().then(() => {
+      action('play');
+    }).catch(() => {
+      setMuted(true);
+      vid.current.play().finally(() => {
+        action('play');
+      })
+    });
+  }
 
-    const onPlaying = () => {
-        action("play", true);
-    }
-
-    const videoLoaded = () => {
-        messageHandler('UPDATE_VIDEO_DURATION', { duration: vid.current.duration });
-        setLoaded(true);
-        vid.current.play().then(() => {
-            action('play');
-        }).catch(() => {
-            setMuted(true);
-            vid.current.play().finally(() => {
-                action('play');
-            })
-        });
-    }
-
-    return <WithHeader story={story} globalHeader={config.header}>
-        <WithSeeMore story={story} action={action}>
-            <div style={styles.videoContainer}>
-                <video
-                    ref={vid}
-                    style={computedStyles}
-                    src={story.url}
-                    controls={false}
-                    onLoadedData={videoLoaded}
-                    playsInline
-                    onWaiting={onWaiting}
-                    onPlaying={onPlaying}
-                    muted={muted}
-                    autoPlay
-                    webkit-playsinline="true"
-                />
-                {!loaded && (
-                    <div
-                        style={{
-                            width: width,
-                            height: height,
-                            position: "absolute",
-                            left: 0,
-                            top: 0,
-                            background: "rgba(0, 0, 0, 0.9)",
-                            zIndex: 9,
-                            display: "flex",
-                            justifyContent: "center",
-                            alignItems: "center",
-                            color: "#ccc"
-                        }}
-                    >
-                        {loader || <Spinner />}
-                    </div>
-                )}
-            </div>
-        </WithSeeMore>
-    </WithHeader>
+  return <WithHeader story={story} globalHeader={config.header}>
+    <WithSeeMore story={story} action={action}>
+      <View style={styles.videoContainer as StyleProp<ViewStyle>}>
+        <Video
+          ref={ref => (vid.current = ref)}
+          style={computedStyles}
+          source={{ uri: story.url }}
+          controls={false}
+          onVideoLoad={videoLoaded}
+          onVideoBuffer={onWaiting}
+          onVideoProgress={onPlaying}
+        />
+        {!loaded && (
+          <View
+            style={{
+              width: width,
+              height: height,
+              position: "absolute",
+              left: 0,
+              top: 0,
+              backgroundColor: "rgba(0, 0, 0, 0.9)",
+              zIndex: 9,
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+          >
+            {loader || <Spinner />}
+          </View>
+        )}
+      </View>
+    </WithSeeMore>
+  </WithHeader>
 }
 
 const styles = {
-    storyContent: {
-        width: "auto",
-        maxWidth: "100%",
-        maxHeight: "100%",
-        margin: "auto"
-    },
-    videoContainer: {
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center'
-    }
+  storyContent: {
+    width: "auto",
+    maxWidth: "100%",
+    maxHeight: "100%",
+    margin: "auto"
+  },
+  videoContainer: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center'
+  }
 };
 
 export const tester: Tester = (story) => {
-    return {
-        condition: story.type === 'video',
-        priority: 2
-    }
+  return {
+    condition: story.type === 'video',
+    priority: 2
+  }
 }
 
 export default {
-    renderer,
-    tester
+  renderer,
+  tester
 }
