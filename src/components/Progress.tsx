@@ -30,11 +30,12 @@ export default (props: ProgressProps) => {
 
 const styles: any = {
     inner: {
-        background: '#fff',
+        background: '#E0E0E0',
         height: '100%',
         maxWidth: '100%',
         borderRadius: 2,
         transformOrigin: 'center left',
+        border: 'none',
 
         WebkitBackfaceVisibility: 'hidden',
         MozBackfaceVisibility: 'hidden',
