@@ -15,7 +15,7 @@ export default function () {
     let mousedownId = useRef<any>();
     let isMounted = useRef<boolean>(true);
 
-    const { width, height, loop, currentIndex, isPaused, keyboardNavigation, preventDefault, storyContainerStyles = {} } = useContext<GlobalCtx>(GlobalContext);
+    const { loop, currentIndex, isPaused, keyboardNavigation, preventDefault, storyContainerStyles = {} } = useContext<GlobalCtx>(GlobalContext);
     const { stories } = useContext<StoriesContextInterface>(StoriesContext);
 
     useEffect(() => {
@@ -117,7 +117,7 @@ export default function () {
     }
 
     return (
-        <div style={{ ...storyContainerStyles, ...styles.container, ...{ width, height } }}>
+        <div style={{ ...storyContainerStyles, ...styles.container }}>
             <ProgressContext.Provider value={{
                 bufferAction: bufferAction,
                 videoDuration: videoDuration,
@@ -146,8 +146,14 @@ const styles = {
     container: {
         display: 'flex',
         flexDirection: 'column',
-        background: '#111',
-        position: 'relative'
+        background: 'transparent',
+        position: 'relative',
+        width: '100vw',
+        height: "100%",
+        "@media (min-width: 480px)" : {
+            width: 375,
+            maxHeight: 667,
+        }
     },
     overlay: {
         position: 'absolute',
