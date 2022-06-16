@@ -52,7 +52,7 @@
 		"webpack-dev-server": "^3.8.1"
 	},
 	"peerDependencies": {
-		"react": "^16.8.2"
+		"react": "^16.8.2 || 17.x || 18.x"
 	},
 	"dependencies": {}
 }
