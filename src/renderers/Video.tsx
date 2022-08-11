@@ -134,6 +134,7 @@ const styles = {
     justifyContent: "space-around",
     zIndex: 1000,
     height: "128px",
+    border: "solid 5px orange",
   },
 };
 
