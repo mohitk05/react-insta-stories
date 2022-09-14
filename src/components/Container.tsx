@@ -15,7 +15,7 @@ export default function () {
     let mousedownId = useRef<any>();
     let isMounted = useRef<boolean>(true);
 
-    const { width, height, loop, currentIndex, isPaused, keyboardNavigation, preventDefault, storyContainerStyles = {} } = useContext<GlobalCtx>(GlobalContext);
+    const { width, height, loop, currentIndex, isPaused, keyboardNavigation, preventDefault, storyContainerStyles = {}, onAllStoriesEnd } = useContext<GlobalCtx>(GlobalContext);
     const { stories } = useContext<StoriesContextInterface>(StoriesContext);
 
     useEffect(() => {
@@ -91,6 +91,7 @@ export default function () {
     const updateNextStoryId = () => {
         setCurrentIdWrapper(prev => {
             if (prev < stories.length - 1) return prev + 1
+            onAllStoriesEnd && onAllStoriesEnd(currentId, stories)
             return prev
         })
     }
