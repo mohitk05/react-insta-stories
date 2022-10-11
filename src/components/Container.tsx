@@ -117,7 +117,7 @@ export default function () {
     }
 
     return (
-        <div style={{ ...storyContainerStyles, ...styles.container, ...{ width, height } }}>
+        <div style={{ ...styles.container, ...storyContainerStyles, ...{ width, height } }}>
             <ProgressContext.Provider value={{
                 bufferAction: bufferAction,
                 videoDuration: videoDuration,
