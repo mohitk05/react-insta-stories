@@ -19,6 +19,8 @@ export default function () {
     const { stories } = useContext<StoriesContextInterface>(StoriesContext);
 
     useEffect(() => {
+        console.log(currentIndex);
+        
         if (typeof currentIndex === 'number') {
             if (currentIndex >= 0 && currentIndex < stories.length) {
                 setCurrentIdWrapper(() => currentIndex)
