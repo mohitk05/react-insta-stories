@@ -19,8 +19,6 @@ export default function () {
     const { stories } = useContext<StoriesContextInterface>(StoriesContext);
 
     useEffect(() => {
-        console.log(currentIndex);
-        
         if (typeof currentIndex === 'number') {
             if (currentIndex >= 0 && currentIndex < stories.length) {
                 setCurrentIdWrapper(() => currentIndex)
@@ -68,8 +66,6 @@ export default function () {
     }
 
     const setCurrentIdWrapper = (callback) => {
-        console.log(callback, currentId,
-            currentIndex);
         setCurrentId(callback);
         toggleState('pause', true);
     }
