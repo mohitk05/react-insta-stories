@@ -72,7 +72,7 @@ export default function () {
 
     const previous = () => {
         const pressedPreviousButtonWhileFirstStory = currentId === 0;
-        pressedPreviousButtonWhileFirstStory && onAllStoriesEnd && onAllStoriesEnd(currentId, stories)
+        pressedPreviousButtonWhileFirstStory && onAllStoriesEnd && onAllStoriesEnd()
         setCurrentIdWrapper(prev => prev > 0 ? prev - 1 : prev)
     }
 
@@ -93,7 +93,7 @@ export default function () {
     const updateNextStoryId = () => {
         setCurrentIdWrapper(prev => {
             if (prev < stories.length - 1) return prev + 1
-            onAllStoriesEnd && onAllStoriesEnd(currentId, stories)
+            onAllStoriesEnd && onAllStoriesEnd(true)
             return prev
         })
     }
