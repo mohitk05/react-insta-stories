@@ -72,7 +72,7 @@ export default function () {
 
     const previous = () => {
         const pressedPreviousButtonWhileFirstStory = currentId === 0;
-        console.log(pressedPreviousButtonWhileFirstStory, currentId);
+        pressedPreviousButtonWhileFirstStory && onAllStoriesEnd && onAllStoriesEnd(currentId, stories)
         setCurrentIdWrapper(prev => prev > 0 ? prev - 1 : prev)
     }
 
