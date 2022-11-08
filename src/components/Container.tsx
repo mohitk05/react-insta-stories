@@ -66,8 +66,6 @@ export default function () {
     }
 
     const setCurrentIdWrapper = (callback) => {
-        console.log(callback, currentId,
-            currentIndex);
         setCurrentId(callback);
         toggleState('pause', true);
     }
