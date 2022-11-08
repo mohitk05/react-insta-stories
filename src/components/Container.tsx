@@ -71,7 +71,8 @@ export default function () {
     }
 
     const previous = () => {
-        console.log("previous-test")
+        const pressedPreviousButtonWhileFirstStory = currentIndex === 0;
+        console.log(pressedPreviousButtonWhileFirstStory, currentIndex);
         setCurrentIdWrapper(prev => prev > 0 ? prev - 1 : prev)
     }
 
