@@ -71,7 +71,7 @@ export default function () {
     }
 
     const previous = () => {
-        console.log("previous")
+        console.log("previous-test")
         setCurrentIdWrapper(prev => prev > 0 ? prev - 1 : prev)
     }
 
