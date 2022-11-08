@@ -19,6 +19,7 @@ export default function () {
     const { stories } = useContext<StoriesContextInterface>(StoriesContext);
 
     useEffect(() => {
+        console.log(currentIndex);
         if (typeof currentIndex === 'number') {
             if (currentIndex >= 0 && currentIndex < stories.length) {
                 setCurrentIdWrapper(() => currentIndex)
@@ -71,8 +72,6 @@ export default function () {
     }
 
     const previous = () => {
-        const pressedPreviousButtonWhileFirstStory = currentIndex === 0;
-        console.log(pressedPreviousButtonWhileFirstStory, currentIndex);
         setCurrentIdWrapper(prev => prev > 0 ? prev - 1 : prev)
     }
 
