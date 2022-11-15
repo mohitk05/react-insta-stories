@@ -26,14 +26,14 @@ export default function () {
                 console.error('Index out of bounds. Current index was set to value more than the length of stories array.', currentIndex)
             }
         }
-    }, [currentIndex])
+    console.log(storyContainerStyles);
+}, [currentIndex])
 
     useEffect(() => {
         if (typeof isPaused === 'boolean') {
             setPause(isPaused)
         }
-    console.log(storyContainerStyles);
-}, [isPaused])
+    }, [isPaused])
 
     useEffect(() => {
         const isClient = (typeof window !== 'undefined' && window.document);
@@ -137,8 +137,8 @@ export default function () {
                 getVideoDuration={getVideoDuration}
             />
             {!preventDefault && <div style={styles.overlay}>
-              <div className="previous-story-button" style={{ width: '50%', zIndex: 999 }} onTouchStart={debouncePause} onTouchEnd={mouseUp('previous')} onMouseDown={debouncePause} onMouseUp={mouseUp('previous')} />
-              <div className="next-story-button" style={{ width: '50%', zIndex: 999 }} onTouchStart={debouncePause} onTouchEnd={mouseUp('next')} onMouseDown={debouncePause} onMouseUp={mouseUp('next')} />
+                <div className="previous-story-button" style={{ width: '50%', zIndex: 999 }} onTouchStart={debouncePause} onTouchEnd={mouseUp('previous')} onMouseDown={debouncePause} onMouseUp={mouseUp('previous')} />
+                <div className="next-story-button" style={{ width: '50%', zIndex: 999 }} onTouchStart={debouncePause} onTouchEnd={mouseUp('next')} onMouseDown={debouncePause} onMouseUp={mouseUp('next')} />
             </div>}
         </div>
     )
