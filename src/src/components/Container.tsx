@@ -17,6 +17,7 @@ export default function () {
 
     const { width, height, loop, currentIndex, isPaused, keyboardNavigation, preventDefault, storyContainerStyles = {}, onAllStoriesEnd } = useContext<GlobalCtx>(GlobalContext);
     const { stories } = useContext<StoriesContextInterface>(StoriesContext);
+    console.log(storyContainerStyles);
 
     useEffect(() => {
         if (typeof currentIndex === 'number') {
