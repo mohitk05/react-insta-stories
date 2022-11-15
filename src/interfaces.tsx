@@ -43,6 +43,7 @@ export interface GlobalCtx {
     onStoryEnd?: Function;
     keyboardNavigation?: boolean;
     preventDefault?: boolean;
+    topStoriesProgressStyles?: Record<string, any>;
 }
 
 type NumberOrString = number | string;

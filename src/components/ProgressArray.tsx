@@ -8,7 +8,7 @@ import StoriesContext from './../context/Stories'
 export default () => {
     const [count, setCount] = useState<number>(0)
     const { currentId, next, videoDuration, pause } = useContext<ProgressContext>(ProgressCtx)
-    const { defaultInterval, onStoryEnd, onStoryStart, onAllStoriesEnd } = useContext<GlobalCtx>(GlobalContext);
+    const { defaultInterval, onStoryEnd, onStoryStart, onAllStoriesEnd, topStoriesProgressStyles } = useContext<GlobalCtx>(GlobalContext);
     const { stories } = useContext<StoriesContextInterface>(StoriesContext);
 
     useEffect(() => {
@@ -65,7 +65,7 @@ export default () => {
     }
 
     return (
-        <div style={styles.progressArr}>
+        <div style={{ ...styles.progressArr, ...topStoriesProgressStyles }}>
             {stories.map((_, i) =>
                 <Progress
                     key={i}
@@ -86,7 +86,7 @@ const styles = {
         position: 'absolute',
         width: '98%',
         padding: 5,
-        paddingTop: 23,
+        paddingTop: 7,
         alignSelf: 'center',
         zIndex: 1001,
         filter: 'drop-shadow(0 1px 8px #222)'

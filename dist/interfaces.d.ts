@@ -41,6 +41,7 @@ export interface GlobalCtx {
     onStoryEnd?: Function;
     keyboardNavigation?: boolean;
     preventDefault?: boolean;
+    topStoriesProgressStyles?: Record<string, any>;
 }
 declare type NumberOrString = number | string;
 export interface StoriesContext {
