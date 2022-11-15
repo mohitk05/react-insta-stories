@@ -26,8 +26,7 @@ export default function () {
                 console.error('Index out of bounds. Current index was set to value more than the length of stories array.', currentIndex)
             }
         }
-    console.log(storyContainerStyles);
-}, [currentIndex])
+    }, [currentIndex])
 
     useEffect(() => {
         if (typeof isPaused === 'boolean') {
