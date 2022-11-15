@@ -17,7 +17,6 @@ export default function () {
 
     const { width, height, loop, currentIndex, isPaused, keyboardNavigation, preventDefault, storyContainerStyles = {}, onAllStoriesEnd } = useContext<GlobalCtx>(GlobalContext);
     const { stories } = useContext<StoriesContextInterface>(StoriesContext);
-    console.log(storyContainerStyles);
 
     useEffect(() => {
         if (typeof currentIndex === 'number') {
@@ -33,7 +32,8 @@ export default function () {
         if (typeof isPaused === 'boolean') {
             setPause(isPaused)
         }
-    }, [isPaused])
+    console.log(storyContainerStyles);
+}, [isPaused])
 
     useEffect(() => {
         const isClient = (typeof window !== 'undefined' && window.document);
