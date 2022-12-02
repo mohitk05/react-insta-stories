@@ -1,10 +1,12 @@
 import * as React from 'react';
 import { Renderer, Tester } from './../interfaces';
 
-export const renderer: Renderer = ({ story, action }) => {
+export const renderer: Renderer = ({ story, action, isPaused }) => {
     React.useEffect(() => {
-        action('play');
-    }, [story])
+        if (!isPaused) {
+            action('play');
+        }
+    }, [story, isPaused])
 
     return <div style={styles.storyContent}>
         <p style={styles.text}>This story could not be loaded.</p>
