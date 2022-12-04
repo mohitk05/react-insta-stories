@@ -136,6 +136,7 @@ export default function () {
                 playState={pause}
                 story={stories[currentId]}
                 getVideoDuration={getVideoDuration}
+                pausePlayFunctions={{ debouncePause, mouseUp }}
             />
             {!preventDefault && <div style={styles.overlay}>
                 <div className="previous-story-button" style={{ width: '50%', zIndex: 999 }} onTouchStart={debouncePause} onTouchEnd={mouseUp('previous')} onMouseDown={debouncePause} onMouseUp={mouseUp('previous')} />
