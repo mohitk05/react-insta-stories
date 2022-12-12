@@ -6,6 +6,9 @@ import GlobalContext from './../context/Global'
 import StoriesContext from './../context/Stories'
 
 export default () => {
+    let animationFrameId = useRef<number>()
+    const pauseRef = useRef(false);
+
     const [count, setCount] = useState<number>(0)
     const { currentId, next, videoDuration, pause } = useContext<ProgressContext>(ProgressCtx)
     const { defaultInterval, onStoryEnd, onStoryStart, onAllStoriesEnd } = useContext<GlobalCtx>(GlobalContext);
@@ -16,6 +19,7 @@ export default () => {
     }, [currentId, stories])
 
     useEffect(() => {
+        pauseRef.current = pause
         if (!pause) {
             animationFrameId.current = requestAnimationFrame(incrementCount)
         }
@@ -24,11 +28,10 @@ export default () => {
         }
     }, [currentId, pause])
 
-    let animationFrameId = useRef<number>()
-
     let countCopy = count;
     const incrementCount = () => {
         if (countCopy === 0) storyStartCallback()
+        if (pauseRef.current) return
         setCount((count: number) => {
             const interval = getCurrentInterval()
             countCopy = count + (100 / ((interval / 1000) * 60))
@@ -65,13 +68,13 @@ export default () => {
     }
 
     return (
-        <div style={styles.progressArr}>
+        <div style={{...styles.progressArr, filter: !pauseRef.current ?'drop-shadow(0 1px 8px #222)': 'none'}}>
             {stories.map((_, i) =>
                 <Progress
-                    key={i}
-                    count={count}
-                    width={1 / stories.length}
-                    active={i === currentId ? 1 : (i < currentId ? 2 : 0)}
+                key={i}
+                count={count}
+                width={1 / stories.length}
+                active={i === currentId ? 1 : (i < currentId ? 2 : 0)}
                 />)}
         </div>
     )
@@ -89,6 +92,5 @@ const styles = {
         paddingTop: 7,
         alignSelf: 'center',
         zIndex: 1001,
-        filter: 'drop-shadow(0 1px 8px #222)'
     }
 }
