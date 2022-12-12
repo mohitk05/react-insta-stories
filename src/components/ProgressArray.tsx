@@ -71,10 +71,10 @@ export default () => {
         <div style={{...styles.progressArr, filter: !pauseRef.current ?'drop-shadow(0 1px 8px #222)': 'none'}}>
             {stories.map((_, i) =>
                 <Progress
-                key={i}
-                count={count}
-                width={1 / stories.length}
-                active={i === currentId ? 1 : (i < currentId ? 2 : 0)}
+                    key={i}
+                    count={count}
+                    width={1 / stories.length}
+                    active={i === currentId ? 1 : (i < currentId ? 2 : 0)}
                 />)}
         </div>
     )
