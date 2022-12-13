@@ -1,4 +1,4 @@
-import React, { useContext, useState, useRef, useEffect } from 'react'
+import React, { useContext, useState, useRef, useEffect, MouseEvent, TouchEvent } from 'react'
 import GlobalContext from './../context/Global'
 import StoriesContext from './../context/Stories'
 import ProgressContext from './../context/Progress'
@@ -51,6 +51,11 @@ export default function () {
         }
     }, []);
 
+    function isTouchDevice() {
+        return 'ontouchstart' in window        // works on most browsers
+            || navigator.maxTouchPoints;       // works on IE10/11 and Surface
+    }
+
     const handleKeyDown = (e: KeyboardEvent) => {
         if (e.key === 'ArrowLeft') {
             previous()
@@ -93,14 +98,22 @@ export default function () {
         }
     }
 
-    const debouncePause = (e: React.MouseEvent | React.TouchEvent) => {
+    const debouncePause = (e: MouseEvent | TouchEvent) => {
+        if (isTouchDevice() && e.nativeEvent instanceof MouseEvent) {
+            return
+        }
+
         e.preventDefault()
         mousedownId.current = setTimeout(() => {
             toggleState('pause')
         }, 200)
     }
 
-    const mouseUp = (type: string) => (e: React.MouseEvent | React.TouchEvent) => {
+    const mouseUp = (type: string) => (e: MouseEvent | TouchEvent) => {
+        if (isTouchDevice() && e.nativeEvent instanceof MouseEvent) {
+            return
+        }
+
         e.preventDefault()
         mousedownId.current && clearTimeout(mousedownId.current)
         if (pause) {

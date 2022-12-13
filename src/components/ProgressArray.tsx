@@ -31,7 +31,7 @@ export default () => {
     let countCopy = count;
     const incrementCount = () => {
         if (countCopy === 0) storyStartCallback()
-        if (pauseRef.current) return
+        if (pauseRef.current) return 
         setCount((count: number) => {
             const interval = getCurrentInterval()
             countCopy = count + (100 / ((interval / 1000) * 60))
@@ -68,14 +68,14 @@ export default () => {
     }
 
     return (
-        <div style={{...styles.progressArr, filter: !pauseRef.current ?'drop-shadow(0 1px 8px #222)': 'none'}}>
+        <div style={{...styles.progressArr}}>
             {stories.map((_, i) =>
                 <Progress
                     key={i}
                     count={count}
                     width={1 / stories.length}
                     active={i === currentId ? 1 : (i < currentId ? 2 : 0)}
-                />)}
+                    />)}
         </div>
     )
 }
