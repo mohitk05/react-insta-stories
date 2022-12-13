@@ -14,7 +14,6 @@ export default function () {
 
     let mousedownId = useRef<any>();
     let isMounted = useRef<boolean>(true);
-    let pauseRef = useRef(false);
 
     const { width, height, loop, currentIndex, isPaused, keyboardNavigation, preventDefault, storyContainerStyles = {}, onAllStoriesEnd } = useContext<GlobalCtx>(GlobalContext);
     const { stories } = useContext<StoriesContextInterface>(StoriesContext);
@@ -34,10 +33,6 @@ export default function () {
             setPause(isPaused)
         }
     }, [isPaused])
-
-    useEffect(() => {
-        pauseRef.current = pause
-    }, [pause])
 
     useEffect(() => {
         const isClient = (typeof window !== 'undefined' && window.document);
@@ -121,7 +116,7 @@ export default function () {
 
         e.preventDefault()
         mousedownId.current && clearTimeout(mousedownId.current)
-        if (pauseRef.current) {
+        if (pause) {
             toggleState('play')
         } else {
             type === 'next' ? next() : previous()
@@ -138,7 +133,7 @@ export default function () {
                 bufferAction: bufferAction,
                 videoDuration: videoDuration,
                 currentId,
-                pause: pause || isPaused,
+                pause: pause,
                 next
             }}>
                 <ProgressArray />
@@ -146,7 +141,7 @@ export default function () {
             <Story
                 action={toggleState}
                 bufferAction={bufferAction}
-                playState={pause || isPaused}
+                playState={pause}
                 story={stories[currentId]}
                 getVideoDuration={getVideoDuration}
             />
