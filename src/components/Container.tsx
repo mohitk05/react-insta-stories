@@ -31,11 +31,6 @@ export default function () {
     storyContainerStyles = {},
   } = useContext<GlobalCtx>(GlobalContext);
   const { stories } = useContext<StoriesContextInterface>(StoriesContext);
-  console.log(
-    "🚀 ~ file: Container.tsx:34 ~ stories",
-    stories,
-    stories[currentId]
-  );
 
   useEffect(() => {
     if (typeof currentIndex === "number") {
@@ -178,8 +173,10 @@ export default function () {
             onMouseDown={debouncePause}
             onMouseUp={mouseUp("previous")}
           >
-            <RenderIf condition={true}>
-              <NavigatePrev onPrev={() => mouseUp("previous")} />
+            <RenderIf condition={currentId != 0}>
+              <RenderIf condition={stories.length != 1}>
+                <NavigatePrev onPrev={() => mouseUp("previous")} />
+              </RenderIf>
             </RenderIf>
           </div>
           <div
@@ -189,8 +186,10 @@ export default function () {
             onMouseDown={debouncePause}
             onMouseUp={mouseUp("next")}
           >
-            <RenderIf condition={true}>
-              <NavigateNext onNext={() => mouseUp("next")} />
+            <RenderIf condition={currentId != stories.length - 1}>
+              <RenderIf condition={stories.length != 1}>
+                <NavigateNext onNext={() => mouseUp("next")} />
+              </RenderIf>
             </RenderIf>
           </div>
         </div>

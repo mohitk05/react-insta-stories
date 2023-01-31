@@ -183,7 +183,7 @@ function App() {
           loop
           keyboardNavigation
           defaultInterval={8000}
-          stories={stories2.splice(0, 1)}
+          stories={stories2}
           onStoryEnd={(s, st) => console.log("story ended", s, st)}
           onAllStoriesEnd={(s, st) => console.log("all stories ended", s, st)}
           onStoryStart={(s, st) => console.log("story started", s, st)}
