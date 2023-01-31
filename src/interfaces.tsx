@@ -113,6 +113,7 @@ export interface Header {
   heading: string;
   subheading: string;
   profileImage: string;
+  onHeadPress?(): void;
 }
 
 export interface SeeMoreProps {

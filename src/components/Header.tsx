@@ -1,13 +1,8 @@
 import React from "react";
 import { HeaderProps } from "./../interfaces";
 
-const Header = ({
-  profileImage,
-  heading,
-  subheading,
-  onHeadPress,
-}: HeaderProps) => (
-  <div style={styles.main} onClick={onHeadPress}>
+const Header = ({ profileImage, heading, subheading }: HeaderProps) => (
+  <div style={styles.main}>
     {profileImage && <img style={styles.img} src={profileImage} />}
     <span style={styles.text}>
       <p style={styles.heading}>{heading}</p>

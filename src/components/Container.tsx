@@ -213,7 +213,7 @@ const styles = {
   },
   nav: {
     width: "50%",
-    zIndex: 999,
+    zIndex: 900,
     display: "flex",
     alignItems: "center",
     padding: "0.5rem",

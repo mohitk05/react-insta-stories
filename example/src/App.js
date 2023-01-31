@@ -215,7 +215,23 @@ const Story2 = ({ action, isPaused }) => {
   );
 };
 
+const handleHeaderNavigate = () => {
+  console.log("handleHeaderNavigate clicked");
+};
+
 const stories2 = [
+  {
+    header: {
+      heading: "hello everyone",
+      subheading: "Possibilities are endless, like here - here's a code block!",
+      onHeadPress: handleHeaderNavigate,
+      profileImage:
+        "https://images.unsplash.com/photo-1565506737357-af89222625ad?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1650&q=80",
+    },
+    url:
+      "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4",
+    type: "video",
+  },
   {
     content: ({ action, isPaused }) => {
       return (
