@@ -1,4 +1,4 @@
-import React, { useContext, useState, useRef, useEffect } from 'react'
+import React, { useContext, useState, useRef, useEffect, MouseEvent, TouchEvent } from 'react'
 import GlobalContext from './../context/Global'
 import StoriesContext from './../context/Stories'
 import ProgressContext from './../context/Progress'
@@ -15,13 +15,13 @@ export default function () {
     let mousedownId = useRef<any>();
     let isMounted = useRef<boolean>(true);
 
-    const { width, height, loop, currentIndex, isPaused, keyboardNavigation, preventDefault, storyContainerStyles = {} } = useContext<GlobalCtx>(GlobalContext);
+    const { width, height, loop, currentIndex, isPaused, keyboardNavigation, preventDefault, storyContainerStyles = {}, onAllStoriesEnd } = useContext<GlobalCtx>(GlobalContext);
     const { stories } = useContext<StoriesContextInterface>(StoriesContext);
 
     useEffect(() => {
         if (typeof currentIndex === 'number') {
             if (currentIndex >= 0 && currentIndex < stories.length) {
-                setCurrentIdWrapper(() => currentIndex)
+                setCurrentId(() => currentIndex)
             } else {
                 console.error('Index out of bounds. Current index was set to value more than the length of stories array.', currentIndex)
             }
@@ -51,6 +51,11 @@ export default function () {
         }
     }, []);
 
+    function isTouchDevice() {
+        return 'ontouchstart' in window        // works on most browsers
+            || navigator.maxTouchPoints;       // works on IE10/11 and Surface
+    }
+
     const handleKeyDown = (e: KeyboardEvent) => {
         if (e.key === 'ArrowLeft') {
             previous()
@@ -65,13 +70,10 @@ export default function () {
         setBufferAction(!!bufferAction)
     }
 
-    const setCurrentIdWrapper = (callback) => {
-        setCurrentId(callback);
-        toggleState('pause', true);
-    }
-
     const previous = () => {
-        setCurrentIdWrapper(prev => prev > 0 ? prev - 1 : prev)
+        if(currentId !== 0){
+            setCurrentId(prev =>  prev - 1)
+        }
     }
 
     const next = () => {
@@ -85,24 +87,33 @@ export default function () {
     };
 
     const updateNextStoryIdForLoop = () => {
-        setCurrentIdWrapper(prev => (prev + 1) % stories.length)
+        setCurrentId(prev => (prev + 1) % stories.length)
     }
 
     const updateNextStoryId = () => {
-        setCurrentIdWrapper(prev => {
-            if (prev < stories.length - 1) return prev + 1
-            return prev
-        })
+        if(currentId < stories.length - 1){
+            setCurrentId(prev => prev + 1)
+        } else{
+            onAllStoriesEnd()
+        }
     }
 
-    const debouncePause = (e: React.MouseEvent | React.TouchEvent) => {
+    const debouncePause = (e: MouseEvent | TouchEvent) => {
+        if (isTouchDevice() && e.nativeEvent instanceof MouseEvent) {
+            return
+        }
+
         e.preventDefault()
         mousedownId.current = setTimeout(() => {
             toggleState('pause')
         }, 200)
     }
 
-    const mouseUp = (type: string) => (e: React.MouseEvent | React.TouchEvent) => {
+    const mouseUp = (type: string) => (e: MouseEvent | TouchEvent) => {
+        if (isTouchDevice() && e.nativeEvent instanceof MouseEvent) {
+            return
+        }
+
         e.preventDefault()
         mousedownId.current && clearTimeout(mousedownId.current)
         if (pause) {

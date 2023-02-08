@@ -1,8 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './App.css';
 import Stories, { WithSeeMore } from 'react-insta-stories'
 
 function App() {
+	const [pause, setPause] = useState(false)
+
 	return (
 		<div className="App">
 			<div className="left">
@@ -64,11 +66,15 @@ function App() {
 					keyboardNavigation
 					defaultInterval={8000}
 					stories={stories2}
+					isPaused={pause}
 					onStoryEnd={(s, st) => console.log('story ended', s, st)}
 					onAllStoriesEnd={(s, st) => console.log('all stories ended', s, st)}
 					onStoryStart={(s, st) => console.log('story started', s, st)}
 					storyContainerStyles={{ borderRadius: 8, overflow: 'hidden' }}
 				/>
+			</div>
+			<div>
+				<button onClick={() => setPause(prev => !prev)}>{pause ? 'Resume' : 'Pause'} Story</button>
 			</div>
 		</div>
 	);
