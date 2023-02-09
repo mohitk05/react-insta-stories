@@ -39,8 +39,8 @@ export interface GlobalCtx {
         tester: Tester
     }[];
     onAllStoriesEnd?: Function;
-    onStoryStart?: Function;
-    onStoryEnd?: Function;
+    onStoryStart?(index: number, story: Story): void;
+    onStoryEnd?(index: number, story: Story): void;
     keyboardNavigation?: boolean;
     preventDefault?: boolean;
 }
