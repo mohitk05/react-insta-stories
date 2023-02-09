@@ -7,6 +7,7 @@ import StoriesContext from './../context/Stories'
 
 export default () => {
     const [count, setCount] = useState<number>(0)
+    const inteveralStarted = useRef<boolean>(true)
     const { currentId, next, videoDuration, pause } = useContext<ProgressContext>(ProgressCtx)
     const { defaultInterval, onStoryEnd, onStoryStart, onAllStoriesEnd } = useContext<GlobalCtx>(GlobalContext);
     const { stories } = useContext<StoriesContextInterface>(StoriesContext);
@@ -24,11 +25,18 @@ export default () => {
         }
     }, [currentId, pause])
 
+    useEffect(() => {
+        storyStartCallback()
+    }, [])
+
     let animationFrameId = useRef<number>()
 
     let countCopy = count;
     const incrementCount = () => {
-        if (countCopy === 0) storyStartCallback()
+        if (!inteveralStarted.current) {
+            inteveralStarted.current = true
+            storyStartCallback()
+        }
         setCount((count: number) => {
             const interval = getCurrentInterval()
             countCopy = count + (100 / ((interval / 1000) * 60))
@@ -37,6 +45,7 @@ export default () => {
         if (countCopy < 100) {
             animationFrameId.current = requestAnimationFrame(incrementCount)
         } else {
+            inteveralStarted.current = false
             storyEndCallback();
             if (currentId === stories.length - 1) {
                 allStoriesEndCallback();
