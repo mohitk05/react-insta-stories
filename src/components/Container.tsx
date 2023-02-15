@@ -15,7 +15,7 @@ export default function () {
     let mousedownId = useRef<any>();
     let isMounted = useRef<boolean>(true);
 
-    const { width, height, loop, currentIndex, isPaused, keyboardNavigation, preventDefault, storyContainerStyles = {} } = useContext<GlobalCtx>(GlobalContext);
+    const { width, height, loop, currentIndex, isPaused, keyboardNavigation, preventDefault, storyContainerStyles = {}, onAllStoriesEnd } = useContext<GlobalCtx>(GlobalContext);
     const { stories } = useContext<StoriesContextInterface>(StoriesContext);
 
     useEffect(() => {
@@ -71,6 +71,8 @@ export default function () {
     }
 
     const previous = () => {
+        const pressedPreviousButtonWhileFirstStory = currentId === 0;
+        pressedPreviousButtonWhileFirstStory && onAllStoriesEnd && onAllStoriesEnd()
         setCurrentIdWrapper(prev => prev > 0 ? prev - 1 : prev)
     }
 
@@ -91,6 +93,7 @@ export default function () {
     const updateNextStoryId = () => {
         setCurrentIdWrapper(prev => {
             if (prev < stories.length - 1) return prev + 1
+            onAllStoriesEnd && onAllStoriesEnd(true)
             return prev
         })
     }
@@ -133,10 +136,11 @@ export default function () {
                 playState={pause}
                 story={stories[currentId]}
                 getVideoDuration={getVideoDuration}
+                pausePlayFunctions={{ debouncePause, mouseUp }}
             />
             {!preventDefault && <div style={styles.overlay}>
-              <div style={{ width: '50%', zIndex: 999 }} onTouchStart={debouncePause} onTouchEnd={mouseUp('previous')} onMouseDown={debouncePause} onMouseUp={mouseUp('previous')} />
-              <div style={{ width: '50%', zIndex: 999 }} onTouchStart={debouncePause} onTouchEnd={mouseUp('next')} onMouseDown={debouncePause} onMouseUp={mouseUp('next')} />
+                <div className="previous-story-button" style={{ width: '50%', zIndex: 999 }} onTouchStart={debouncePause} onTouchEnd={mouseUp('previous')} onMouseDown={debouncePause} onMouseUp={mouseUp('previous')} />
+                <div className="next-story-button" style={{ width: '50%', zIndex: 999 }} onTouchStart={debouncePause} onTouchEnd={mouseUp('next')} onMouseDown={debouncePause} onMouseUp={mouseUp('next')} />
             </div>}
         </div>
     )

@@ -7,6 +7,7 @@ export interface ReactInstaStoriesProps {
     loader?: JSX.Element;
     header?: Function;
     storyContainerStyles?: Record<string, any>;
+    topStoriesProgressStyles?: Record<string, any>;
     storyStyles?: Object;
     loop?: boolean;
     defaultInterval?: number;
@@ -43,6 +44,7 @@ export interface GlobalCtx {
     onStoryEnd?: Function;
     keyboardNavigation?: boolean;
     preventDefault?: boolean;
+    topStoriesProgressStyles?: Record<string, any>;
 }
 
 type NumberOrString = number | string;
@@ -84,6 +86,10 @@ export interface StoryProps {
     playState: boolean;
     getVideoDuration: Function;
     bufferAction: boolean;
+    pausePlayFunctions: {
+        debouncePause: (e: React.MouseEvent | React.TouchEvent) => void,
+        mouseUp: (type: string) => void
+    };
 }
 
 export interface StoryState {
