@@ -103,5 +103,6 @@ const styles = {
     alignSelf: "center",
     zIndex: 1001,
     filter: "drop-shadow(0 1px 8px #222)",
+    transition: 'opacity 400ms ease-in-out'
   },
 };

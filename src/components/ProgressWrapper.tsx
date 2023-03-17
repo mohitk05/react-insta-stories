@@ -19,7 +19,6 @@ const styles = {
         background: '#555',
         margin: 2,
         borderRadius: 2,
-        transition: 'opacity 400ms ease-in-out'
     }
 }
 
