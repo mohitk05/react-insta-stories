@@ -18,6 +18,10 @@ const styles = {
         background: '#555',
         margin: 2,
         borderRadius: 2,
+        WebkitBackfaceVisibility: 'hidden' as const,
+        MozBackfaceVisibility: 'hidden' as const,
+        msBackfaceVisibility: 'hidden',
+        backfaceVisibility: 'hidden' as const,
     }
 }
 
