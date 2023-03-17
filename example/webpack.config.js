@@ -1,48 +1,47 @@
-const webpack = require('webpack');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const webpack = require("webpack");
+const HtmlWebpackPlugin = require("html-webpack-plugin");
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 module.exports = {
-    entry: './src/index.js',
-    module: {
-        rules: [
-            {
-                test: /\.(js|jsx)$/,
-                exclude: /node_modules/,
-                use: ['babel-loader']
-            },
-            {
-                test: /\.css$/i,
-                use: [
-                    MiniCssExtractPlugin.loader,
-                    {
-                        loader: 'css-loader'
-                    }
-                ],
-            }
-        ]
-    },
-    resolve: {
-        extensions: ['*', '.js', '.jsx']
-    },
-    output: {
-        path: __dirname + '/dist',
-        filename: 'bundle.js'
-    },
-    plugins: [
-        new HtmlWebpackPlugin({
-            template: __dirname + '/src/index.ejs'
-        }),
-        new MiniCssExtractPlugin(),
-        new webpack.HotModuleReplacementPlugin()
+  entry: "./src/index.js",
+  module: {
+    rules: [
+      {
+        test: /\.(js|jsx)$/,
+        exclude: /node_modules/,
+        use: ["babel-loader"],
+      },
+      {
+        test: /\.css$/i,
+        use: [
+          MiniCssExtractPlugin.loader,
+          {
+            loader: "css-loader",
+          },
+        ],
+      },
     ],
-    devServer: {
-        contentBase: './dist',
-        hot: true
+  },
+  optimization: {
+    splitChunks: {
+      chunks: "all",
     },
-    watchOptions: {
-        ignored: [
-            /node_modules([\\]+|\/)+(?!react-insta-stories)/
-        ]
-    }
+  },
+  resolve: {
+    extensions: ["*", ".js", ".jsx"],
+  },
+  output: {
+    path: __dirname + "/dist",
+    filename: "bundle.[name].js",
+  },
+  plugins: [
+    new HtmlWebpackPlugin({
+      template: __dirname + "/src/index.ejs",
+    }),
+    new MiniCssExtractPlugin(),
+    new webpack.HotModuleReplacementPlugin(),
+  ],
+  devServer: {
+    hot: true,
+  },
 };

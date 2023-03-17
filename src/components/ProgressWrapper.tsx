@@ -7,9 +7,8 @@ const ProgressWrapper = (props: ProgressWrapperProps) => (
     </div>
 )
 
-const getProgressWrapperStyle = ({ width, pause, bufferAction }) => ({
+const getProgressWrapperStyle = ({ width }) => ({
     width: `${width * 100}%`,
-    opacity: pause && !bufferAction ? 0 : 1
 })
 
 const styles = {
@@ -19,7 +18,10 @@ const styles = {
         background: '#555',
         margin: 2,
         borderRadius: 2,
-        transition: 'opacity 400ms ease-in-out'
+        WebkitBackfaceVisibility: 'hidden' as const,
+        MozBackfaceVisibility: 'hidden' as const,
+        msBackfaceVisibility: 'hidden',
+        backfaceVisibility: 'hidden' as const,
     }
 }
 
