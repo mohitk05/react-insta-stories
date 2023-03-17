@@ -14,7 +14,8 @@
 		"predeploy": "cd example && npm install && npm run build",
 		"deploy": "gh-pages -d example/dist",
 		"buildall": "npm install && webpack --mode production && cd example && npm install && npm run build",
-		"postversion": "git push && git push --tags"
+		"postversion": "git push && git push --tags",
+		"analyze-bundle": "webpack --profile --json > stats.json && webpack-bundle-analyzer stats.json --mode=static"
 	},
 	"files": [
 		"dist",
@@ -53,6 +54,7 @@
 		"ts-loader": "^9.4.2",
 		"typescript": "^4.9.5",
 		"webpack": "^5.76.2",
+		"webpack-bundle-analyzer": "^4.8.0",
 		"webpack-cli": "^5.0.1",
 		"webpack-dev-server": "^4.12.0"
 	},
