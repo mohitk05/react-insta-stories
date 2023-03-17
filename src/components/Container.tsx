@@ -109,9 +109,6 @@ export default function () {
   };
 
   const debouncePause = (e: React.MouseEvent | React.TouchEvent) => {
-    // Prevent selection on long press in Safari
-    // @ts-ignore
-    e.returnValue = false;
     e.preventDefault();
     mousedownId.current = setTimeout(() => {
       toggleState("pause");
@@ -121,9 +118,6 @@ export default function () {
   const mouseUp = (type: string) => (
     e: React.MouseEvent | React.TouchEvent
   ) => {
-    // Prevent selection on long press in Safari
-    // @ts-ignore
-    e.returnValue = false;
     e.preventDefault();
     mousedownId.current && clearTimeout(mousedownId.current);
     if (pause) {
