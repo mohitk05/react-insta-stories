@@ -11,7 +11,7 @@ import StoriesContext from "./../context/Stories";
 
 export default () => {
   const [count, setCount] = useState<number>(0);
-  const { currentId, next, videoDuration, pause } = useContext<ProgressContext>(
+  const { currentId, next, videoDuration, pause, bufferAction } = useContext<ProgressContext>(
     ProgressCtx
   );
   const {
@@ -76,8 +76,12 @@ export default () => {
     return defaultInterval;
   };
 
+  const opacityStyles = {
+    opacity: pause && !bufferAction ? 0 : 1
+  }
+
   return (
-    <div style={styles.progressArr}>
+    <div style={{ ...styles.progressArr, ...opacityStyles }}>
       {stories.map((_, i) => (
         <Progress
           key={i}
