@@ -37,21 +37,35 @@ export default () => {
 
   let animationFrameId = useRef<number>();
 
+  const startTime = Date.now();
+  let frame = 0;
+
   let countCopy = count;
+
   const incrementCount = () => {
+    frame++;
+
     if (countCopy === 0) storyStartCallback();
+
+    const time = Date.now();
+
     setCount((count: number) => {
       const interval = getCurrentInterval();
-      countCopy = count + 100 / ((interval / 1000) * 60);
-      return count + 100 / ((interval / 1000) * 60);
+      const fps = frame / ((time - startTime) / 1000);
+
+      countCopy = count + 100 / ((interval / 1000) * fps);
+      return count + 100 / ((interval / 1000) * fps);
     });
+
     if (countCopy < 100) {
       animationFrameId.current = requestAnimationFrame(incrementCount);
     } else {
       storyEndCallback();
+
       if (currentId === stories.length - 1) {
         allStoriesEndCallback();
       }
+
       cancelAnimationFrame(animationFrameId.current);
       next();
     }
