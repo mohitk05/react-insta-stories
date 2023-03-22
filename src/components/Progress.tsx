@@ -5,7 +5,7 @@ import GlobalContext from "./../context/Global";
 import ProgressCtx from './../context/Progress'
 
 export default (props: ProgressProps) => {
-    const { progressWrapperStyles } = useContext<GlobalCtx>(GlobalContext);
+    const { progressStyles } = useContext<GlobalCtx>(GlobalContext);
     const { bufferAction, pause } = useContext<ProgressContext>(ProgressCtx)
 
     const getProgressStyle = ({ active }) => {
@@ -27,7 +27,7 @@ export default (props: ProgressProps) => {
             <div
                 style={{ 
                     ...styles.inner,
-                    ...progressWrapperStyles,
+                    ...progressStyles,
                     ...getProgressStyle({ active }),
                 }} />
         </ProgressWrapper>

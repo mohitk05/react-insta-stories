@@ -3,12 +3,12 @@ import { ProgressWrapperProps, GlobalCtx } from './../interfaces'
 import GlobalContext from "./../context/Global";
 
 const ProgressWrapper = (props: ProgressWrapperProps) => {
-    const globalContext = useContext<GlobalCtx>(GlobalContext);
+    const { progressWrapperStyles } = useContext<GlobalCtx>(GlobalContext);
 
     return (
         <div style={{
             ...styles.progress, 
-            ...globalContext.progressStyles, 
+            ...progressWrapperStyles, 
             ...getProgressWrapperStyle(props) 
         }}>
             {props.children}
