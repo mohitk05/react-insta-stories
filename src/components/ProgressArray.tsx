@@ -19,6 +19,7 @@ export default () => {
     onStoryEnd,
     onStoryStart,
     onAllStoriesEnd,
+    progressContainerStyles,
   } = useContext<GlobalCtx>(GlobalContext);
   const { stories } = useContext<StoriesContextInterface>(StoriesContext);
 
@@ -81,7 +82,11 @@ export default () => {
   }
 
   return (
-    <div style={{ ...styles.progressArr, ...opacityStyles }}>
+    <div style={{ 
+      ...styles.progressArr,
+      ...progressContainerStyles, 
+      ...opacityStyles 
+    }}>
       {stories.map((_, i) => (
         <Progress
           key={i}

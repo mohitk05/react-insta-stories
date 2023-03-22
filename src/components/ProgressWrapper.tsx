@@ -1,11 +1,20 @@
-import React from 'react'
-import { ProgressWrapperProps } from './../interfaces'
+import React, { useContext } from 'react'
+import { ProgressWrapperProps, GlobalCtx } from './../interfaces'
+import GlobalContext from "./../context/Global";
 
-const ProgressWrapper = (props: ProgressWrapperProps) => (
-    <div style={{ ...styles.progress, ...getProgressWrapperStyle(props) }}>
-        {props.children}
-    </div>
-)
+const ProgressWrapper = (props: ProgressWrapperProps) => {
+    const globalContext = useContext<GlobalCtx>(GlobalContext);
+
+    return (
+        <div style={{
+            ...styles.progress, 
+            ...globalContext.progressStyles, 
+            ...getProgressWrapperStyle(props) 
+        }}>
+            {props.children}
+        </div>
+    )
+}
 
 const getProgressWrapperStyle = ({ width }) => ({
     width: `${width * 100}%`,

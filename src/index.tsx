@@ -17,6 +17,8 @@ const ReactInstaStories = function (props: ReactInstaStoriesProps) {
         header: props.header,
         storyContainerStyles: props.storyContainerStyles,
         storyStyles: props.storyStyles,
+        progressContainerStyles: props.progressContainerStyles,
+        progressStyles: props.progressStyles,
         loop: props.loop,
         defaultInterval: props.defaultInterval,
         isPaused: props.isPaused,
