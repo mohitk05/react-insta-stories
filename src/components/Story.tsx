@@ -5,7 +5,14 @@ import GlobalContext from "./../context/Global";
 const Story = (props: StoryProps) => {
   const globalContext = useContext<GlobalCtx>(GlobalContext);
 
-  const { width, height, loader, header, storyStyles } = globalContext;
+  const {
+    width,
+    height,
+    loader,
+    header,
+    storyStyles,
+    storyInnerContainerStyles = {},
+  } = globalContext;
 
   const rendererMessageHandler = (type: string, data: any) => {
     switch (type) {
@@ -30,7 +37,14 @@ const Story = (props: StoryProps) => {
   };
 
   return (
-    <div style={{ ...styles.story, width: width, height: height }}>
+    <div
+      style={{
+        ...styles.story,
+        ...storyInnerContainerStyles,
+        width: width,
+        height: height,
+      }}
+    >
       {getStoryContent()}
     </div>
   );
@@ -42,6 +56,7 @@ const styles = {
     position: "relative" as "relative",
     overflow: "hidden",
     alignItems: "center",
+    justifyContent: "center",
   },
   storyContent: {
     width: "auto",
