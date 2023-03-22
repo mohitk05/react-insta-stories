@@ -9,6 +9,7 @@ export interface ReactInstaStoriesProps {
   storyContainerStyles?: Record<string, any>;
   storyStyles?: Object;
   progressContainerStyles?: Object;
+  progressWrapperStyles?: Object;
   progressStyles?: Object;
   loop?: boolean;
   defaultInterval?: number;
@@ -33,6 +34,7 @@ export interface GlobalCtx {
   storyContainerStyles?: Record<string, any>;
   storyStyles?: Object;
   progressContainerStyles?: Object;
+  progressWrapperStyles?: Object;
   progressStyles?: Object;
   loop?: boolean;
   defaultInterval?: number;
