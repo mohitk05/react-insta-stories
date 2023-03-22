@@ -7,6 +7,7 @@
 	"scripts": {
 		"build": "webpack --mode production",
 		"build:dev": "webpack --mode development",
+		"prepare": "npm run build",
 		"prestart": "webpack --mode development",
 		"start": "webpack --watch --mode development",
 		"example": "cd example && npm start",
