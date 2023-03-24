@@ -59,6 +59,7 @@ module.exports = {
     splitChunks: {
       chunks: "all",
     },
+    minimize: false,
   },
   externals: {
     // Don't bundle react or react-dom
