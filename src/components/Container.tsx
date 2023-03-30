@@ -192,7 +192,6 @@ const styles = {
     background: "#111",
     position: "relative" as const,
     WebkitUserSelect: 'none' as const,
-    userSelect: 'none' as const
   },
   overlay: {
     position: "absolute" as const,
