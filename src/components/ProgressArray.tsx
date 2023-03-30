@@ -51,9 +51,6 @@ export default () => {
       animationFrameId.current = requestAnimationFrame(incrementCount);
     } else {
       storyEndCallback();
-      if (currentId === stories.length - 1) {
-        allStoriesEndCallback();
-      }
       cancelAnimationFrame(animationFrameId.current);
       next();
     }
@@ -65,10 +62,6 @@ export default () => {
 
   const storyEndCallback = () => {
     onStoryEnd && onStoryEnd(currentId, stories[currentId]);
-  };
-
-  const allStoriesEndCallback = () => {
-    onAllStoriesEnd && onAllStoriesEnd(currentId, stories);
   };
 
   const getCurrentInterval = () => {
