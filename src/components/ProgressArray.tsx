@@ -12,7 +12,7 @@ import { timestamp } from "../util/time";
 
 export default () => {
   const [count, setCount] = useState<number>(0);
-  const lastTime = useRef<number>(timestamp());
+  const lastTime = useRef<number>();
 
   const { currentId, next, videoDuration, pause, bufferAction } =
     useContext<ProgressContext>(ProgressCtx);
@@ -38,6 +38,7 @@ export default () => {
   let countCopy = count;
   const incrementCount = () => {
     if (countCopy === 0) storyStartCallback();
+    if (lastTime.current == undefined) lastTime.current = timestamp();
     const t = timestamp();
     const dt = t - lastTime.current;
     lastTime.current = t;
