@@ -1,9 +1,11 @@
 import React, { useContext } from 'react'
-import { ProgressProps, ProgressContext } from './../interfaces'
+import { ProgressProps, ProgressContext, GlobalCtx } from './../interfaces'
 import ProgressWrapper from './ProgressWrapper'
+import GlobalContext from "./../context/Global";
 import ProgressCtx from './../context/Progress'
 
 export default (props: ProgressProps) => {
+    const { progressStyles } = useContext<GlobalCtx>(GlobalContext);
     const { bufferAction, pause } = useContext<ProgressContext>(ProgressCtx)
 
     const getProgressStyle = ({ active }) => {
@@ -23,7 +25,11 @@ export default (props: ProgressProps) => {
     return (
         <ProgressWrapper width={width} pause={pause} bufferAction={bufferAction}>
             <div
-                style={{ ...getProgressStyle({ active }), ...styles.inner }} />
+                style={{ 
+                    ...styles.inner,
+                    ...progressStyles,
+                    ...getProgressStyle({ active }),
+                }} />
         </ProgressWrapper>
     )
 }
