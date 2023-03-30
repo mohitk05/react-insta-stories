@@ -7,6 +7,7 @@ export interface ReactInstaStoriesProps {
   loader?: JSX.Element;
   header?: Function;
   storyContainerStyles?: Record<string, any>;
+  storyInnerContainerStyles?: Record<string, any>;
   storyStyles?: Object;
   progressContainerStyles?: Object;
   progressWrapperStyles?: Object;
@@ -32,6 +33,7 @@ export interface GlobalCtx {
   loader?: JSX.Element;
   header?: Function;
   storyContainerStyles?: Record<string, any>;
+  storyInnerContainerStyles?: Record<string, any>;
   storyStyles?: Object;
   progressContainerStyles?: Object;
   progressWrapperStyles?: Object;
@@ -79,9 +81,7 @@ export type Renderer = React.FC<{
   messageHandler: (type: string, data: any) => { ack: "OK" | "ERROR" };
 }>;
 
-export type Tester = (
-  story: Story
-) => {
+export type Tester = (story: Story) => {
   condition: boolean;
   priority: number;
 };

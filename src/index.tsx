@@ -16,6 +16,7 @@ const ReactInstaStories = function (props: ReactInstaStoriesProps) {
         loader: props.loader,
         header: props.header,
         storyContainerStyles: props.storyContainerStyles,
+        storyInnerContainerStyles: props.storyInnerContainerStyles,
         storyStyles: props.storyStyles,
         progressContainerStyles: props.progressContainerStyles,
         progressWrapperStyles: props.progressWrapperStyles,
