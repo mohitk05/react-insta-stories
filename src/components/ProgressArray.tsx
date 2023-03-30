@@ -8,18 +8,16 @@ import {
 import ProgressCtx from "./../context/Progress";
 import GlobalContext from "./../context/Global";
 import StoriesContext from "./../context/Stories";
+import { timestamp } from "../util/time";
 
 export default () => {
   const [count, setCount] = useState<number>(0);
-  const { currentId, next, videoDuration, pause, bufferAction } = useContext<ProgressContext>(
-    ProgressCtx
-  );
-  const {
-    defaultInterval,
-    onStoryEnd,
-    onStoryStart,
-    onAllStoriesEnd,
-  } = useContext<GlobalCtx>(GlobalContext);
+  const lastTime = useRef<number>();
+
+  const { currentId, next, videoDuration, pause, bufferAction } =
+    useContext<ProgressContext>(ProgressCtx);
+  const { defaultInterval, onStoryEnd, onStoryStart, onAllStoriesEnd } =
+    useContext<GlobalCtx>(GlobalContext);
   const { stories } = useContext<StoriesContextInterface>(StoriesContext);
 
   useEffect(() => {
@@ -40,18 +38,19 @@ export default () => {
   let countCopy = count;
   const incrementCount = () => {
     if (countCopy === 0) storyStartCallback();
+    if (lastTime.current == undefined) lastTime.current = timestamp();
+    const t = timestamp();
+    const dt = t - lastTime.current;
+    lastTime.current = t;
     setCount((count: number) => {
       const interval = getCurrentInterval();
-      countCopy = count + 100 / ((interval / 1000) * 60);
-      return count + 100 / ((interval / 1000) * 60);
+      countCopy = count + (dt * 100) / interval;
+      return countCopy;
     });
     if (countCopy < 100) {
       animationFrameId.current = requestAnimationFrame(incrementCount);
     } else {
       storyEndCallback();
-      if (currentId === stories.length - 1) {
-        allStoriesEndCallback();
-      }
       cancelAnimationFrame(animationFrameId.current);
       next();
     }
@@ -65,10 +64,6 @@ export default () => {
     onStoryEnd && onStoryEnd(currentId, stories[currentId]);
   };
 
-  const allStoriesEndCallback = () => {
-    onAllStoriesEnd && onAllStoriesEnd(currentId, stories);
-  };
-
   const getCurrentInterval = () => {
     if (stories[currentId].type === "video") return videoDuration;
     if (typeof stories[currentId].duration === "number")
@@ -77,8 +72,8 @@ export default () => {
   };
 
   const opacityStyles = {
-    opacity: pause && !bufferAction ? 0 : 1
-  }
+    opacity: pause && !bufferAction ? 0 : 1,
+  };
 
   return (
     <div style={{ ...styles.progressArr, ...opacityStyles }}>
@@ -107,6 +102,6 @@ const styles = {
     alignSelf: "center",
     zIndex: 1001,
     filter: "drop-shadow(0 1px 8px #222)",
-    transition: 'opacity 400ms ease-in-out'
+    transition: "opacity 400ms ease-in-out",
   },
 };

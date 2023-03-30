@@ -28,6 +28,7 @@ export default function () {
     keyboardNavigation,
     preventDefault,
     storyContainerStyles = {},
+    onAllStoriesEnd,
   } = useContext<GlobalCtx>(GlobalContext);
   const { stories } = useContext<StoriesContextInterface>(StoriesContext);
 
@@ -98,12 +99,18 @@ export default function () {
   };
 
   const updateNextStoryIdForLoop = () => {
-    setCurrentIdWrapper((prev) => (prev + 1) % stories.length);
+    setCurrentIdWrapper((prev) => {
+      if (prev >= stories.length - 1) {
+        onAllStoriesEnd && onAllStoriesEnd(currentId, stories);
+      }
+      return (prev + 1) % stories.length;
+    });
   };
 
   const updateNextStoryId = () => {
     setCurrentIdWrapper((prev) => {
       if (prev < stories.length - 1) return prev + 1;
+      onAllStoriesEnd && onAllStoriesEnd(currentId, stories);
       return prev;
     });
   };
@@ -115,17 +122,16 @@ export default function () {
     }, 200);
   };
 
-  const mouseUp = (type: string) => (
-    e: React.MouseEvent | React.TouchEvent
-  ) => {
-    e.preventDefault();
-    mousedownId.current && clearTimeout(mousedownId.current);
-    if (pause) {
-      toggleState("play");
-    } else {
-      type === "next" ? next() : previous();
-    }
-  };
+  const mouseUp =
+    (type: string) => (e: React.MouseEvent | React.TouchEvent) => {
+      e.preventDefault();
+      mousedownId.current && clearTimeout(mousedownId.current);
+      if (pause) {
+        toggleState("play");
+      } else {
+        type === "next" ? next() : previous();
+      }
+    };
 
   const getVideoDuration = (duration: number) => {
     setVideoDuration(duration * 1000);
