@@ -9,6 +9,7 @@ import {
   StoriesContext as StoriesContextInterface,
 } from "./../interfaces";
 import useIsMounted from "./../util/use-is-mounted";
+import { usePreLoader } from "../util/usePreLoader";
 
 export default function () {
   const [currentId, setCurrentId] = useState<number>(0);
@@ -29,8 +30,11 @@ export default function () {
     preventDefault,
     storyContainerStyles = {},
     onAllStoriesEnd,
+    preloadCount,
   } = useContext<GlobalCtx>(GlobalContext);
   const { stories } = useContext<StoriesContextInterface>(StoriesContext);
+
+  usePreLoader(stories, currentId, preloadCount);
 
   useEffect(() => {
     if (typeof currentIndex === "number") {
@@ -44,6 +48,7 @@ export default function () {
       }
     }
   }, [currentIndex]);
+
 
   useEffect(() => {
     if (typeof isPaused === "boolean") {

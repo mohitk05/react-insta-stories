@@ -25,6 +25,7 @@ export interface ReactInstaStoriesProps {
   onStoryEnd?: Function;
   keyboardNavigation?: boolean;
   preventDefault?: boolean;
+  preloadCount?: number;
 }
 
 export interface GlobalCtx {
@@ -51,6 +52,7 @@ export interface GlobalCtx {
   onStoryEnd?: Function;
   keyboardNavigation?: boolean;
   preventDefault?: boolean;
+  preloadCount?: number;
 }
 
 type NumberOrString = number | string;
