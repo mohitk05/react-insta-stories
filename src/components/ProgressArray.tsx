@@ -16,10 +16,10 @@ export default () => {
 
   const { currentId, next, videoDuration, pause, bufferAction } =
     useContext<ProgressContext>(ProgressCtx);
-  const { 
-    defaultInterval, 
-    onStoryEnd, 
-    onStoryStart, 
+  const {
+    defaultInterval,
+    onStoryEnd,
+    onStoryStart,
     progressContainerStyles,
   } = useContext<GlobalCtx>(GlobalContext);
   const { stories } = useContext<StoriesContextInterface>(StoriesContext);
@@ -31,6 +31,7 @@ export default () => {
   useEffect(() => {
     if (!pause) {
       animationFrameId.current = requestAnimationFrame(incrementCount);
+      lastTime.current = timestamp();
     }
     return () => {
       cancelAnimationFrame(animationFrameId.current);
@@ -80,10 +81,10 @@ export default () => {
   };
 
   return (
-    <div style={{ 
+    <div style={{
       ...styles.progressArr,
-      ...progressContainerStyles, 
-      ...opacityStyles 
+      ...progressContainerStyles,
+      ...opacityStyles
     }}>
       {stories.map((_, i) => (
         <Progress
