@@ -33,10 +33,17 @@ const cacheContent = async (contents: Story[]) => {
 export const usePreLoader = (contents: Story[], cursor: number, preloadCount: number) => {
 	const urlsLoaded = useRef([] as string[]).current;
 
+	// Pushes urls to urlsLoaded
+	const markUrlsLoaded = (contents: Story[]) => urlsLoaded.push(...contents.map((content) => content.url))
+
 	useEffect(() => {
 		const start = cursor + 1;
 		const end = cursor + preloadCount + 1;
-		const toPreload = contents.slice(start, end);
+
+		const toPreload = contents.slice(start, end)
+			.filter((content) => !urlsLoaded.includes(content.url)); // Only preload urls that haven't been loaded yet
+
+		markUrlsLoaded(toPreload)
 
 		cacheContent(toPreload)
 	}, [cursor, preloadCount, contents])
