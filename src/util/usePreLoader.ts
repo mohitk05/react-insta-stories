@@ -1,5 +1,5 @@
 import {Story} from "../interfaces";
-import {useEffect, useState} from "react";
+import {useEffect, useRef, useState} from "react";
 
 
 // Caches given Story[] using HTMLImageElement and HTMLVideoElement
@@ -31,15 +31,14 @@ const cacheContent = async (contents: Story[]) => {
 // Preload count is the number of images/videos to preload after the cursor
 // Cursor is the current index to start preloading from
 export const usePreLoader = (contents: Story[], cursor: number, preloadCount: number) => {
+	const urlsLoaded = useRef([] as string[]).current;
+
 	useEffect(() => {
 		const start = cursor + 1;
 		const end = cursor + preloadCount + 1;
 		const toPreload = contents.slice(start, end);
 
-		cacheContent(toPreload).then(() => {
-			console.log('Preloaded from cursor:', cursor, 'preloadCount:', preloadCount)
-		}).catch((e) => {
-			console.error('Error preloading', e)
-		})
+		// todo remove then/catch after testing
+		cacheContent(toPreload)
 	}, [cursor, preloadCount, contents])
 }

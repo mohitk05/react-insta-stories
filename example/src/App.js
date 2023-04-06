@@ -319,6 +319,16 @@ const stories2 = [
     type: "video",
   },
   {
+    url:
+      "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4",
+    type: "video",
+  },
+  {
+    url:
+      "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4",
+    type: "video",
+  },
+  {
     content: Story2,
   },
   {
