@@ -38,7 +38,6 @@ export const usePreLoader = (contents: Story[], cursor: number, preloadCount: nu
 		const end = cursor + preloadCount + 1;
 		const toPreload = contents.slice(start, end);
 
-		// todo remove then/catch after testing
 		cacheContent(toPreload)
 	}, [cursor, preloadCount, contents])
 }
