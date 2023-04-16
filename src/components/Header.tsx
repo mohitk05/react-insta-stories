@@ -1,20 +1,30 @@
 import React from "react";
 import { HeaderProps } from "./../interfaces";
 
-const Header = ({ profileImage, heading, subheading }: HeaderProps) => (
-  <div style={styles.main}>
-    {profileImage && <img style={styles.img} src={profileImage} />}
-    <span style={styles.text}>
-      <p style={styles.heading}>{heading}</p>
-      <p style={styles.subheading}>{subheading}</p>
-    </span>
-  </div>
+const Header = ({
+  externalLink,
+  profileImage,
+  heading,
+  subheading,
+}: HeaderProps) => (
+  <a style={styles.link} href={externalLink} target="_blank" rel="noreferrer">
+    <div style={styles.main}>
+      {profileImage && <img style={styles.img} src={profileImage} />}
+      <span style={styles.text}>
+        <p style={styles.heading}>{heading}</p>
+        <p style={styles.subheading}>{subheading}</p>
+      </span>
+    </div>
+  </a>
 );
 
 const styles = {
   main: {
     display: "flex",
     alignItems: "center",
+  },
+  link: {
+    textDecoration: "none",
   },
   img: {
     width: 40,
