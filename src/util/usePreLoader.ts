@@ -37,6 +37,17 @@ const markUrlsLoaded = (contents: Story[]) => {
 	})
 }
 
+
+// Returns true if given Story should be preloaded
+const shouldPreload = (content: Story) => {
+	if (!content.url) return false
+	if (urlsLoaded.has(content.url)) return false
+	if (content.preloadResource !== undefined) return content.preloadResource
+	if (content.type === 'video') return false
+
+	return true
+}
+
 // Preloads images and videos from given Story[] using a cursor and preloadCount
 // Preload count is the number of images/videos to preload after the cursor
 // Cursor is the current index to start preloading from
@@ -47,8 +58,7 @@ export const usePreLoader = (contents: Story[], cursor: number, preloadCount: nu
 		const start = cursor + 1;
 		const end = cursor + preloadCount + 1;
 
-		const toPreload = contents.slice(start, end)
-			.filter((content) => !urlsLoaded.has(content.url)); // Only preload urls that haven't been loaded yet
+		const toPreload = contents.slice(start, end).filter(shouldPreload); // Only preload urls that haven't been loaded yet
 
 		markUrlsLoaded(toPreload)
 
