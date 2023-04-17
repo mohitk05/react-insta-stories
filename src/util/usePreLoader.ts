@@ -1,5 +1,5 @@
 import {Story} from "../interfaces";
-import {useEffect, useRef, useState} from "react";
+import {useEffect} from "react";
 
 
 // Caches given Story[] using HTMLImageElement and HTMLVideoElement
@@ -52,16 +52,15 @@ const shouldPreload = (content: Story) => {
 // Preload count is the number of images/videos to preload after the cursor
 // Cursor is the current index to start preloading from
 export const usePreLoader = (contents: Story[], cursor: number, preloadCount: number) => {
-
-
 	useEffect(() => {
 		const start = cursor + 1;
 		const end = cursor + preloadCount + 1;
 
-		const toPreload = contents.slice(start, end).filter(shouldPreload); // Only preload urls that haven't been loaded yet
+		const toPreload = contents
+			.slice(start, end)
+			.filter(shouldPreload);
 
 		markUrlsLoaded(toPreload)
-
 		cacheContent(toPreload)
 	}, [cursor, preloadCount, contents])
 }
