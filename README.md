@@ -75,7 +75,7 @@ Here `stories` is an array of story objects, which can be of various types as de
 Instead of simple string url, a comprehensive 'story object' can also be passed in the `stories` array.
 
 | Property           | Description                                                                                                                                   |
-| ------------------ | --------------------------------------------------------------------------------------------------------------------------------------------- |
+|--------------------|-----------------------------------------------------------------------------------------------------------------------------------------------|
 | `url`              | The url of the resource, be it image or video.                                                                                                |
 | `type`             | Optional. Type of the story. `type: 'video'                                                                                                   | 'image'`. Type `video` is necessary for a video story. |
 | `duration`         | Optional. Duration for which a story should persist.                                                                                          |
@@ -83,6 +83,7 @@ Instead of simple string url, a comprehensive 'story object' can also be passed 
 | `seeMore`          | Optional. Adds a see more icon at the bottom of the story. On clicking, opens up this component. (v2: updated to Function instead of element) |
 | `seeMoreCollapsed` | Optional. Send custom component to be rendered instead of the default 'See More' text.                                                        |  |
 | `styles`           | Optional. Override the default story styles mentioned below.                                                                                  |
+| `preloadResource`  | Optional. Whether to preload the resource or not, defaults to `true` for images and `false` for videos (video preloading is experimental)         | 
 
 ### Default story styles
 
