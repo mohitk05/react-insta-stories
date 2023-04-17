@@ -113,7 +113,9 @@ export interface Story {
   duration?: number;
   styles?: object;
   content?: Renderer;
-  originalContent?: Renderer;
+  originalContent?: Renderer
+  // Whether to preload the resource or not, defaults to true for images and false for videos
+  preloadResource?: boolean;
 }
 
 export interface Header {

@@ -20,28 +20,35 @@ const cacheContent = async (contents: Story[]) => {
 			img.src = content.url;
 			img.onload = resolve;
 			img.onerror = reject;
+
 		})
 	})
 
 	await Promise.all(promises);
 }
 
+// Keeps track of urls that have been loaded
+const urlsLoaded = new Set<string>();
+
+// Pushes urls to urlsLoaded
+const markUrlsLoaded = (contents: Story[]) => {
+	contents.forEach((content) => {
+		urlsLoaded.add(content.url)
+	})
+}
 
 // Preloads images and videos from given Story[] using a cursor and preloadCount
 // Preload count is the number of images/videos to preload after the cursor
 // Cursor is the current index to start preloading from
 export const usePreLoader = (contents: Story[], cursor: number, preloadCount: number) => {
-	const urlsLoaded = useRef([] as string[]).current;
 
-	// Pushes urls to urlsLoaded
-	const markUrlsLoaded = (contents: Story[]) => urlsLoaded.push(...contents.map((content) => content.url))
 
 	useEffect(() => {
 		const start = cursor + 1;
 		const end = cursor + preloadCount + 1;
 
 		const toPreload = contents.slice(start, end)
-			.filter((content) => !urlsLoaded.includes(content.url)); // Only preload urls that haven't been loaded yet
+			.filter((content) => !urlsLoaded.has(content.url)); // Only preload urls that haven't been loaded yet
 
 		markUrlsLoaded(toPreload)
 
