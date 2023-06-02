@@ -29,6 +29,8 @@ export default function () {
     preventDefault,
     storyContainerStyles = {},
     onAllStoriesEnd,
+    onPrevious,
+    onNext
   } = useContext<GlobalCtx>(GlobalContext);
   const { stories } = useContext<StoriesContextInterface>(StoriesContext);
 
@@ -84,10 +86,16 @@ export default function () {
   };
 
   const previous = () => {
+    if(onPrevious != undefined){
+      onPrevious();
+    }
     setCurrentIdWrapper((prev) => (prev > 0 ? prev - 1 : prev));
   };
 
   const next = () => {
+    if(onNext != undefined){
+      onNext();
+    }
     // Check if component is mounted - for issue #130 (https://github.com/mohitk05/react-insta-stories/issues/130)
     if (isMounted()) {
       if (loop) {

@@ -28,6 +28,8 @@ const ReactInstaStories = function (props: ReactInstaStoriesProps) {
         onStoryStart: props.onStoryStart,
         onStoryEnd: props.onStoryEnd,
         onAllStoriesEnd: props.onAllStoriesEnd,
+        onNext: props.onNext,
+        onPrevious: props.onPrevious,
         keyboardNavigation: props.keyboardNavigation,
         preventDefault: props.preventDefault
     }
