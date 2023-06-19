@@ -69,15 +69,9 @@ export default function () {
 
   const handleKeyDown = (e: KeyboardEvent) => {
     if (e.key === "ArrowLeft") {
-      if(onPrevious != undefined){
-        onPrevious();
-      }
       previous();
     } else if (e.key === "ArrowRight") {
-      if(onNext != undefined){
-        onNext();
-      }
-      next();
+      next(true);
     }
   };
 
@@ -92,10 +86,16 @@ export default function () {
   };
 
   const previous = () => {
+    if (onPrevious != undefined) {
+      onPrevious();
+    }
     setCurrentIdWrapper((prev) => (prev > 0 ? prev - 1 : prev));
   };
 
-  const next = () => {
+  const next = (isSkippedByUser?: boolean) => {
+    if (onNext != undefined && isSkippedByUser) {
+      onNext();
+    }
     // Check if component is mounted - for issue #130 (https://github.com/mohitk05/react-insta-stories/issues/130)
     if (isMounted()) {
       if (loop) {
@@ -137,17 +137,7 @@ export default function () {
       if (pause) {
         toggleState("play");
       } else {
-        if(type === "next"){
-          if(onNext != undefined){
-            onNext();
-          }
-          next();
-        }else{
-          if(onPrevious != undefined){
-            onPrevious();
-          }
-          previous();
-        }
+        type === "next" ? next(true) : previous();
       }
     };
 
