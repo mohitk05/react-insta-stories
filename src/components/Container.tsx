@@ -71,7 +71,7 @@ export default function () {
     if (e.key === "ArrowLeft") {
       previous();
     } else if (e.key === "ArrowRight") {
-      next(true);
+      next({ isSkippedByUser: true });
     }
   };
 
@@ -92,8 +92,8 @@ export default function () {
     setCurrentIdWrapper((prev) => (prev > 0 ? prev - 1 : prev));
   };
 
-  const next = (isSkippedByUser?: boolean) => {
-    if (onNext != undefined && isSkippedByUser) {
+  const next = (options?: { isSkippedByUser?: boolean }) => {
+    if (onNext != undefined && options?.isSkippedByUser) {
       onNext();
     }
     // Check if component is mounted - for issue #130 (https://github.com/mohitk05/react-insta-stories/issues/130)
@@ -137,7 +137,7 @@ export default function () {
       if (pause) {
         toggleState("play");
       } else {
-        type === "next" ? next(true) : previous();
+        type === "next" ? next({ isSkippedByUser: true }) : previous();
       }
     };
 
