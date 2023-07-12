@@ -122,6 +122,7 @@ export interface Header {
   heading: string;
   subheading: string;
   profileImage: string;
+  externalLink?: string;
 }
 
 export interface SeeMoreProps {
@@ -139,6 +140,7 @@ export interface HeaderProps {
   profileImage: string;
   heading: string;
   subheading: string;
+  externalLink?: string;
 }
 
 export interface ProgressProps {

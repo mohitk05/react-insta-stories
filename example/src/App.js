@@ -313,6 +313,7 @@ const stories2 = [
         </p>
       </div>
     ),
+    header: {externalLink: "https://github.com/mohitk05", profileImage: "https://picsum.photos/360/480", heading: "Mohit Karekar", subheading: "mohitk05"}
   },
   {
     url:
