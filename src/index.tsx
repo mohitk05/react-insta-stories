@@ -31,9 +31,12 @@ const ReactInstaStories = function (props: ReactInstaStoriesProps) {
         onNext: props.onNext,
         onPrevious: props.onPrevious,
         keyboardNavigation: props.keyboardNavigation,
-        preventDefault: props.preventDefault
+        preventDefault: props.preventDefault,
+        preloadCount: props.preloadCount,
     }
     const [stories, setStories] = useState<{ stories: Story[] }>({ stories: generateStories(props.stories, renderers) });
+
+
     useEffect(() => {
         setStories({ stories: generateStories(props.stories, renderers) });
     }, [props.stories, props.renderers]);
@@ -66,7 +69,8 @@ const generateStories = (stories: Story[], renderers: { renderer: Renderer, test
 ReactInstaStories.defaultProps = {
     width: 360,
     height: 640,
-    defaultInterval: 4000
+    defaultInterval: 4000,
+    preloadCount: 1,
 }
 
 export const WithHeader = withHeader;

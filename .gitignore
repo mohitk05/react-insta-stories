@@ -3,3 +3,4 @@ node_modules
 dist
 stats.json
 report.html
+.idea
