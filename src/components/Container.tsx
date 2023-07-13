@@ -30,6 +30,8 @@ export default function () {
     preventDefault,
     storyContainerStyles = {},
     onAllStoriesEnd,
+    onPrevious,
+    onNext,
     preloadCount,
   } = useContext<GlobalCtx>(GlobalContext);
   const { stories } = useContext<StoriesContextInterface>(StoriesContext);
@@ -74,7 +76,7 @@ export default function () {
     if (e.key === "ArrowLeft") {
       previous();
     } else if (e.key === "ArrowRight") {
-      next();
+      next({ isSkippedByUser: true });
     }
   };
 
@@ -89,10 +91,16 @@ export default function () {
   };
 
   const previous = () => {
+    if (onPrevious != undefined) {
+      onPrevious();
+    }
     setCurrentIdWrapper((prev) => (prev > 0 ? prev - 1 : prev));
   };
 
-  const next = () => {
+  const next = (options?: { isSkippedByUser?: boolean }) => {
+    if (onNext != undefined && options?.isSkippedByUser) {
+      onNext();
+    }
     // Check if component is mounted - for issue #130 (https://github.com/mohitk05/react-insta-stories/issues/130)
     if (isMounted()) {
       if (loop) {
@@ -134,7 +142,7 @@ export default function () {
       if (pause) {
         toggleState("play");
       } else {
-        type === "next" ? next() : previous();
+        type === "next" ? next({ isSkippedByUser: true }) : previous();
       }
     };
 
