@@ -3,6 +3,7 @@ import Spinner from "../components/Spinner";
 import { Renderer, Tester } from "./../interfaces";
 import WithHeader from "./wrappers/withHeader";
 import WithSeeMore from "./wrappers/withSeeMore";
+import { WithFooterHOC } from "./wrappers/WithFooter";
 
 export const renderer: Renderer = ({ story, action, isPaused, config }) => {
   const [loaded, setLoaded] = React.useState(false);
@@ -17,32 +18,35 @@ export const renderer: Renderer = ({ story, action, isPaused, config }) => {
     action("play");
   };
   return (
-    <WithHeader {...{ story, globalHeader: config.header }}>
-      <WithSeeMore {...{ story, action }}>
-        <div>
-          <img style={computedStyles} src={story.url} onLoad={imageLoaded} />
-          {!loaded && (
-            <div
-              style={{
-                width: width,
-                height: height,
-                position: "absolute",
-                left: 0,
-                top: 0,
-                background: "rgba(0, 0, 0, 0.9)",
-                zIndex: 9,
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-                color: "#ccc",
-              }}
-            >
-              {loader || <Spinner />}
-            </div>
-          )}
-        </div>
-      </WithSeeMore>
-    </WithHeader>
+    <WithFooterHOC footerElement={config?.footer?.footerElement} isOuterContainer={config?.footer?.isOuterContainer}>
+      <WithHeader {...{ story, globalHeader: config.header }}>
+        <WithSeeMore {...{ story, action }}>
+          <div>
+            <img style={computedStyles} src={story.url} onLoad={imageLoaded} />
+            {!loaded && (
+              <div
+                style={{
+                  width: width,
+                  height: height,
+                  position: "absolute",
+                  left: 0,
+                  top: 0,
+                  background: "rgba(0, 0, 0, 0.9)",
+                  zIndex: 9,
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  color: "#ccc",
+                }}
+              >
+                {loader || <Spinner />}
+              </div>
+            )}
+          </div>
+        </WithSeeMore>
+      </WithHeader>
+    </WithFooterHOC>
+
   );
 };
 
