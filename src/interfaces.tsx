@@ -82,6 +82,7 @@ export type Renderer = React.FC<{
     height?: NumberOrString;
     loader?: JSX.Element;
     header?: Function;
+    footer?:  FooterProps;
     storyStyles?: Object;
   };
   messageHandler: (type: string, data: any) => { ack: "OK" | "ERROR" };
@@ -112,7 +113,8 @@ export interface Story {
     toggleMore: (show: boolean) => void;
     action: Action;
   }>;
-  header?: Header;
+  header?: HeaderProps;
+  footer?: FooterProps;
   type?: string;
   duration?: number;
   styles?: object;
@@ -120,12 +122,6 @@ export interface Story {
   originalContent?: Renderer
   // Whether to preload the resource or not, defaults to `true` for images and `false` for videos (video preloading is experimental)
   preloadResource?: boolean;
-}
-
-export interface Header {
-  heading: string;
-  subheading: string;
-  profileImage: string;
 }
 
 export interface SeeMoreProps {
@@ -143,6 +139,11 @@ export interface HeaderProps {
   profileImage: string;
   heading: string;
   subheading: string;
+}
+
+export interface FooterProps {
+  footerElement?: React.ReactElement;
+  isOuterContainer?: boolean;
 }
 
 export interface ProgressProps {
