@@ -120,6 +120,7 @@ export interface Story {
   originalContent?: Renderer
   // Whether to preload the resource or not, defaults to `true` for images and `false` for videos (video preloading is experimental)
   preloadResource?: boolean;
+  muted?: boolean;
 }
 
 export interface Header {

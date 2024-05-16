@@ -12,7 +12,7 @@ export const renderer: Renderer = ({
   messageHandler,
 }) => {
   const [loaded, setLoaded] = React.useState(false);
-  const [muted, setMuted] = React.useState(false);
+  const [muted, setMuted] = React.useState(story.muted || false);
   const { width, height, loader, storyStyles } = config;
 
   let computedStyles = {
