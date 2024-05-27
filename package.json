@@ -1,6 +1,6 @@
 {
 	"name": "react-insta-stories",
-	"version": "2.6.2",
+	"version": "2.7.0",
 	"description": "A React component for Instagram like stories",
 	"main": "dist/index.js",
 	"types": "dist/index.d.ts",
