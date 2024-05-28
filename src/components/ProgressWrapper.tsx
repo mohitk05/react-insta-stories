@@ -27,6 +27,7 @@ const styles = {
         background: '#555',
         margin: 2,
         borderRadius: 2,
+        overflow: "hidden" as  const,
         WebkitBackfaceVisibility: 'hidden' as const,
         MozBackfaceVisibility: 'hidden' as const,
         msBackfaceVisibility: 'hidden',
