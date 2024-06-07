@@ -10,6 +10,11 @@
     "experimentalDecorators": true,
     "declaration": true,
     "declarationDir": "dist",
-    "moduleResolution": "node"
+    "moduleResolution": "node",
+    "paths" : {
+      "@/*" : [
+        "./src/components"
+      ]
+    }
   }
 }
