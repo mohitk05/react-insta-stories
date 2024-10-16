@@ -158,6 +158,13 @@ export default function () {
         ...{ width, height },
       }}
     >
+      <Story
+        action={toggleState}
+        bufferAction={bufferAction}
+        playState={pause}
+        story={stories[currentId]}
+        getVideoDuration={getVideoDuration}
+      />
       <ProgressContext.Provider
         value={{
           bufferAction: bufferAction,
@@ -169,13 +176,6 @@ export default function () {
       >
         <ProgressArray />
       </ProgressContext.Provider>
-      <Story
-        action={toggleState}
-        bufferAction={bufferAction}
-        playState={pause}
-        story={stories[currentId]}
-        getVideoDuration={getVideoDuration}
-      />
       {!preventDefault && (
         <div style={styles.overlay}>
           <div
