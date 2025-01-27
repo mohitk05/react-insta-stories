@@ -8,45 +8,57 @@ import { renderers as defaultRenderers } from './renderers/index';
 import withHeader from './renderers/wrappers/withHeader'
 import withSeeMore from './renderers/wrappers/withSeeMore'
 
-const ReactInstaStories = function (props: ReactInstaStoriesProps) {
-    let renderers = props.renderers ? props.renderers.concat(defaultRenderers) : defaultRenderers;
-    let context: GlobalCtx = {
-        width: props.width,
-        height: props.height,
-        loader: props.loader,
-        header: props.header,
-        storyContainerStyles: props.storyContainerStyles,
-        storyInnerContainerStyles: props.storyInnerContainerStyles,
-        storyStyles: props.storyStyles,
-        progressContainerStyles: props.progressContainerStyles,
-        progressWrapperStyles: props.progressWrapperStyles,
-        progressStyles: props.progressStyles,
-        loop: props.loop,
-        defaultInterval: props.defaultInterval,
-        isPaused: props.isPaused,
-        currentIndex: props.currentIndex,
-        onStoryStart: props.onStoryStart,
-        onStoryEnd: props.onStoryEnd,
-        onAllStoriesEnd: props.onAllStoriesEnd,
-        onNext: props.onNext,
-        onPrevious: props.onPrevious,
-        keyboardNavigation: props.keyboardNavigation,
-        preventDefault: props.preventDefault,
-        preloadCount: props.preloadCount,
-    }
-    const [stories, setStories] = useState<{ stories: Story[] }>({ stories: generateStories(props.stories, renderers) });
+const ReactInstaStories = function ({
+  width = 360,
+  height = 640,
+  defaultInterval = 4000,
+  preloadCount = 1,
+  ...restProps
+}: ReactInstaStoriesProps) {
+  let renderers = restProps.renderers
+    ? restProps.renderers.concat(defaultRenderers)
+    : defaultRenderers;
+  let context: GlobalCtx = {
+    width,
+    height,
+    loader: restProps.loader,
+    header: restProps.header,
+    storyContainerStyles: restProps.storyContainerStyles,
+    storyInnerContainerStyles: restProps.storyInnerContainerStyles,
+    storyStyles: restProps.storyStyles,
+    progressContainerStyles: restProps.progressContainerStyles,
+    progressWrapperStyles: restProps.progressWrapperStyles,
+    progressStyles: restProps.progressStyles,
+    loop: restProps.loop,
+    defaultInterval,
+    isPaused: restProps.isPaused,
+    currentIndex: restProps.currentIndex,
+    onStoryStart: restProps.onStoryStart,
+    onStoryEnd: restProps.onStoryEnd,
+    onAllStoriesEnd: restProps.onAllStoriesEnd,
+    onNext: restProps.onNext,
+    onPrevious: restProps.onPrevious,
+    keyboardNavigation: restProps.keyboardNavigation,
+    preventDefault: restProps.preventDefault,
+    preloadCount,
+  };
+  const [stories, setStories] = useState<{ stories: Story[] }>({
+    stories: generateStories(restProps.stories, renderers),
+  });
 
+  useEffect(() => {
+    setStories({ stories: generateStories(restProps.stories, renderers) });
+  }, [restProps.stories, restProps.renderers]);
 
-    useEffect(() => {
-        setStories({ stories: generateStories(props.stories, renderers) });
-    }, [props.stories, props.renderers]);
-
-    return <GlobalContext.Provider value={context}>
-        <StoriesContext.Provider value={stories}>
-            <Container />
-        </StoriesContext.Provider>
+  return (
+    <GlobalContext.Provider value={context}>
+      <StoriesContext.Provider value={stories}>
+        <Container />
+      </StoriesContext.Provider>
     </GlobalContext.Provider>
-}
+  );
+};
+
 
 const generateStories = (stories: Story[], renderers: { renderer: Renderer, tester: Tester }[]) => {
     return stories.map(s => {
@@ -65,13 +77,6 @@ const generateStories = (stories: Story[], renderers: { renderer: Renderer, test
         return story
     })
 };
-
-ReactInstaStories.defaultProps = {
-    width: 360,
-    height: 640,
-    defaultInterval: 4000,
-    preloadCount: 1,
-}
 
 export const WithHeader = withHeader;
 export const WithSeeMore = withSeeMore;
