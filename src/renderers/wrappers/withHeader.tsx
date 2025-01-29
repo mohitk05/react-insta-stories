@@ -10,7 +10,7 @@ const withHeader: React.FC<React.PropsWithChildren<{
     <>
       {children}
       {story.header && (
-        <div style={{ position: "absolute", left: 12, top: 20, zIndex: 19 }}>
+        <div style={{ position: "absolute", left: 12, top: 20, zIndex: 1000 }}>
           {typeof story === "object" ? (
             globalHeader ? (
               globalHeader(story.header)
