@@ -381,8 +381,6 @@ To develop this package locally, you can follo these steps:
 
 This will start a hot-reloading setup with a live example.
 
-<!-- Testing -->
-
 ## Thanks To
 
 -   [@SamHambert](https://github.com/SamHerbert/SVG-Loaders) for the default spinner SVG
