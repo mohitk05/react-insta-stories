@@ -7,6 +7,7 @@ import { getRenderer } from './util/renderers'
 import { renderers as defaultRenderers } from './renderers/index';
 import withHeader from './renderers/wrappers/withHeader'
 import withSeeMore from './renderers/wrappers/withSeeMore'
+import {WithFooterHOC} from './renderers/wrappers/WithFooter'
 
 const ReactInstaStories = function ({
   width = 360,
@@ -61,7 +62,7 @@ const ReactInstaStories = function ({
 
 
 const generateStories = (stories: Story[], renderers: { renderer: Renderer, tester: Tester }[]) => {
-    return stories.map(s => {
+    return stories && stories.map(s => {
         let story: Story = {};
 
         if (typeof s === 'string') {
@@ -76,9 +77,11 @@ const generateStories = (stories: Story[], renderers: { renderer: Renderer, test
         story.content = renderer;
         return story
     })
+    
 };
 
 export const WithHeader = withHeader;
 export const WithSeeMore = withSeeMore;
+export const withFooterHOC = WithFooterHOC;
 
 export default ReactInstaStories

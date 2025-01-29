@@ -3,6 +3,7 @@ import Spinner from "../components/Spinner";
 import { Renderer, Tester } from "./../interfaces";
 import WithHeader from "./wrappers/withHeader";
 import WithSeeMore from "./wrappers/withSeeMore";
+import { WithFooterHOC } from "./wrappers/WithFooter";
 
 export const renderer: Renderer = ({
   story,
@@ -57,44 +58,46 @@ export const renderer: Renderer = ({
   };
 
   return (
-    <WithHeader {...{ story, globalHeader: config.header }}>
-      <WithSeeMore {...{ story, action }}>
-        <div style={styles.videoContainer}>
-          <video
-            ref={vid}
-            style={computedStyles}
-            src={story.url}
-            controls={false}
-            onLoadedData={videoLoaded}
-            playsInline
-            onWaiting={onWaiting}
-            onPlaying={onPlaying}
-            muted={muted}
-            autoPlay
-            webkit-playsinline="true"
-          />
-          {!loaded && (
-            <div
-              style={{
-                width: width,
-                height: height,
-                position: "absolute",
-                left: 0,
-                top: 0,
-                background: "rgba(0, 0, 0, 0.9)",
-                zIndex: 9,
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-                color: "#ccc",
-              }}
-            >
-              {loader || <Spinner />}
-            </div>
-          )}
-        </div>
-      </WithSeeMore>
-    </WithHeader>
+    <WithFooterHOC footerElement={config?.footer?.footerElement} isOuterContainer={config?.footer?.isOuterContainer}>
+      <WithHeader {...{ story, globalHeader: config.header }}>
+        <WithSeeMore {...{ story, action }}>
+          <div style={styles.videoContainer}>
+            <video
+              ref={vid}
+              style={computedStyles}
+              src={story.url}
+              controls={false}
+              onLoadedData={videoLoaded}
+              playsInline
+              onWaiting={onWaiting}
+              onPlaying={onPlaying}
+              muted={muted}
+              autoPlay
+              webkit-playsinline="true"
+            />
+            {!loaded && (
+              <div
+                style={{
+                  width: width,
+                  height: height,
+                  position: "absolute",
+                  left: 0,
+                  top: 0,
+                  background: "rgba(0, 0, 0, 0.9)",
+                  zIndex: 9,
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  color: "#ccc",
+                }}
+              >
+                {loader || <Spinner />}
+              </div>
+            )}
+          </div>
+        </WithSeeMore>
+      </WithHeader>
+    </WithFooterHOC>
   );
 };
 
