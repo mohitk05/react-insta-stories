@@ -87,7 +87,6 @@ export default function () {
 
   const setCurrentIdWrapper = (callback) => {
     setCurrentId(callback);
-    toggleState("pause", true);
   };
 
   const previous = () => {
