@@ -1,18 +1,25 @@
-import React, { useEffect, useState } from 'react'
-import { ReactInstaStoriesProps, GlobalCtx, Story, Tester, Renderer } from './interfaces'
-import Container from './components/Container'
-import GlobalContext from './context/Global'
-import StoriesContext from './context/Stories';
-import { getRenderer } from './util/renderers'
-import { renderers as defaultRenderers } from './renderers/index';
-import withHeader from './renderers/wrappers/withHeader'
-import withSeeMore from './renderers/wrappers/withSeeMore'
+import React, { useEffect, useState } from "react";
+import {
+  ReactInstaStoriesProps,
+  GlobalCtx,
+  Story,
+  Tester,
+  Renderer,
+} from "./interfaces";
+import Container from "./components/Container";
+import GlobalContext from "./context/Global";
+import StoriesContext from "./context/Stories";
+import { getRenderer } from "./util/renderers";
+import { renderers as defaultRenderers } from "./renderers/index";
+import withHeader from "./renderers/wrappers/withHeader";
+import withSeeMore from "./renderers/wrappers/withSeeMore";
 
 const ReactInstaStories = function ({
   width = 360,
   height = 640,
   defaultInterval = 4000,
   preloadCount = 1,
+  rtl = false,
   ...restProps
 }: ReactInstaStoriesProps) {
   let renderers = restProps.renderers
@@ -41,6 +48,7 @@ const ReactInstaStories = function ({
     keyboardNavigation: restProps.keyboardNavigation,
     preventDefault: restProps.preventDefault,
     preloadCount,
+    rtl,
   };
   const [stories, setStories] = useState<{ stories: Story[] }>({
     stories: generateStories(restProps.stories, renderers),
@@ -59,26 +67,28 @@ const ReactInstaStories = function ({
   );
 };
 
+const generateStories = (
+  stories: Story[],
+  renderers: { renderer: Renderer; tester: Tester }[]
+) => {
+  return stories.map((s) => {
+    let story: Story = {};
 
-const generateStories = (stories: Story[], renderers: { renderer: Renderer, tester: Tester }[]) => {
-    return stories.map(s => {
-        let story: Story = {};
+    if (typeof s === "string") {
+      story.url = s;
+      story.type = "image";
+    } else if (typeof s === "object") {
+      story = Object.assign(story, s);
+    }
 
-        if (typeof s === 'string') {
-            story.url = s;
-            story.type = 'image';
-        } else if (typeof s === 'object') {
-            story = Object.assign(story, s);
-        }
-
-        let renderer = getRenderer(story, renderers);
-        story.originalContent = story.content;
-        story.content = renderer;
-        return story
-    })
+    let renderer = getRenderer(story, renderers);
+    story.originalContent = story.content;
+    story.content = renderer;
+    return story;
+  });
 };
 
 export const WithHeader = withHeader;
 export const WithSeeMore = withSeeMore;
 
-export default ReactInstaStories
+export default ReactInstaStories;

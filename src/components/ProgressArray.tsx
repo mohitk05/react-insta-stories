@@ -21,6 +21,7 @@ export default () => {
     onStoryEnd,
     onStoryStart,
     progressContainerStyles,
+    rtl = false,
   } = useContext<GlobalCtx>(GlobalContext);
   const { stories } = useContext<StoriesContextInterface>(StoriesContext);
 
@@ -80,20 +81,34 @@ export default () => {
     opacity: pause && !bufferAction ? 0 : 1,
   };
 
+  const getRTLStyles = () => {
+    if (!rtl) return {};
+
+    return {
+      flexDirection: "row-reverse" as const,
+      direction: "rtl" as const,
+    };
+  };
+
+  const progressBars = stories.map((_, i) => (
+    <Progress
+      key={i}
+      count={count}
+      width={1 / stories.length}
+      active={i === currentId ? 1 : i < currentId ? 2 : 0}
+    />
+  ));
+
   return (
-    <div style={{
-      ...styles.progressArr,
-      ...progressContainerStyles,
-      ...opacityStyles
-    }}>
-      {stories.map((_, i) => (
-        <Progress
-          key={i}
-          count={count}
-          width={1 / stories.length}
-          active={i === currentId ? 1 : i < currentId ? 2 : 0}
-        />
-      ))}
+    <div
+      style={{
+        ...styles.progressArr,
+        ...getRTLStyles(),
+        ...progressContainerStyles,
+        ...opacityStyles,
+      }}
+    >
+      {rtl ? progressBars.reverse() : progressBars}
     </div>
   );
 };

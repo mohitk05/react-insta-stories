@@ -33,6 +33,7 @@ export default function () {
     onPrevious,
     onNext,
     preloadCount,
+    rtl = false,
   } = useContext<GlobalCtx>(GlobalContext);
   const { stories } = useContext<StoriesContextInterface>(StoriesContext);
 
@@ -50,7 +51,6 @@ export default function () {
       }
     }
   }, [currentIndex]);
-
 
   useEffect(() => {
     if (typeof isPaused === "boolean") {
@@ -70,13 +70,23 @@ export default function () {
         document.removeEventListener("keydown", handleKeyDown);
       };
     }
-  }, [keyboardNavigation]);
+  }, [keyboardNavigation, rtl]);
 
   const handleKeyDown = (e: KeyboardEvent) => {
-    if (e.key === "ArrowLeft") {
-      previous();
-    } else if (e.key === "ArrowRight") {
-      next({ isSkippedByUser: true });
+    if (rtl) {
+      // RTL keyboard navigation: reverse arrow key behavior
+      if (e.key === "ArrowLeft") {
+        next({ isSkippedByUser: true });
+      } else if (e.key === "ArrowRight") {
+        previous();
+      }
+    } else {
+      // Default LTR behavior
+      if (e.key === "ArrowLeft") {
+        previous();
+      } else if (e.key === "ArrowRight") {
+        next({ isSkippedByUser: true });
+      }
     }
   };
 
@@ -181,16 +191,16 @@ export default function () {
           <div
             style={{ width: "50%", zIndex: 999 }}
             onTouchStart={debouncePause}
-            onTouchEnd={mouseUp("previous")}
+            onTouchEnd={mouseUp(rtl ? "next" : "previous")}
             onMouseDown={debouncePause}
-            onMouseUp={mouseUp("previous")}
+            onMouseUp={mouseUp(rtl ? "next" : "previous")}
           />
           <div
             style={{ width: "50%", zIndex: 999 }}
             onTouchStart={debouncePause}
-            onTouchEnd={mouseUp("next")}
+            onTouchEnd={mouseUp(rtl ? "previous" : "next")}
             onMouseDown={debouncePause}
-            onMouseUp={mouseUp("next")}
+            onMouseUp={mouseUp(rtl ? "previous" : "next")}
           />
         </div>
       )}
@@ -204,7 +214,7 @@ const styles = {
     flexDirection: "column" as const,
     background: "#111",
     position: "relative" as const,
-    WebkitUserSelect: 'none' as const,
+    WebkitUserSelect: "none" as const,
   },
   overlay: {
     position: "absolute" as const,

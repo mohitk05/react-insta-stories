@@ -1,13 +1,15 @@
-import React, { Suspense } from "react";
-import "./App.css";
-const StoriesLazy = React.lazy(() => import("react-insta-stories"));
+import React, { Suspense } from 'react'
+import './App.css'
+const StoriesLazy = React.lazy(() => import('react-insta-stories'))
 const WithSeeMore = React.lazy(() =>
-  import("react-insta-stories").then((module) => ({
+  import('react-insta-stories').then((module) => ({
     default: module.WithSeeMore,
   }))
-);
+)
 
 function App() {
+  const [isRTL, setIsRTL] = React.useState(false)
+
   return (
     <div className="App">
       <div className="left">
@@ -34,12 +36,12 @@ function App() {
         <code style={{ marginTop: 10, marginBottom: 10 }}>
           <span
             style={{
-              background: "#eee",
+              background: '#eee',
               padding: 5,
               paddingLeft: 10,
               paddingRight: 10,
               borderRadius: 5,
-              width: "auto",
+              width: 'auto',
             }}
           >
             npm i react-insta-stories
@@ -50,8 +52,40 @@ function App() {
             Documentation →
           </a>
         </p>
+
+        {/* RTL Toggle Control */}
+        <div
+          style={{
+            background: '#f0f0f0',
+            padding: 10,
+            marginBottom: 20,
+            borderRadius: 5,
+            border: '2px solid #ddd',
+          }}
+        >
+          <p>
+            <strong>RTL Support</strong>
+          </p>
+          <label
+            style={{ display: 'flex', alignItems: 'center', cursor: 'pointer' }}
+          >
+            <input
+              type="checkbox"
+              checked={isRTL}
+              onChange={(e) => setIsRTL(e.target.checked)}
+              style={{ marginRight: 8 }}
+            />
+            Enable RTL Mode (Arabic/Hebrew-like behavior)
+          </label>
+          <p style={{ fontSize: '12px', color: '#666', margin: '8px 0 0 0' }}>
+            {isRTL
+              ? '🔄 RTL: Progress bars reversed, Left=Next, Right=Previous'
+              : '➡️ LTR: Default behavior, Left=Previous, Right=Next'}
+          </p>
+        </div>
+
         <p>
-          Made with ♥ by{" "}
+          Made with ♥ by{' '}
           <a
             rel="noopener noreferrer"
             href="https://github.com/mohitk05/react-insta-stories"
@@ -62,16 +96,16 @@ function App() {
         </p>
         <div
           style={{
-            background: "#eee",
+            background: '#eee',
             padding: 5,
             paddingLeft: 10,
             paddingRight: 10,
             borderRadius: 5,
-            width: "auto",
+            width: 'auto',
           }}
         >
-          <p>◀ Tap left for previous story</p>
-          <p>▶︎ Tap right for next story</p>
+          <p>◀ Tap left for {isRTL ? 'next' : 'previous'} story</p>
+          <p>▶︎ Tap right for {isRTL ? 'previous' : 'next'} story</p>
           <p>◉ Press and hold to pause</p>
         </div>
         <br />
@@ -185,7 +219,7 @@ function App() {
         </div>
         <br />
         <p>
-          Know more about me here:{" "}
+          Know more about me here:{' '}
           <a
             rel="noopener noreferrer"
             href="https://mohitkarekar.com"
@@ -202,40 +236,41 @@ function App() {
             loop
             keyboardNavigation
             defaultInterval={8000}
+            rtl={isRTL}
             stories={stories2}
-            onStoryEnd={(s, st) => console.log("story ended", s, st)}
-            onAllStoriesEnd={(s, st) => console.log("all stories ended", s, st)}
-            onStoryStart={(s, st) => console.log("story started", s, st)}
-            onNext={() => console.log("next button pressed")}
-            onPrevious={() => console.log("previous button pressed")}
-            storyContainerStyles={{ borderRadius: 8, overflow: "hidden" }}
+            onStoryEnd={(s, st) => console.log('story ended', s, st)}
+            onAllStoriesEnd={(s, st) => console.log('all stories ended', s, st)}
+            onStoryStart={(s, st) => console.log('story started', s, st)}
+            onNext={() => console.log('next button pressed')}
+            onPrevious={() => console.log('previous button pressed')}
+            storyContainerStyles={{ borderRadius: 8, overflow: 'hidden' }}
           />
         </Suspense>
       </div>
     </div>
-  );
+  )
 }
 
 const Story2 = ({ action, isPaused }) => {
   return (
-    <div style={{ ...contentStyle, background: "Aquamarine", color: "#333" }}>
+    <div style={{ ...contentStyle, background: 'Aquamarine', color: '#333' }}>
       <h1>You get the control of the story.</h1>
       <p>
-        Render your custom JSX by passing just a{" "}
-        <code style={{ fontStyle: "italic" }}>content</code> property inside
+        Render your custom JSX by passing just a{' '}
+        <code style={{ fontStyle: 'italic' }}>content</code> property inside
         your story object.
       </p>
       <p>
-        You get a <code style={{ fontStyle: "italic" }}>action</code> prop as an
+        You get a <code style={{ fontStyle: 'italic' }}>action</code> prop as an
         input to your content function, that can be used to play or pause the
         story.
       </p>
-      <h1>{isPaused ? "Paused" : "Playing"}</h1>
+      <h1>{isPaused ? 'Paused' : 'Playing'}</h1>
       <h4>v2 is out 🎉</h4>
       <p>React Native version coming soon.</p>
     </div>
-  );
-};
+  )
+}
 
 const stories2 = [
   {
@@ -257,7 +292,7 @@ const stories2 = [
           ></img>
           <h3>Perfect. But there's more! →</h3>
         </div>
-      );
+      )
     },
   },
   {
@@ -265,15 +300,15 @@ const stories2 = [
       return (
         <Suspense>
           <WithSeeMore story={story} action={action}>
-            <div style={{ background: "snow", padding: 20, height: "100%" }}>
-              <h1 style={{ marginTop: "100%", marginBottom: 0 }}>🌝</h1>
+            <div style={{ background: 'snow', padding: 20, height: '100%' }}>
+              <h1 style={{ marginTop: '100%', marginBottom: 0 }}>🌝</h1>
               <h1 style={{ marginTop: 5 }}>
                 We have our good old image and video stories, just the same.
               </h1>
             </div>
           </WithSeeMore>
         </Suspense>
-      );
+      )
     },
     seeMoreCollapsed: ({ toggleMore, action }) => (
       <p style={customSeeMore} onClick={() => toggleMore(true)}>
@@ -283,14 +318,14 @@ const stories2 = [
     seeMore: ({ close }) => (
       <div
         style={{
-          maxWidth: "100%",
-          height: "100%",
+          maxWidth: '100%',
+          height: '100%',
           padding: 40,
-          background: "white",
+          background: 'white',
         }}
       >
         <h2>Just checking the see more feature.</h2>
-        <p style={{ textDecoration: "underline" }} onClick={close}>
+        <p style={{ textDecoration: 'underline' }} onClick={close}>
           Go on, close this popup.
         </p>
       </div>
@@ -298,80 +333,79 @@ const stories2 = [
     duration: 5000,
   },
   {
-    url: "https://picsum.photos/1080/1920",
+    url: 'https://picsum.photos/1080/1920',
     seeMore: ({ close }) => (
       <div
         style={{
-          maxWidth: "100%",
-          height: "100%",
+          maxWidth: '100%',
+          height: '100%',
           padding: 40,
-          background: "white",
+          background: 'white',
         }}
       >
         <h2>Just checking the see more feature.</h2>
-        <p style={{ textDecoration: "underline" }} onClick={close}>
+        <p style={{ textDecoration: 'underline' }} onClick={close}>
           Go on, close this popup.
         </p>
       </div>
     ),
   },
   {
-    url:
-      "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4",
-    type: "video",
+    url: 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4',
+    type: 'video',
   },
   {
     content: Story2,
   },
   {
-    url: "https://plus.unsplash.com/premium_photo-1676231417481-5eae894e7f68?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1742&q=80",
+    url: 'https://plus.unsplash.com/premium_photo-1676231417481-5eae894e7f68?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1742&q=80',
   },
   {
-    url: "https://images.unsplash.com/photo-1676321626679-2513969695d3?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=774&q=80",
+    url: 'https://images.unsplash.com/photo-1676321626679-2513969695d3?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=774&q=80',
   },
   {
-    url: "https://images.unsplash.com/photo-1676359912443-1bf438548584?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80",
+    url: 'https://images.unsplash.com/photo-1676359912443-1bf438548584?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80',
   },
   {
-    url: "https://images.unsplash.com/photo-1676316698468-a907099ad5bc?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=928&q=80",
+    url: 'https://images.unsplash.com/photo-1676316698468-a907099ad5bc?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=928&q=80',
     preloadResource: false,
   },
   {
-    url: "https://images.unsplash.com/photo-1676310483825-daa08914445e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2920&q=80",
+    url: 'https://images.unsplash.com/photo-1676310483825-daa08914445e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2920&q=80',
     preloadResource: false,
   },
   {
-    url: "https://images.unsplash.com/photo-1676321685222-0b527e61d5c7?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=774&q=80",
+    url: 'https://images.unsplash.com/photo-1676321685222-0b527e61d5c7?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=774&q=80',
     preloadResource: false,
   },
-];
+]
 
 const image = {
-  display: "block",
-  maxWidth: "100%",
+  display: 'block',
+  maxWidth: '100%',
   borderRadius: 4,
-};
+}
 
 const code = {
-  background: "#eee",
-  padding: "5px 10px",
-  borderRadius: "4px",
-  color: "#333",
-};
+  background: '#eee',
+  padding: '5px 10px',
+  borderRadius: '4px',
+  color: '#333',
+}
 
 const contentStyle = {
-  background: "#333",
-  width: "100%",
+  background: '#333',
+  width: '100%',
   padding: 20,
-  color: "white",
-  height: "100%",
-};
+  color: 'white',
+  height: '100%',
+}
 
 const customSeeMore = {
-  textAlign: "center",
+  textAlign: 'center',
   fontSize: 14,
   bottom: 20,
-  position: "relative",
-};
+  position: 'relative',
+}
 
-export default App;
+export default App

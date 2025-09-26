@@ -25,19 +25,19 @@ See it in action here: https://mohitk05.github.io/react-insta-stories/
 ## Usage
 
 ```jsx
-import React, { Component } from 'react';
+import React, { Component } from "react";
 
-import Stories from 'react-insta-stories';
+import Stories from "react-insta-stories";
 
 const App = () => {
-	return (
-		<Stories
-			stories={stories}
-			defaultInterval={1500}
-			width={432}
-			height={768}
-		/>
-	);
+  return (
+    <Stories
+      stories={stories}
+      defaultInterval={1500}
+      width={432}
+      height={768}
+    />
+  );
 };
 ```
 
@@ -45,47 +45,48 @@ Here `stories` is an array of story objects, which can be of various types as de
 
 ## Props
 
-| Property               | Type            | Default                   | Description                                                                                                                                                         |
-| ---------------------- | --------------- | ------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `stories`              | [String/Object] | `required`                | An array of image urls or array of story objects (options described below)                                                                                          |
-| `renderers` ⚡️        | [Object]        | `[]`                      | An array of renderer objects (options described below)                                                                                                              |
-| `defaultInterval`      | Number          | 1200                      | Milliseconds duration for which a story persists                                                                                                                    |
-| `loader`               | Component       | Ripple loader             | A loader component as a fallback until image loads from url                                                                                                         |
-| `header`               | Component       | Default header as in demo | A header component which sits at the top of each story. It receives the `header` object from the `story` object. Data for header to be sent with each story object. |
-| `storyContainerStyles` | Object          | `{}`                      | Styles object for the outer container                                                                                                                               |
-| `width`                | Number/String   | 360                       | Width of the component, e.g. 600 or '100vw' or 'inherit'                                                                                                            |
-| `height`               | Number/String   | 640                       | Height of the component, e.g. 1000 or '100%' or 'inherit'                                                                                                           |
-| `storyStyles`          | Object          | none                      | Override the default story styles mentioned below.                                                                                                                  |
-| `progressContainerStyles` | Object          | `{}`                      | Styles object for the container wrapping the progress bars                                                                                                                 |
-| `progressWrapperStyles` | Object          | `{}`                      | Styles object for the container wrapping each progress bar bars                                                                                                                 |
-| `progressStyles`       | Object          | `{}`                      | Styles object for the progress bars                                                                                                                 |
-| `loop`                 | Boolean         | false                     | The last story loop to the first one and restart the stories.                                                                                                       |
-| **New props**          | ⭐️             | ⭐️                       | ⭐️                                                                                                                                                                 |
-| `isPaused`             | Boolean         | false                     | Toggle story playing state                                                                                                                                          |
-| `currentIndex`         | Number          | undefined                 | Set the current story index                                                                                                                                         |
-| `onStoryStart`         | Function        | -                         | Callback when a story starts                                                                                                                                        |
-| `onStoryEnd`           | Function        | -                         | Callback when a story ends                                                                                                                                          |
-| `onAllStoriesEnd`      | Function        | -                         | Callback when all stories in the array have ended                                                                                                                   |
-| `onNext`               | Function        | -                         | Callback when the user taps/press to proceed to the next story                                                                                                                   |
-| `onPrevious`           | Function        | -                         | Callback when the user taps/press to go back to the previous story                                                                                                                    |
-| `keyboardNavigation`   | Boolean         | false                     | Attaches arrow key listeners to navigate between stories if true. Also adds up arrow key listener for opening See More and Escape/down arrow for closing it         |
-| `preventDefault`       | Boolean         | false                     | Disable the default behavior when user click the component                                                                                                          |
-| `preloadCount`         | number          | 1                         | Determines how many stories should be preloaded ahead of the current story index.                                                                                   |
+| Property                  | Type            | Default                   | Description                                                                                                                                                                                               |
+| ------------------------- | --------------- | ------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `stories`                 | [String/Object] | `required`                | An array of image urls or array of story objects (options described below)                                                                                                                                |
+| `renderers` ⚡️           | [Object]        | `[]`                      | An array of renderer objects (options described below)                                                                                                                                                    |
+| `defaultInterval`         | Number          | 1200                      | Milliseconds duration for which a story persists                                                                                                                                                          |
+| `loader`                  | Component       | Ripple loader             | A loader component as a fallback until image loads from url                                                                                                                                               |
+| `header`                  | Component       | Default header as in demo | A header component which sits at the top of each story. It receives the `header` object from the `story` object. Data for header to be sent with each story object.                                       |
+| `storyContainerStyles`    | Object          | `{}`                      | Styles object for the outer container                                                                                                                                                                     |
+| `width`                   | Number/String   | 360                       | Width of the component, e.g. 600 or '100vw' or 'inherit'                                                                                                                                                  |
+| `height`                  | Number/String   | 640                       | Height of the component, e.g. 1000 or '100%' or 'inherit'                                                                                                                                                 |
+| `storyStyles`             | Object          | none                      | Override the default story styles mentioned below.                                                                                                                                                        |
+| `progressContainerStyles` | Object          | `{}`                      | Styles object for the container wrapping the progress bars                                                                                                                                                |
+| `progressWrapperStyles`   | Object          | `{}`                      | Styles object for the container wrapping each progress bar bars                                                                                                                                           |
+| `progressStyles`          | Object          | `{}`                      | Styles object for the progress bars                                                                                                                                                                       |
+| `loop`                    | Boolean         | false                     | The last story loop to the first one and restart the stories.                                                                                                                                             |
+| **New props**             | ⭐️             | ⭐️                       | ⭐️                                                                                                                                                                                                       |
+| `isPaused`                | Boolean         | false                     | Toggle story playing state                                                                                                                                                                                |
+| `currentIndex`            | Number          | undefined                 | Set the current story index                                                                                                                                                                               |
+| `onStoryStart`            | Function        | -                         | Callback when a story starts                                                                                                                                                                              |
+| `onStoryEnd`              | Function        | -                         | Callback when a story ends                                                                                                                                                                                |
+| `onAllStoriesEnd`         | Function        | -                         | Callback when all stories in the array have ended                                                                                                                                                         |
+| `onNext`                  | Function        | -                         | Callback when the user taps/press to proceed to the next story                                                                                                                                            |
+| `onPrevious`              | Function        | -                         | Callback when the user taps/press to go back to the previous story                                                                                                                                        |
+| `keyboardNavigation`      | Boolean         | false                     | Attaches arrow key listeners to navigate between stories if true. Also adds up arrow key listener for opening See More and Escape/down arrow for closing it. In RTL mode, arrow key behavior is reversed. |
+| `preventDefault`          | Boolean         | false                     | Disable the default behavior when user click the component                                                                                                                                                |
+| `preloadCount`            | number          | 1                         | Determines how many stories should be preloaded ahead of the current story index.                                                                                                                         |
+| `rtl` ⚡️                 | Boolean         | false                     | Enables RTL (right-to-left) layout support for languages like Arabic, Hebrew, etc. Reverses progress bar order, navigation controls, and keyboard shortcuts.                                              |
 
 ### Story object
 
 Instead of simple string url, a comprehensive 'story object' can also be passed in the `stories` array.
 
 | Property           | Description                                                                                                                                   |
-|--------------------|-----------------------------------------------------------------------------------------------------------------------------------------------|
+| ------------------ | --------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------ |
 | `url`              | The url of the resource, be it image or video.                                                                                                |
 | `type`             | Optional. Type of the story. `type: 'video'                                                                                                   | 'image'`. Type `video` is necessary for a video story. |
 | `duration`         | Optional. Duration for which a story should persist.                                                                                          |
 | `header`           | Optional. Adds a header on the top. Object with `heading`, `subheading` and `profileImage` properties.                                        |
 | `seeMore`          | Optional. Adds a see more icon at the bottom of the story. On clicking, opens up this component. (v2: updated to Function instead of element) |
-| `seeMoreCollapsed` | Optional. Send custom component to be rendered instead of the default 'See More' text.                                                        |  |
+| `seeMoreCollapsed` | Optional. Send custom component to be rendered instead of the default 'See More' text.                                                        |                                                        |
 | `styles`           | Optional. Override the default story styles mentioned below.                                                                                  |
-| `preloadResource`  | Optional. Whether to preload the resource or not, defaults to `true` for images and `false` for videos (video preloading is experimental)         | 
+| `preloadResource`  | Optional. Whether to preload the resource or not, defaults to `true` for images and `false` for videos (video preloading is experimental)     |
 
 ### Default story styles
 
@@ -104,10 +105,10 @@ storyContent: {
 
 To allow reusable components to display story UI, you can pass in pre-built or custom-built components in a special manner to leverage this behavior. Each renderer object has two properties:
 
--   `renderer` - This is the UI component that will be rendered whenever the object matches certain conditions.
--   `tester` - This is a function that tests whether the renderer is suitable for the current story. It receives the current story object to render and returns an object with two properties:
-    -   `condition` - This states if the renderer matches the current story's criteria (a boolean).
-    -   `priority` - A number denoting the priority of the current renderer. E.g. priority of 2 is less than a 5, and if two renderers have condition = `true`, their priorities will be compared and the one with higher priority will be selected.
+- `renderer` - This is the UI component that will be rendered whenever the object matches certain conditions.
+- `tester` - This is a function that tests whether the renderer is suitable for the current story. It receives the current story object to render and returns an object with two properties:
+  - `condition` - This states if the renderer matches the current story's criteria (a boolean).
+  - `priority` - A number denoting the priority of the current renderer. E.g. priority of 2 is less than a 5, and if two renderers have condition = `true`, their priorities will be compared and the one with higher priority will be selected.
 
 So essentially a simple renderer would look like this:
 (you may also refer the inbuilt [Image renderer](src/renderers/Image.tsx))
@@ -116,15 +117,15 @@ So essentially a simple renderer would look like this:
 // Renderer.js
 
 export const renderer = ({ story, action, isPaused, config }) => {
-	return <div>Hello!</div>;
+  return <div>Hello!</div>;
 };
 
 export const tester = (story) => {
-	return {
-		// Use this renderer only when the story type is video
-		condition: story.type === 'video',
-		priority: 3,
-	};
+  return {
+    // Use this renderer only when the story type is video
+    condition: story.type === "video",
+    priority: 3,
+  };
 };
 ```
 
@@ -139,7 +140,7 @@ const { width, height, loader, storyStyles } = config;
 
 List of public renderers:
 
--   Add one here
+- Add one here
 
 ### Higher Order Components
 
@@ -192,11 +193,11 @@ If not implementing a custom UI, you can send the `customCollapsedComponent` com
 
 ```jsx
 const stories = [
-	{
-		url: 'some.url',
-		seeMore: SeeMoreComponent, // when expanded
-		seeMoreCollapsed: customCollapsedComponent, // when collapsed
-	},
+  {
+    url: "some.url",
+    seeMore: SeeMoreComponent, // when expanded
+    seeMoreCollapsed: customCollapsedComponent, // when collapsed
+  },
 ];
 ```
 
@@ -227,12 +228,12 @@ If you wish to have a bare minimum setup and only need to show image stories, yo
 This will show all your images as stories.
 
 ```js
-import Stories from 'react-insta-stories';
+import Stories from "react-insta-stories";
 
 const stories = [
-	'https://example.com/pic.jpg',
-	'data:image/jpg;base64,R0lGODl....',
-	'https://mohitkarekar.com/icon.png',
+  "https://example.com/pic.jpg",
+  "data:image/jpg;base64,R0lGODl....",
+  "https://mohitkarekar.com/icon.png",
 ];
 
 return () => <Stories stories={stories} />;
@@ -250,11 +251,11 @@ Each story can be set to have a different duration.
 
 ```jsx
 const stories = [
-	'https://example.com/pic.jpg',
-	{
-		url: 'https://example.com/pic2.jpg',
-		duration: 5000,
-	},
+  "https://example.com/pic.jpg",
+  {
+    url: "https://example.com/pic2.jpg",
+    duration: 5000,
+  },
 ];
 ```
 
@@ -264,16 +265,16 @@ Adds a header to the story.
 
 ```jsx
 const stories = [
-	'https://example.com/pic.jpg',
-	{
-		url: 'https://example.com/pic2.jpg',
-		duration: 5000,
-		header: {
-			heading: 'Mohit Karekar',
-			subheading: 'Posted 30m ago',
-			profileImage: 'https://picsum.photos/100/100',
-		},
-	},
+  "https://example.com/pic.jpg",
+  {
+    url: "https://example.com/pic2.jpg",
+    duration: 5000,
+    header: {
+      heading: "Mohit Karekar",
+      subheading: "Posted 30m ago",
+      profileImage: "https://picsum.photos/100/100",
+    },
+  },
 ];
 ```
 
@@ -283,19 +284,19 @@ Adds a click to see more option at the bottom of the story. When present, shows 
 
 ```jsx
 const stories = [
-	'https://example.com/pic.jpg',
-	{
-		url: 'https://example.com/pic2.jpg',
-		duration: 5000,
-		seeMore: SeeMore, // some component
-	},
-	{
-		url: 'https://example.com/pic3.jpg',
-		duration: 2000,
-		seeMore: ({ close }) => {
-			return <div onClick={close}>Hello, click to close this.</div>;
-		},
-	},
+  "https://example.com/pic.jpg",
+  {
+    url: "https://example.com/pic2.jpg",
+    duration: 5000,
+    seeMore: SeeMore, // some component
+  },
+  {
+    url: "https://example.com/pic3.jpg",
+    duration: 2000,
+    seeMore: ({ close }) => {
+      return <div onClick={close}>Hello, click to close this.</div>;
+    },
+  },
 ];
 ```
 
@@ -305,12 +306,12 @@ If provided `type: video`, then the component loads a video player. All expected
 
 ```jsx
 const stories = [
-	'https://example.com/pic.jpg',
-	{
-		url: 'https://example.com/vid.mp4',
-		duration: 5000, // ignored
-		type: 'video',
-	},
+  "https://example.com/pic.jpg",
+  {
+    url: "https://example.com/vid.mp4",
+    duration: 5000, // ignored
+    type: "video",
+  },
 ];
 ```
 
@@ -324,44 +325,44 @@ You can render custom JSX inside a story by sending a `content` property inside 
 
 ```jsx
 const stories = [
-	'https://example.com/pic.jpg',
-	{
-		content: (props) => (
-			<div style={{ background: 'pink', padding: 20 }}>
-				<h1 style={{ marginTop: '100%', marginBottom: 0 }}>🌝</h1>
-				<h1 style={{ marginTop: 5 }}>A custom title can go here.</h1>
-			</div>
-		),
-	},
+  "https://example.com/pic.jpg",
+  {
+    content: (props) => (
+      <div style={{ background: "pink", padding: 20 }}>
+        <h1 style={{ marginTop: "100%", marginBottom: 0 }}>🌝</h1>
+        <h1 style={{ marginTop: 5 }}>A custom title can go here.</h1>
+      </div>
+    ),
+  },
 ];
 ```
 
 The content property can hold any React component. For further control, it receives two important props:
 
--   `action` It allows you to fire play/pause actions.
--   `isPaused` Holds true is the story is currently paused, false otherwise.
+- `action` It allows you to fire play/pause actions.
+- `isPaused` Holds true is the story is currently paused, false otherwise.
 
 ```jsx
 const stories = [
-	'https://example.com/pic.jpg',
-	{
-		content: ({ action, isPaused }) => {
-			useEffect(() => {
-				setTimeout(() => {
-					action('pause');
-					setTimeout(() => {
-						action('play');
-					}, 2000);
-				}, 2000);
-			}, []);
-			return (
-				<div style={{ background: 'pink', padding: 20 }}>
-					<h1 style={{ marginTop: '100%', marginBottom: 0 }}>🌝</h1>
-					<h1>{isPaused ? 'Paused' : 'Playing'}</h1>
-				</div>
-			);
-		},
-	},
+  "https://example.com/pic.jpg",
+  {
+    content: ({ action, isPaused }) => {
+      useEffect(() => {
+        setTimeout(() => {
+          action("pause");
+          setTimeout(() => {
+            action("play");
+          }, 2000);
+        }, 2000);
+      }, []);
+      return (
+        <div style={{ background: "pink", padding: 20 }}>
+          <h1 style={{ marginTop: "100%", marginBottom: 0 }}>🌝</h1>
+          <h1>{isPaused ? "Paused" : "Playing"}</h1>
+        </div>
+      );
+    },
+  },
 ];
 ```
 
@@ -385,13 +386,13 @@ This will start a hot-reloading setup with a live example.
 
 ## Thanks To
 
--   [@SamHambert](https://github.com/SamHerbert/SVG-Loaders) for the default spinner SVG
+- [@SamHambert](https://github.com/SamHerbert/SVG-Loaders) for the default spinner SVG
 
 ## Websites using `react-insta-stories`
 
--   [Corsza](http://corsza.com/)
--   [TLDR Stories](https://www.producthunt.com/posts/tldr-stories-a0c16732-ba1e-4a40-b420-8582b9128bac)
--   [Dysperse](https://dysperse.com)
+- [Corsza](http://corsza.com/)
+- [TLDR Stories](https://www.producthunt.com/posts/tldr-stories-a0c16732-ba1e-4a40-b420-8582b9128bac)
+- [Dysperse](https://dysperse.com)
 
 Do you use `react-insta-stories` too? Raise a PR to include your site in this list!
 
@@ -401,6 +402,7 @@ This project exists thanks to all the people who contribute.
 <a href="https://github.com/mohitk05/react-insta-stories/graphs/contributors"><img src="https://opencollective.com/react-insta-stories/contributors.svg?width=890&button=false" /></a>
 
 ## Like the project? Support me on Ko-fi
+
 [![ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/L3L2Q0BK)
 
 ## License

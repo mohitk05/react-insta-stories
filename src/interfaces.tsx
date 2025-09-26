@@ -28,6 +28,7 @@ export interface ReactInstaStoriesProps {
   keyboardNavigation?: boolean;
   preventDefault?: boolean;
   preloadCount?: number;
+  rtl?: boolean;
 }
 
 export interface GlobalCtx {
@@ -57,6 +58,7 @@ export interface GlobalCtx {
   keyboardNavigation?: boolean;
   preventDefault?: boolean;
   preloadCount?: number;
+  rtl?: boolean;
 }
 
 type NumberOrString = number | string;
@@ -117,7 +119,7 @@ export interface Story {
   duration?: number;
   styles?: object;
   content?: Renderer;
-  originalContent?: Renderer
+  originalContent?: Renderer;
   // Whether to preload the resource or not, defaults to `true` for images and `false` for videos (video preloading is experimental)
   preloadResource?: boolean;
   muted?: boolean;
