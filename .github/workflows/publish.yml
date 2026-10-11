@@ -9,8 +9,8 @@ permissions:
     id-token: write
 
 jobs:
-    publish-staging:
-        name: Stage Package for Approval
+    publish:
+        name: Publish to npm
         runs-on: ubuntu-latest
         permissions:
             contents: read
@@ -27,14 +27,7 @@ jobs:
                   cache: 'pnpm'
             - run: pnpm install --frozen-lockfile
             - run: pnpm build
-            - name: Stage package with stage-only token
+            - name: Publish to npm with provenance
               run: npm publish --provenance --access public
               env:
                   NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-            - name: Promotion instructions
-              run: |
-                echo "✅ Package staged successfully!"
-                echo ""
-                echo "Stage-only token automatically stages instead of publishing."
-                echo "To promote to production, run:"
-                echo "  npm dist-tag add react-insta-stories@3.0.0 latest"
