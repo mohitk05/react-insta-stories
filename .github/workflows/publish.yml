@@ -26,8 +26,6 @@ jobs:
             - run: pnpm build
             - name: Publish to staging with provenance
               run: npm publish --tag staging --provenance --access public
-              env:
-                  NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
     publish-production:
         name: Publish to Production
@@ -50,5 +48,3 @@ jobs:
             - run: pnpm build
             - name: Publish to production with provenance
               run: npm publish --tag latest --provenance --access public
-              env:
-                  NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
