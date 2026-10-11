@@ -27,16 +27,14 @@ jobs:
                   cache: 'pnpm'
             - run: pnpm install --frozen-lockfile
             - run: pnpm build
-            - name: Stage package for manual promotion
-              run: npm stage publish --provenance --access public
+            - name: Stage package with stage-only token
+              run: npm publish --provenance --access public
               env:
                   NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
             - name: Promotion instructions
               run: |
                 echo "✅ Package staged successfully!"
                 echo ""
+                echo "Stage-only token automatically stages instead of publishing."
                 echo "To promote to production, run:"
                 echo "  npm dist-tag add react-insta-stories@3.0.0 latest"
-                echo ""
-                echo "Or install the staged version to test first:"
-                echo "  npm install react-insta-stories@staging"
