@@ -25,6 +25,8 @@ jobs:
                   node-version: '20.x'
                   registry-url: https://registry.npmjs.org/
                   cache: 'pnpm'
+            - name: Upgrade npm to latest
+              run: npm install -g npm@latest
             - run: pnpm install --frozen-lockfile
             - run: pnpm build
             - name: Stage package for manual promotion
