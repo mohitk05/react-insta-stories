@@ -4,7 +4,8 @@ on:
         tags:
             - 'v*'
 jobs:
-    publish:
+    publish-staging:
+        name: Publish to Staging
         runs-on: ubuntu-latest
         steps:
             - uses: actions/checkout@v4
@@ -18,6 +19,31 @@ jobs:
                   cache: 'pnpm'
             - run: pnpm install --frozen-lockfile
             - run: pnpm build
-            - run: npm publish
+            - name: Publish to staging
+              run: npm publish --tag staging
               env:
                   NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+    publish-production:
+        name: Publish to Production
+        runs-on: ubuntu-latest
+        needs: publish-staging
+        environment:
+            name: production
+            url: https://www.npmjs.com/package/react-insta-stories
+        steps:
+            - uses: actions/checkout@v4
+            - uses: pnpm/action-setup@v4
+              with:
+                  version: 9
+            - uses: actions/setup-node@v4
+              with:
+                  node-version: '20.x'
+                  registry-url: https://registry.npmjs.org/
+                  cache: 'pnpm'
+            - run: pnpm install --frozen-lockfile
+            - run: pnpm build
+            - name: Publish to production (latest tag)
+              run: npm publish --tag latest
+              env:
+                  NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN_PUBLISH }}
