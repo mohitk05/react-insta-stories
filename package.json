@@ -1,6 +1,6 @@
 {
 	"name": "react-insta-stories",
-	"version": "3.0.0",
+	"version": "3.0.1",
 	"type": "module",
 	"description": "A React component for Instagram like stories",
 	"main": "./dist/index.cjs",
