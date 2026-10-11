@@ -78,110 +78,60 @@ function App() {
         <div className="updates">
           <p>
             <mark>
-              <b>Updates [V2.5.0]</b>
+              <b>🎉 Version 3.0.0 - Modern Build System</b>
             </mark>
           </p>
           <p>
-            1. React 18 progress bar bug fix (
+            <strong>⚠️ Breaking Changes:</strong>
+          </p>
+          <ul style={{ textAlign: 'left', paddingLeft: 20 }}>
+            <li>Node.js ≥20.0.0 required</li>
+            <li>Pure ESM package with CommonJS fallback</li>
+            <li>UMD format removed</li>
+            <li>TypeScript 5.0+ recommended</li>
+          </ul>
+          <p>
+            <strong>✨ Improvements:</strong>
+          </p>
+          <ul style={{ textAlign: 'left', paddingLeft: 20 }}>
+            <li>⚡️ Built with Vite + SWC (faster builds)</li>
+            <li>📦 Better tree-shaking with native ESM</li>
+            <li>🔧 Development uses pnpm workspaces</li>
+            <li>📝 TypeScript 5.9 with modern module resolution</li>
+            <li>🗺️ Source maps for better debugging</li>
+          </ul>
+          <p>
+            <a href="https://github.com/mohitk05/react-insta-stories/blob/master/MIGRATION.md">
+              📖 Migration Guide →
+            </a>
+          </p>
+          <p>
+            <a href="https://github.com/mohitk05/react-insta-stories/blob/master/CHANGELOG.md">
+              📋 Full Changelog →
+            </a>
+          </p>
+          <br />
+          <p>
+            <mark>
+              <b>Previous Updates [V2.5.0]</b>
+            </mark>
+          </p>
+          <p>
+            • React 18 progress bar bug fix (
             <a href="https://github.com/mohitk05/react-insta-stories/issues/214">
-              #214 and others
+              #214
             </a>
             )
           </p>
-          <p>
-            <mark>
-              <b>Updates [V2.2.2]</b>
-            </mark>
-          </p>
-          <p>
-            1. Server-side rendering bug fix (
-            <a href="https://github.com/mohitk05/react-insta-stories/issues/51">
-              #51 and others
-            </a>
-            )
-          </p>
-          <p>
-            <mark>
-              <b>Updates [V2.2.1]</b>
-            </mark>
-          </p>
-          <p>
-            1. Bug fixes (
-            <a href="https://github.com/mohitk05/react-insta-stories/issues/130">
-              #130
-            </a>
-            )
-          </p>
-          <p>
-            <mark>
-              <b>Updates [V2.1.2]</b>
-            </mark>
-          </p>
-          <p>
-            1. Pass in renderers to switch story UI according to certain
-            conditions
-          </p>
-          <p>
-            2. Internal code structure changed keeping in mind long-term
-            maintainability
-          </p>
-          <p>3. Community based pluggable renderers possible now</p>
-          <p>4. Optional keyboard navigation</p>
-          <p>5. Bug fixes</p>
-          <p>
-            <a href="https://github.com/mohitk05/react-insta-stories/pull/80">
-              Read more here →
-            </a>
-          </p>
-          <br></br>
           <p>
             <mark>
               <b>Updates [V2.0.0]</b>
             </mark>
           </p>
-          <p>1. Render your own components/JSX in stories</p>
-          <p>
-            2. Create multiple instances to recreate stories by multiple users
-            easily, jump to stories using props
-          </p>
-          <p>3. Prop based control, event callbacks</p>
-          <p>4. Custom JSX gives control to pause/play story</p>
-          <p>5. (for devs) TypeScript 🎉</p>
-          <p>6. (for devs) Updated for easier feature additions, hooks</p>
-          <br></br>
-          <p>
-            <mark>
-              <b>Updates [V1.4.1]</b>
-            </mark>
-          </p>
-          <p>1. Stories stretch to fill screen by default</p>
-          <p>2. Style story content using 'storyStyles' prop 💅</p>
-          <p>3. Add individual styling to each story</p>
-          <br />
-          <p>
-            <mark>
-              <b>Updates [V1.4.0]</b>
-            </mark>
-          </p>
-          <p>1. 'See more' feature added 🤳</p>
-          <p>2. Video playback fixes</p>
-          <br />
-          <p>
-            <mark>
-              <b>Updates [V1.3.0]</b>
-            </mark>
-          </p>
-          <p>1. Video support added 🎉</p>
-          <p>2. babel-polyfill error fix 👾</p>
-          <p>3. Changed progress animation to plain CSS</p>
-          <br />
-          <p>
-            <mark>
-              <b>Updates [V1.2.0]</b>
-            </mark>
-          </p>
-          <p>1. Now you can add a header to the story</p>
-          <p>2. Image aspect ratio retained if story size changed (fix)</p>
+          <p>• Render custom components/JSX in stories</p>
+          <p>• Multiple instances support</p>
+          <p>• TypeScript support 🎉</p>
+          <p>• Prop-based control and event callbacks</p>
         </div>
         <br />
         <p>
@@ -231,8 +181,8 @@ const Story2 = ({ action, isPaused }) => {
         story.
       </p>
       <h1>{isPaused ? "Paused" : "Playing"}</h1>
-      <h4>v2 is out 🎉</h4>
-      <p>React Native version coming soon.</p>
+      <h4>v3.0 is out 🎉</h4>
+      <p>Built with modern tools: Vite + ESM + TypeScript 5.9</p>
     </div>
   );
 };
@@ -242,14 +192,15 @@ const stories2 = [
     content: ({ action, isPaused }) => {
       return (
         <div style={contentStyle}>
-          <h1>The new version is here.</h1>
-          <p>This is the new story.</p>
-          <p>Now render React components right into your stories.</p>
-          <p>Possibilities are endless, like here - here's a code block!</p>
+          <h1>Version 3.0 is here! 🎉</h1>
+          <p>Rebuilt with modern tooling for better performance.</p>
+          <p>Now powered by Vite + SWC for lightning-fast builds.</p>
+          <p>Pure ESM with CommonJS fallback for compatibility.</p>
+          <p>Like before, you can render React components in your stories!</p>
           <pre>
-            <code style={code}>console.log('Hello, world!')</code>
+            <code style={code}>import Stories from 'react-insta-stories'</code>
           </pre>
-          <p>Or here, an image!</p>
+          <p>Or display images!</p>
           <br />
           <img
             style={image}
