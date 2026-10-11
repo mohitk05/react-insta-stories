@@ -3,6 +3,11 @@ on:
     push:
         tags:
             - 'v*'
+
+permissions:
+    contents: read
+    id-token: write
+
 jobs:
     publish-staging:
         name: Publish to Staging
@@ -19,8 +24,8 @@ jobs:
                   cache: 'pnpm'
             - run: pnpm install --frozen-lockfile
             - run: pnpm build
-            - name: Publish to staging
-              run: npm publish --tag staging
+            - name: Publish to staging with provenance
+              run: npm publish --tag staging --provenance --access public
               env:
                   NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
@@ -43,7 +48,7 @@ jobs:
                   cache: 'pnpm'
             - run: pnpm install --frozen-lockfile
             - run: pnpm build
-            - name: Publish to production (latest tag)
-              run: npm publish --tag latest
+            - name: Publish to production with provenance
+              run: npm publish --tag latest --provenance --access public
               env:
-                  NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN_PUBLISH }}
+                  NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
