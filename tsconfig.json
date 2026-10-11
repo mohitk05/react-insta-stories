@@ -1,15 +1,22 @@
 {
   "compilerOptions": {
-    "module": "none",
-    "jsx": "react",
-    "target": "es6",
-    "lib": ["es2015", "dom", "dom.iterable"],
-    "sourceMap": true,
-    "allowSyntheticDefaultImports": true,
+    "target": "ES2020",
+    "lib": ["ES2020", "DOM", "DOM.Iterable"],
+    "module": "ESNext",
+    "moduleResolution": "node16",
+    "jsx": "react-jsx",
+    "strict": true,
     "esModuleInterop": true,
-    "experimentalDecorators": true,
+    "skipLibCheck": true,
+    "allowSyntheticDefaultImports": true,
+    "resolveJsonModule": true,
+    "isolatedModules": true,
     "declaration": true,
-    "declarationDir": "dist",
-    "moduleResolution": "node"
-  }
+    "declarationMap": true,
+    "sourceMap": true,
+    "outDir": "./dist",
+    "declarationDir": "./dist"
+  },
+  "include": ["src"],
+  "exclude": ["node_modules", "dist", "example"]
 }
