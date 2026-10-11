@@ -2,9 +2,6 @@
 node_modules/
 .pnpm-store/
 
-# Lock files
-pnpm-lock.yaml
-
 # Build outputs
 dist/
 example/dist/
