@@ -28,7 +28,7 @@ jobs:
             - run: pnpm install --frozen-lockfile
             - run: pnpm build
             - name: Stage package for manual promotion
-              run: npm publish --tag staging --provenance --access public
+              run: npm stage publish --provenance --access public
               env:
                   NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
             - name: Promotion instructions
