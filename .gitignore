@@ -1,6 +1,19 @@
-.DS_Store
-node_modules
-dist
+# Dependency directories
+node_modules/
+.pnpm-store/
+
+# Lock files
+pnpm-lock.yaml
+
+# Build outputs
+dist/
+example/dist/
 stats.json
 report.html
-.idea
+
+# Editor
+.DS_Store
+.vscode/
+.idea/
+*.swp
+*.swo
