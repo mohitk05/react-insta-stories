@@ -1,26 +1,43 @@
 {
 	"name": "react-insta-stories",
-	"version": "2.8.0",
+	"version": "3.0.0",
+	"type": "module",
 	"description": "A React component for Instagram like stories",
-	"main": "dist/index.js",
-	"types": "dist/index.d.ts",
-	"scripts": {
-		"build": "webpack --mode production",
-		"build:dev": "webpack --mode development",
-		"prestart": "webpack --mode development",
-		"start": "webpack --watch --mode development",
-		"example": "cd example && npm start",
-		"test": "echo \"Error: no test specified\" && exit 1",
-		"predeploy": "cd example && npm install && npm run build",
-		"deploy": "gh-pages -d example/dist",
-		"buildall": "npm install && webpack --mode production && cd example && npm install && npm run build",
-		"postversion": "git push && git push --tags",
-		"analyze-bundle": "webpack --profile --json > stats.json && webpack-bundle-analyzer stats.json --mode=static"
+	"main": "./dist/index.cjs",
+	"module": "./dist/index.js",
+	"types": "./dist/index.d.ts",
+	"exports": {
+		".": {
+			"types": "./dist/index.d.ts",
+			"import": "./dist/index.js",
+			"require": "./dist/index.cjs"
+		},
+		"./package.json": "./package.json"
 	},
 	"files": [
 		"dist",
 		"README.md"
 	],
+	"engines": {
+		"node": ">=20.0.0"
+	},
+	"scripts": {
+		"build": "vite build",
+		"build:types": "tsc --project tsconfig.build.json",
+		"dev": "vite build --watch",
+		"dev:example": "pnpm --filter example dev",
+		"example": "pnpm --filter example dev",
+		"build:example": "pnpm --filter example build",
+		"preview:example": "pnpm --filter example preview",
+		"prepare": "pnpm build",
+		"typecheck": "tsc --noEmit",
+		"test": "echo \"Error: no test specified\" && exit 1",
+		"predeploy": "pnpm --filter example build",
+		"deploy": "gh-pages -d example/dist",
+		"buildall": "pnpm install && pnpm build && pnpm --filter example build",
+		"postversion": "git push && git push --tags",
+		"analyze-bundle": "vite build --mode analyze"
+	},
 	"repository": {
 		"type": "git",
 		"url": "git+https://github.com/mohitk05/react-insta-stories.git"
