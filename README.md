@@ -11,11 +11,18 @@
 
 <img height="600" src="https://i.imgur.com/Y1s8FKb.png" alt="Demo screenshot"/>
 
+## Requirements
+
+- **Node.js:** ≥20.0.0
+- **React:** ≥16.8.2
+
 ## Install
 
 ```bash
 npm install --save react-insta-stories
 ```
+
+> **Upgrading from v2.x?** See the [Migration Guide](MIGRATION.md) for breaking changes and upgrade steps.
 
 ## Demo
 
@@ -399,6 +406,37 @@ Do you use `react-insta-stories` too? Raise a PR to include your site in this li
 
 This project exists thanks to all the people who contribute.
 <a href="https://github.com/mohitk05/react-insta-stories/graphs/contributors"><img src="https://opencollective.com/react-insta-stories/contributors.svg?width=890&button=false" /></a>
+
+## Development
+
+This project uses modern tooling for faster development:
+
+- **Package Manager:** [pnpm](https://pnpm.io/)
+- **Build Tool:** [Vite](https://vitejs.dev/) with SWC
+- **Node Version:** ≥20.0.0
+
+### Setup
+
+```bash
+# Install dependencies
+pnpm install
+
+# Build the library
+pnpm build
+
+# Run the example app
+pnpm example
+```
+
+### Project Structure
+
+```
+react-insta-stories/
+├── src/              # Library source code
+├── dist/             # Built library (ESM + CJS)
+├── example/          # Example app (pnpm workspace)
+└── docs/             # Documentation
+```
 
 ## Like the project? Support me on Ko-fi
 [![ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/L3L2Q0BK)
