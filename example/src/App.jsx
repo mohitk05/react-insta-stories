@@ -191,22 +191,18 @@ const stories2 = [
   {
     content: ({ action, isPaused }) => {
       return (
-        <div style={contentStyle}>
-          <h1>Version 3.0 is here! 🎉</h1>
-          <p>Rebuilt with modern tooling for better performance.</p>
-          <p>Now powered by Vite + SWC for lightning-fast builds.</p>
-          <p>Pure ESM with CommonJS fallback for compatibility.</p>
-          <p>Like before, you can render React components in your stories!</p>
+        <div style={{...contentStyle, overflowY: 'auto'}}>
+          <h1>Version 3.0 🎉</h1>
+          <p>Modern build with Vite + ESM</p>
           <pre>
-            <code style={code}>import Stories from 'react-insta-stories'</code>
+            <code style={code}>npm i react-insta-stories</code>
           </pre>
-          <p>Or display images!</p>
           <br />
           <img
             style={image}
             src="https://images.unsplash.com/photo-1565506737357-af89222625ad?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1650&q=80"
           ></img>
-          <h3>Perfect. But there's more! →</h3>
+          <h3>Swipe for more! →</h3>
         </div>
       );
     },
