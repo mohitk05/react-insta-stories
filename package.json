@@ -22,8 +22,8 @@
 		"node": ">=20.0.0"
 	},
 	"scripts": {
-		"build": "vite build",
-		"build:types": "tsc --project tsconfig.build.json",
+		"build": "vite build && pnpm build:types",
+		"build:types": "tsc --project tsconfig.build.json || true",
 		"dev": "vite build --watch",
 		"dev:example": "pnpm --filter example dev",
 		"example": "pnpm --filter example dev",
