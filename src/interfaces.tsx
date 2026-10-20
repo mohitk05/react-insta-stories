@@ -4,7 +4,7 @@ export interface ReactInstaStoriesProps {
   stories: Story[];
   width?: NumberOrString;
   height?: NumberOrString;
-  loader?: JSX.Element;
+  loader?: React.ReactNode;
   header?: Function;
   storyContainerStyles?: Record<string, any>;
   storyInnerContainerStyles?: Record<string, any>;
@@ -33,7 +33,7 @@ export interface ReactInstaStoriesProps {
 export interface GlobalCtx {
   width?: NumberOrString;
   height?: NumberOrString;
-  loader?: JSX.Element;
+  loader?: React.ReactNode;
   header?: Function;
   storyContainerStyles?: Record<string, any>;
   storyInnerContainerStyles?: Record<string, any>;
@@ -73,14 +73,14 @@ export interface ContainerState {
 }
 
 export type Action = (action: string, bufferAction?: boolean) => void;
-export type Renderer = React.FC<{
+export type Renderer = React.ComponentType<{
   action: Action;
   isPaused: boolean;
   story: Story;
   config: {
     width?: NumberOrString;
     height?: NumberOrString;
-    loader?: JSX.Element;
+    loader?: React.ReactNode;
     header?: Function;
     storyStyles?: Object;
   };
@@ -107,7 +107,7 @@ export interface StoryState {
 
 export interface Story {
   url?: string;
-  seeMore?: Function;
+  seeMore?: React.ComponentType<{ close: () => void }>;
   seeMoreCollapsed?: React.ComponentType<{
     toggleMore: (show: boolean) => void;
     action: Action;
@@ -117,7 +117,7 @@ export interface Story {
   duration?: number;
   styles?: object;
   content?: Renderer;
-  originalContent?: Renderer
+  originalContent?: Renderer;
   // Whether to preload the resource or not, defaults to `true` for images and `false` for videos (video preloading is experimental)
   preloadResource?: boolean;
   muted?: boolean;
@@ -130,11 +130,11 @@ export interface Header {
 }
 
 export interface SeeMoreProps {
-  seeMoreContent: Function;
+  seeMoreContent: React.ComponentType<{ close: () => void }>;
   showContent: boolean;
   action: Action;
   toggleMore: (show: boolean) => void;
-  customCollapsed: React.ComponentType<{
+  customCollapsed?: React.ComponentType<{
     toggleMore: (show: boolean) => void;
     action: Action;
   }>;

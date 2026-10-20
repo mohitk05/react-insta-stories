@@ -41,23 +41,25 @@ export const renderer: Renderer = ({
   };
 
   const videoLoaded = () => {
-    messageHandler("UPDATE_VIDEO_DURATION", { duration: vid.current.duration });
+    messageHandler("UPDATE_VIDEO_DURATION", {
+      duration: vid.current?.duration,
+    });
     setLoaded(true);
     vid.current
-      .play()
+      ?.play()
       .then(() => {
         action("play");
       })
       .catch(() => {
         setMuted(true);
-        vid.current.play().finally(() => {
+        vid.current?.play().finally(() => {
           action("play");
         });
       });
   };
 
   return (
-    <WithHeader {...{ story, globalHeader: config.header }}>
+    <WithHeader {...{ story, globalHeader: config.header ?? (() => null) }}>
       <WithSeeMore {...{ story, action }}>
         <div style={styles.videoContainer}>
           <video

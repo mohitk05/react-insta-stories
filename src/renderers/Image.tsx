@@ -17,7 +17,7 @@ export const renderer: Renderer = ({ story, action, isPaused, config }) => {
     action("play");
   };
   return (
-    <WithHeader {...{ story, globalHeader: config.header }}>
+    <WithHeader {...{ story, globalHeader: config.header ?? (() => null) }}>
       <WithSeeMore {...{ story, action }}>
         <div>
           <img style={computedStyles} src={story.url} onLoad={imageLoaded} />

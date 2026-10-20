@@ -19,11 +19,14 @@ const Story = (props: StoryProps) => {
       case "UPDATE_VIDEO_DURATION":
         props.getVideoDuration(data.duration);
         return { ack: "OK" as "OK" };
+      default:
+        return { ack: "ERROR" as "ERROR" };
     }
   };
 
   const getStoryContent = () => {
     let InnerContent = props.story.content;
+    if (!InnerContent) return null;
     let config = { width, height, loader, header, storyStyles };
     return (
       <InnerContent

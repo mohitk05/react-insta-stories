@@ -10,18 +10,17 @@ import GlobalContext from "./../context/Global";
 import StoriesContext from "./../context/Stories";
 import { timestamp } from "../util/time";
 
+// Default interval for story progress when no specific duration is provided
+const DEFAULT_INTERVAL = 5000;
+
 export default () => {
   const [count, setCount] = useState<number>(0);
-  const lastTime = useRef<number>();
+  const lastTime = useRef<number | null>(null);
 
   const { currentId, next, videoDuration, pause, bufferAction } =
     useContext<ProgressContext>(ProgressCtx);
-  const {
-    defaultInterval,
-    onStoryEnd,
-    onStoryStart,
-    progressContainerStyles,
-  } = useContext<GlobalCtx>(GlobalContext);
+  const { defaultInterval, onStoryEnd, onStoryStart, progressContainerStyles } =
+    useContext<GlobalCtx>(GlobalContext);
   const { stories } = useContext<StoriesContextInterface>(StoriesContext);
 
   useEffect(() => {
@@ -34,21 +33,23 @@ export default () => {
       lastTime.current = timestamp();
     }
     return () => {
-      cancelAnimationFrame(animationFrameId.current);
+      if (animationFrameId.current !== null) {
+        cancelAnimationFrame(animationFrameId.current);
+      }
     };
   }, [currentId, pause]);
 
-  let animationFrameId = useRef<number>();
+  let animationFrameId = useRef<number | null>(null);
 
   let countCopy = count;
   const incrementCount = () => {
     if (countCopy === 0) storyStartCallback();
-    if (lastTime.current == undefined) lastTime.current = timestamp();
+    if (lastTime.current === null) lastTime.current = timestamp();
     const t = timestamp();
-    const dt = t - lastTime.current;
+    const dt = t - (lastTime.current ?? 0);
     lastTime.current = t;
     setCount((count: number) => {
-      const interval = getCurrentInterval();
+      const interval = getCurrentInterval() ?? DEFAULT_INTERVAL;
       countCopy = count + (dt * 100) / interval;
       return countCopy;
     });
@@ -56,7 +57,9 @@ export default () => {
       animationFrameId.current = requestAnimationFrame(incrementCount);
     } else {
       storyEndCallback();
-      cancelAnimationFrame(animationFrameId.current);
+      if (animationFrameId.current !== null) {
+        cancelAnimationFrame(animationFrameId.current);
+      }
       next();
     }
   };
@@ -81,11 +84,13 @@ export default () => {
   };
 
   return (
-    <div style={{
-      ...styles.progressArr,
-      ...progressContainerStyles,
-      ...opacityStyles
-    }}>
+    <div
+      style={{
+        ...styles.progressArr,
+        ...progressContainerStyles,
+        ...opacityStyles,
+      }}
+    >
       {stories.map((_, i) => (
         <Progress
           key={i}

@@ -18,7 +18,7 @@ export default function () {
   const [videoDuration, setVideoDuration] = useState<number>(0);
   const isMounted = useIsMounted();
 
-  let mousedownId = useRef<any>();
+  let mousedownId = useRef<number | null>(null);
 
   const {
     width,
@@ -36,7 +36,7 @@ export default function () {
   } = useContext<GlobalCtx>(GlobalContext);
   const { stories } = useContext<StoriesContextInterface>(StoriesContext);
 
-  usePreLoader(stories, currentId, preloadCount);
+  usePreLoader(stories, currentId, preloadCount ?? 2);
 
   useEffect(() => {
     if (typeof currentIndex === "number") {
@@ -45,12 +45,11 @@ export default function () {
       } else {
         console.error(
           "Index out of bounds. Current index was set to value more than the length of stories array.",
-          currentIndex
+          currentIndex,
         );
       }
     }
   }, [currentIndex]);
-
 
   useEffect(() => {
     if (typeof isPaused === "boolean") {
@@ -85,7 +84,7 @@ export default function () {
     setBufferAction(!!bufferAction);
   };
 
-  const setCurrentIdWrapper = (callback) => {
+  const setCurrentIdWrapper = (callback: (prev: number) => number) => {
     setCurrentId(callback);
     toggleState("pause", true);
   };
@@ -130,7 +129,7 @@ export default function () {
 
   const debouncePause = (e: React.MouseEvent | React.TouchEvent) => {
     e.preventDefault();
-    mousedownId.current = setTimeout(() => {
+    mousedownId.current = window.setTimeout(() => {
       toggleState("pause");
     }, 200);
   };
@@ -138,7 +137,7 @@ export default function () {
   const mouseUp =
     (type: string) => (e: React.MouseEvent | React.TouchEvent) => {
       e.preventDefault();
-      mousedownId.current && clearTimeout(mousedownId.current);
+      mousedownId.current && window.clearTimeout(mousedownId.current);
       if (pause) {
         toggleState("play");
       } else {
@@ -204,7 +203,7 @@ const styles = {
     flexDirection: "column" as const,
     background: "#111",
     position: "relative" as const,
-    WebkitUserSelect: 'none' as const,
+    WebkitUserSelect: "none" as const,
   },
   overlay: {
     position: "absolute" as const,
