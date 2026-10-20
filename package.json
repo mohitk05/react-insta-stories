@@ -23,7 +23,7 @@
 	},
 	"scripts": {
 		"build": "vite build && pnpm build:types",
-		"build:types": "tsc --project tsconfig.build.json || true",
+		"build:types": "tsc --project tsconfig.build.json",
 		"dev": "vite build --watch",
 		"dev:example": "pnpm --filter example dev",
 		"example": "pnpm --filter example dev",
