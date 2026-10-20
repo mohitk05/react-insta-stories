@@ -271,6 +271,11 @@ const stories2 = [
     type: "video",
   },
   {
+    url: "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+    type: "youtube",
+    duration: 30000,
+  },
+  {
     content: Story2,
   },
   {
