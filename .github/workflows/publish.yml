@@ -5,7 +5,7 @@ on:
             - 'v*'
 
 permissions:
-    contents: read
+    contents: write
     id-token: write
 
 jobs:
@@ -13,7 +13,7 @@ jobs:
         name: Publish to npm
         runs-on: ubuntu-latest
         permissions:
-            contents: read
+            contents: write
             id-token: write
         steps:
             - uses: actions/checkout@v4
@@ -31,3 +31,7 @@ jobs:
               run: npm publish --provenance --access public
               env:
                   NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+            - name: Create GitHub Release
+              uses: softprops/action-gh-release@v2
+              with:
+                  generate_release_notes: true
