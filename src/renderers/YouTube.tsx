@@ -21,7 +21,7 @@ export const renderer: Renderer = ({ story, action, config }) => {
 
   if (!videoId) return null;
 
-  const embedUrl = `https://www.youtube.com/embed/${videoId}?autoplay=1&controls=1&rel=0&modestbranding=1`;
+  const embedUrl = `https://www.youtube.com/embed/${videoId}?autoplay=1&controls=0&rel=0&modestbranding=1`;
 
   return (
     <WithHeader {...{ story, globalHeader: config.header ?? (() => null) }}>
