@@ -267,6 +267,10 @@ const stories2 = [
     type: "video",
   },
   {
+    url: "https://upload.wikimedia.org/wikipedia/commons/transcoded/4/47/Astrophysics_Holiday_Vertical_Video_%28SVS14800_-_Fermi_YuleLog_Rotate_Reel%29.webm/Astrophysics_Holiday_Vertical_Video_%28SVS14800_-_Fermi_YuleLog_Rotate_Reel%29.webm.480p.vp9.webm",
+    type: "video",
+  },
+  {
     content: Story2,
   },
   {
