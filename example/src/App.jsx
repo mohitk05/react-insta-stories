@@ -1,13 +1,30 @@
-import React, { Suspense } from "react";
+import React, { Suspense, useState, useEffect } from "react";
 import "./App.css";
 const StoriesLazy = React.lazy(() => import("react-insta-stories"));
 const WithSeeMore = React.lazy(() =>
   import("react-insta-stories").then((module) => ({
     default: module.WithSeeMore,
-  }))
+  })),
 );
 
+const installCommands = ["npm i react-insta-stories", "pnpm add react-insta-stories", "yarn add react-insta-stories"];
+
 function App() {
+    const [cmdIndex, setCmdIndex] = useState(0);
+  const [visible, setVisible] = useState(true);
+  const [hovered, setHovered] = useState(false);
+
+  useEffect(() => {
+    if (hovered) return;
+    const interval = setInterval(() => {
+      setVisible(false);
+      setTimeout(() => {
+        setCmdIndex((i) => (i + 1) % installCommands.length);
+        setVisible(true);
+      }, 400);
+    }, 3000);
+    return () => clearInterval(interval);
+  }, [hovered]);
   return (
     <div className="App">
       <div className="left">
@@ -33,6 +50,8 @@ function App() {
         <br />
         <code style={{ marginTop: 10, marginBottom: 10 }}>
           <span
+            onMouseEnter={() => setHovered(true)}
+            onMouseLeave={() => setHovered(false)}
             style={{
               background: "#eee",
               padding: 5,
@@ -40,9 +59,12 @@ function App() {
               paddingRight: 10,
               borderRadius: 5,
               width: "auto",
+              display: "inline-block",
+              transition: "opacity 0.4s ease",
+              opacity: visible ? 1 : 0,
             }}
           >
-            npm i react-insta-stories
+            {installCommands[cmdIndex]}
           </span>
         </code>
         <p>
@@ -84,7 +106,7 @@ function App() {
           <p>
             <strong>⚠️ Breaking Changes:</strong>
           </p>
-          <ul style={{ textAlign: 'left', paddingLeft: 20 }}>
+          <ul style={{ textAlign: "left", paddingLeft: 20 }}>
             <li>Node.js ≥20.0.0 required</li>
             <li>Pure ESM package with CommonJS fallback</li>
             <li>UMD format removed</li>
@@ -93,7 +115,7 @@ function App() {
           <p>
             <strong>✨ Improvements:</strong>
           </p>
-          <ul style={{ textAlign: 'left', paddingLeft: 20 }}>
+          <ul style={{ textAlign: "left", paddingLeft: 20 }}>
             <li>⚡️ Built with Vite + SWC (faster builds)</li>
             <li>📦 Better tree-shaking with native ESM</li>
             <li>🔧 Development uses pnpm workspaces</li>
@@ -191,9 +213,17 @@ const stories2 = [
   {
     content: ({ action, isPaused }) => {
       return (
-        <div style={{...contentStyle, overflowY: 'auto'}}>
-          <h1>Version 3.0 🎉</h1>
-          <p>Modern build with Vite + ESM</p>
+        <div
+          style={{
+            ...contentStyle,
+            overflowY: "auto",
+            fontFamily: "Inter",
+          }}
+        >
+          <h1 style={{ marginTop: 40, marginBottom: 0 }}>Version 3.0 🎉</h1>
+          <p>
+            <em>Modern build with Vite + ESM</em>
+          </p>
           <pre>
             <code style={code}>npm i react-insta-stories</code>
           </pre>
@@ -206,6 +236,11 @@ const stories2 = [
         </div>
       );
     },
+  },
+  {
+    url: "https://www.youtube.com/watch?v=KRntP-q_R9s",
+    type: "youtube",
+    duration: 192000,
   },
   {
     content: ({ action, story }) => {
@@ -265,15 +300,6 @@ const stories2 = [
   {
     url: "https://upload.wikimedia.org/wikipedia/commons/transcoded/2/22/Volcano_Lava_Sample.webm/Volcano_Lava_Sample.webm.360p.vp9.webm",
     type: "video",
-  },
-  {
-    url: "https://upload.wikimedia.org/wikipedia/commons/transcoded/4/47/Astrophysics_Holiday_Vertical_Video_%28SVS14800_-_Fermi_YuleLog_Rotate_Reel%29.webm/Astrophysics_Holiday_Vertical_Video_%28SVS14800_-_Fermi_YuleLog_Rotate_Reel%29.webm.480p.vp9.webm",
-    type: "video",
-  },
-  {
-    url: "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
-    type: "youtube",
-    duration: 30000,
   },
   {
     content: Story2,

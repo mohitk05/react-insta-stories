@@ -5,18 +5,18 @@ import WithSeeMore from "./wrappers/withSeeMore";
 
 const getYouTubeId = (url: string): string | null => {
   const match = url.match(
-    /(?:youtube\.com\/(?:watch\?v=|embed\/|shorts\/)|youtu\.be\/)([a-zA-Z0-9_-]{11})/
+    /(?:youtube\.com\/(?:watch\?v=|embed\/|shorts\/)|youtu\.be\/)([a-zA-Z0-9_-]{11})/,
   );
   return match ? match[1] : null;
 };
 
 const postToIframe = (
   iframe: HTMLIFrameElement | null,
-  command: "playVideo" | "pauseVideo"
+  command: "playVideo" | "pauseVideo",
 ) => {
   iframe?.contentWindow?.postMessage(
     JSON.stringify({ event: "command", func: command }),
-    "*"
+    "*",
   );
 };
 
@@ -43,7 +43,9 @@ export const renderer: Renderer = ({ story, action, isPaused, config }) => {
   return (
     <WithHeader {...{ story, globalHeader: config.header ?? (() => null) }}>
       <WithSeeMore {...{ story, action }}>
-        <div style={{ width, height, background: "#000", position: "relative" }}>
+        <div
+          style={{ width, height, background: "#000", position: "relative", overflow: "hidden", transform: "scale(1.25)", transformOrigin: "center center" }}
+        >
           {!loaded && (
             <div style={styles.loader}>
               <div style={styles.playIcon}>▶</div>
@@ -55,7 +57,11 @@ export const renderer: Renderer = ({ story, action, isPaused, config }) => {
             style={{ ...styles.iframe, opacity: loaded ? 1 : 0 }}
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
             allowFullScreen
-            onLoad={() => setLoaded(true)}
+            onLoad={() => {
+              setLoaded(true);
+              postToIframe(iframeRef.current, "playVideo");
+              action("play");
+            }}
           />
         </div>
       </WithSeeMore>
