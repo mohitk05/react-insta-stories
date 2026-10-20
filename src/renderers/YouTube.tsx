@@ -10,8 +10,19 @@ const getYouTubeId = (url: string): string | null => {
   return match ? match[1] : null;
 };
 
-export const renderer: Renderer = ({ story, action, config }) => {
+const postToIframe = (
+  iframe: HTMLIFrameElement | null,
+  command: "playVideo" | "pauseVideo"
+) => {
+  iframe?.contentWindow?.postMessage(
+    JSON.stringify({ event: "command", func: command }),
+    "*"
+  );
+};
+
+export const renderer: Renderer = ({ story, action, isPaused, config }) => {
   const [loaded, setLoaded] = React.useState(false);
+  const iframeRef = React.useRef<HTMLIFrameElement>(null);
   const { width, height } = config;
   const videoId = story.url ? getYouTubeId(story.url) : null;
 
@@ -19,9 +30,15 @@ export const renderer: Renderer = ({ story, action, config }) => {
     action("pause");
   }, []);
 
+  React.useEffect(() => {
+    if (!loaded) return;
+    postToIframe(iframeRef.current, isPaused ? "pauseVideo" : "playVideo");
+  }, [isPaused, loaded]);
+
   if (!videoId) return null;
 
-  const embedUrl = `https://www.youtube.com/embed/${videoId}?autoplay=1&controls=0&rel=0&modestbranding=1`;
+  // enablejsapi=1 is required for postMessage commands to work
+  const embedUrl = `https://www.youtube.com/embed/${videoId}?autoplay=1&controls=0&rel=0&modestbranding=1&enablejsapi=1`;
 
   return (
     <WithHeader {...{ story, globalHeader: config.header ?? (() => null) }}>
@@ -33,6 +50,7 @@ export const renderer: Renderer = ({ story, action, config }) => {
             </div>
           )}
           <iframe
+            ref={iframeRef}
             src={embedUrl}
             style={{ ...styles.iframe, opacity: loaded ? 1 : 0 }}
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
